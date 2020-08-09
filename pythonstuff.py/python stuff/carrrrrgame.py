@@ -2,7 +2,7 @@ i = input("to start press 1= ")
 def pycargame():
    print("|\                             /|")
    print("| \                           / |")
-   print("|  \                         /  |")
+   print("|  \         ]  [             /  |")
    print("|___\        0||0           /___|")
 if i == "1":
      pycargame()
