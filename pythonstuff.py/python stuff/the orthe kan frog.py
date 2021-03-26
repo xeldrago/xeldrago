@@ -1,7 +1,7 @@
 from tkinter import *
 
 window = Tk()
-window.title('Alien')
+window.title('the orthe kan frog')
 c = Canvas(window, height = 300, width=400)
 c.pack()
 body=c.create_oval(100,150,300,250,fill='green')
@@ -32,7 +32,7 @@ window.attributes('-topmost',1)
 
 def burp(event):
     mouth_open()
-    c.itemconfig(words,text="Burp!")
+    c.itemconfig(words,text="dont touch there!")
 c.bind_all('<Button-1>', burp)
 
 c.bind_all('<KeyPress-a>',blink)
