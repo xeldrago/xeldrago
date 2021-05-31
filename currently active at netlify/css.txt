@@ -2,7 +2,7 @@
 border-radius: 25px 0;
 }
 .btn::before{
-content: "https://xelrago.wixsite.com/thewanabechristianst";
+content: ;
 position: absolute;
 top:@;
 く
