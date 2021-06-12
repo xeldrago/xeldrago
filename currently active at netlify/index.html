@@ -1,5 +1,53 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  background-image: url('sea.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.button {
+  border-radius: 4px;
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
 <nav>
 <h2>
 <a style="color:blue;" href="index.html">HOME</a>|
@@ -14,15 +62,14 @@
 <h2>Presenting you the xeldrago-services site, read throught the below content for entertainment !!!</h2>
 <marquee behavior="scroll" direction="left">This is the start of frontend for xeldragon servies!! there is more to come so, hafun!!</marquee>
 <img src="logo.jpg" %}" alt="xeldrago" />
-<link rel="stylesheet" type="text/css" href="css.css"
 </head>
-<body style="background-color:LightBlue;">
-<p class="main">
-<button class="btn">
-XELDRAGO SERVICES
-</button>
-</p>
-<p> hi this is a website designed by xeldrago for simple intro purpose!!</p>
+<body>
+<p><a href="https://linktr.ee/Xeldrago">
+<button class="button"><span>XELDRAGO SERVICES</span></button>
+
+</button></a></p>
+<h3>
+<p> Hi this is a website designed by xeldrago for simple intro purpose!!</p>
 <p> NEW!! blog contents below </p>
 <p>LIFE LESSONS & TRUTH BOMBS</p>
 <ul>
@@ -67,10 +114,10 @@ Don't treat it like u own it and it's u.. it ain't u if u don't look after it li
 It isn't selfish.. it's taking care of tht body and soul given to u.. just like a friend</li>
 </ul>
 <p>And theres yet more to come on your way !! hafun!!</p>
-<button><a href="https://dl1.zoopix.ir/Series/">Click here for lockdown boredom for timepass!!</a></button>
-<p>The above link contains a lot of popular series and movies !! hafun</p>
-<button><a href="https://www.instagram.com/weeknowit/">click here for memes to timepass and watch(hafun!) !!</a></button>
-<p> The above link is a meme page maintained by xeldrago services ,fun is guaranteed!!<p>
+<nav>
+<a href="https://dl1.zoopix.ir/Series/"><button class="button"><span>Click here for Entertainment!!</span></button></a><p>This link contains a lot of popular series and movies !! hafun</p>
+<button><a href="https://www.instagram.com/weeknowit/"><button class="button"><span>Meme page by xeldrago</span></button></a><p> This link is a meme page maintained by xeldrago services ,fun is guaranteed!!<p>
+</nav>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- ads -->
 <ins class="adsbygoogle"
@@ -82,7 +129,8 @@ It isn't selfish.. it's taking care of tht body and soul given to u.. just like 
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<p> NEW RECENT MOVIES TORRENT<br><a href="conjuring 3.torrent"download>CONJURING 3</a></p>
+<p> NEW RECENT MOVIES TORRENT<br><a href="conjuring 3.torrent"download><button class="button"><span>CONJURING 3</span></button></a></p>
+</h3>
 
 </body>
 </html>
