@@ -72,6 +72,7 @@ body {
 .btn-group button:hover {
   background-color: #3e8e41;
 }
+.button2 {background-color: #008CBA; color: white;}
 </style>
 <nav>
 <h2>
@@ -103,6 +104,13 @@ body {
 <button class="button"><span>XELDRAGO SERVICES</span></button>
 
 </button></a></p>
+<button class="button2" onclick="myFunction()">Scroll to usefull-links section</button>
+<script>
+function myFunction() {
+  var elmnt = document.getElementById("content");
+  elmnt.scrollIntoView();
+}
+</script>
 <strong style="color:white;"><h3>
 <p> Hi this is a website designed by xeldrago for simple intro purpose!!</p>
 <p> NEW!! blog contents below </p>
@@ -150,7 +158,7 @@ It isn't selfish.. it's taking care of tht body and soul given to u.. just like 
 </ul>
 <p>And theres yet more to come on your way !! hafun!!</p>
 <p> Below are some useful links online</p>
-<div class="btn-group" style="width:100%">
+<div id="content" class="btn-group" style="width:100%">
 <p><a href="http://103.222.20.150/ftpdata/Movies/"><button class="button"><span>Click here for Entertainment!!</span></button></a>This link contains a lot of popular series and movies !! hafun</p>
 <p><a href="https://www.instagram.com/weeknowit/"><button class="button"><span>Meme page by xeldrago</span></button></a> This link is a meme page maintained by xeldrago services ,fun is guaranteed!!</p>
 <p><a href="https://dl.kookdownload.com/game/computer/"><button class="button"><span>All Pc Games</span></button></a> Download any game you want in one click!! from above button</p>
