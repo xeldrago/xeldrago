@@ -47,6 +47,30 @@ body {
   opacity: 1;
   right: 0;
 }
+.btn-group button {
+  background-color: DodgerBlue; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
 </style>
 <nav>
 <h2>
@@ -124,11 +148,15 @@ Don't treat it like u own it and it's u.. it ain't u if u don't look after it li
 It isn't selfish.. it's taking care of tht body and soul given to u.. just like a friend</li>
 </ul>
 <p>And theres yet more to come on your way !! hafun!!</p>
-<nav>
+<p> Below are some useful links online</p>
+<div class="btn-group" style="width:100%">
 <a href="http://103.222.20.150/ftpdata/Movies/"><button class="button"><span>Click here for Entertainment!!</span></button></a><p>This link contains a lot of popular series and movies !! hafun</p>
 <a href="https://www.instagram.com/weeknowit/"><button class="button"><span>Meme page by xeldrago</span></button></a><p> This link is a meme page maintained by xeldrago services ,fun is guaranteed!!<p>
 <a href="https://dl.kookdownload.com/game/computer/"><button class="button"><span>All Pc Games</span></button></a><p> Download any game you want in one click!! from above button<p>
-</nav>
+<a href="https://myflixer.to/"><button class="button"><span>All Pc Games</span></button></a><p>legal and safe online stream for netflix series and movies (alternate free), ha'fun!!<p>
+<a href="https://www.photopea.com/"><button class="button"><span>All Pc Games</span></button></a><p>Alternative photoshop online!! try it out!<p>
+</div>
+
 
 </h3></strong>
 
