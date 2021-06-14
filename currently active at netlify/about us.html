@@ -60,6 +60,45 @@ body {
 .btn:hover {
   background-color: RoyalBlue;
 }
+.flip-box {
+  background-color: transparent;
+  width: 300px;
+  height: 150px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
+}
+
+.flip-box-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-inner {
+  transform: rotateX(180deg);
+}
+
+.flip-box-front, .flip-box-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-box-front {
+  background-color: white;
+  color: Green;
+}
+
+.flip-box-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateX(180deg);
+}
 </style>
 <body>
 <h1 style="color:Dodgerblue;"> Just a small startup on freelance field </h1>
@@ -68,4 +107,14 @@ body {
 <li> feel like joining us?,<a href="contactus.html"><button class="button"><span>click here</span></button></a>
 <li>always hafun ,no regrets!! cherish each moment</li>
 </ul></h2>
+<div class="flip-box">
+  <div class="flip-box-inner">
+    <div class="flip-box-front">
+      <h2>Donate/Support<br>If you feel entertained & want to give love by means!!</h2>
+    </div>
+    <div class="flip-box-back">
+      <h2>Paytm/Gpay/Paypal number  +919994198795</h2>
+    </div>
+  </div>
+</div>
 </body>
