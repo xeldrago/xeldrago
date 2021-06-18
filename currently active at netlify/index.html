@@ -17,7 +17,7 @@ html {
   scroll-padding-top: var(--top-spacing);
 }
 .button {
-  border-radius: 4px;
+  
   background-color: DodgerBlue;
   border: none;
   color: white;
@@ -28,6 +28,7 @@ html {
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
+  border-radius: 30px;
 }
 
 .button span {
@@ -35,6 +36,7 @@ html {
   display: inline-block;
   position: relative;
   transition: 0.5s;
+  border-radius: 30px;
 }
 
 .button span:after {
@@ -44,15 +46,18 @@ html {
   top: 0;
   right: -20px;
   transition: 0.5s;
+  border-radius: 30px;
 }
 
 .button:hover span {
   padding-right: 25px;
+  border-radius: 30px;
 }
 
 .button:hover span:after {
   opacity: 1;
   right: 0;
+  border-radius: 30px;
 }
 .btn-group button {
   background-color: DodgerBlue; /* Green background */
@@ -61,6 +66,7 @@ html {
   padding: 10px 24px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
+  border-radius: 30px;
 }
 
 /* Clear floats (clearfix hack) */
@@ -68,17 +74,22 @@ html {
   content: "";
   clear: both;
   display: table;
+  border-radius: 30px;
 }
 
 .btn-group button:not(:last-child) {
   border-right: none; /* Prevent double borders */
+  border-radius: 30px;
 }
 
 /* Add a background color on hover */
 .btn-group button:hover {
   background-color: #75ACFC;
 }
-.button2 {background-color: #75ACFC; color: white;}
+.button2 {background-color: #75ACFC; 
+          color: white;
+          border-radius: 30px;
+}
 .navbar {
   overflow: hidden;
   background-color: #000000;
@@ -86,6 +97,7 @@ html {
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
   z-index: 2;
+  border-radius: 30px;
   
   
 }
@@ -105,12 +117,14 @@ ads {
   text-align: center;
   padding: 10px 13px;
   text-decoration: none;
+  border-radius: 30px;
 }
 
 /* Change background on mouse-over */
 .navbar a:hover {
   background: #75ACFC;
   color: blue;
+  border-radius: 30px;
   
 }
 #toc_container {
@@ -123,6 +137,7 @@ ads {
     margin-bottom: 1em;
     padding: 20px;
     width: auto;
+    border-radius: 30px;
 }
 #toc_title {
     font-weight: 700;
@@ -145,6 +160,7 @@ aside {
   float: right;
   font-style: italic;
   background-color: rgb(15, 165, 235);
+  border-radius: 30px;
 }
 .float{
 	position:fixed;
