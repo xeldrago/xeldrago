@@ -1,6 +1,6 @@
 from gtts import gTTS
 import os
-mytext = 'hey yo this is some awesome shitee!'
+mytext = 'hey yo this is some awesome stuff!'
 
 TextFile = open("Example.txt", "r")#u can use this to locate any text file u wanted read as well
 f=TextFile.read()
