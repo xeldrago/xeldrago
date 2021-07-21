@@ -19,7 +19,7 @@ FuncObject2 = gTTS(text=f, lang=language, slow=False)
 # Saving the converted audio in a mp3 file named
 # welcome 
 FuncObject.save("TextToSpeech.mp3")
-FuncObject.save("TextFileToSpeech.mp3")
+FuncObject2.save("TextFileToSpeech.mp3")
   
 # Playing the converted file
 os.system("TextToSpeech.mp3")
