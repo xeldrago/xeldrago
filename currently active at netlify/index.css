@@ -20,7 +20,7 @@
    background-size: 200% auto;
    color: white;            
    box-shadow: 0 0 20px #eee;
-   border-radius: 0px;
+   border-radius: 30px;
    display: block;
  }
 
@@ -49,7 +49,14 @@
     color: #fff;
     text-decoration: none;
   }
- 
+
+  .multicolortext {
+        background-image: linear-gradient(to left, rgb(55, 0, 255), rgb(0, 217, 255), rgb(0, 153, 255), rgb(5, 238, 255));
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
 
 .button {
   
@@ -190,7 +197,7 @@ ads {
 .topnav-right {
   float: right;
 }
-aside {
+.aside1 {
   width: 100%;
   padding-left: 15px;
   margin-left: 10px;
