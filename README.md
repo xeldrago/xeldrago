@@ -1,5 +1,5 @@
 # XELDRAGO 
-![The San Juan Mountains are beautiful!](san-juan-mountains.jpg "These are some awesome mountains...")
+![logo!](logo.png "The xeldragon logo...")
 ### <span style="font-family:Papyrus; font-size:4em;">Hey people...!!</span>
 - Just an ordinary guy
 - User with extra steps
