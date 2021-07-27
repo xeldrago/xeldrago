@@ -1,12 +1,5 @@
 # XELDRAGO 
-<head>
-<style>
-  img {
-  border-radius: 40px;
-}
-</style>
-  </head>
-<img src="logo.jpg" alt="logo" width="200"/>
+<img src="logo.jpg" alt="logo" style="border-radius: 40px" height="auto" width="200"/>
 ### <span style="font-family:Papyrus; font-size:4em;">Hey people...!!</span>
 - Just an ordinary guy
 - User with extra steps
