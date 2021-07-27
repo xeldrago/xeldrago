@@ -1,4 +1,7 @@
 # XELDRAGO 
+<style>img {
+  border-radius: 40px;
+}</style>
 <img src="logo.jpg" alt="logo" width="200"/>
 ### <span style="font-family:Papyrus; font-size:4em;">Hey people...!!</span>
 - Just an ordinary guy
