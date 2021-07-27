@@ -1,5 +1,5 @@
 # XELDRAGO 
-<p style="border-radius: 40%"><img src="logo.jpg" alt="logo" height="auto" width="200" style="border-radius: 80px"></p>
+<img src="logo.jpg" alt="logo" height="auto" width="100" style="border-radius: 80px">
 ### <span style="font-family:Papyrus; font-size:4em;">Hey people...!!</span>
 - Just an ordinary guy
 - User with extra steps
