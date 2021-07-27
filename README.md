@@ -1,5 +1,5 @@
 # XELDRAGO 
-![xeldrago Logo](/currently active at netlify/media/images/logo.png)
+![The San Juan Mountains are beautiful!](/currently active at netlify/media/images/logo.png)
 ### <span style="font-family:Papyrus; font-size:4em;">Hey people...!!</span>
 - Just an ordinary guy
 - User with extra steps
