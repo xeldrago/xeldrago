@@ -1,5 +1,4 @@
 # XELDRAGO 
-![xeldrago logo](logo.png)
 ### <span style="font-family:Papyrus; font-size:4em;">Hey people...!!</span>
 - Just an ordinary guy
 - User with extra steps
