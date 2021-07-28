@@ -1,6 +1,6 @@
 # XELDRAGO
 
-<img src="logo.jpg" alt="logo" height="auto" width="100">
+<img src="logo.jpg" alt="logo" width="100">
 
 ### Hey people...!!
 
@@ -12,7 +12,7 @@
 
 >@>@>@>@> https://linktr.ee/Xeldrago
 
-<span style="color:blue">And i love blue so, im having some blue stuff in this content block</span>
+And i love blue <!--so, im having some blue stuff in this content block-->
 
 ## Code was fun
 
@@ -23,7 +23,6 @@
 	src="https://github-readme-stats.vercel.app/api?username=xeldrago&theme=algolia&show_icons=true">
   </a>
 </p>
-
 
 <p align="center">
   <a href="/anuraghazra/github-readme-stats">
