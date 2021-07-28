@@ -1,0 +1,17 @@
+{
+"apple":"red, shiny, sweet, and ripe people bite me"
+,"ball":"football is incomplete without this!!!"
+,"cat":"i am small, and related to kings"
+,"dog":"most people like me more than you"
+,"elephant":"you killed my brothers, i am just going to eat these leaves and not help you"
+,"forest":"thick, lush, green or dry, scanty brown: i become ash if a fire follows me"
+,"garland":"strung together frangrant or aestheic i cling to your neck"
+,"holiday":"i follow heavy rains, occur under harsh suns, or heavy snow"
+,"igloo":"a very cold man-made cave"
+,"justice":"serve me balancedly with your eyes closed"
+,"knowledge":"i'm often represented as a tree. if you have me, you will know how the tree, among other things, works"
+,"labyrinth":"a man once hunted a bull here and found his way back using a ball of string"
+,"meagre":"i may sound like i am eager, but i am a lot less"
+,"nocturnal":"at night i make my turn"
+,"opthalmologist":"i make sure you can see easily. but you cannot say my name"
+}
