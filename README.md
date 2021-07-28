@@ -1,6 +1,7 @@
 # XELDRAGO
 
-<img src="logo.jpg" alt="Xeldrago logo" width="100">
+<img src="logo.jpg" width="100"
+    alt="Xeldrago logo/blue dragon on white background" >
 
 ### Hey people...!!
 
@@ -35,5 +36,5 @@ And I love blue. <!--so, I have some blue stuff in this content block-->
 ## Love to see how the future turns out !!
 
 <p align="center">
-  <img src="codz.svg" alt="It's super awesome">
+  <img src="codz.svg" alt="Coding is awesome. Having funzz">
 </p>
