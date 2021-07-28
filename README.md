@@ -10,10 +10,13 @@
 - User with extra steps
 - Having fun with what code can do.
 
-#### Look what they made me do :joy: >@>@>@>@>
+#### Look what they made me do :joy:
 
-https://linktr.ee/Xeldrago
+>@>@>@>@> https://linktr.ee/Xeldrago
+
 <span style="color:blue">And i love blue so, im having some blue stuff in this content block</span>
+
+## Code was fun
 
 <p align="center">
   <a href="/anuraghazra/github-readme-stats">
@@ -23,7 +26,6 @@ https://linktr.ee/Xeldrago
   </a>
 </p>
 
-<h1>Code was fun</h1>
 
 <p align="center">
   <a href="/anuraghazra/github-readme-stats">
