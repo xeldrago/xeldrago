@@ -12,5 +12,5 @@
 # Code was fun 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=xeldrago&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
-## An awesome picture inappropriate to this block of junk..
-![The San Juan Mountains are beautiful!](san-juan-mountains.jpg "These are some awesome mountains...")
+## love to see how the future turns out !!
+
