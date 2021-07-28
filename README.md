@@ -13,9 +13,17 @@
 #### Look what they made me do :joy: >@>@>@>@> https://linktr.ee/Xeldrago <span style="color:blue">And i love blue so, im having some blue stuff in this content block</span>
 
 <p align="center">
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=xeldrago&theme=algolia&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+<a href="/anuraghazra/github-readme-stats">
+<!--link to proj page to support author and share-->
+<img alt="xeldrago's GitHub stats"
+    src="https://github-readme-stats.vercel.app/api?username=xeldrago&theme=algolia&show_icons=true">
+</a>
 <h1>Code was fun</h1>
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=xeldrago&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+<a href="/anuraghazra/github-readme-stats">
+<!--link to proj page to support author and share-->
+<img alt="xeldrago's top langs"
+    src="https://github-readme-stats.vercel.app/api/top-langs?username=xeldrago&layout=compact">
+</a>
 </p>
 
 ## love to see how the future turns out !!
