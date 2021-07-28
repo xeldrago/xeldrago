@@ -13,4 +13,6 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=xeldrago&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
 ## love to see how the future turns out !!
+<img src="codz.svg" alt="logo" height="auto" width="100">
+
 
