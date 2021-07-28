@@ -10,14 +10,14 @@
 
 #### Look what they made me do :joy:
 
->@>@>@>@> https://linktr.ee/Xeldrago
+\>@>@>@>@> https://linktr.ee/Xeldrago
 
 And i love blue <!--so, im having some blue stuff in this content block-->
 
 ## Code was fun
 
 <p align="center">
-  <a href="/anuraghazra/github-readme-stats">
+  <a href="https://github.com/anuraghazra/github-readme-stats">
   <!--link to proj page to support author and share-->
     <img alt="xeldrago's GitHub stats"
 	src="https://github-readme-stats.vercel.app/api?username=xeldrago&theme=algolia&show_icons=true">
@@ -25,7 +25,7 @@ And i love blue <!--so, im having some blue stuff in this content block-->
 </p>
 
 <p align="center">
-  <a href="/anuraghazra/github-readme-stats">
+  <a href="https://github.com/anuraghazra/github-readme-stats">
   <!--link to proj page to support author and share-->
     <img alt="xeldrago's top langs"
 	src="https://github-readme-stats.vercel.app/api/top-langs?username=xeldrago&layout=compact">
