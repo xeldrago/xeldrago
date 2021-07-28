@@ -1,6 +1,8 @@
 # XELDRAGO
 
-![logo](logo.jpg)
+<p align="center">
+  <img src="logo.jpg" alt="logo" height="auto" width="100">
+</p>
 
 ### Hey people...!!
 
