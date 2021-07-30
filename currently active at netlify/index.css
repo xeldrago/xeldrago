@@ -194,15 +194,18 @@
   background: #75ACFC;
   color: blue;
   border-radius: 30px;
+  align-content: center;
   
 }
 
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
+  right: 60px;
   font-size: 36px;
-  margin-left: 50px;
+  margin-left: 11010px;
+  
+  border-radius: 0px;
 }
 
 #main {
@@ -318,7 +321,7 @@ ads {
     width:60px;
     height:60px;
     bottom: 500px;
-    left: 380px; 
+    left: 355px; 
     background-color:#27c03c;
     color:#FFF;
     border-radius:50px;
