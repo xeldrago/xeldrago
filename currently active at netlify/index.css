@@ -307,9 +307,29 @@ ads {
 	border-radius:50px;
 	text-align:center;
   font-size:30px;
-	box-shadow: 2px 2px 3px #999;
+	box-shadow: 2px 2px 3px rgba(25, 0, 255, 0.247);
   z-index:100;
+
 }
+@media only screen and (max-width: 490px) {
+ 
+  [class="float"]{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom: 500px;
+    left: 380px; 
+    background-color:#27c03c;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    font-size:30px;
+    box-shadow: 2px 2px 3px rgba(25, 0, 255, 0.247);
+    z-index: 100;
+  
+  }
+}
+
 
 .my-float{
 	margin-top:16px;
