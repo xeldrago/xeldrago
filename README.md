@@ -17,6 +17,6 @@
  
 
 ## love to see how the future turns out !!
-<img src="codz.svg" alt="an SVG that is awesome">
+![](codz.svg)
 
 
