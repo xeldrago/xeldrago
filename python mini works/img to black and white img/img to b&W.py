@@ -1,5 +1,5 @@
 from PIL import Image 
-b='10th.jpg'
+b='pic path'
 image_file = Image.open(b) # open colour image
-image_file = image_file.convert('2') # convert image to black and white
-image_file.save('10th certificate B&W.jpg')
+image_file = image_file.convert('1') # convert image to black and white
+image_file.save('B&W.jpg')
