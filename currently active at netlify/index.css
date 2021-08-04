@@ -52,11 +52,13 @@
     text-decoration: none;
   }
   
-  .btn-grad3 {background-image: linear-gradient(to right, #6a3093 0%, #a044ff  51%, #6a3093  100%)}
+  .btn-grad3 {background-image: linear-gradient(to right, #6a3093 0%, #3156cf  51%, #05fcef  100%)}
   .btn-grad3 {
      margin: 10px;
      padding: 15px 45px;
      text-align: center;
+     font-style: italic;
+     font-weight: bolder;
      text-transform: uppercase;
      transition: 0.5s;
      background-size: 200% auto;
@@ -67,6 +69,28 @@
    }
 
    .btn-grad3:hover {
+     background-position: right center; /* change the direction of the change here */
+     color: #fff;
+     text-decoration: none;
+   }
+
+   .btn-grad4 {background-image: linear-gradient(to right, #0004ff 0%, #ae00ff  51%, #00d9ff  100%)}
+  .btn-grad4 {
+     margin: 10px;
+     padding: 15px 45px;
+     text-align: center;
+     text-transform: uppercase;
+     font-style: italic;
+     font-weight: bolder;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     box-shadow: 0 0 20px #eee;
+     border-radius: 10px;
+     display: block;
+   }
+
+   .btn-grad4:hover {
      background-position: right center; /* change the direction of the change here */
      color: #fff;
      text-decoration: none;
