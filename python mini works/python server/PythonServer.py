@@ -1,6 +1,6 @@
 import os
 import socket
-import webbrowser
+
 
 
 # getting the hostname by socket.gethostname() method
@@ -20,12 +20,12 @@ print("your website or folders will be served now")
 
 
 
-chrome_path = 'C:\"Program Files"\Google\Chrome\Application\chrome.exe %s'
+
 
 
 url=f"http://{ip_address}:{q}/"
-webbrowser.get(chrome_path).open(url)
 
+os.system(f"start chrome {url}")
 os.system(f"python -m http.server {q}")
 
 print("reload browser if you see it not loading properly")
