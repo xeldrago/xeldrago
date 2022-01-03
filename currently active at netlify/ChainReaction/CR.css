@@ -1,0 +1,51 @@
+.im
+{
+	display: none;
+}
+#test
+{
+	z-index: 20;
+	position: absolute;
+	top: 300px;
+	left: 300px;
+}
+#myCanvas
+{
+	border:1px solid #c3c3c3;
+	margin: auto;
+}
+#ulist
+{
+	position: fixed;
+	left: 0px;
+	top: 100px;
+	border:1px solid #c3c3c3;
+	width: 200px;
+	height: 400px;
+	overflow: scroll;
+	text-align: center;
+}
+#upane
+{
+	font-size: 50px;
+	position: absolute;
+	left: 250px;
+}
+#ticker
+{
+	position: fixed;
+	right:0px;
+	top: 0px;
+	width: 250px;
+	overflow: scroll;
+	height: 400px;	
+	border: 1px dotted black;
+}
+#ipbox
+{
+	position: fixed;
+	right: 0px;
+	bottom: 180px;
+	width: 250px;
+	border: 1px dotted black;
+}
