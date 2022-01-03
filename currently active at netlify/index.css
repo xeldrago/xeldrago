@@ -6,6 +6,22 @@
   
   
 }
+.body1 {
+  background-image: url('media/images/BGCR.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+  
+}
+.body2 {
+  background-image: url('media/images/TICTAC.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+  
+}
 .htmls {
   --top-spacing: 100px;
   scroll-padding-top: var(--top-spacing);
@@ -116,7 +132,7 @@
      color: #fff;
      text-decoration: none;
    }
-   .btn-grad7 {background-image: linear-gradient(to right, #a189f7 0%, #3156cf  51%, #ff00aa  100%)}
+   .btn-grad7 {background-image: linear-gradient(to right, #00ffb3 0%, #000000  51%, #0011ff  100%)}
    .btn-grad7 {
       margin: 10px;
       padding: 15px 45px;
