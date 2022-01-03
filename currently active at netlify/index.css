@@ -116,6 +116,27 @@
      color: #fff;
      text-decoration: none;
    }
+   .btn-grad7 {background-image: linear-gradient(to right, #a189f7 0%, #3156cf  51%, #ff00aa  100%)}
+   .btn-grad7 {
+      margin: 10px;
+      padding: 15px 45px;
+      text-align: center;
+      font-style: italic;
+      font-weight: bolder;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      display: block;
+    }
+ 
+    .btn-grad7:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
   
 
   .multicolortext {

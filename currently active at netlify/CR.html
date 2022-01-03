@@ -1,0 +1,129 @@
+ <html>
+	<head>
+		<link rel="icon" class="logo" href="media/images/logo.jpg" type="image/x-icon">
+<link rel="stylesheet" href="index.css">
+<link rel="canonical" href="https://xeldrago-service.netlify.app/"/>
+		<meta charset="utf-8"/>
+<meta name="author" content="Xeldrago"/>
+<meta name="keywords" content="freelancer, Technopreneur, movies for free, services, advertising, games for free, free movies, free games"/>
+<meta name="description" content="Freelance Technopreneurs Hub - A XELDRAGO CREATION" />
+<meta property="og:title" content="Freelance Technopreneurs Hub - A XELDRAGO CREATION" />
+<meta property="og:description" content="XELDRAGO | A Startup initiated for fellow freelance technopreneurs | Interested can join us!, to learn &amp; for fun" />
+<meta property="og:image" content="media/images/logo.jpg">
+<meta name="google-site-verification" content="pTSGbBOhvssU15exEBaLuNyVSNDxB12W-xkOvRqiUqQ" />
+		<link rel="icon" class="logo" href="media/images/logo.jpg" type="image/x-icon">
+<a href="index.html"><button class="btn"><i class="fa fa-home"></i> Home</button></a>
+<meta name="chain reaction game online" content="play with your friends!"/>
+<meta name="google-site-verification" content="pTSGbBOhvssU15exEBaLuNyVSNDxB12W-xkOvRqiUqQ" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Chain Reaction</title>
+		<h1>Chain Reaction</h1>
+		<h3>The most interesting thing is how unpredictable the game seems to be in the end, at least when you play it with your human friends. The obvious heuristic that tells us you're better off at the moment by having as many orbs as possible turns out to be very wrong. While it so seems to everyone, that say, red will win, blue suddenly takes over.</h3>
+		<link rel="stylesheet" type="text/css" href="ChainReaction/CR.css">
+	<script src="ChainReaction/CR2.js"></script>
+	<style type="text/css">
+		.menu
+		{
+			margin: 190px;
+			text-align: center;
+			background-color: #CCEBF7;
+			padding: 20px;
+		}
+		#ud
+		{
+			position: absolute;
+			background-color: #CCEBF7;
+			top:0px;
+			right: 0px;
+		}
+		.btn {
+      background-color: DodgerBlue; /* Blue background */
+      border: none; /* Remove borders */
+      color: white; /* White text */
+      padding: 25px 35px; /* Some padding */
+      font-size: 25px; /* Set a font size */
+      cursor: pointer; /* Mouse pointer on hover */
+      border-radius: 30px;
+    }
+    
+    /* Darker background on mouse-over */
+    .btn:hover {
+      background-color: RoyalBlue;
+      border-radius: 30px;
+    }
+    .btn-grad {background-image: linear-gradient(to right, #003cff 0%, #00dbde  51%, #fc00ff  100%)}
+.btn-grad {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 0px;
+   display: block;
+ }
+
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+    </style>
+	</style>
+	<script type="text/javascript">
+		function dispFields(){
+			tmp = document.getElementById('menu');
+			tmp.style.display = "block";
+		}
+		function grabVals(){
+			total_users = parseInt(document.getElementById('plyrs').value);
+			grid_sz = parseInt(document.getElementById('dims').value);
+
+			//640/grid_sz
+			cell_sz = Math.floor(640/grid_sz);
+			//should be atleast cell_sz*/``2
+			img_sz = Math.ceil((cell_sz -2)/ 1.414);
+
+			//animateRadius signifies the size of intermediate 
+			//balls
+			animateRadius = Math.floor(cell_sz/4);
+
+			//now display the canvas
+			tmp = document.getElementById('myCanvas');
+			tmp.style.display="block";
+			tmp.addEventListener("mousedown", getpos, false);
+			ctx=tmp.getContext("2d");
+			setInterval(startt,200);
+			tmp = document.getElementById('menu');
+			tmp.style.display = "none";
+			createArrays();
+			paint_Lines(color_Array[1]);
+		}
+	</script>
+	</head>
+	<body onLoad="dispFields()">
+			<img src="ChainReaction/3.png" class="im" id="3"></img>
+			<img src="ChainReaction/2.png" class="im" id="2"></img>
+			<img src="chainReaction/1.png" class="im" id="1"></img>
+
+			<!--<p style="color:#FF0000;">Nitish</p>
+			<p style="color:#FF00FF;">Nitish</p>-->
+			<div id="menu" class="menu">
+				Players&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;<input id="plyrs" type="text"/><br>
+				Dimensions&nbsp;<input id="dims" type="text"/><br>
+				<button onclick="grabVals()">Go!</button>
+			</div>
+
+			<canvas id="myCanvas" style="display:none" width="640" height="640" ></canvas>
+			
+			<div id="ud" style="display:none;">
+				<button onclick="undo()">Undo</button>
+			</div>
+			<h2>ideal dimension to have the most fun would be 10,<br>add how much ever players you want<br> tired of truth and dare during parties?? now play this game and get your guy to do the stunt 
+				<br>XD lmao hafun!!</h2>
+	</body>
+</html>
