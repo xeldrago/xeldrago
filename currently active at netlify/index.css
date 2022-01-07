@@ -175,6 +175,28 @@
       color: #fff;
       text-decoration: none;
     }
+    .btn-grad56 {background-image: linear-gradient(to right, #1100ff 0%, #cbff0f  51%, #851b6a  100%)}
+   .btn-grad56 {
+      margin: 10px;
+      padding: 15px 45px;
+      text-align: center;
+      font-style: italic;
+      font-weight: bolder;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      display: block;
+    }
+ 
+    .btn-grad56:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
+
     .btn-grad10 {background-image: linear-gradient(to right, #0026ff 0%, #ff00ea  51%, #ffffff  100%)}
    .btn-grad10 {
       margin: 10px;
