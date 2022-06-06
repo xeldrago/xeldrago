@@ -1,0 +1,7 @@
+def jeffsucks():
+    averybignumber = open("hello", "w")
+    averybignumber.write("world")
+    averybignumber.close()
+
+
+jeffsucks()
