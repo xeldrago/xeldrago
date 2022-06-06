@@ -1,0 +1,14 @@
+i = input("to start press 1= ")
+def pycargame():
+   print("|\                             /|")
+   print("| \                           / |")
+   print("|  \         ]  [             /  |")
+   print("|___\        0||0           /___|")
+if i == "1":
+     pycargame()
+else:
+    print("press what is asked to be pressed")
+    while i != 1:
+        j = input("so press 1= ")
+        pycargame()
+        break
