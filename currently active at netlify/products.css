@@ -1,23 +1,22 @@
-   body {
-  background-image: url('media/images/products.jpg');
+body {
+  background-image: url("media/images/products.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.panel,.flip{
+.panel,
+.flip {
   padding: 10px;
   text-align: left;
- 
-  
 }
 
-.panel{
+.panel {
   padding: -10px;
   display: none;
 }
-  
-    .fa {
+
+.fa {
   padding: 20px;
   font-size: 30px;
   width: 100px;
@@ -30,7 +29,6 @@
 .fa:hover {
   opacity: 0.7;
   border-radius: 50px;
-  
 }
 .fa-youtube {
   background: red;
@@ -44,11 +42,10 @@
   background: #e71c1c;
   color: white;
 }
-.logo{
-    border-radius: 40px;
+.logo {
+  border-radius: 40px;
 }
 .button {
-  
   background-color: DodgerBlue;
   border: greenyellow;
   color: white;
@@ -71,7 +68,7 @@
 }
 
 .button span:after {
-  content: '\00bb';
+  content: "\00bb";
   position: absolute;
   opacity: 0;
   top: 0;
@@ -99,7 +96,6 @@
   cursor: pointer; /* Mouse pointer on hover */
   border-radius: 30px;
   width: 150px;
-  
 }
 
 /* Darker background on mouse-over */
@@ -107,20 +103,18 @@
   background-color: RoyalBlue;
   border-radius: 30px;
 }
-.fs{
+.fs {
   text-decoration: none;
   color: aliceblue;
-
 }
 aside {
-   width: 100%;
+  width: 100%;
   padding-left: 15px;
   margin-left: 10px;
   margin-right: -10px;
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   float: right;
   font-style: italic;
   background-color: rgb(12, 229, 245);
   border-radius: 30px;
-
 }
