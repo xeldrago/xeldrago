@@ -1,235 +1,302 @@
 .bodys {
-  background-image: url('media/images/gradientB.jpg');
+  background-image: url("media/images/gradientB.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  
-  
 }
 .body1 {
-  background-image: url('media/images/BGCR.jpg');
+  background-image: url("media/images/BGCR.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  
-  
 }
 .body2 {
-  background-image: url('media/images/TICTAC.jpg');
+  background-image: url("media/images/TICTAC.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  
-  
 }
 .htmls {
   --top-spacing: 100px;
   scroll-padding-top: var(--top-spacing);
 }
 
-
-.btn-grad {background-image: linear-gradient(to right, #fc00ff 0%, #00dbde  51%, #fc00ff  100%)}
 .btn-grad {
-   margin: 10px;
-   padding: 15px 45px;
-   text-align: center;
-   text-transform: uppercase;
-   transition: 0.5s;
-   background-size: 200% auto;
-   color: white;            
-   box-shadow: 0 0 20px #eee;
-   border-radius: 30px;
-   display: block;
- }
+  background-image: linear-gradient(
+    to right,
+    #fc00ff 0%,
+    #00dbde 51%,
+    #fc00ff 100%
+  );
+}
+.btn-grad {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 30px;
+  display: block;
+}
 
- .btn-grad:hover {
-   background-position: right center; /* change the direction of the change here */
-   color: #fff;
-   text-decoration: none;
- }
- 
- .btn-gradS {background-image: linear-gradient(to right, #56CCF2 0%, #2F80ED  51%, #56CCF2  100%)}
- .btn-gradS {
-    margin: 10px;
-    padding: 5px 5px;
-    text-align: left;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;            
-    box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
-    display: -ms-inline-grid;
-  }
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
 
-  .btn-gradS:hover {
-    background-position: right center; /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .btn-grad3 {background-image: linear-gradient(to right, #6a3093 0%, #3156cf  51%, #05fcef  100%)}
-  .btn-grad3 {
-     margin: 10px;
-     padding: 15px 45px;
-     text-align: center;
-     font-style: italic;
-     font-weight: bolder;
-     text-transform: uppercase;
-     transition: 0.5s;
-     background-size: 200% auto;
-     color: white;            
-     box-shadow: 0 0 20px #eee;
-     border-radius: 10px;
-     display: block;
-   }
+.btn-gradS {
+  background-image: linear-gradient(
+    to right,
+    #56ccf2 0%,
+    #2f80ed 51%,
+    #56ccf2 100%
+  );
+}
+.btn-gradS {
+  margin: 10px;
+  padding: 5px 5px;
+  text-align: left;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: -ms-inline-grid;
+}
 
-   .btn-grad3:hover {
-     background-position: right center; /* change the direction of the change here */
-     color: #fff;
-     text-decoration: none;
-   }
+.btn-gradS:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
 
-   .btn-grad4 {background-image: linear-gradient(to right, #0004ff 0%, #ae00ff  51%, #00d9ff  100%)}
-  .btn-grad4 {
-     margin: 10px;
-     padding: 15px 45px;
-     text-align: center;
-     text-transform: uppercase;
-     font-style: italic;
-     font-weight: bolder;
-     transition: 0.5s;
-     background-size: 200% auto;
-     color: white;            
-     box-shadow: 0 0 20px #eee;
-     border-radius: 10px;
-     display: block;
-   }
+.btn-grad3 {
+  background-image: linear-gradient(
+    to right,
+    #6a3093 0%,
+    #3156cf 51%,
+    #05fcef 100%
+  );
+}
+.btn-grad3 {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bolder;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
 
-   .btn-grad4:hover {
-     background-position: right center; /* change the direction of the change here */
-     color: #fff;
-     text-decoration: none;
-   }
-   .btn-grad9 {background-image: linear-gradient(to right, #000000 0%, #3156cf  51%, #fc0505  100%)}
-  .btn-grad9 {
-     margin: 10px;
-     padding: 15px 45px;
-     text-align: center;
-     font-style: italic;
-     font-weight: bolder;
-     text-transform: uppercase;
-     transition: 0.5s;
-     background-size: 200% auto;
-     color: white;            
-     box-shadow: 0 0 20px #eee;
-     border-radius: 10px;
-     display: block;
-   }
+.btn-grad3:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
 
-   .btn-grad9:hover {
-     background-position: right center; /* change the direction of the change here */
-     color: #fff;
-     text-decoration: none;
-   }
-   .btn-grad7 {background-image: linear-gradient(to right, #00ffb3 0%, #000000  51%, #0011ff  100%)}
-   .btn-grad7 {
-      margin: 10px;
-      padding: 15px 45px;
-      text-align: center;
-      font-style: italic;
-      font-weight: bolder;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-      color: white;            
-      box-shadow: 0 0 20px #eee;
-      border-radius: 10px;
-      display: block;
-    }
- 
-    .btn-grad7:hover {
-      background-position: right center; /* change the direction of the change here */
-      color: #fff;
-      text-decoration: none;
-    }
+.btn-grad4 {
+  background-image: linear-gradient(
+    to right,
+    #0004ff 0%,
+    #ae00ff 51%,
+    #00d9ff 100%
+  );
+}
+.btn-grad4 {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: bolder;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
 
-    .btn-grad11 {background-image: linear-gradient(to right, #1100ff 0%, #1fffbc  51%, #000000  100%)}
-   .btn-grad11 {
-      margin: 10px;
-      padding: 15px 45px;
-      text-align: center;
-      font-style: italic;
-      font-weight: bolder;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-      color: white;            
-      box-shadow: 0 0 20px #eee;
-      border-radius: 10px;
-      display: block;
-    }
- 
-    .btn-grad11:hover {
-      background-position: right center; /* change the direction of the change here */
-      color: #fff;
-      text-decoration: none;
-    }
-    .btn-grad56 {background-image: linear-gradient(to right, #1100ff 0%, #cbff0f  51%, #851b6a  100%)}
-   .btn-grad56 {
-      margin: 10px;
-      padding: 15px 45px;
-      text-align: center;
-      font-style: italic;
-      font-weight: bolder;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-      color: white;            
-      box-shadow: 0 0 20px #eee;
-      border-radius: 10px;
-      display: block;
-    }
- 
-    .btn-grad56:hover {
-      background-position: right center; /* change the direction of the change here */
-      color: #fff;
-      text-decoration: none;
-    }
+.btn-grad4:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad9 {
+  background-image: linear-gradient(
+    to right,
+    #000000 0%,
+    #3156cf 51%,
+    #fc0505 100%
+  );
+}
+.btn-grad9 {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bolder;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
 
-    .btn-grad10 {background-image: linear-gradient(to right, #0026ff 0%, #ff00ea  51%, #ffffff  100%)}
-   .btn-grad10 {
-      margin: 10px;
-      padding: 15px 45px;
-      text-align: center;
-      font-style: italic;
-      font-weight: bolder;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-      color: white;            
-      box-shadow: 0 0 20px #eee;
-      border-radius: 10px;
-      display: block;
-    }
- 
-    .btn-grad10:hover {
-      background-position: right center; /* change the direction of the change here */
-      color: #fff;
-      text-decoration: none;
-    }
-  
+.btn-grad9:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad7 {
+  background-image: linear-gradient(
+    to right,
+    #00ffb3 0%,
+    #000000 51%,
+    #0011ff 100%
+  );
+}
+.btn-grad7 {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bolder;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
 
-  .multicolortext {
-        background-image: linear-gradient(to left, rgb(55, 0, 255), rgb(0, 217, 255), rgb(0, 153, 255), rgb(5, 238, 255));
-        -webkit-background-clip: text;
-        -moz-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-.button {background-image: linear-gradient(to right, #56CCF2 0%, #2F80ED  51%, #56CCF2  100%)}
+.btn-grad7:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-grad11 {
+  background-image: linear-gradient(
+    to right,
+    #1100ff 0%,
+    #1fffbc 51%,
+    #000000 100%
+  );
+}
+.btn-grad11 {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bolder;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad11:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad56 {
+  background-image: linear-gradient(
+    to right,
+    #1100ff 0%,
+    #cbff0f 51%,
+    #851b6a 100%
+  );
+}
+.btn-grad56 {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bolder;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad56:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-grad10 {
+  background-image: linear-gradient(
+    to right,
+    #0026ff 0%,
+    #ff00ea 51%,
+    #ffffff 100%
+  );
+}
+.btn-grad10 {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bolder;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad10:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.multicolortext {
+  background-image: linear-gradient(
+    to left,
+    rgb(55, 0, 255),
+    rgb(0, 217, 255),
+    rgb(0, 153, 255),
+    rgb(5, 238, 255)
+  );
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 .button {
-  
+  background-image: linear-gradient(
+    to right,
+    #56ccf2 0%,
+    #2f80ed 51%,
+    #56ccf2 100%
+  );
+}
+.button {
   background-color: DodgerBlue;
   border: none;
   color: white;
@@ -252,7 +319,7 @@
 }
 
 .button span:after {
-  content: '\00bb';
+  content: "\00bb";
   position: absolute;
   opacity: 0;
   top: 0;
@@ -296,11 +363,12 @@
 
 /* Add a background color on hover */
 .btn-group button:hover {
-  background-color: #75ACFC;
+  background-color: #75acfc;
 }
-.button2 {background-color: #75ACFC; 
-          color: white;
-          border-radius: 30px;
+.button2 {
+  background-color: #75acfc;
+  color: white;
+  border-radius: 30px;
 }
 .navbar {
   overflow: hidden;
@@ -311,9 +379,6 @@
   width: 100%; /* Full width */
   z-index: 2;
   font-family: "Lato", sans-serif;
- 
-  
-  
 }
 .sidenav {
   height: 100%;
@@ -338,11 +403,10 @@
 }
 
 .sidenav a:hover {
-  background: #75ACFC;
+  background: #75acfc;
   color: blue;
   border-radius: 30px;
   align-content: center;
-  
 }
 
 .sidenav .closebtn {
@@ -351,18 +415,22 @@
   right: 60px;
   font-size: 36px;
   margin-left: 11010px;
-  
+
   border-radius: 0px;
 }
 
 #main {
-  transition: margin-left .5s;
+  transition: margin-left 0.5s;
   padding: 16px;
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }
 ads {
   height: 4px;
@@ -382,40 +450,36 @@ ads {
   border-radius: 30px;
 }
 
-
 /* Change background on mouse-over */
 .navbar a:hover {
-  background: #75ACFC;
+  background: #75acfc;
   color: blue;
   border-radius: 30px;
-  
 }
-
-
 
 #toc_container {
-    background: dodgerblue none repeat scroll 0 0;
-    border: 1px solid #aaa;
-    text-align: left;
-    display: table;
-    font-size: 95%;
-    color: whitesmoke;
-    margin-bottom: 1em;
-    padding: 20px;
-    width: auto;
-    border-radius: 30px;
+  background: dodgerblue none repeat scroll 0 0;
+  border: 1px solid #aaa;
+  text-align: left;
+  display: table;
+  font-size: 95%;
+  color: whitesmoke;
+  margin-bottom: 1em;
+  padding: 20px;
+  width: auto;
+  border-radius: 30px;
 }
 #toc_title {
-    font-weight: 700;
-    text-align: center;
-    text-align: left;
+  font-weight: 700;
+  text-align: center;
+  text-align: left;
 }
 
-
-
-#toc_container li, #toc_container ul, #toc_container ul li{
-    list-style: outside none none !important;
-    color: whitesmoke;
+#toc_container li,
+#toc_container ul,
+#toc_container ul li {
+  list-style: outside none none !important;
+  color: whitesmoke;
 }
 .topnav-right {
   float: right;
@@ -428,61 +492,59 @@ ads {
   float: right;
   font-style: italic;
   color: white;
-  background-image: linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #5f23be  100%);
+  background-image: linear-gradient(
+    to right,
+    #00c6ff 0%,
+    #0072ff 51%,
+    #5f23be 100%
+  );
   border-radius: 30px;
 }
 .responsive {
   width: 500px;
   height: 290px;
-  border-radius: 8px;}
-  @media only screen and (max-width: 490px) {
- 
-    [class="responsive"]{
-    width: 100%;
-    height: auto;
-    }
-  }
-
-
-
-
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:#27c03c;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-  font-size:30px;
-	box-shadow: 2px 2px 3px rgba(25, 0, 255, 0.247);
-  z-index:100;
-
+  border-radius: 8px;
 }
 @media only screen and (max-width: 490px) {
- 
-  [class="float"]{
-    position:fixed;
-    width:60px;
-    height:60px;
-    bottom: 500px;
-    left: 355px; 
-    background-color:#27c03c;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    font-size:30px;
-    box-shadow: 2px 2px 3px rgba(25, 0, 255, 0.247);
-    z-index: 100;
-  
+  [class="responsive"] {
+    width: 100%;
+    height: auto;
   }
 }
 
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #27c03c;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px rgba(25, 0, 255, 0.247);
+  z-index: 100;
+}
+@media only screen and (max-width: 490px) {
+  [class="float"] {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 500px;
+    left: 355px;
+    background-color: #27c03c;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px rgba(25, 0, 255, 0.247);
+    z-index: 100;
+  }
+}
 
-.my-float{
-	margin-top:16px;
+.my-float {
+  margin-top: 16px;
 }
 
 footer {
@@ -491,7 +553,7 @@ footer {
   background-color: rgb(26, 160, 238);
   color: white;
 }
-.logo{
+.logo {
   border-radius: 50px;
 }
 /* Main content */
