@@ -1,268 +1,473 @@
 <html>
   <head>
     <style>
-    .btn {
-      background-color: DodgerBlue; /* Blue background */
-      border: none; /* Remove borders */
-      color: white; /* White text */
-      padding: 25px 35px; /* Some padding */
-      font-size: 25px; /* Set a font size */
-      cursor: pointer; /* Mouse pointer on hover */
-      border-radius: 30px;
-    }
-    
-    /* Darker background on mouse-over */
-    .btn:hover {
-      background-color: RoyalBlue;
-      border-radius: 30px;
-    }
-    .btn-grad {background-image: linear-gradient(to right, #003cff 0%, #00dbde  51%, #fc00ff  100%)}
-.btn-grad {
-   margin: 10px;
-   padding: 15px 45px;
-   text-align: center;
-   text-transform: uppercase;
-   transition: 0.5s;
-   background-size: 200% auto;
-   color: white;            
-   box-shadow: 0 0 20px #eee;
-   border-radius: 0px;
-   display: block;
- }
+      .btn {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 25px 35px; /* Some padding */
+        font-size: 25px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        border-radius: 30px;
+      }
 
- .btn-grad:hover {
-   background-position: right center; /* change the direction of the change here */
-   color: #fff;
-   text-decoration: none;
- }
+      /* Darker background on mouse-over */
+      .btn:hover {
+        background-color: RoyalBlue;
+        border-radius: 30px;
+      }
+      .btn-grad {
+        background-image: linear-gradient(
+          to right,
+          #003cff 0%,
+          #00dbde 51%,
+          #fc00ff 100%
+        );
+      }
+      .btn-grad {
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 0px;
+        display: block;
+      }
 
+      .btn-grad:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
     </style>
-    
-    
-    <title>
-      Articles
-    </title>
-    <meta expr:content='data:blog.isMobile         ? &quot;width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0&quot;         : &quot;width=1100&quot;' name='viewport'/>
-    <link rel="stylesheet" href="index.css">
-    <a href="index.html"><button class="btn"><i class="fa fa-home"></i>← Home</button></a>
 
-
+    <title>Articles</title>
+    <meta
+      expr:content='data:blog.isMobile         ? "width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"         : "width=1100"'
+      name="viewport"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <a href="index.html"
+      ><button class="btn"><i class="fa fa-home"></i>← Home</button></a
+    >
   </head>
   <body class="bodys">
     <article>
-
-      <strong style="color:white;">
-      
-      <h1 class="btn-grad" id="articles">
-      <br>Content filled with
-      <br>LIFE LESSONS & TRUTH BOMBS</h1></strong>
-      </article>
-      <article>
-
-        <div id="toc_container" >
-          <p id="toc_title">CONTENT</p>
-          <ul class="toc_container li" >
-            <li><a href="#LifeHacks" style="color: rgb(243, 236, 236);">1 Life Hack</a>
+      <strong style="color: white">
+        <h1 class="btn-grad" id="articles">
+          <br />Content filled with <br />LIFE LESSONS & TRUTH BOMBS
+        </h1></strong
+      >
+    </article>
+    <article>
+      <div id="toc_container">
+        <p id="toc_title">CONTENT</p>
+        <ul class="toc_container li">
+          <li>
+            <a href="#LifeHacks" style="color: rgb(243, 236, 236)"
+              >1 Life Hack</a
+            >
             <ul>
-              <li><a href="#tricks" style="color: rgb(243, 236, 236);">1.1 Tricks</a></li>
-              <li><a href="#relax" style="color: rgb(243, 236, 236);">1.2 Relaxation</a></li>
-              
-              
+              <li>
+                <a href="#tricks" style="color: rgb(243, 236, 236)"
+                  >1.1 Tricks</a
+                >
+              </li>
+              <li>
+                <a href="#relax" style="color: rgb(243, 236, 236)"
+                  >1.2 Relaxation</a
+                >
+              </li>
             </ul>
           </li>
-          <li><a href="#reality" style="color: rgb(243, 236, 236);">2 Reality</a></li>
-          <li><a href="#politics be like" style="color: rgb(243, 236, 236);">3 Politics be like </a></li>
-          <li><a href="#Fun Fact" style="color: rgb(243, 236, 236);">4 Fun Fact </a></li>
-          <li><a href="#Toxic" style="color: rgb(243, 236, 236);">5 Toxic relationship </a></li>
-          <li><a href="#money" style="color: rgb(243, 236, 236);">6 Money philosophy </a>
-            <ul>
-              <li><a href="work" style="color: rgb(243, 236, 236);">6.1 Make it Work </a></li>
-              <li><a href="#better" style="color: rgb(243, 236, 236);">6.2 Betterment of Society</a></li>
-              <li><a href="#know" style="color: rgb(243, 236, 236);">6.3 know well</a></li>
-              
-              
-            </ul>
-            </li>
-        
-          <li><a href="#Truth" style="color: rgb(243, 236, 236);">7 Truth Bombs </a>
-            <ul>
-              <li><a href="#SEE" style="color: rgb(243, 236, 236);">7.1 See Truth</a></li>
-              <li><a href="#belief" style="color: rgb(243, 236, 236);">7.2 Belief</a></li>
-              <li><a href="#worth" style="color: rgb(243, 236, 236);">7.3 Self Worth</a></li>
-              
-              
-            </ul>
-            <li><a href="#empathy" style="color: rgb(243, 236, 236);">8 Empathy</a>
-            
+          <li>
+            <a href="#reality" style="color: rgb(243, 236, 236)">2 Reality</a>
           </li>
-          
-          </ul>
-          </div>
-        </article>
-      
-      <article>
+          <li>
+            <a href="#politics be like" style="color: rgb(243, 236, 236)"
+              >3 Politics be like
+            </a>
+          </li>
+          <li>
+            <a href="#Fun Fact" style="color: rgb(243, 236, 236)"
+              >4 Fun Fact
+            </a>
+          </li>
+          <li>
+            <a href="#Toxic" style="color: rgb(243, 236, 236)"
+              >5 Toxic relationship
+            </a>
+          </li>
+          <li>
+            <a href="#money" style="color: rgb(243, 236, 236)"
+              >6 Money philosophy
+            </a>
+            <ul>
+              <li>
+                <a href="work" style="color: rgb(243, 236, 236)"
+                  >6.1 Make it Work
+                </a>
+              </li>
+              <li>
+                <a href="#better" style="color: rgb(243, 236, 236)"
+                  >6.2 Betterment of Society</a
+                >
+              </li>
+              <li>
+                <a href="#know" style="color: rgb(243, 236, 236)"
+                  >6.3 know well</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#Truth" style="color: rgb(243, 236, 236)"
+              >7 Truth Bombs
+            </a>
+            <ul>
+              <li>
+                <a href="#SEE" style="color: rgb(243, 236, 236)"
+                  >7.1 See Truth</a
+                >
+              </li>
+              <li>
+                <a href="#belief" style="color: rgb(243, 236, 236)"
+                  >7.2 Belief</a
+                >
+              </li>
+              <li>
+                <a href="#worth" style="color: rgb(243, 236, 236)"
+                  >7.3 Self Worth</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#empathy" style="color: rgb(243, 236, 236)">8 Empathy</a>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <article>
       <ul>
-      <h2 id="LifeHacks">
-        Life Hacks
-      </h2>
-      
-        <li id="tricks"><i>Tricks</i><br>There's things tht need time to take decision 
-      And then there is tht shouldn't need tht time and at those times use 5 second rule or toss a coin<br>the 5 second rule is just you taking a break and at the end of those seconds,
-      <br>
-       whatever decision hangs on your head mus be taken<br>And the coin toss trick is not that u take the decision by head or tails but actually when u toss the coin,<br> the moment before it hits the ground you will surely think of the decision that u really want to take by heart  </li>
-        <li>Average life expectancy maybe 79.6years <br>but the actual living is 17.5 years (sleep,eating,drinking,old age,non-consciousness take away the other time) 
-          Now, knowing this will be of your advantage to face life and an easy reminder that: sad or happy, enjoy each moment !!
-      <a href="https://www.instagram.com/p/CLZW2SSB4H-/?igshid=1w5siweuly3pb" style="color: LightGreen;">(for reference)</a></li>
-        <li id="#relax"><i>Relax</i><br>Don't think too much.. u feel and experience what u think.. so stop.. breathe 
-      Relax... 
-      Don't pressure urself.. no one's dying bud(got your 17 years yet)</li>
-        <li>And one of the most common ways to attain such relaxation in fierce fights or<br>
-          bad situations is to learn about Empathy and Perspective,<br><img src="media/images/perspective.jpg"><br>
-           The main way or one of the major ways to prepare that point of view is by analogy ..(think of an example that suits the situation best)<a style="color: LightGreen;" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZh9GFMkLu8u-34_qCshRFEFJ9i3m5O-m20g&usqp=CAU">perspective</a></li>
-      </ul>
-        </article>
-        <article>
-        <h2 id="reality">Reality</h2>
-        <li>1. Awkward but isn't it true that whatvr we may eat ,how rich nor how poor,how tasty, how miserable it all comes down the same way as every food ever for a human in the next day morning 🙄(no matter how good things go(start),they all end up bad(death eventually))<br>
-      2. Bad habits ,people who say they oly do a little of it ... (Shit is shit no matter how little or big it is...sry)<br>
-      3.Girls are vulnerable ,boys misuse ..no two ways about it (*FACTS*)<br>
-      4. (once you know this you won't be normal)Dopamine, testosterone, oxytocin, norepinephrine, and phenylethylamine all work together to create a feedback loop of love</li>
-        <li>5.dont listen to unknown quotes ,it is just new trend not the real fact in the end !<a style="color: LightGreen;"  href="https://www.instagram.com/p/CLszSZlnHjb/?igshid=sutx119d8rk0">for reference</a></li>
-      </article>
-      <article>
-         <h2 id="politics be like">Politics</h2>
-         <li>We all know in general about how politics revolve around the world 
-           but what happend in India,TN was the peak of everything(fun oriented)<br>
-           <iframe width="560" height="315" src="https://www.youtube.com/embed/ogOdgZXtSg8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-         </li>
-        </article>
-        <article>
-         <h2 id="Fun Fact">Fun Fact</h2>
-        <li><i>Nothing is ever tooooo dumb for life</i><br> 
-      Cos we literally just pay to see other human beings (movies,airplane tickets,through specs,heck even prostitution)</li>
-      </article>
-      <article><ul><li>Fun Facts are pretty random to pop out of nowhere<br>
-         even when we are enduring hardships and struggles in our life. Say, like how you come across random ads while watching TV <br>
-         or playing Ad implied games etc or like the ad that has popped right below this Text<br>
-         <script type="text/javascript">
-          atOptions = {
-            'key' : '711e7af8d7e5cf9bbef407f704f19994',
-            'format' : 'iframe',
-            'height' : 300,
-            'width' : 160,
-            'params' : {}
-          };
-          document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.variouscreativeformats.com/711e7af8d7e5cf9bbef407f704f19994/invoke.js"></scr' + 'ipt>');
-        </script>
-          And just like the above ad, you must ignore those fun facts that hurt or disturb you,<br>
-           or should use it for the very sake of it!! Fun and drop ladies and gentlemen.<br>
-          As i said earlier perspective matters,<br> yet another example image for you down below, but this time watch closely(tilt phone upside down) <br>
-          <img src="media/images/perspective2.jpg" width="400" height="400"><br>
-          Did you find the trick??, hope you did!<br>
-          just like the above image, life sometimes may seem hard and unruly no matter<br>
-          which direction or way of approach you may make and take<br>
-          At those times, you must not fade away rather bounce back and say "is that all you've got?!!(reference:Thor,avengers")<br>
-          Dont shout, i can hear your, "HOW!!"<br>
-          that is life, figuring it out is your adventure but if you wana drop dead as a weakling(unlike Thor) you always have a choice mate<br>
-          if you cant approach it anyway, then let it slide, flow, crash<br>
-          And once you get the slightest hint, go at it!!, crash it back!!, harder and twice as it did. 
-      
-        </li></ul></article>
-      <article>
-       <h2 id="Toxic">Toxic Relationship</h2>
-        <li><i>Toxic relationships are at times just "One-sided relationships"</i><br>
-          -How to Move Forward in a One-sided Relationship
-      If you feel that you're in an imbalanced relationship, Campbell suggests documenting your time and making a concrete list of observations. </li>
-        <li>If after making these observations, you feel that things are one-sided, you need to communicate your feelings with your partner who otherwise won't know that a problem exists.and if it still pertains cut ties with the partner </li>
-        <li>However, initiating change can be the hardest part of navigating a one-sided relationship. "The problem with one-sided relationships is that often it is just one partner initiating these 'talks' because being in what we call an over-benefitted situation (getting more out of a relationship than you are putting in) can be quite comfortable," Campbell explains. "So your partner may not respond favorably to the complaint."</li>
-        <li>In fact, "researchers call this pattern 'demand-withdrawal,' which involves one partner is initiating a discussion or requesting a change and the other withdrawing from the conversation and avoiding discussion," she elaborates.1﻿ It's a very unhealthy and a common pattern in one-sided relationships. "If the over-benefitted cares about the other's well-being, they will seek to improve the balance and take on more of the work or put in more effort," says Campbell.</li>
-        <li>"If a partner does not change after being made aware of the imbalance, the partnership might not be a good fit and the under-benefitted person should consider moving on," she adds.</li>
-      </article>
-      <article>
-        <h2 id="money">Money philosophy </h2>
-        <img src="media/images/money.jpg"><br>
-        <ul id="money"><b><i>Explaination</i></b><br>
-          The point about the animation is this. There are two individuals, apparently doing likewise work.<br>
-      
-      
-          One looks glad and the other is extremely pitiful. One is doing things the most difficult way possible, and one is doing things the simple way. <br>
-          <li id="work"><b><i>Smart way</i></b><br>
-          
-          The simple route is to work first. Get some cash. Everyone needs to bring in cash, and except if you acquired it, a great many people need to work. <br>
-          
-          Nonetheless, when you are acquiring, begin bringing in your cash work for you, instead of zeroing in on working for cash. <br>
+        <h2 id="LifeHacks">Life Hacks</h2>
+
+        <li id="tricks">
+          <i>Tricks</i><br />There's things tht need time to take decision And
+          then there is tht shouldn't need tht time and at those times use 5
+          second rule or toss a coin<br />the 5 second rule is just you taking a
+          break and at the end of those seconds,
+          <br />
+          whatever decision hangs on your head mus be taken<br />And the coin
+          toss trick is not that u take the decision by head or tails but
+          actually when u toss the coin,<br />
+          the moment before it hits the ground you will surely think of the
+          decision that u really want to take by heart
         </li>
-          <li id="better">
-           <b><i>Betterment of Society or Surrounding</i></b><br>
-          
-          It can get going little from the outset. Two or three hundred dollars or pounds to a great extent. <br>
-          
-          In the event that you start soon enough, you can collect a tremendous pot of cash at retirement. <br>
-          
-          There are alternate approaches to bring in cash work for you also, remembering contributing for appreciating and income creating resources. 
-          
-          The fact of the matter is, in the event that you buckle down for cash, however spend that cash on things that will go down in esteem and won't ever deliver income, 
-          you will consistently be once again at the starting point. <br></li>
-          <li id="know"><b><i>Know Better</i></b><br>
-          
-          That doesn't mean paid and difficult work is terrible. It gives individuals reason.<br>
-          
-          No one can tell when your wellbeing will go however.<br> 
-          So when you can begin reinvesting cash from that work, into future income, the sooner you have more alternatives</li>
-      
-        </ul>
-      </article>
-      <script type="text/javascript">
-        atOptions = {
-          'key' : '8ad1405b9a6182a0e34744cc85a4973a',
-          'format' : 'iframe',
-          'height' : 600,
-          'width' : 160,
-          'params' : {}
-        };
-        document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.variouscreativeformats.com/8ad1405b9a6182a0e34744cc85a4973a/invoke.js"></scr' + 'ipt>');
-      </script>
-      <article>
-        <h2 id="Truth">Truth bomb alert!</h2>
-        <li id="SEE"><i>TRUTH</i><br>
-      If u like somone ,ull exaggerate them in ur mind<br>
-      If u dislike someone ,ull still exaggerate them in ur mind<br>
-      If u exaggerate ,it means ur unable to see them as they are ,<br>
-      U can never handle life the way it should be ..
-      </li><br>
-      </article>
-      <article>
-      <li id="Belief"><i>BELIEF</i> <br>
-      Now...I have to be grateful to somone for the good things that happend and would happen to me in future <br>
-      Thus I believe in Jesus and am grateful to him <br>
-      So that I don't feel guilty under my own judgement and conscience </li><br>
-      </article>
-      <article>
-	      <ul>
-        <li id="worth"><i>SELF WORTH</i> <br>
-          <img src="media/images/self.jpg"><br>
-          You put down yourself too much sometimes that you sacredly believe that<br>
-          you'd just die for somone who is better(lol due to low self esteem)<br>
-      Your body isn't yours <br>
-      It's prolly ur parents' (if u don't believe in God)<br>
-      Or it's ur creator's(ur God)<br>
-      So if u wana die for your friends sake and ur tht pure of it ...<br>
-      Then u might as well take ur body and soul as ur other friend who deserves ur attention too..<br>
-      Don't treat it like u own it and it's u.. it ain't u if u don't look after it like u should ..<br>
-      It isn't selfish.. it's taking care of tht body and soul given to u.. just like a friend<br>
-      So, DEEP breath and know that you are worthy of yourself. </li>
-      
+        <li>
+          Average life expectancy maybe 79.6years <br />but the actual living is
+          17.5 years (sleep,eating,drinking,old age,non-consciousness take away
+          the other time) Now, knowing this will be of your advantage to face
+          life and an easy reminder that: sad or happy, enjoy each moment !!
+          <a
+            href="https://www.instagram.com/p/CLZW2SSB4H-/?igshid=1w5siweuly3pb"
+            style="color: LightGreen"
+            >(for reference)</a
+          >
+        </li>
+        <li id="#relax">
+          <i>Relax</i><br />Don't think too much.. u feel and experience what u
+          think.. so stop.. breathe Relax... Don't pressure urself.. no one's
+          dying bud(got your 17 years yet)
+        </li>
+        <li>
+          And one of the most common ways to attain such relaxation in fierce
+          fights or<br />
+          bad situations is to learn about Empathy and Perspective,<br /><img
+            src="media/images/perspective.jpg"
+          /><br />
+          The main way or one of the major ways to prepare that point of view is
+          by analogy ..(think of an example that suits the situation best)<a
+            style="color: LightGreen"
+            href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZh9GFMkLu8u-34_qCshRFEFJ9i3m5O-m20g&usqp=CAU"
+            >perspective</a
+          >
+        </li>
       </ul>
-      
-      </article>
-      <article>
-        <ul>
-          <li id="empathy"><i>EMPATHY</i><br>
-            Knowing this may actually make you know which is a suited environment for you or<br>
-            make such environment for others to build a better workplace.<br>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/_Ie_vRj-LuQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>
-        </ul>
-      </article>
-      
+    </article>
+    <article>
+      <h2 id="reality">Reality</h2>
+      <li>
+        1. Awkward but isn't it true that whatvr we may eat ,how rich nor how
+        poor,how tasty, how miserable it all comes down the same way as every
+        food ever for a human in the next day morning 🙄(no matter how good
+        things go(start),they all end up bad(death eventually))<br />
+        2. Bad habits ,people who say they oly do a little of it ... (Shit is
+        shit no matter how little or big it is...sry)<br />
+        3.Girls are vulnerable ,boys misuse ..no two ways about it (*FACTS*)<br />
+        4. (once you know this you won't be normal)Dopamine, testosterone,
+        oxytocin, norepinephrine, and phenylethylamine all work together to
+        create a feedback loop of love
+      </li>
+      <li>
+        5.dont listen to unknown quotes ,it is just new trend not the real fact
+        in the end !<a
+          style="color: LightGreen"
+          href="https://www.instagram.com/p/CLszSZlnHjb/?igshid=sutx119d8rk0"
+          >for reference</a
+        >
+      </li>
+    </article>
+    <article>
+      <h2 id="politics be like">Politics</h2>
+      <li>
+        We all know in general about how politics revolve around the world but
+        what happend in India,TN was the peak of everything(fun oriented)<br />
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/ogOdgZXtSg8"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </li>
+    </article>
+    <article>
+      <h2 id="Fun Fact">Fun Fact</h2>
+      <li>
+        <i>Nothing is ever tooooo dumb for life</i><br />
+        Cos we literally just pay to see other human beings (movies,airplane
+        tickets,through specs,heck even prostitution)
+      </li>
+    </article>
+    <article>
+      <ul>
+        <li>
+          Fun Facts are pretty random to pop out of nowhere<br />
+          even when we are enduring hardships and struggles in our life. Say,
+          like how you come across random ads while watching TV <br />
+          or playing Ad implied games etc or like the ad that has popped right
+          below this Text<br />
+          <script type="text/javascript">
+            atOptions = {
+              key: "711e7af8d7e5cf9bbef407f704f19994",
+              format: "iframe",
+              height: 300,
+              width: 160,
+              params: {},
+            };
+            document.write(
+              "<scr" +
+                'ipt type="text/javascript" src="http' +
+                (location.protocol === "https:" ? "s" : "") +
+                '://www.variouscreativeformats.com/711e7af8d7e5cf9bbef407f704f19994/invoke.js"></scr' +
+                "ipt>"
+            );
+          </script>
+          And just like the above ad, you must ignore those fun facts that hurt
+          or disturb you,<br />
+          or should use it for the very sake of it!! Fun and drop ladies and
+          gentlemen.<br />
+          As i said earlier perspective matters,<br />
+          yet another example image for you down below, but this time watch
+          closely(tilt phone upside down) <br />
+          <img
+            src="media/images/perspective2.jpg"
+            width="400"
+            height="400"
+          /><br />
+          Did you find the trick??, hope you did!<br />
+          just like the above image, life sometimes may seem hard and unruly no
+          matter<br />
+          which direction or way of approach you may make and take<br />
+          At those times, you must not fade away rather bounce back and say "is
+          that all you've got?!!(reference:Thor,avengers")<br />
+          Dont shout, i can hear your, "HOW!!"<br />
+          that is life, figuring it out is your adventure but if you wana drop
+          dead as a weakling(unlike Thor) you always have a choice mate<br />
+          if you cant approach it anyway, then let it slide, flow, crash<br />
+          And once you get the slightest hint, go at it!!, crash it back!!,
+          harder and twice as it did.
+        </li>
+      </ul>
+    </article>
+    <article>
+      <h2 id="Toxic">Toxic Relationship</h2>
+      <li>
+        <i>Toxic relationships are at times just "One-sided relationships"</i
+        ><br />
+        -How to Move Forward in a One-sided Relationship If you feel that you're
+        in an imbalanced relationship, Campbell suggests documenting your time
+        and making a concrete list of observations.
+      </li>
+      <li>
+        If after making these observations, you feel that things are one-sided,
+        you need to communicate your feelings with your partner who otherwise
+        won't know that a problem exists.and if it still pertains cut ties with
+        the partner
+      </li>
+      <li>
+        However, initiating change can be the hardest part of navigating a
+        one-sided relationship. "The problem with one-sided relationships is
+        that often it is just one partner initiating these 'talks' because being
+        in what we call an over-benefitted situation (getting more out of a
+        relationship than you are putting in) can be quite comfortable,"
+        Campbell explains. "So your partner may not respond favorably to the
+        complaint."
+      </li>
+      <li>
+        In fact, "researchers call this pattern 'demand-withdrawal,' which
+        involves one partner is initiating a discussion or requesting a change
+        and the other withdrawing from the conversation and avoiding
+        discussion," she elaborates.1﻿ It's a very unhealthy and a common
+        pattern in one-sided relationships. "If the over-benefitted cares about
+        the other's well-being, they will seek to improve the balance and take
+        on more of the work or put in more effort," says Campbell.
+      </li>
+      <li>
+        "If a partner does not change after being made aware of the imbalance,
+        the partnership might not be a good fit and the under-benefitted person
+        should consider moving on," she adds.
+      </li>
+    </article>
+    <article>
+      <h2 id="money">Money philosophy</h2>
+      <img src="media/images/money.jpg" /><br />
+      <ul id="money">
+        <b><i>Explaination</i></b
+        ><br />
+        The point about the animation is this. There are two individuals,
+        apparently doing likewise work.<br />
+
+        One looks glad and the other is extremely pitiful. One is doing things
+        the most difficult way possible, and one is doing things the simple way.
+        <br />
+        <li id="work">
+          <b><i>Smart way</i></b
+          ><br />
+
+          The simple route is to work first. Get some cash. Everyone needs to
+          bring in cash, and except if you acquired it, a great many people need
+          to work. <br />
+
+          Nonetheless, when you are acquiring, begin bringing in your cash work
+          for you, instead of zeroing in on working for cash. <br />
+        </li>
+        <li id="better">
+          <b><i>Betterment of Society or Surrounding</i></b
+          ><br />
+
+          It can get going little from the outset. Two or three hundred dollars
+          or pounds to a great extent. <br />
+
+          In the event that you start soon enough, you can collect a tremendous
+          pot of cash at retirement. <br />
+
+          There are alternate approaches to bring in cash work for you also,
+          remembering contributing for appreciating and income creating
+          resources. The fact of the matter is, in the event that you buckle
+          down for cash, however spend that cash on things that will go down in
+          esteem and won't ever deliver income, you will consistently be once
+          again at the starting point. <br />
+        </li>
+        <li id="know">
+          <b><i>Know Better</i></b
+          ><br />
+
+          That doesn't mean paid and difficult work is terrible. It gives
+          individuals reason.<br />
+
+          No one can tell when your wellbeing will go however.<br />
+          So when you can begin reinvesting cash from that work, into future
+          income, the sooner you have more alternatives
+        </li>
+      </ul>
+    </article>
+    <script type="text/javascript">
+      atOptions = {
+        key: "8ad1405b9a6182a0e34744cc85a4973a",
+        format: "iframe",
+        height: 600,
+        width: 160,
+        params: {},
+      };
+      document.write(
+        "<scr" +
+          'ipt type="text/javascript" src="http' +
+          (location.protocol === "https:" ? "s" : "") +
+          '://www.variouscreativeformats.com/8ad1405b9a6182a0e34744cc85a4973a/invoke.js"></scr' +
+          "ipt>"
+      );
+    </script>
+    <article>
+      <h2 id="Truth">Truth bomb alert!</h2>
+      <li id="SEE">
+        <i>TRUTH</i><br />
+        If u like somone ,ull exaggerate them in ur mind<br />
+        If u dislike someone ,ull still exaggerate them in ur mind<br />
+        If u exaggerate ,it means ur unable to see them as they are ,<br />
+        U can never handle life the way it should be ..
+      </li>
+      <br />
+    </article>
+    <article>
+      <li id="Belief">
+        <i>BELIEF</i> <br />
+        Now...I have to be grateful to somone for the good things that happend
+        and would happen to me in future <br />
+        Thus I believe in Jesus and am grateful to him <br />
+        So that I don't feel guilty under my own judgement and conscience
+      </li>
+      <br />
+    </article>
+    <article>
+      <ul>
+        <li id="worth">
+          <i>SELF WORTH</i> <br />
+          <img src="media/images/self.jpg" /><br />
+          You put down yourself too much sometimes that you sacredly believe
+          that<br />
+          you'd just die for somone who is better(lol due to low self esteem)<br />
+          Your body isn't yours <br />
+          It's prolly ur parents' (if u don't believe in God)<br />
+          Or it's ur creator's(ur God)<br />
+          So if u wana die for your friends sake and ur tht pure of it ...<br />
+          Then u might as well take ur body and soul as ur other friend who
+          deserves ur attention too..<br />
+          Don't treat it like u own it and it's u.. it ain't u if u don't look
+          after it like u should ..<br />
+          It isn't selfish.. it's taking care of tht body and soul given to u..
+          just like a friend<br />
+          So, DEEP breath and know that you are worthy of yourself.
+        </li>
+      </ul>
+    </article>
+    <article>
+      <ul>
+        <li id="empathy">
+          <i>EMPATHY</i><br />
+          Knowing this may actually make you know which is a suited environment
+          for you or<br />
+          make such environment for others to build a better workplace.<br />
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/_Ie_vRj-LuQ"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </li>
+      </ul>
+    </article>
   </body>
-    </html>
+</html>

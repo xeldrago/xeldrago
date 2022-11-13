@@ -1,74 +1,77 @@
-	/* CSS Code */
-	/* Heading */
-	h1 {
-		color: rgb(0, 17, 255);
-		font-size: 45px;
-	}
+/* CSS Code */
+/* Heading */
+h1 {
+  color: rgb(0, 17, 255);
+  font-size: 45px;
+}
 
-	/* 3*3 Grid */
-	#b1, #b2, #b3, #b4, #b5,
-	#b6, #b7, #b8, #b9 {
-		width: 80px;
-		height: 52px;
-		margin: auto;
-		border: 1px solid gray;
-		border-radius: 6px;
-		font-size: 30px;
-		text-align: center;
-	}
+/* 3*3 Grid */
+#b1,
+#b2,
+#b3,
+#b4,
+#b5,
+#b6,
+#b7,
+#b8,
+#b9 {
+  width: 80px;
+  height: 52px;
+  margin: auto;
+  border: 1px solid gray;
+  border-radius: 6px;
+  font-size: 30px;
+  text-align: center;
+}
 
-	/* Reset Button */
-	#but {
-		box-sizing: border-box;
-		width: 95px;
-		height: 40px;
-		border: 1px solid rgb(0, 163, 114);
-		margin: auto;
-		border-radius: 4px;
-		font-family: Verdana,
-			Geneva, Tahoma, sans-serif;
+/* Reset Button */
+#but {
+  box-sizing: border-box;
+  width: 95px;
+  height: 40px;
+  border: 1px solid rgb(0, 163, 114);
+  margin: auto;
+  border-radius: 4px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-		background-color: rgb(30, 221, 255);
-		color: white;
-		font-size: 20px;
-		cursor: pointer;
-	}
-	.btn {
-		background-color: DodgerBlue; /* Blue background */
-		border: none; /* Remove borders */
-		color: white; /* White text */
-		padding: 25px 35px; /* Some padding */
-		font-size: 25px; /* Set a font size */
-		cursor: pointer; /* Mouse pointer on hover */
-		border-radius: 30px;
-	  }
-	  
-	  /* Darker background on mouse-over */
-	  .btn:hover {
-		background-color: RoyalBlue;
-		border-radius: 30px;
-	  }
+  background-color: rgb(30, 221, 255);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+.btn {
+  background-color: DodgerBlue; /* Blue background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 25px 35px; /* Some padding */
+  font-size: 25px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+  border-radius: 30px;
+}
 
-	/* Player turn space */
-	#print {
-		font-family: Verdana,
-			Geneva, Tahoma, sans-serif;
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+  border-radius: 30px;
+}
 
-		color: rgb(255, 255, 255);
-		font-size: 20px;
-	}
+/* Player turn space */
+#print {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-	/* Main Container */
-	#main {
-		text-align: center;
-	}
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
 
-	/* Game Instruction Text */
-	#ins {
-		font-family: Verdana,
-			Geneva, Tahoma, sans-serif;
-			
-		color: rgb(0, 0, 0);
-		font-size: 17px;
-	}
+/* Main Container */
+#main {
+  text-align: center;
+}
 
+/* Game Instruction Text */
+#ins {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  color: rgb(0, 0, 0);
+  font-size: 17px;
+}
