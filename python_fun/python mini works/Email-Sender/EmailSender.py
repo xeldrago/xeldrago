@@ -1,5 +1,5 @@
 # for i in range(1000)
-import win32com.client as win32
+import pywin32.client as win32
 olApp = win32.Dispatch('Outlook.Application')
 olNS = olApp.GetNameSpace('MAPI')
 mail_item = olApp.CreateItem(0)
