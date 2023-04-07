@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"
+    integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/index.css">
+
+    <title>cal gpa</title>
+
+</head>
+
+<body>
+    <h1>TNAU GPA CALCULATOR</h1>
+
+    <div class="nav_btns">
+                    <!-- theme change button -->
+        <i class="uil uil-moon change-theme" id="theme-button"></i>
+    </div>
+    <h2 id="Instructions">Instructions <i class="uil uil-arrow-down"></i></h2>
+
+    <section class="instruction-hide" id="instructionBlock">
+            <h3 class="instrustion" >Subject Information, Credit scores are taken from TNAU website</h3>
+            <h3 class="instrustion">Enter scores only for the courses you opted</h3>
+            <h3 class="instrustion">Example</h3>
+            <h3 class="instrustion">If there are 13 subjects and you took only 12 subjects enter scores of subjects you took</h3>
+            <h3 class="instrustion">Leave the input box as it is(empty) for the subject you not took</h3>
+            <h3 class="instrustion">Unfortunately if arrear happened enter zero for that subject</h3>
+            <h3 class="instrustion">If a subject has no credit points then leave that input box also empty</h3>
+    </section>
+    <section class="section">
+        <div class="grp-course" id="r1">
+        </div>
+        <div class="grp-streams" id="r2"></div>
+        <div class="grp-semaster" id="r3"></div>
+    </section>
+    <section class="section" id="r4">
+    </section>
+    <section class="section" id="r5"></section>
+    <footer class="footer footer-hide" id="r6">
+        <div class="footer__bg">
+            <div class="footer__container container grid">
+                <div>
+                    <h1 class="footer__title">TNAU GPA CALCULATOR</h1>
+                    <span class="footer__subtitle">For Students By Students❤️</span>
+                </div>
+                <div>
+                    <h2>Data(Course Information) Contributors : </h2>
+                    <h3 class="contibution__person">Shreeneethi & Rakshitha (B.Tech Food Technology TNAU CBE 2019-2023)</h3>  
+                    <p class="contribution__info"> B. Tech. (Food Technology) course information were collected and converted by them as per our requirement</p>  
+                    <h3 class="contibution__person"> Nithin Joel J ( B.Tech Agricultural Engineering TNAU CBE 2020-2024)</h3>  
+                    <p class="contribution__info"> B. Tech. (Agricultural Engineering) course information were collected and converted by him as per our requirement</p>  
+                </div>
+                <div>
+                    <h2> Connect and Contribution : </h2>
+                    <p class="connect__item">Mistakes/Clarification enquries : <a href="mailto:aswin18027@cse.ssn.edu.in?subject=TNAU GPA Mistakes/Clarification enquries regards">Email</a></p>
+                    <p class="connect__item">If you are Interested in helping to collect other departments semaster detials like subjects, credits Connect with me :  <a href="mailto:aswin18027@cse.ssn.edu.in?subject=TNAU GPA data contribution regrads">Email</a></p>
+                </div>
+                <div class="bottom__social">
+                    <a href="https://www.instagram.com/aswin_037/" target='_blank' class="home__social-icon">
+                        <i class="uil uil-instagram-alt"></i>
+                    </a>
+                    <a href="https://aswin-7.github.io/" target='_blank' class="home__social-icon">
+                        <i class="uil uil-link-h"></i>
+                    </a>
+                    <a href="https://github.com/AswiN-7" target='_blank' class="home__social-icon">
+                        <i class="uil uil-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/aswin07/" target='_blank' class="home__social-icon">
+                        <i class="uil uil-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com/AswiN_037" target='_blank' class="home__social-icon">
+                        <i class="uil uil-twitter"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--==================== MAIN JS ====================-->
+    <script src="assets/data.js"></script>
+    <script src="assets/index.js"></script>
+</body>
+
+</html>
