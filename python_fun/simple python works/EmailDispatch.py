@@ -14,43 +14,22 @@ num_attachments = 1
 outlook = win32.Dispatch('Outlook.Application')
 namespace = outlook.GetNamespace('MAPI')
 
-# Create a new workbook
-workbook = Workbook()
-sheet = workbook.active
-
-# Set column names
-sheet['A1'] = 'Subject'
-sheet['B1'] = 'To Email Address'
-sheet['C1'] = 'Body'
-sheet['D1'] = 'Attachment1'
-sheet['E1'] = 'Email Sent'  # New column for email sent indication
-
-# Save the workbook to the specified path
-workbook.save(excel_file_path)
-print("Excel file created successfully.")
-
-# Instructions for the user
-print("Please paste the email data into the Excel file.")
-print("Ensure that the data starts from row 2, with the subject in column A, email address in column B, body in column C, and attachments in column D.")
-
-# Wait for user confirmation to proceed
-input("Press Enter to send the emails...")
-
 # Load the Excel file
 workbook = load_workbook(excel_file_path)
 sheet = workbook.active
 
+# Get the index of the last column in the sheet
+last_column = sheet.max_column
+
+# Add "Sent" column header
+sent_column_header = "Sent"
+sheet.cell(row=1, column=last_column + 1, value=sent_column_header)
+
 # Iterate over the rows in the Excel sheet
-for row in sheet.iter_rows(min_row=2, values_only=True):
+for row_index, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2):
     email = row[1]  # To email address
     subject = row[0]  # Subject
     body = row[2]  # Body of the email
-    email_sent = row[4]  # Email sent indication
-
-    # Check if the email has already been sent
-    if email_sent:
-        print(f"Skipping email: {subject} | {email} - Email already sent.")
-        continue
 
     # Dictionary mapping attachment numbers to file names
     attachments = {}
@@ -66,21 +45,24 @@ for row in sheet.iter_rows(min_row=2, values_only=True):
     mail_item.To = email
     mail_item.Body = body
 
-    # Attach the PDF files
-    for attachment_num, attachment_file in attachments.items():
-        attachment_path = os.path.join('F:\work related', attachment_file)
-        mail_item.Attachments.Add(Source=attachment_path)
-
-    # Send the email
     try:
+        # Attach the PDF files
+        for attachment_num, attachment_file in attachments.items():
+            attachment_path = os.path.join('F:\work related', attachment_file)
+            mail_item.Attachments.Add(Source=attachment_path)
+
+        # Send the email
         mail_item.Send()
+
+        # Update the "Sent" column value to "True"
+        sheet.cell(row=row_index, column=last_column + 1, value=True)
         print(f"Email sent successfully: {subject} | {email}")
-        # Mark email as sent in the Excel file
-        sheet.cell(row=row[0].row, column=5).value = "Sent"
     except Exception as e:
+        # Update the "Sent" column value to "False"
+        sheet.cell(row=row_index, column=last_column + 1, value=False)
         print(f"Failed to send email: {subject} | {email} - {str(e)}")
 
-# Save the updated workbook with email sent indications
+# Save the updated workbook
 workbook.save(excel_file_path)
-print("Emails sent successfully.")
 
+print("Emails sent successfully.")
