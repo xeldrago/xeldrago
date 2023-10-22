@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Course List</h2>
+<h3>current competition courses</h3>
+
+<!-- code to display list of courses-->
+<table class="table">
+    <tr>
+        <th>Course</th>
+        <th>Name</th>
+        <th>Map diagram</th>
+    </tr>
+    {% for Course, Name, Map in course_list %}
+    <tr>
+        <td>{{Course}}</td>
+        <td>{{Name}}</td>
+
+        <td><img src="{{url_for( 'static', filename=Map)}}"></td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
