@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- driver_list is the variable passed in containing the list of drivers -->
+<!-- Add code to display a list of drivers -->
+
+<h2>Driver List</h2>
+<style>
+    /* Style for the table container */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    /* Style for the table */
+    .styled-table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #f8f8f8;
+    }
+
+    .styled-table thead th {
+        background-color: #333;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    .styled-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .styled-table tr:hover {
+        background-color: #ddd;
+    }
+</style>
+<!-- Check if driver_list is not empty -->
+{% if driver_list %}
+<div class="styled-table">
+    <table class="table-container">
+        <tr>
+            <th>Driver ID</th>
+            <th>First Name</th>
+            <th>Surname</th>
+            <th>Date of Birth</th>
+            <th>Age</th>
+        </tr>
+        {% for driver in driver_list %}
+        <tr>
+            <td>{{ driver[0] }}</td>
+            <td>{{ driver[1] }}</td>
+            <td>{{ driver[2] }}</td>
+            <td>{{ driver[3] }}</td>
+            <td>{{ driver[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% else %}
+<p>No drivers available.</p>
+{% endif %}
+
+{% endblock %}
