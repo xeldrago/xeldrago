@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    /* Add this CSS style to make links blue */
+    .driver-link {
+        color: blue;
+        text-decoration: underline;
+    }
+
+    /* Style for the table container */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    /* Style for the table */
+    .styled-table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #f8f8f8;
+    }
+
+    .styled-table thead th {
+        background-color: #333;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    .styled-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .styled-table tr:hover {
+        background-color: #ddd;
+    }
+</style>
+<h2>List of Drivers</h2>
+
+<!-- Check if driver_list is not empty -->
+{% if driver_list %}
+<div class="styled-table">
+    <table class="table-container">
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Age</th>
+            <th>Caregiver</th>
+            <th>Car Model</th>
+            <th>Drive Class</th>
+            <th>Drive ID</th>
+        </tr>
+        {% for driver in driver_list %}
+        <tr>
+            <td><a href="{{ url_for('driversrun_details', driver_id=driver[0]) }}" class="driver-link">{{ driver[0] }}</a></td>
+            <td>{{ driver[1] }}</td>
+            <td>{{ driver[2] }}</td>
+            <td>{{ driver[3] }}</td>
+            <td>{{ driver[4] }}</td>
+            <td>{{ driver[5] }}</td>
+            <td>{{ driver[6] }}</td>
+            <td>{{ driver[7] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% else %}
+<p>No drivers available.</p>
+{% endif %}
+{% endblock %}
