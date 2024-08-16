@@ -37,7 +37,7 @@ def handle_poll(update: Update, context: CallbackContext):
     # Send the Excel file to the user
     context.bot.send_document(chat_id=update.effective_chat.id, document=InputFile(file_name))
 
-# Create an Updater and attach handlers
+# Create an Updater and attach handlerscd
 updater = Updater(token=BOT_TOKEN, use_context=True)
 dispatcher = updater.dispatcher
 
