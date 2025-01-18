@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Learning Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+        }
+        .fake-page {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .fake-page input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .fake-page button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .fake-page button:hover {
+            background-color: #007bb5;
+        }
+        h1, h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Learn How to Stay Safe Online</h1>
+</header>
+
+<section>
+    <h2>What is Phishing and How to Avoid It</h2>
+    <p>Phishing is a type of cyberattack where a hacker masquerades as a trusted entity, usually via email or fake websites, to steal sensitive information like passwords, credit card details, or personal data.</p>
+    
+    <h3>Types of Phishing:</h3>
+    <ul>
+        <li><strong>Link Manipulation:</strong> Hackers send fake links that look real, but when clicked, they lead to malicious sites.</li>
+        <li><strong>Fake Websites:</strong> Attackers create duplicate websites resembling real services (like Instagram or Facebook) to collect login credentials.</li>
+        <li><strong>Malware Distribution:</strong> Hackers trick users into downloading malware through deceptive emails or pop-up ads.</li>
+    </ul>
+
+    <h3>How to Protect Yourself:</h3>
+    <ul>
+        <li>Always verify URLs before entering sensitive information.</li>
+        <li>Check for HTTPS encryption in the browser address bar.</li>
+        <li>Don't click on suspicious links or download files from untrusted sources.</li>
+    </ul>
+
+    <h2>Learn Through a Safe Demo</h2>
+    <p>Below is a demo of how easily a fake login page can look convincing. Remember, always check for signs of phishing before entering your details!</p>
+    
+    <div class="fake-page">
+        <h3>Instagram Login</h3>
+        <form id="fake-form" action="#">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+    <p id="message" style="color: red;"></p>
+</section>
+
+<script>
+    // This script mimics the behavior of capturing the form input and displaying a warning.
+    document.getElementById("fake-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // For learning purposes, this is where you could log the captured data in a real setup
+        console.log("Captured data: Username - " + username + ", Password - " + password);
+
+        document.getElementById("message").innerHTML = "Warning: You are entering your details into a fake login page. Always verify the URL before submitting sensitive information!";
+    });
+</script>
+
+</body>
+</html>
