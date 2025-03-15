@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: xeldrago-service.netlify.app
+Token: ab7acb521bde3320367d8b7474b3a2d37901d18ed28bc993c847886f32fb1b6a
