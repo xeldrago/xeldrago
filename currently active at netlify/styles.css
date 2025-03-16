@@ -228,6 +228,12 @@ li {
 
 .hero-text {
   text-align: center;
+  max-width: 90%;
+  /* Ensures it scales */
+  margin: 0 auto;
+  /* Centers it */
+  word-wrap: break-word;
+  /* Prevents overflow */
 }
 
 .hero-text h1 {
