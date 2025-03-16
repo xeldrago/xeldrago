@@ -58,11 +58,9 @@ li {
   transition: all 0.3s ease;
 
   /* ✅ Fix for horizontal overflow */
-  max-width: 56px;
-  /* Ensures it doesn't exceed intended size */
+  max-width: 56px; /* Ensures it doesn't exceed intended size */
   max-height: 56px;
-  overflow: hidden;
-  /* Prevents any extra space */
+  overflow: hidden; /* Prevents any extra space */
 }
 
 .whatsapp-button:hover {
@@ -73,7 +71,14 @@ li {
 .whatsapp-button i {
   font-size: 28px;
 }
-
+/* ✅ Fix for unnecessary scrolling */
+html,
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 /* Overlay */
 .menu-overlay {
   position: fixed;
