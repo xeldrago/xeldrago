@@ -1,171 +1,410 @@
-<html>
-  <head>
-    <link
-      rel="icon"
-      class="logo"
-      href="media/images/logo.jpg"
-      type="image/x-icon"
-    />
-    <a href="index.html"
-      ><button class="btn"><i class="fa fa-home"></i> Home</button></a
-    >
-    <meta
-      name="description"
-      content="freelance services at the most affordable prices, Contact for more details"
-    />
-    <meta
-      name="keywords"
-      content="Content writing, Digital Advertising, counselling, Website developing, Tech services"
-    />
-    <title>Xeldrago|Services</title>
-    <style>
-      html {
-        background: url(media/images/services.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-      }
-      .float {
-        position: fixed;
-        width: 60px;
-        height: 60px;
-        bottom: 40px;
-        right: 40px;
-        background-color: #2531d3;
-        color: #fff;
-        border-radius: 50px;
-        text-align: center;
-        font-size: 30px;
-        box-shadow: 2px 2px 3px #999;
-        z-index: 100;
-      }
+<!DOCTYPE html>
+<html lang="en">
 
-      .my-float {
-        margin-top: 16px;
-      }
-      .button {
-        border-radius: 30px;
-        background-color: DodgerBlue;
-        border: none;
-        color: white;
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Freelance services at the most affordable prices, Contact for more details" />
+  <meta name="keywords"
+    content="Content writing, Digital Advertising, counselling, Website developing, Tech services" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" class="logo" href="media/images/logo.jpg" type="image/x-icon" />
+  <title>Xeldrago | Services</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        text-align: center;
-        font-size: 20px;
+  <style>
+    :root {
+      --primary: #4a6cf7;
+      --primary-dark: #3d5cd7;
+      --dark: #1d2144;
+      --body-color: #637381;
+      --light-bg: #f3f4ff;
+      --white: #ffffff;
+      --border-color: #e5e7eb;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%);
+      --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    .dark-mode {
+      --primary: #6c7ee1;
+      --primary-dark: #5c6ecf;
+      --dark: #f3f4ff;
+      --body-color: #d3d7e2;
+      --light-bg: #1a1a2e;
+      --white: #121212;
+      --border-color: #2a2a3a;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 23%, 1) 0%, hsla(220, 78%, 49%, 1) 100%);
+      --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: var(--body-color);
+      background: var(--gradient);
+      min-height: 100vh;
+      transition: var(--transition);
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      margin-top: 30px;
+      margin-bottom: 30px;
+      transition: var(--transition);
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--card-shadow);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
+      transform: rotate(20deg);
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .service-card {
+      padding: 25px;
+      background-color: var(--light-bg);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .btn-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .btn-home:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    .btn-whatsapp {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+    }
+
+    .intro-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 768px) {
+      .container {
         padding: 20px;
-        width: 200px;
-        transition: all 0.5s;
-        cursor: pointer;
-        margin: 5px;
+        margin-top: 80px;
       }
 
-      .button span {
-        cursor: pointer;
-        border-radius: 30px;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
+      h1 {
+        font-size: 2rem;
       }
 
-      .button span:after {
-        content: "\00bb";
-        border-radius: 30px;
-        position: absolute;
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
         opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.5s;
+        transform: translateY(20px);
       }
 
-      .button:hover span {
-        padding-right: 25px;
-        border-radius: 30px;
-      }
-
-      .button:hover span:after {
+      to {
         opacity: 1;
-        right: 0;
-        border-radius: 30px;
+        transform: translateY(0);
       }
-      .button2 {
-        background-color: #75acfc;
-        color: white;
-      }
-      .btn {
-        background-color: DodgerBlue; /* Blue background */
-        border: none; /* Remove borders */
-        color: white; /* White text */
-        padding: 25px 45px; /* Some padding */
-        font-size: 25px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-        border-radius: 30px;
-      }
+    }
 
-      /* Darker background on mouse-over */
-      .btn:hover {
-        background-color: RoyalBlue;
-        border-radius: 30px;
-      }
-    </style>
-  </head>
-  <body text="white">
-    <h1>
-      <u><i>Services</i></u>
-    </h1>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
-    />
-    <a
-      href="https://api.whatsapp.com/send?phone=+919994198795&text=Hey"
-      class="float"
-      target="_blank"
-    >
-      <i class="fa fa-whatsapp my-float"></i>
+    .container {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .service-card {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .service-card:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .service-card:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .service-card:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .service-card:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <a href="index.html" class="btn-home" title="Go to Home">
+      <i class="fas fa-home"></i>
     </a>
+    <button id="theme-toggle-btn" class="theme-toggle" title="Toggle dark/light mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </header>
 
-    <h3>
-      <b
-        >Xeldrago-services provide on-point delivery on the given tasks with
-        follow-up over proper guidelines<br />
-        To make the best experience for the clients Cost price is Customizable
-        and thus highly negotiable (more clientele approach with flexibility)</b
-      >
-    </h3>
-    <h2>Content writing</h2>
-    <p>
-      Content writers produce relevant content for websites,<br />
-      blogs, articles, white papers, product descriptions, and social media
-      platforms.<br />
-      They create content that is specifically crafted to capture the attention
-      of a particular target audience.<br />
-    </p>
-    <h2>Digital or Online Marketting</h2>
-    <p>
-      Digital marketing is the use of the Internet to reach consumers.<br />
-      Digital marketing is a broad field, including attracting customers via
-      email, <br />
-      content marketing, search platforms, social media, and more.<br />
-    </p>
+  <div class="container">
+    <div class="intro-section">
+      <h1>Our Services</h1>
+      <h3>
+        Xeldrago-services provide on-point delivery on the given tasks with follow-up over proper guidelines.<br>
+        To make the best experience for our clients, pricing is customizable and highly negotiable, offering a flexible
+        approach to meet your needs.
+      </h3>
+    </div>
 
-    <h2>Counselling services</h2>
-    <p>
-      A counsellor is not there to sit you down and tell you what to do.<br />
-      Instead, they will encourage you to talk about what's bothering you in
-      order to uncover any root causes and<br />
-      identify your specific ways of thinking. The counsellor may then look to
-      create a plan of action <br />
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-pen-fancy"></i>
+        </div>
+        <h2>Content Writing</h2>
+        <p>
+          Our content writers produce relevant content for websites, blogs, articles, white papers, product
+          descriptions, and social media platforms. We create content that is specifically crafted to capture the
+          attention of your target audience, enhancing engagement and conversion rates.
+        </p>
+      </div>
 
-      to either help you reconcile your issues, or help you to find ways of
-      coping.
-    </p>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h2>Digital Marketing</h2>
+        <p>
+          Our digital marketing services leverage the power of the Internet to reach consumers effectively. We cover a
+          broad range of strategies including email marketing, content marketing, SEO, social media campaigns, and more
+          to increase your brand visibility and drive customer acquisition.
+        </p>
+      </div>
 
-    <h2>Website & Business Account developement</h2>
-    <p>
-      Web development is the building and maintenance of websites;<br />
-      it's the work that happens behind the scenes to make a website look great,
-      work fast and perform well with a seamless user experience. Web
-      developers, or 'devs', do this by using a variety of coding languages
-    </p>
-  </body>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-comments"></i>
+        </div>
+        <h2>Counselling Services</h2>
+        <p>
+          Our counselors don't simply tell you what to do; they encourage meaningful conversations to uncover root
+          causes and identify specific thought patterns. We work together to create actionable plans that help you
+          reconcile issues or develop effective coping strategies for better mental well-being.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h2>Website Development</h2>
+        <p>
+          Our web development team builds and maintains websites that not only look great but also work efficiently with
+          a seamless user experience. We handle all the behind-the-scenes work using various coding languages to ensure
+          your online presence is professional, responsive, and effective.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://api.whatsapp.com/send?phone=+919994198795&text=Hey" class="btn-whatsapp" title="Contact via WhatsApp"
+    target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Scripts from Google Ads -->
+  <script data-ad-client="ca-pub-9618809913051129" async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Theme Toggle Functionality
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const themeIcon = themeToggleBtn.querySelector('i');
+
+      // Check for saved theme preference or use the default one
+      const savedTheme = localStorage.getItem('theme') || 'light';
+
+      // Apply the saved theme on page load
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      }
+
+      // Toggle theme when the button is clicked
+      themeToggleBtn.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+
+        // Update the theme icon
+        if (document.body.classList.contains('dark-mode')) {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // Add a loaded class to body for animations
+      document.body.classList.add('loaded');
+    });
+  </script>
+</body>
+
 </html>

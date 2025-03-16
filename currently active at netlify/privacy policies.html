@@ -1,54 +1,356 @@
-<html>
-  <head>
-    <title>Xeldrago|Privacy policies</title>
-    <link
-      rel="icon"
-      class="logo"
-      href="media/images/logo.jpg"
-      type="image/x-icon"
-    />
-    <a href="index.html"
-      ><button class="btn"><i class="fa fa-home"></i> Home</button></a
-    >
-    <style>
-      body {
-        background-image: url("media/images/gradientV.jpg");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-      }
-      .btn {
-        background-color: DodgerBlue; /* Blue background */
-        border: none; /* Remove borders */
-        color: white; /* White text */
-        padding: 25px 30px; /* Some padding */
-        font-size: 20px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-        border-radius: 30px;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Privacy policy for Xeldrago services" />
+  <link rel="icon" class="logo" href="media/images/logo.jpg" type="image/x-icon" />
+  <title>Xeldrago | Privacy Policy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #4a6cf7;
+      --primary-dark: #3d5cd7;
+      --dark: #1d2144;
+      --body-color: #637381;
+      --light-bg: #f3f4ff;
+      --white: #ffffff;
+      --border-color: #e5e7eb;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%);
+      --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    .dark-mode {
+      --primary: #6c7ee1;
+      --primary-dark: #5c6ecf;
+      --dark: #f3f4ff;
+      --body-color: #d3d7e2;
+      --light-bg: #1a1a2e;
+      --white: #121212;
+      --border-color: #2a2a3a;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 23%, 1) 0%, hsla(220, 78%, 49%, 1) 100%);
+      --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: var(--body-color);
+      background: var(--gradient);
+      min-height: 100vh;
+      transition: var(--transition);
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      margin-top: 30px;
+      margin-bottom: 30px;
+      transition: var(--transition);
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--card-shadow);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
+      transform: rotate(20deg);
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--primary);
+      margin-top: 1.5em;
+      margin-bottom: 0.75em;
+      transition: var(--transition);
+    }
+
+    h1 {
+      font-size: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      margin-bottom: 1em;
+      color: var(--dark);
+      transition: var(--transition);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    ul,
+    ol {
+      margin-left: 2em;
+      margin-bottom: 1.5em;
+      color: var(--dark);
+    }
+
+    li {
+      margin-bottom: 0.5em;
+    }
+
+    .privacy-header {
+      margin-bottom: 2em;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1em;
+    }
+
+    .privacy-section {
+      margin-bottom: 2em;
+      padding-bottom: 1em;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .last-updated {
+      font-style: italic;
+      color: var(--body-color);
+      margin-bottom: 2em;
+    }
+
+    .btn-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .btn-home:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    .table-of-contents {
+      background-color: var(--light-bg);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 2em;
+      transition: var(--transition);
+    }
+
+    .table-of-contents h3 {
+      margin-top: 0;
+    }
+
+    .table-of-contents ul {
+      list-style-type: none;
+      margin-left: 0;
+    }
+
+    .table-of-contents li {
+      margin-bottom: 0.5em;
+    }
+
+    .table-of-contents a {
+      text-decoration: none;
+      display: block;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: var(--transition);
+    }
+
+    .table-of-contents a:hover {
+      background-color: rgba(74, 108, 247, 0.1);
+      transform: translateX(5px);
+    }
+
+    #back-to-top-btn {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      z-index: 100;
+      opacity: 0;
+    }
+
+    #back-to-top-btn:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin-top: 80px;
       }
 
-      /* Darker background on mouse-over */
-      .btn:hover {
-        background-color: RoyalBlue;
-        border-radius: 30px;
+      h1 {
+        font-size: 1.8rem;
       }
-    </style>
-  </head>
-  <body>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
-    />
-    <div style="color: whitesmoke">
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      .table-of-contents {
+        padding: 15px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container,
+    .privacy-section,
+    .table-of-contents {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .privacy-section:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .privacy-section:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .privacy-section:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <a href="index.html" class="btn-home" title="Go to Home">
+      <i class="fas fa-home"></i>
+    </a>
+    <button id="theme-toggle-btn" class="theme-toggle" title="Toggle dark/light mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </header>
+
+  <div class="container">
+    <div class="privacy-header">
       <h1>Privacy Policy</h1>
-      <p>Last updated: May 31, 2021</p>
+      <p class="last-updated">Last updated: May 31, 2021</p>
       <p>
         This Privacy Policy describes Our policies and procedures on the
         collection, use and disclosure of Your information when You use the
         Service and tells You about Your privacy rights and how the law protects
         You.
       </p>
+    </div>
 
+    <div class="table-of-contents">
+      <h3>Table of Contents</h3>
+      <ul>
+        <li><a href="#interpretation">Interpretation and Definitions</a></li>
+        <li><a href="#data-collection">Collecting and Using Your Personal Data</a></li>
+        <li><a href="#data-usage">Use of Your Personal Data</a></li>
+        <li><a href="#data-retention">Retention of Your Personal Data</a></li>
+        <li><a href="#data-transfer">Transfer of Your Personal Data</a></li>
+        <li><a href="#data-disclosure">Disclosure of Your Personal Data</a></li>
+        <li><a href="#data-security">Security of Your Personal Data</a></li>
+        <li><a href="#children">Children's Privacy</a></li>
+        <li><a href="#links">Links to Other Websites</a></li>
+        <li><a href="#changes">Changes to this Privacy Policy</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div id="interpretation" class="privacy-section article-section">
       <h1>Interpretation and Definitions</h1>
       <h2>Interpretation</h2>
       <p>
@@ -119,12 +421,8 @@
         <li>
           <p>
             <strong>Website</strong> refers to xeldrago servies, accessible from
-            <a
-              href="https://xeldrago-service.netlify.app/"
-              rel="external nofollow noopener"
-              target="_blank"
-              >https://xeldrago-service.netlify.app/</a
-            >
+            <a href="https://xeldrago-service.netlify.app/" rel="external nofollow noopener"
+              target="_blank">https://xeldrago-service.netlify.app/</a>
           </p>
         </li>
         <li>
@@ -135,6 +433,9 @@
           </p>
         </li>
       </ul>
+    </div>
+
+    <div id="data-collection" class="privacy-section article-section">
       <h1>Collecting and Using Your Personal Data</h1>
       <h2>Types of Data Collected</h2>
       <h3>Personal Data</h3>
@@ -198,12 +499,9 @@
           used for Browser Cookies. For more information on how You can delete
           Flash Cookies, please read &quot;Where can I change the settings for
           disabling, or deleting local shared objects?&quot; available at
-          <a
-            href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
+          <a href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
             rel="external nofollow noopener"
-            target="_blank"
-            >https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_</a
-          >
+            target="_blank">https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_</a>
         </li>
         <li>
           <strong>Web Beacons.</strong> Certain sections of our Service and our
@@ -220,9 +518,7 @@
         Persistent Cookies remain on Your personal computer or mobile device
         when You go offline, while Session Cookies are deleted as soon as You
         close Your web browser. Learn more about cookies:
-        <a href="https://www.privacypolicies.com/blog/cookies/" target="_blank"
-          >What Are Cookies?</a
-        >.
+        <a href="https://www.privacypolicies.com/blog/cookies/" target="_blank">What Are Cookies?</a>.
       </p>
       <p>
         We use both Session and Persistent Cookies for the purposes set out
@@ -269,7 +565,10 @@
         cookies, please visit our Cookies Policy or the Cookies section of our
         Privacy Policy.
       </p>
-      <h2>Use of Your Personal Data</h2>
+    </div>
+
+    <div id="data-usage" class="privacy-section article-section">
+      <h1>Use of Your Personal Data</h1>
       <p>The Company may use Personal Data for the following purposes:</p>
       <ul>
         <li>
@@ -376,7 +675,10 @@
           information for any other purpose with Your consent.
         </li>
       </ul>
-      <h2>Retention of Your Personal Data</h2>
+    </div>
+
+    <div id="data-retention" class="privacy-section article-section">
+      <h1>Retention of Your Personal Data</h1>
       <p>
         The Company will retain Your Personal Data only for as long as is
         necessary for the purposes set out in this Privacy Policy. We will
@@ -392,7 +694,10 @@
         functionality of Our Service, or We are legally obligated to retain this
         data for longer time periods.
       </p>
-      <h2>Transfer of Your Personal Data</h2>
+    </div>
+
+    <div id="data-transfer" class="privacy-section article-section">
+      <h1>Transfer of Your Personal Data</h1>
       <p>
         Your information, including Personal Data, is processed at the Company's
         operating offices and in any other places where the parties involved in
@@ -412,7 +717,10 @@
         a country unless there are adequate controls in place including the
         security of Your data and other personal information.
       </p>
-      <h2>Disclosure of Your Personal Data</h2>
+    </div>
+
+    <div id="data-disclosure" class="privacy-section article-section">
+      <h1>Disclosure of Your Personal Data</h1>
       <h3>Business Transactions</h3>
       <p>
         If the Company is involved in a merger, acquisition or asset sale, Your
@@ -443,7 +751,10 @@
         </li>
         <li>Protect against legal liability</li>
       </ul>
-      <h2>Security of Your Personal Data</h2>
+    </div>
+
+    <div id="data-security" class="privacy-section article-section">
+      <h1>Security of Your Personal Data</h1>
       <p>
         The security of Your Personal Data is important to Us, but remember that
         no method of transmission over the Internet, or method of electronic
@@ -451,6 +762,9 @@
         means to protect Your Personal Data, We cannot guarantee its absolute
         security.
       </p>
+    </div>
+
+    <div id="children" class="privacy-section article-section">
       <h1>Children's Privacy</h1>
       <p>
         Our Service does not address anyone under the age of 13. We do not
@@ -467,6 +781,9 @@
         require Your parent's consent before We collect and use that
         information.
       </p>
+    </div>
+
+    <div id="links" class="privacy-section article-section">
       <h1>Links to Other Websites</h1>
       <p>
         Our Service may contain links to other websites that are not operated by
@@ -478,6 +795,9 @@
         We have no control over and assume no responsibility for the content,
         privacy policies or practices of any third party sites or services.
       </p>
+    </div>
+
+    <div id="changes" class="privacy-section article-section">
       <h1>Changes to this Privacy Policy</h1>
       <p>
         We may update Our Privacy Policy from time to time. We will notify You
@@ -493,13 +813,129 @@
         changes. Changes to this Privacy Policy are effective when they are
         posted on this page.
       </p>
+    </div>
+
+    <div id="contact" class="privacy-section article-section">
       <h1>Contact Us</h1>
       <p>
         If you have any questions about this Privacy Policy, You can contact us:
       </p>
       <ul>
-        <li>By phone number: 9994198795</li>
+        <li>By phone number: <a href="tel:+919994198795">+91 9994 198 795</a></li>
       </ul>
     </div>
-  </body>
+  </div>
+
+  <button id="back-to-top-btn" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts from Google Ads -->
+  <script data-ad-client="ca-pub-9618809913051129" async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Theme Toggle Functionality
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const themeIcon = themeToggleBtn.querySelector('i');
+
+      // Check for saved theme preference or use the default one
+      const savedTheme = localStorage.getItem('theme') || 'light';
+
+      // Apply the saved theme on page load
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      }
+
+      // Toggle theme when the button is clicked
+      themeToggleBtn.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+
+        // Update the theme icon
+        if (document.body.classList.contains('dark-mode')) {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // Back to top button
+      const backToTopBtn = document.getElementById('back-to-top-btn');
+
+      // Show/hide back to top button based on scroll position
+      window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.style.opacity = '1';
+        } else {
+          backToTopBtn.style.opacity = '0';
+        }
+      });
+
+      // Scroll to top when back to top button is clicked
+      backToTopBtn.addEventListener('click', function () {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Smooth scroll for table of contents links
+      const tocLinks = document.querySelectorAll('.table-of-contents a');
+
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            window.scrollTo({
+              top: targetSection.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Intersection Observer for scroll animations
+      const sections = document.querySelectorAll('.article-section');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+
+            // Highlight the corresponding TOC link
+            const id = entry.target.getAttribute('id');
+            document.querySelectorAll('.table-of-contents a').forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '-100px 0px -100px 0px'
+      });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+
+      // Add a loaded class to body for animations
+      document.body.classList.add('loaded');
+    });
+  </script>
+</body>
+
 </html>

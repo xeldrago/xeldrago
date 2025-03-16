@@ -1,284 +1,511 @@
-<html>
-  <head>
-    <link
-      rel="icon"
-      class="logo"
-      href="media/images/logo.jpg"
-      type="image/x-icon"
-    />
-    <a href="index.html"
-      ><button class="btn"><i class="fa fa-home"></i></button
-    ></a>
+<!DOCTYPE html>
+<html lang="en">
 
-    <meta
-      name="keywords"
-      content="cheap homemade products, homemade, DIY, paper DIY"
-    />
-    <meta
-      name="description"
-      content="Affordable yet massively applicable products, homemade items, eatables, Entertainment and much more"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="products.css" />
-    <title>Xeldrago|Products</title>
-    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $(".flip").on("click", function () {
-          $(this).children(".panel").slideToggle("slow");
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="cheap homemade products, homemade, DIY, paper DIY">
+  <meta name="description"
+    content="Affordable yet massively applicable products, homemade items, eatables, Entertainment and much more">
+  <link rel="icon" class="logo" href="media/images/logo.jpg" type="image/x-icon">
+  <title>Xeldrago | Products</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #4a6cf7;
+      --primary-dark: #3d5cd7;
+      --dark: #1d2144;
+      --body-color: #637381;
+      --light-bg: #f3f4ff;
+      --white: #ffffff;
+      --border-color: #e5e7eb;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%);
+      --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    .dark-mode {
+      --primary: #6c7ee1;
+      --primary-dark: #5c6ecf;
+      --dark: #f3f4ff;
+      --body-color: #d3d7e2;
+      --light-bg: #1a1a2e;
+      --white: #121212;
+      --border-color: #2a2a3a;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 23%, 1) 0%, hsla(220, 78%, 49%, 1) 100%);
+      --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: var(--body-color);
+      background: var(--gradient);
+      min-height: 100vh;
+      transition: var(--transition);
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      margin-top: 80px;
+      transition: var(--transition);
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--card-shadow);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
+      transform: rotate(20deg);
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--primary);
+      transition: var(--transition);
+      margin-bottom: 15px;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+      transition: var(--transition);
+    }
+
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .intro-section {
+      background-color: var(--light-bg);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      transition: var(--transition);
+      border-left: 4px solid var(--primary);
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .product-card {
+      background-color: var(--light-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .product-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .product-header h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+    }
+
+    .product-header h2 i {
+      color: var(--primary);
+      transition: transform 0.3s ease;
+    }
+
+    .product-details {
+      padding: 20px;
+      display: none;
+      transition: var(--transition);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .social-link.youtube {
+      background-color: #FF0000;
+    }
+
+    .social-link.instagram {
+      background-color: #E1306C;
+    }
+
+    .social-link.google {
+      background-color: #4285F4;
+    }
+
+    .social-link.whatsapp {
+      background-color: #25D366;
+    }
+
+    .social-link:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    .btn-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .btn-home:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 15px;
+    }
+
+    .button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .contact-info {
+      margin: 15px 0;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin-top: 80px;
+      }
+
+      .product-list {
+        grid-template-columns: 1fr;
+      }
+
+      .header {
+        padding: 15px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .product-card:nth-child(1) {
+      animation: fadeIn 0.5s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    .product-card:nth-child(2) {
+      animation: fadeIn 0.5s ease-out forwards;
+      animation-delay: 0.4s;
+    }
+
+    .product-card:nth-child(3) {
+      animation: fadeIn 0.5s ease-out forwards;
+      animation-delay: 0.6s;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <a href="index.html" class="btn-home" title="Go to Home">
+      <i class="fas fa-home"></i>
+    </a>
+    <button id="theme-toggle-btn" class="theme-toggle" title="Toggle dark/light mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </header>
+
+  <div class="container">
+    <h1 class="page-title">Our Products & Partnerships</h1>
+
+    <div class="intro-section">
+      <h2>"Well begun is half done" - Aristotle</h2>
+      <p>The companies below have started from humble beginnings, with a passionate heart to strive forward more for
+        their <strong>customer satisfaction</strong>. Providing <strong>better performance</strong> than their
+        competitors. Support them and be rewarded by their growth as well.</p>
+      <p>Thank you for your time. Contact for more details.</p>
+    </div>
+
+    <div class="product-list">
+      <!-- Ovenstories_naz -->
+      <div class="product-card">
+        <img src="media/images/product2.jpg" alt="Ovenstories_naz" class="product-image">
+        <div class="product-header">
+          <h2><i class="fas fa-angle-down"></i> Ovenstories_naz</h2>
+          <p>Looking to have a delicious Cake? Click to know more</p>
+        </div>
+        <div class="product-details">
+          <h3>"Don't you be famish-ed, get Ovenstories_Naz-ed!!"</h3>
+          <p>"Food & love, We do both here at Ovenstories_Naz"</p>
+          <p><strong>High quality Cakes at Affordable prices</strong></p>
+
+          <div class="contact-info">
+            <p><strong>Menu:</strong> <a href="media/docs/BoxomoreishMenu.pdf">See Menu</a></p>
+            <p><strong>Contact:</strong> <a href="mailto:Ovenstories_Naz@gmail.com">Ovenstories_Naz@gmail.com</a></p>
+            <p><strong>For orders:</strong> <a href="tel:+918939639354">+91 8939639354</a></p>
+            <p><a href="media/docs/BoxomoreishMenu.pdf" download="Menu">Download the Menu</a></p>
+          </div>
+
+          <div class="social-links">
+           
+            <a href="https://www.instagram.com/ovenstories__naz?igsh=YTVkdmdtdGhvZHpx" class="social-link instagram" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/+918939639354" class="social-link whatsapp" title="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Innovative -->
+      <div class="product-card">
+        <img src="media/images/product1.jpg" alt="Innovative" class="product-image">
+        <div class="product-header">
+          <h2><i class="fas fa-angle-down"></i> Innovative</h2>
+          <p>Want to gift someone special? You're one step away. Click to know more</p>
+        </div>
+        <div class="product-details">
+          <h3>"There is memory in every single piece of Art"</h3>
+          <p><strong>Handmade customized gifts at lowest price</strong></p>
+
+          <div class="contact-info">
+            <p><strong>Contact:</strong> <a href="mailto:innovative.jezy@gmail.com">innovative.jezy@gmail.com</a></p>
+            <p><strong>For orders:</strong> <a href="tel:+919498328003">+91 94983 28003</a></p>
+            <p><a href="https://trell.co/@innovative">More videos at trell.co/@innovative</a></p>
+          </div>
+
+          <a href="https://innovative-scrapbooking-store.business.site/?m=true" class="button">Visit Website</a>
+
+          <div class="social-links">
+            <a href="https://www.youtube.com/channel/UCE0ArVOZVDvkg-Dv2CEUf2g" class="social-link youtube"
+              title="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com/_.innovative._/" class="social-link instagram" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/+919498328003" class="social-link whatsapp" title="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/xIBZKwmCoiw"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Xeldrago Advertising -->
+      <div class="product-card">
+        <img src="media/images/product3.jpg" alt="Xeldrago Advertising" class="product-image">
+        <div class="product-header">
+          <h2><i class="fas fa-angle-down"></i> To make life easier</h2>
+          <p>Want to advertise via XELDRAGO too? Click to know more</p>
+        </div>
+        <div class="product-details">
+          <h3>We know how hard it is, so let us try our hand, to help you out.</h3>
+          <p>Contact us <a href="contactus.html">here</a> to learn more about our advertising services.</p>
+          <a href="contactus.html" class="button">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Theme Toggle Functionality
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const themeIcon = themeToggleBtn.querySelector('i');
+
+      // Check for saved theme preference or use the default one
+      const savedTheme = localStorage.getItem('theme') || 'light';
+
+      // Apply the saved theme on page load
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      }
+
+      // Toggle theme when the button is clicked
+      themeToggleBtn.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+
+        // Update the theme icon
+        if (document.body.classList.contains('dark-mode')) {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // Toggle product details when header is clicked
+      const productHeaders = document.querySelectorAll('.product-header');
+      productHeaders.forEach(header => {
+        header.addEventListener('click', function () {
+          const details = this.nextElementSibling;
+          const icon = this.querySelector('i');
+
+          if (details.style.display === 'block') {
+            details.style.display = 'none';
+            icon.style.transform = 'rotate(0deg)';
+          } else {
+            details.style.display = 'block';
+            icon.style.transform = 'rotate(180deg)';
+          }
         });
       });
-    </script>
 
-    <title>Startups</title>
-  </head>
-  <body>
-    <h1>
-      <b>Well begun is half done<br />-Aristotle </b>
-    </h1>
-    <aside>
-      <h2>
-        The companies below have started from humble beginings, with a
-        passionate heart to strive forward more for their
-        <b style="color: rgb(18, 2, 243)">customer satisfaction </b
-        ><br />Providing
-        <b style="color: rgb(7, 22, 231)">better perfomance</b> than their
-        competitors. Support them and be rewarded by their Growth as well.
-        <br /><br />
-        Thank you for your time,
+      // Add a loaded class to body for animations
+      document.body.classList.add('loaded');
+    });
+  </script>
+</body>
 
-        <br />Contact for more details
-      </h2>
-    </aside>
-    <br />
-    <article>
-      <ul>
-        <li>
-          <div class="flip">
-            <h2 style="color: #000000">
-              <b> <i>Box-O-Moreish</i></b
-              ><br /><img
-                class="logo"
-                src="media/images/product2.jpg"
-                width="300"
-                height="230"
-              /><br /><i
-                >Looking to have a delicious Cake? ,<br />
-                <u style="color: blue">Click here to know more</u></i
-              >
-            </h2>
-
-            <div class="panel">
-              <h1>
-                "Dont you be famish-ed, get Boxomoreish-ed!!,<br />
-                Food & love, We do both here at Boxomoreish"
-              </h1>
-              <br />
-              <h1>High quality Cakes at Affordable prices</h1>
-              <h2 style="color: rgb(196, 4, 255)">
-                <b
-                  ><a href="http://shorturl.at/sGHZ2">See Menu</a><br />Click,
-                  click away with your orders!!</b
-                >
-              </h2>
-              <h2>
-                contact:
-                <a href="mailto:boxomoreish@gmail.com">boxomoreish@gmail.com</a
-                ><br /><br />
-                for orders: <a href="tel:+91 97891 72692">+91 97891 72692</a>
-              </h2>
-              <br />
-              <h2>
-                <i
-                  ><a href="media/docs/BoxomoreishMenu.pdf" download="Menu"
-                    >Click here to download the Menu</a
-                  ></i
-                >
-              </h2>
-
-              <p>
-                <br />Check out the links below to be elated with flavours
-                <br />
-                <a href="https://boxomoreish.wixsite.com/boxomoreish" class="fs"
-                  ><button class="button">
-                    <span><b>Website to know about (also order)</b></span>
-                  </button></a
-                >
-                <a
-                  href="https://box-o-moreish.business.site/?utm_source=gmb&utm_medium=referral"
-                  class="fa fa-google"
-                ></a>
-                <a
-                  href="https://www.instagram.com/boxomoreish/"
-                  class="fa fa-instagram"
-                ></a>
-                <a href="https://wa.me/+91 94983 28003"
-                  ><button
-                    style="
-                      font: size 15px;
-                      color: white;
-                      background-color: green;
-                      border-radius: 30px;
-                    "
-                  >
-                    <i class="fa fa-whatsapp"></i></button
-                ></a>
-              </p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </article>
-    <br />
-    <article>
-      <ul>
-        <li>
-          <div class="flip">
-            <h2 style="color: #000000">
-              <b> <i>Innovative</i></b
-              ><br /><img
-                class="logo"
-                src="media/images/product1.jpg"
-                width="300"
-                height="230"
-              /><br /><i
-                >Want to gift someone special? ,your one step away<br />
-                <u style="color: blue">Click here to know more</u></i
-              >
-            </h2>
-
-            <div class="panel">
-              <h1>"There is memory in every single piece of Art"<br /></h1>
-              <h1>Handmade customized gifts at lowest price</h1>
-              <br />
-              <h2>
-                contact:
-                <a href="mailto:innovative.jezy@gmail.com"
-                  >innovative.jezy@gmail.com</a
-                ><br /><br />
-                for orders: <a href="tel:+91 94983 28003">+9498328003</a>
-              </h2>
-              <br />
-
-              <p>
-                below video>><br />
-                One minute DIYs and Check out for more at <br />
-                <a
-                  href="https://innovative-scrapbooking-store.business.site/?m=true"
-                  class="fs"
-                  ><button class="button">
-                    <span><b>Website to know about (also order)</b></span>
-                  </button></a
-                >
-                <a
-                  href="https://www.youtube.com/channel/UCE0ArVOZVDvkg-Dv2CEUf2g"
-                  class="fa fa-youtube"
-                ></a>
-                <a
-                  href="https://www.instagram.com/_.innovative._/"
-                  class="fa fa-instagram"
-                ></a>
-                <a href="https://wa.me/+91 94983 28003"
-                  ><button
-                    style="
-                      font: size 15px;
-                      color: white;
-                      background-color: green;
-                      border-radius: 30px;
-                    "
-                  >
-                    <i class="fa fa-whatsapp"></i></button></a
-                ><br />
-              </p>
-
-              <h2>
-                <i
-                  >To check out more videos like this, visit
-                  <a href="https://trell.co/@innovative"
-                    >trell.co/@innovative</a
-                  ></i
-                >
-              </h2>
-              <p>
-                <iframe
-                  frameborder="0"
-                  scrolling="no"
-                  marginheight="0"
-                  marginwidth="0"
-                  width="532"
-                  height="400"
-                  type="text/html"
-                  src="https://www.youtube.com/embed/xIBZKwmCoiw?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"
-                >
-                  <div>
-                    <small
-                      ><a href="https://youtubeembedcode.com/nl/"
-                        >youtubeembedcode nl</a
-                      ></small
-                    >
-                  </div>
-
-                  <div>
-                    <small
-                      ><a href="https://enableflashplayer.com"
-                        >Enable flash in chrome</a
-                      ></small
-                    >
-                  </div>
-
-                  <div>
-                    <small
-                      ><a href="https://youtubeembedcode.com/pl/"
-                        >youtubeembedcode.com/pl/</a
-                      ></small
-                    >
-                  </div>
-
-                  <div>
-                    <small
-                      ><a href="https://enableflashplayer.com"
-                        >Enable flash in chrome</a
-                      ></small
-                    >
-                  </div></iframe
-                >
-              </p>
-              <br />
-            </div>
-          </div>
-        </li>
-      </ul>
-    </article>
-    <article>
-      <ul>
-        <li>
-          <div class="flip">
-            <h2 style="color: #000000">
-              <b> <i>To make life easier</i></b
-              ><br /><img
-                class="logo"
-                src="media/images/product3.jpg"
-                width="300"
-                height="230"
-              /><br /><i
-                >Want to advertise via XELDRAGO too? ,<br />
-                <u style="color: blue">Click here to know more</u></i
-              >
-            </h2>
-
-            <div class="panel">
-              <h1>
-                Contact us <a href="contactus.html">here</a><br />
-                We know how hard it is, so<br />
-                let us try our hand, to help you out.
-              </h1>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </article>
-  </body>
 </html>
