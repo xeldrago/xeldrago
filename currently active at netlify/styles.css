@@ -56,6 +56,13 @@ li {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   z-index: 50;
   transition: all 0.3s ease;
+
+  /* ✅ Fix for horizontal overflow */
+  max-width: 56px;
+  /* Ensures it doesn't exceed intended size */
+  max-height: 56px;
+  overflow: hidden;
+  /* Prevents any extra space */
 }
 
 .whatsapp-button:hover {
