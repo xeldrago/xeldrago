@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A simple initiative by a freelance Technopreneur for boredom kill">
   <meta name="google-site-verification" content="pTSGbBOhvssU15exEBaLuNyVSNDxB12W-xkOvRqiUqQ">
+  <link rel="icon" class="logo" href="media/images/logo.jpg" type="image/x-icon">
   <title>Xeldrago | About Us</title>
-  <link rel="icon" href="media/images/logo.jpg" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --primary: #4a6cf7;
@@ -18,84 +19,185 @@
       --light-bg: #f3f4ff;
       --white: #ffffff;
       --border-color: #e5e7eb;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%);
       --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
       --transition: all 0.3s ease;
     }
 
+    .dark-mode {
+      --primary: #6c7ee1;
+      --primary-dark: #5c6ecf;
+      --dark: #f3f4ff;
+      --body-color: #d3d7e2;
+      --light-bg: #1a1a2e;
+      --white: #121212;
+      --border-color: #2a2a3a;
+      --gradient: linear-gradient(90deg, hsla(221, 45%, 23%, 1) 0%, hsla(220, 78%, 49%, 1) 100%);
+      --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       line-height: 1.6;
       color: var(--body-color);
-      background: url("media/images/Green.jpg") no-repeat center center fixed;
-      background-size: cover;
+      background: var(--gradient);
       min-height: 100vh;
+      transition: var(--transition);
       padding: 20px;
-      text-align: center;
       overflow-x: hidden;
     }
 
     .container {
-      max-width: 800px;
-      margin: 50px auto;
+      max-width: 900px;
+      margin: 0 auto;
       padding: 30px;
       background-color: var(--white);
       border-radius: 15px;
       box-shadow: var(--card-shadow);
+      margin-top: 30px;
+      margin-bottom: 30px;
       transition: var(--transition);
     }
 
-    h1,
-    h2 {
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--card-shadow);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .theme-toggle:hover {
       color: var(--primary);
+      transform: rotate(20deg);
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--dark);
       margin-bottom: 1rem;
+      transition: var(--transition);
     }
 
     h1 {
       font-size: 2.5rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      margin: 10px 0;
-      font-size: 1.2rem;
-    }
-
-    .btn {
-      background-color: var(--primary);
-      border: none;
-      color: white;
-      padding: 15px 30px;
-      font-size: 20px;
-      cursor: pointer;
-      border-radius: 30px;
-      transition: var(--transition);
-      text-decoration: none;
+      position: relative;
       display: inline-block;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
     }
 
-    .btn:hover {
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    .about-section {
+      margin-bottom: 2rem;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .features li {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .features li::before {
+      content: '•';
+      color: var(--primary);
+      font-size: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: -0.2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button:hover {
       background-color: var(--primary-dark);
-      transform: scale(1.05);
+      transform: translateY(-3px);
+      color: #fff;
     }
 
-    .flip-box {
+    .flip-card {
       background-color: transparent;
       width: 100%;
-      max-width: 400px;
+      max-width: 350px;
       height: 180px;
-      margin: 20px auto;
       perspective: 1000px;
+      margin: 2rem 0;
     }
 
-    .flip-box-inner {
+    .flip-card-inner {
       position: relative;
       width: 100%;
       height: 100%;
@@ -104,64 +206,293 @@
       transform-style: preserve-3d;
     }
 
-    .flip-box:hover .flip-box-inner {
+    .flip-card:hover .flip-card-inner {
       transform: rotateY(180deg);
     }
 
-    .flip-box-front,
-    .flip-box-back {
+    .flip-card-front,
+    .flip-card-back {
       position: absolute;
       width: 100%;
       height: 100%;
+      -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       border-radius: 15px;
-      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
+      background-color: var(--light-bg);
+      box-shadow: var(--card-shadow);
     }
 
-    .flip-box-front {
+    .flip-card-back {
+      transform: rotateY(180deg);
       background-color: var(--primary);
       color: white;
     }
 
-    .flip-box-back {
-      background-color: var(--primary-dark);
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 2rem;
+    }
+
+    .team-card {
+      background-color: var(--light-bg);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary);
       color: white;
-      transform: rotateY(180deg);
+      font-size: 2.5rem;
+    }
+
+    .btn-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .btn-home:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    .btn-whatsapp {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin-top: 80px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .flip-card {
+        max-width: 100%;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .team-card,
+    .flip-card {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .team-card:nth-child(1),
+    .flip-card {
+      animation-delay: 0.2s;
+    }
+
+    .team-card:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .team-card:nth-child(3) {
+      animation-delay: 0.6s;
     }
   </style>
 </head>
 
 <body>
-  <a href="index.html" class="btn"><i class="fa fa-home"></i> Home</a>
+  <header class="header">
+    <a href="index.html" class="btn-home" title="Go to Home">
+      <i class="fas fa-home"></i>
+    </a>
+    <button id="theme-toggle-btn" class="theme-toggle" title="Toggle dark/light mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </header>
 
   <div class="container">
-    <h1>Just a Small Startup on Freelance Field</h1>
-    <h2>
-      <ul>
-        <li>Nothing more, nothing less</li>
-        <li>
-          Feel like joining us?
-          <a href="contactus.html" class="btn">Click Here</a>
-        </li>
-        <li>Always hafun, no regrets!! Cherish each moment</li>
-      </ul>
-    </h2>
-  </div>
+    <h1>About Xeldrago</h1>
 
-  <div class="flip-box">
-    <div class="flip-box-inner">
-      <div class="flip-box-front">
-        <h2>Donate/Support<br>If you feel entertained & want to give love by means!!</h2>
+    <div class="about-section">
+      <p>
+        Xeldrago is a small startup in the freelance field, founded by a passionate technopreneur.
+        We provide quality services with a personal touch, making sure each client gets exactly what they need.
+      </p>
+
+      <p>
+        Our philosophy is simple: We aim to deliver high-quality work that exceeds expectations while
+        maintaining affordability and flexibility.
+      </p>
+    </div>
+
+    <div class="about-section">
+      <h2>What We Believe In</h2>
+      <ul class="features">
+        <li>Nothing more, nothing less - we deliver exactly what we promise</li>
+        <li>Always have fun, no regrets! Cherish each moment</li>
+        <li>Building long-term relationships with our clients</li>
+        <li>Providing customized solutions for unique challenges</li>
+      </ul>
+    </div>
+
+    <div class="about-section">
+      <h2>Join Our Team</h2>
+      <p>
+        We're always looking for talented individuals who share our passion and vision.
+        If you feel like joining us, click the button below to get in touch!
+      </p>
+      <a href="contactus.html" class="cta-button">
+        <i class="fas fa-handshake"></i> Join Us
+      </a>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h2>Support Our Work</h2>
+          <p>If you feel entertained & want to show your appreciation!</p>
+          <p>(Hover to see payment details)</p>
+        </div>
+        <div class="flip-card-back">
+          <h2>Payment Options</h2>
+          <p>Paytm / GPay / PayPal</p>
+          <p><strong>+91 9994198795</strong></p>
+        </div>
       </div>
-      <div class="flip-box-back">
-        <h2>Paytm/Gpay/Paypal: +919994198795</h2>
+    </div>
+
+    <div class="about-section">
+      <h2>Our Team</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <h3>Founder</h3>
+          <p>Technopreneur with a passion for innovative solutions and creative problem-solving.</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3>Development Team</h3>
+          <p>Skilled developers who transform ideas into functional, user-friendly digital experiences.</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fas fa-pen-fancy"></i>
+          </div>
+          <h3>Content Team</h3>
+          <p>Creative writers who craft engaging content that resonates with target audiences.</p>
+        </div>
       </div>
     </div>
   </div>
+
+  <a href="https://api.whatsapp.com/send?phone=+919994198795&text=Hey" class="btn-whatsapp" title="Contact via WhatsApp"
+    target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Theme Toggle Functionality
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const themeIcon = themeToggleBtn.querySelector('i');
+
+      // Check for saved theme preference or use the default one
+      const savedTheme = localStorage.getItem('theme') || 'light';
+
+      // Apply the saved theme on page load
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      }
+
+      // Toggle theme when the button is clicked
+      themeToggleBtn.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+
+        // Update the theme icon
+        if (document.body.classList.contains('dark-mode')) {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // Add a loaded class to body for animations
+      document.body.classList.add('loaded');
+    });
+  </script>
 </body>
 
 </html>
