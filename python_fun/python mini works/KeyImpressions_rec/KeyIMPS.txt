@@ -1,1 +1,1 @@
-['s', 'd', 'a', 'w', 'e', 'enter', 'ctrl', 'end']
+['c', 'r', 'ctrl', 'end']
