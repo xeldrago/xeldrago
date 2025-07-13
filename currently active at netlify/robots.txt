@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xeldrago-service.netlify.app/sitemap.xml
