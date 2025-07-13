@@ -768,7 +768,34 @@ body {
     width: 60%;
     text-align: left;
   }
+    .intro-summary {
+      background-color: #111827;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+  
+    .intro-summary h2 {
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+  
+    .intro-summary p {
+      max-width: 600px;
+      margin: 0 auto 1rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: rgb(255, 255, 255);
+    }
 
+        .dark-mode .intro-summary {
+          background-color: #1a1a2e;
+        }
+    
+        .dark-mode .intro-summary h2,
+        .dark-mode .intro-summary p {
+          color: #d3d7e2;
+        }
   .main-content {
     margin-left: 0;
   }
