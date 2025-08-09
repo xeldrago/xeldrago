@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>🎧 Xeldrago Music Station - Full Feature</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #003973, #E5E5BE);
+      color: #fff;
+      padding: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 40px;
+    }
+
+    .song {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      margin: 10px 0 30px 0;
+      border-radius: 10px;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .song:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .filename {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #f0f8ff;
+      user-select: text;
+    }
+
+    .media-btn {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 8px;
+      background-color: #3f51b5;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1em;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .media-btn:hover {
+      background-color: #5c6bc0;
+    }
+
+    .shuffle-on {
+      background-color: #4caf50 !important;
+    }
+
+    .active-logo {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+      width: 120px;
+      height: auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input#song-search {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    select#songs-dropdown {
+      width: 100%;
+      max-width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+      border-radius: 6px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      height: 200px;
+      outline: none;
+    }
+    
+  .musical-chair-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background: linear-gradient(135deg, #8e24aa, #007aff);
+    color: #fff;
+    padding: 17px 25px 17px 20px;
+    font-size: 1.18em;
+    font-family: inherit;
+    border: none;
+    border-radius: 30px 15px 35px 15px;
+    box-shadow: 0 4px 18px rgba(10, 30, 80, 0.23), 0 1.5px 10px rgba(0, 0, 0, 0.09);
+    cursor: pointer;
+    z-index: 9999;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background 0.25s, box-shadow 0.18s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .musical-chair-btn:hover {
+    background: linear-gradient(135deg, #fbc531, #6a89cc);
+    color: #232323;
+    box-shadow: 0 6px 20px rgba(80, 40, 120, 0.29);
+    transform: translateY(-2px) scale(1.06);
+    text-decoration: none;
+  }
+
+  </style>
+</head>
+
+<body>
+  <h1>🎧 Xeldrago Music Station</h1>
+
+  <img src="media/images/logo.jpg" alt="Xeldrago Logo" class="active-logo" />
+
+  <div style="margin-bottom: 15px;">
+    <label for="song-search">Search songs:</label>
+    <input type="text" id="song-search" placeholder="Type to filter songs..." autocomplete="off" />
+    <label for="songs-dropdown" style="margin-top:10px;">Select a song:</label>
+    <select id="songs-dropdown" size="10" aria-label="Songs dropdown"></select>
+  </div>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <button id="prev-button" class="media-btn" aria-label="Previous song">⏮️</button>
+    <button id="play-pause-button" class="media-btn" aria-label="Play or pause">⏸️</button>
+    <button id="next-button" class="media-btn" aria-label="Next song">⏭️</button>
+    <button id="shuffle-toggle" class="media-btn" aria-label="Toggle shuffle" style="background-color: #ff9800;">
+      Shuffle: OFF
+    </button>
+  </div>
+
+  <div class="song" aria-live="polite" aria-atomic="true">
+    <div class="filename" id="current-song-name">Loading...</div>
+    <audio id="audio-player" controls preload="none"></audio>
+  </div>
+<a href="musical-chair.html" class="musical-chair-btn" title="Try Musical Chair!">🎵 Musical Chair</a>
+
+
+  <script>
+    (() => {
+      const songs = [
+        'Indian 2 BGMs - Paaraa Song Sad BGM _ Paaraa Flute Version _ Anirudh BGMs-yt.savetube.me.mp3',
+        'Maryan Love Background Music (BGM) _ South Movies BGM-yt.savetube.me.mp3',
+        'SpotiDownloader.com - BLUE LOCK EKI - NUEKI.mp3',
+        'SpotiDownloader.com - En Magane (From _Kuberaa_)(Tamil) - Devi Sri Prasad.mp3',
+        'SpotiDownloader.com - En Vizhiyin Kanavu - Gopi Sundar.mp3',
+        'SpotiDownloader.com - KU LO SA (with Camila Cabello) - Oxlade.mp3',
+        'SpotiDownloader.com - London Bridge Is Falling Down My Fair Lady - Arianna Phillps Music.mp3',
+        'SpotiDownloader.com - MATUSHKA ULTRAFUNK - satirin.mp3',
+        'SpotiDownloader.com - Set Fire to the Rain - Adele.mp3',
+        'SpotiDownloader.com - Матушка - Татьяна Куртукова.mp3',
+        'SpotiDownloader.com - Akuma no Ko - Ai Higuchi.mp3',
+        'SpotiDownloader.com - Fear Song.mp3',
+        'The Soul Of Appanna Bgm Ringtone _ Game Changer _ Ram Charan _ Anjali _ Thaman S-yt.savetube.me.mp3',
+        'Yenga Pona Raasa BGM.mp4',
+        '[SPOTDOWNLOADER.COM] Adheeraa (From _Cobra_).mp3',
+        '[SPOTDOWNLOADER.COM] All The Things She Said.mp3',
+        '[SPOTDOWNLOADER.COM] All Time Low.mp3',
+        'SpotiDownloader.com - Am I Dreaming (Metro Boomin).mp3',
+        '[SPOTDOWNLOADER.COM] Ambikapathy.mp3',
+        '[SPOTDOWNLOADER.COM] Anbil Avan.mp3',
+        '[SPOTDOWNLOADER.COM] Another Love.mp3',
+        '[SPOTDOWNLOADER.COM] Arcade.mp3',
+        '[SPOTDOWNLOADER.COM] Ashes - from _Deadpool 2_ Motion Picture Soundtrack.mp3',
+        'ava.mp3',
+        '[SPOTDOWNLOADER.COM] Bad Liar.mp3',
+        'Be Alright.mp3',
+        '[SPOTDOWNLOADER.COM] Chaleya (From _Jawan_).mp3',
+        '[SPOTDOWNLOADER.COM] Cheap Thrills.mp3',
+        'Chuttamalle (From _Devara Part 1_).mp3',
+        '[SPOTDOWNLOADER.COM] Counting Stars.mp3',
+        '[SPOTDOWNLOADER.COM] Cradles.mp3',
+        'Danza Kuduro.mp3',
+        '[SPOTDOWNLOADER.COM] Dead To Me - Slow + Reverb.mp3',
+        '[SPOTDOWNLOADER.COM] Demons.mp3',
+        '[SPOTDOWNLOADER.COM] Do You Feel It_.mp3',
+        '[SPOTDOWNLOADER.COM] Dynasty.mp3',
+        'End of Beginning.mp3',
+        '[SPOTDOWNLOADER.COM] Engae Endru Povathu.mp3',
+        '[SPOTDOWNLOADER.COM] Ennoda Laila.mp3',
+        'SpotiDownloader.com - EP. 1_ Adult - Ian McConnell.mp3',
+        '[SPOTDOWNLOADER.COM] EP. 2_ Friends.mp3',
+        '[SPOTDOWNLOADER.COM] EP. 4_ Important.mp3',
+        '[SPOTDOWNLOADER.COM] Evanda Enakku Custody (From _Mahaan_).mp3',
+        '[SPOTDOWNLOADER.COM] Everyday Normal Guy 2.mp3',
+        '[SPOTDOWNLOADER.COM] Fairytale.mp3',
+        'Fine.mp3',
+        '[SPOTDOWNLOADER.COM] Fireflies.mp3',
+        '[SPOTDOWNLOADER.COM] Forever Young.mp3',
+        "[SPOTDOWNLOADER.COM] Gangsta's Paradise.mp3",
+'[SPOTDOWNLOADER.COM] Good Life (with G-Eazy & Kehlani).mp3',
+        '[SPOTDOWNLOADER.COM] Hall of Fame (feat. will.i.am).mp3',
+        'Hayyoda.mp3',
+        '[SPOTDOWNLOADER.COM] Heat Waves.mp3',
+        '[SPOTDOWNLOADER.COM] Home (with Machine Gun Kelly, X Ambassadors & Bebe Rexha).mp3',
+        '[SPOTDOWNLOADER.COM] House of Memories.mp3',
+        '[SPOTDOWNLOADER.COM] How You Like That.mp3',
+        '[SPOTDOWNLOADER.COM] Hurt.mp3',
+        '[SPOTDOWNLOADER.COM] Hymn for the Weekend.mp3',
+        '[SPOTDOWNLOADER.COM] I Wanna Be Yours.mp3',
+        '[SPOTDOWNLOADER.COM] In Christ Alone (My Hope Is Found) - Secrets Of The Vine Album Version.mp3',
+        '[SPOTDOWNLOADER.COM] In The End - Mellen Gi Remix.mp3',
+        '[SPOTDOWNLOADER.COM] In The Stars.mp3',
+        '[SPOTDOWNLOADER.COM] Jolly O Gymkhana (From _Beast_).mp3',
+        '[SPOTDOWNLOADER.COM] Kaadhal En Kaviye.mp3',
+        '[SPOTDOWNLOADER.COM] Kaadhalai Solla Mudiyatha.mp3',
+        '[SPOTDOWNLOADER.COM] Kani Mozhiyae.mp3',
+        '[SPOTDOWNLOADER.COM] Karma Veeran.mp3',
+        '[SPOTDOWNLOADER.COM] last day on earth.mp3',
+        '[SPOTDOWNLOADER.COM] Legends Never Die.mp3',
+        '[SPOTDOWNLOADER.COM] Let Her Go.mp3',
+        'Lights Are On.mp3',
+        'Like a Prayer - Choir Version From.mp3',
+        '[SPOTDOWNLOADER.COM] Love Me.mp3',
+        '[SPOTDOWNLOADER.COM] Lutt Putt Gaya (From _Dunki_).mp3',
+        '[SPOTDOWNLOADER.COM] Maattram Ondrudhaan Maaraadhadhu.mp3',
+        '[SPOTDOWNLOADER.COM] Marudaani.mp3',
+        '[SPOTDOWNLOADER.COM] Mary On A Cross - Slowed+Reverb.mp3',
+        '[SPOTDOWNLOADER.COM] Maybe My Soulmate Died.mp3',
+        '[SPOTDOWNLOADER.COM] Mazhai Kuruvi.mp3',
+        '[SPOTDOWNLOADER.COM] Mazhai Varum - Female.mp3',
+        '[SPOTDOWNLOADER.COM] Missing Me (From _Mahaan (Tamil)_).mp3',
+        '[SPOTDOWNLOADER.COM] MONEY.mp3',
+        '[SPOTDOWNLOADER.COM] My Everything.mp3',
+        '[SPOTDOWNLOADER.COM] my ordinary life (slowed + reverb) - Slowed.mp3',
+        '[SPOTDOWNLOADER.COM] Nee Kavithaigala.mp3',
+        '[SPOTDOWNLOADER.COM] Nee Singam Dhan.mp3',
+        '[SPOTDOWNLOADER.COM] Neela Vaanam.mp3',
+        '[SPOTDOWNLOADER.COM] Net ah Thorandha - From _Naa Oru Alien_.mp3',
+        '[SPOTDOWNLOADER.COM] Newyork Nagaram.mp3',
+        '[SPOTDOWNLOADER.COM] Ninaivirukka (From _Pathu Thala_).mp3',
+        '[SPOTDOWNLOADER.COM] Nobody (feat. Matthew West).mp3',
+        '[SPOTDOWNLOADER.COM] Numb Little Bug.mp3',
+        '[SPOTDOWNLOADER.COM] Oh Maya.mp3',
+        '[SPOTDOWNLOADER.COM] Older.mp3',
+        '[SPOTDOWNLOADER.COM] Omana Penne.mp3',
+        '[SPOTDOWNLOADER.COM] On My Own.mp3',
+        '[SPOTDOWNLOADER.COM] Once I Was 7 Years Old.mp3',
+        '[SPOTDOWNLOADER.COM] Osaka Osaka.mp3',
+        '[SPOTDOWNLOADER.COM] Oxygen.mp3',
+        '[SPOTDOWNLOADER.COM] Part of Me (Slowed + Reverb) - This Is Now, Never Gonna Ever Take Away from Me.mp3',
+        '[SPOTDOWNLOADER.COM] Past Lives.mp3',
+        '[SPOTDOWNLOADER.COM] Paththavaikkum (From _Devara Part 1_).mp3',
+        '[SPOTDOWNLOADER.COM] Perfect.mp3',
+        '[SPOTDOWNLOADER.COM] Phoenix.mp3',
+        '[SPOTDOWNLOADER.COM] Pompeii.mp3',
+        '[SPOTDOWNLOADER.COM] Porkanda Singam.mp3',
+        '[SPOTDOWNLOADER.COM] Pudhu Suriyan.mp3',
+        '[SPOTDOWNLOADER.COM] Quit Pannuda.mp3',
+        '[SPOTDOWNLOADER.COM] Remember the Name (feat. Styles of Beyond).mp3',
+        '[SPOTDOWNLOADER.COM] Replay.mp3',
+        '[SPOTDOWNLOADER.COM] Right Now (Na Na Na).mp3',
+        '[SPOTDOWNLOADER.COM] Royalty.mp3',
+        '[SPOTDOWNLOADER.COM] Sadness and Sorrow (Naruto).mp3',
+        '[SPOTDOWNLOADER.COM] Say Yes To Heaven.mp3',
+        '[SPOTDOWNLOADER.COM] Sevatha Pulla.mp3',
+        '[SPOTDOWNLOADER.COM] Sirukki Vaasam.mp3',
+        '[SPOTDOWNLOADER.COM] Smile.mp3',
+        '[SPOTDOWNLOADER.COM] So Big.mp3',
+        '[SPOTDOWNLOADER.COM] So Busted.mp3',
+        '[SPOTDOWNLOADER.COM] Someone You Loved.mp3',
+        '[SPOTDOWNLOADER.COM] Something Just Like This.mp3',
+        '[SPOTDOWNLOADER.COM] Space Song.mp3',
+        '[SPOTDOWNLOADER.COM] Stand By Me (Poovulagamaa).mp3',
+        '[SPOTDOWNLOADER.COM] Stereo Hearts (feat. Adam Levine).mp3',
+        '[SPOTDOWNLOADER.COM] Stressed Out.mp3',
+        '[SPOTDOWNLOADER.COM] Summertime Sadness.mp3',
+        '[SPOTDOWNLOADER.COM] Sweater Weather.mp3',
+        '[SPOTDOWNLOADER.COM] Take Me Home, Country Roads - Original Version.mp3',
+        '[SPOTDOWNLOADER.COM] Take On Me - MTV Unplugged.mp3',
+        '[SPOTDOWNLOADER.COM] Tharangini.mp3',
+        '[SPOTDOWNLOADER.COM] The God Who Stays.mp3',
+        '[SPOTDOWNLOADER.COM] The Nights.mp3',
+        '[SPOTDOWNLOADER.COM] The Rumbling.mp3',
+        '[SPOTDOWNLOADER.COM] The Scientist.mp3',
+        '[SPOTDOWNLOADER.COM] The Search.mp3',
+        '[SPOTDOWNLOADER.COM] The Sound of Silence.mp3',
+        '[SPOTDOWNLOADER.COM] Toxic.mp3',
+        '[SPOTDOWNLOADER.COM] Treachery.mp3',
+        '[SPOTDOWNLOADER.COM] Ullaallaa - From _Petta_.mp3',
+        '[SPOTDOWNLOADER.COM] Un Vizhigalil (From _Darling_).mp3',
+        '[SPOTDOWNLOADER.COM] Unai Serndhidavey.mp3',
+        '[SPOTDOWNLOADER.COM] Unstoppable.mp3',
+        '[SPOTDOWNLOADER.COM] Uyir Urugudhey.mp3',
+        '[SPOTDOWNLOADER.COM] Vaadi Ne Va.mp3',
+        '[SPOTDOWNLOADER.COM] Veesum Velichathile.mp3',
+        '[SPOTDOWNLOADER.COM] Viva La Vida.mp3',
+        '[SPOTDOWNLOADER.COM] Wait.mp3',
+        "[SPOTDOWNLOADER.COM] We Don't Talk Anymore(feat.Selena Gomez).mp3",
+'[SPOTDOWNLOADER.COM] We Own It (Fast & Furious).mp3',
+        '[SPOTDOWNLOADER.COM] When Can I See You Again_ - From _Wreck-It Ralph__Soundtrack Version.mp3',
+        '[SPOTDOWNLOADER.COM] Whistle Baby.mp3',
+        '[SPOTDOWNLOADER.COM] Yesterday (Originally By The Beatles).mp3',
+        "[SPOTDOWNLOADER.COM] You're Perfect.mp3",
+'[SPOTDOWNLOADER.COM] Your Love Is My Drug (8 Bit Slowed).mp3',
+
+      ];
+
+      // Elements
+      const searchInput = document.getElementById('song-search');
+      const dropdown = document.getElementById('songs-dropdown');
+      const audioPlayer = document.getElementById('audio-player');
+      const currentSongName = document.getElementById('current-song-name');
+      const playPauseButton = document.getElementById('play-pause-button');
+      const prevButton = document.getElementById('prev-button');
+      const nextButton = document.getElementById('next-button');
+      const shuffleButton = document.getElementById('shuffle-toggle');
+
+      let currentIndex = 0;
+      let shuffle = false;
+      let isPlaying = false;
+      let shuffledOrder = [];
+      let songHistory = [];
+
+      // Populate dropdown with given list (unfiltered initially)
+      function populateDropdown(filteredSongs) {
+        dropdown.innerHTML = "";
+        filteredSongs.forEach((song, i) => {
+          const option = document.createElement('option');
+          option.value = song;
+          option.text = song;
+          dropdown.appendChild(option);
+        });
+        // Reset dropdown selection after repopulating
+        dropdown.selectedIndex = -1;
+      }
+
+      // Shuffle array helper
+      function shuffleArray(arr) {
+        const array = arr.slice();
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      // Load and play song by index in songs array
+      function playSong(index) {
+        if (index < 0 || index >= songs.length) return;
+        currentIndex = index;
+        const song = songs[index];
+        currentSongName.textContent = song;
+        audioPlayer.src = song;
+        audioPlayer.play();
+        isPlaying = true;
+        playPauseButton.textContent = "⏸️";
+
+        // Update dropdown selection if song visible
+        const options = Array.from(dropdown.options);
+        let optIndex = options.findIndex(opt => opt.value === song);
+        if (optIndex >= 0) {
+          dropdown.selectedIndex = optIndex;
+          dropdown.scrollTop = dropdown.options[optIndex].offsetTop - dropdown.offsetTop;
+        } else {
+          dropdown.selectedIndex = -1; // song filtered out
+        }
+
+        if (shuffle) {
+          // Add to song history if not last played
+          if (songHistory.length === 0 || songHistory[songHistory.length - 1] !== index) {
+            songHistory.push(index);
+          }
+        }
+      }
+      audioPlayer.addEventListener('error', () => {
+        console.warn(`Error loading: ${songs[currentIndex]}. Skipping...`);
+        playNext();
+      });
+      // Get next song index
+      function getNextIndex() {
+        if (shuffle) {
+          if (shuffledOrder.length === 0) {
+            shuffledOrder = shuffleArray([...Array(songs.length).keys()]);
+            // Remove current to prevent immediate repeat
+            shuffledOrder = shuffledOrder.filter(i => i !== currentIndex);
+          }
+          return shuffledOrder.shift();
+        } else {
+          return (currentIndex + 1) % songs.length;
+        }
+      }
+
+      // Get previous song index
+      function getPrevIndex() {
+        if (shuffle) {
+          if (songHistory.length > 1) {
+            // Pop current
+            songHistory.pop();
+            return songHistory[songHistory.length - 1];
+          }
+          return currentIndex; // no previous
+        } else {
+          return (currentIndex - 1 + songs.length) % songs.length;
+        }
+      }
+
+      // Play next song (auto or button)
+      function playNext() {
+        const nextIndex = getNextIndex();
+        playSong(nextIndex);
+      }
+
+      // Play previous song (button)
+      function playPrev() {
+        const prevIndex = getPrevIndex();
+        playSong(prevIndex);
+      }
+
+      // Play or pause toggle
+      function togglePlayPause() {
+        if (isPlaying) {
+          audioPlayer.pause();
+          playPauseButton.textContent = "▶️";
+          isPlaying = false;
+        } else {
+          audioPlayer.play();
+          playPauseButton.textContent = "⏸️";
+          isPlaying = true;
+        }
+      }
+
+      // Toggle shuffle mode
+      function toggleShuffle() {
+        shuffle = !shuffle;
+        shuffleButton.textContent = `Shuffle: ${shuffle ? "ON" : "OFF"}`;
+        shuffleButton.style.backgroundColor = shuffle ? "#4caf50" : "#ff9800";
+        shuffledOrder = [];
+        songHistory = [currentIndex];
+      }
+      
+
+      // When audio ends, move to next song
+      audioPlayer.addEventListener('ended', playNext);
+
+      // When dropdown selection changes, play selected song
+      dropdown.addEventListener('change', () => {
+        const selectedSong = dropdown.value;
+        const idx = songs.indexOf(selectedSong);
+        if (idx >= 0) playSong(idx);
+      });
+
+      // Search input filters dropdown list by song name
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        const filtered = songs.filter(s => s.toLowerCase().includes(query));
+        populateDropdown(filtered);
+
+        // Auto-load first filtered song but don't mark selected (user selects manually)
+        if (filtered.length === 1) {
+          const idx = songs.indexOf(filtered[0]);
+          if (idx >= 0) {
+            currentSongName.textContent = filtered[0];
+            audioPlayer.src = filtered[0];
+            if (isPlaying) audioPlayer.play(); // play if currently playing
+          }
+        }
+      });
+
+      // Button listeners
+      playPauseButton.addEventListener('click', togglePlayPause);
+      nextButton.addEventListener('click', playNext);
+      prevButton.addEventListener('click', playPrev);
+      shuffleButton.addEventListener('click', toggleShuffle);
+      
+
+      // Initialize the page with full dropdown and first song loaded
+      populateDropdown(songs);
+      playSong(0);
+    })();
+  </script>
+
+</body>
+
+</html>
