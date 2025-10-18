@@ -397,6 +397,28 @@ body {
   font-style: italic;
 }
 
+.Book-button {
+  display: inline-block;
+  background: linear-gradient(to right, #02316b, #9333ea);
+  color: white;
+  padding: 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.Book-button:hover {
+  background: linear-gradient(to right, #0800ff, #7e22ce);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.Book-button span {
+  font-style: italic;
+}
 /* Entertainment Section */
 .entertainment-section {
   padding: 48px 16px;
