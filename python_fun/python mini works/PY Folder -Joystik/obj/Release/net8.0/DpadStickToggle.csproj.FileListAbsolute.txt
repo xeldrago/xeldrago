@@ -1,0 +1,6 @@
+E:\Repos\vroom-vroom\python_fun\python mini works\PY Folder -Joystik\obj\Release\net8.0\DpadStickToggle.csproj.AssemblyReference.cache
+E:\Repos\vroom-vroom\python_fun\python mini works\PY Folder -Joystik\obj\Release\net8.0\DpadStickToggle.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repos\vroom-vroom\python_fun\python mini works\PY Folder -Joystik\obj\Release\net8.0\DpadStickToggle.AssemblyInfoInputs.cache
+E:\Repos\vroom-vroom\python_fun\python mini works\PY Folder -Joystik\obj\Release\net8.0\DpadStickToggle.AssemblyInfo.cs
+E:\Repos\vroom-vroom\python_fun\python mini works\PY Folder -Joystik\obj\Release\net8.0\DpadStickToggle.csproj.CoreCompileInputs.cache
+E:\Repos\vroom-vroom\python_fun\python mini works\PY Folder -Joystik\obj\Release\net8.0\DpadStickToggle.sourcelink.json

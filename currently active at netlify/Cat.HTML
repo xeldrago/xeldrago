@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talking Cat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a8d8ff, #c2e9fb);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #1e5799;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .cat-container {
+            position: relative;
+            width: 300px;
+            height: 350px;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .reaction {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e5799;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transition: opacity 0.3s, top 0.5s;
+            pointer-events: none;
+            z-index: 10;
+            text-align: center;
+            max-width: 250px;
+        }
+
+        .reaction.show {
+            opacity: 1;
+            top: -70px;
+        }
+
+        .chat-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 15px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 18px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #4da8ff;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .cat-message {
+            background-color: #f0f8ff;
+            color: #1e5799;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4da8ff;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #3a8de6;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .voice-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .mic-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #ff6b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .mic-btn.listening {
+            background-color: #4cd964;
+            animation: pulse 1.5s infinite;
+        }
+
+        .mic-icon {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .mic-icon::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+        }
+
+        .listening .mic-icon::before {
+            background-color: #4cd964;
+        }
+
+        .instructions {
+            margin-top: 30px;
+            color: #1e5799;
+            text-align: center;
+            font-size: 16px;
+            max-width: 400px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        .paw-print {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: radial-gradient(circle at 20px 15px, white 10px, transparent 10px),
+                radial-gradient(circle at 10px 25px, white 7px, transparent 7px),
+                radial-gradient(circle at 20px 25px, white 7px, transparent 7px),
+                radial-gradient(circle at 30px 25px, white 7px, transparent 7px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 5;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            50% {
+                transform: scaleY(0.1);
+            }
+        }
+
+        .blink {
+            animation: blink 0.3s;
+        }
+
+        @keyframes meow {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .meow {
+            animation: meow 0.5s;
+        }
+
+        @keyframes purr {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-3px);
+            }
+
+            75% {
+                transform: translateX(3px);
+            }
+        }
+
+        .purr {
+            animation: purr 0.2s infinite;
+        }
+
+        @keyframes happy {
+
+            0%,
+            100% {
+                transform: rotate(0);
+            }
+
+            25% {
+                transform: rotate(5deg);
+            }
+
+            75% {
+                transform: rotate(-5deg);
+            }
+        }
+
+        .happy {
+            animation: happy 0.5s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(76, 217, 100, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(76, 217, 100, 0);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cat-container {
+                width: 250px;
+                height: 300px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Talking Cat</h1>
+
+        <div class="cat-container" id="cat-container">
+            <svg viewBox="0 0 300 350" xmlns="http://www.w3.org/2000/svg" class="cat" id="cat">
+                <!-- Kitten Body -->
+                <ellipse cx="150" cy="200" rx="55" ry="50" fill="#f8f9fa" stroke="#ddd" stroke-width="2" />
+
+                <!-- Front Paws -->
+                <ellipse id="left-paw" cx="130" cy="230" rx="18" ry="22" fill="#ffffff" stroke="#ddd"
+                    stroke-width="1.5" />
+                <ellipse id="right-paw" cx="170" cy="230" rx="18" ry="22" fill="#ffffff" stroke="#ddd"
+                    stroke-width="1.5" />
+
+                <!-- Paw Pads -->
+                <ellipse cx="130" cy="235" rx="8" ry="10" fill="#ffb6c1" />
+                <ellipse cx="170" cy="235" rx="8" ry="10" fill="#ffb6c1" />
+
+                <!-- Collar -->
+                <ellipse cx="150" cy="165" rx="35" ry="8" fill="#6c757d" />
+                <circle cx="150" cy="165" r="4" fill="#ffd700" />
+
+                <!-- Head -->
+                <ellipse cx="150" cy="120" rx="60" ry="55" fill="#ffffff" stroke="#ddd" stroke-width="2" />
+
+                <!-- Ears -->
+                <g>
+                    <path id="left-ear" d="M 110,85 L 95,45 L 130,75 Z" fill="#ffffff" stroke="#ddd" stroke-width="2" />
+                    <path d="M 115,75 L 105,50 L 125,72 Z" fill="#ffd4a3" />
+
+                    <path id="right-ear" d="M 190,85 L 205,45 L 170,75 Z" fill="#ffffff" stroke="#ddd"
+                        stroke-width="2" />
+                    <path d="M 185,75 L 195,50 L 175,72 Z" fill="#ffd4a3" />
+                </g>
+
+                <!-- Blue Hair Tuft -->
+                <path id="hair-tuft" d="M 150,70 Q 145,55 150,45 Q 155,55 150,70 Z" fill="#87ceeb" stroke="#5dade2"
+                    stroke-width="1" />
+
+                <!-- Eyes -->
+                <g>
+                    <ellipse cx="130" cy="115" rx="18" ry="22" fill="#ffffff" />
+                    <ellipse cx="130" cy="115" rx="16" ry="20" fill="#4dd0e1" />
+                    <ellipse id="left-pupil" cx="130" cy="112" rx="12" ry="15" fill="#006994" />
+                    <ellipse cx="128" cy="108" rx="6" ry="8" fill="#000000" />
+                    <ellipse cx="130" cy="106" rx="4" ry="5" fill="#ffffff" />
+
+                    <ellipse cx="170" cy="115" rx="18" ry="22" fill="#ffffff" />
+                    <ellipse cx="170" cy="115" rx="16" ry="20" fill="#4dd0e1" />
+                    <ellipse id="right-pupil" cx="170" cy="112" rx="12" ry="15" fill="#006994" />
+                    <ellipse cx="168" cy="108" rx="6" ry="8" fill="#000000" />
+                    <ellipse cx="170" cy="106" rx="4" ry="5" fill="#ffffff" />
+                </g>
+
+                <!-- Blue Stripes on Head -->
+                <path d="M 120,95 Q 130,90 140,95" stroke="#87ceeb" stroke-width="3" fill="none"
+                    stroke-linecap="round" />
+                <path d="M 160,95 Q 170,90 180,95" stroke="#87ceeb" stroke-width="3" fill="none"
+                    stroke-linecap="round" />
+
+                <!-- Nose -->
+                <path id="nose" d="M 150,130 L 145,138 Q 150,142 155,138 Z" fill="#ffb6c1" />
+
+                <!-- Mouth -->
+                <path id="mouth-left" d="M 150,138 Q 145,145 140,143" stroke="#333" stroke-width="1.5" fill="none" />
+                <path id="mouth-right" d="M 150,138 Q 155,145 160,143" stroke="#333" stroke-width="1.5" fill="none" />
+
+                <!-- Whiskers -->
+                <line x1="100" y1="125" x2="70" y2="120" stroke="#333" stroke-width="1" />
+                <line x1="100" y1="130" x2="70" y2="132" stroke="#333" stroke-width="1" />
+                <line x1="200" y1="125" x2="230" y2="120" stroke="#333" stroke-width="1" />
+                <line x1="200" y1="130" x2="230" y2="132" stroke="#333" stroke-width="1" />
+
+                <!-- Tail -->
+                <path id="tail" d="M 195,200 Q 220,190 230,170 Q 235,150 230,130" stroke="#ffffff" stroke-width="20"
+                    fill="none" stroke-linecap="round" />
+                <path d="M 195,200 Q 220,190 230,170 Q 235,150 230,130" stroke="#87ceeb" stroke-width="8" fill="none"
+                    stroke-linecap="round" />
+            </svg>
+            <div class="reaction" id="reaction"></div>
+        </div>
+
+        <div class="chat-container" id="chat-container">
+            <div class="chat-message cat-message" id="welcome-message">
+                Meow! Click the microphone and say something to me!
+            </div>
+        </div>
+
+        <div class="voice-controls">
+            <div class="mic-btn" id="mic-btn">
+                <div class="mic-icon"></div>
+            </div>
+            <div id="status">Click to talk</div>
+        </div>
+
+        <div class="controls">
+            <button id="sorry-btn">Sorry</button>
+            <button id="thanks-btn" style="display:none;">Thanks</button>
+            <button id="bad-kitty-btn" style="display:none;">Bad Kitty</button>
+            <button id="oops-sorry-btn" style="display:none;">Oops Sorry</button>
+        </div>
+
+        <div class="instructions">
+            <p>Click the microphone and speak. The cat will repeat what you say in a cat-like voice!</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const catContainer = document.getElementById('cat-container');
+            const reaction = document.getElementById('reaction');
+            const leftPupil = document.getElementById('left-pupil');
+            const rightPupil = document.getElementById('right-pupil');
+            const leftEar = document.getElementById('left-ear');
+            const rightEar = document.getElementById('right-ear');
+            const nose = document.getElementById('nose');
+            const mouthLeft = document.getElementById('mouth-left');
+            const mouthRight = document.getElementById('mouth-right');
+            const tail = document.getElementById('tail');
+
+            const micBtn = document.getElementById('mic-btn');
+            const statusText = document.getElementById('status');
+            const chatContainer = document.getElementById('chat-container');
+
+            const sorryBtn = document.getElementById('sorry-btn');
+            const thanksBtn = document.getElementById('thanks-btn');
+            const badKittyBtn = document.getElementById('bad-kitty-btn');
+            const oopsSorryBtn = document.getElementById('oops-sorry-btn');
+
+            let recognition;
+            let isListening = false;
+            let conversationRound = 1; // Track which conversation round we're in
+
+            // Initialize speech recognition
+            try {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                if (SpeechRecognition) {
+                    recognition = new SpeechRecognition();
+                    recognition.continuous = false;
+                    recognition.interimResults = false;
+                    recognition.lang = 'en-US';
+
+                    recognition.onstart = function () {
+                        isListening = true;
+                        micBtn.classList.add('listening');
+                        statusText.textContent = "Listening...";
+                        animateMouth();
+                    };
+
+                    recognition.onresult = function (event) {
+                        const transcript = event.results[0][0].transcript;
+                        statusText.textContent = "Heard: " + transcript;
+
+                        // Add user message to chat
+                        addMessageToChat(transcript, 'user');
+
+                        // Cat repeats in a cat-like way
+                        setTimeout(() => {
+                            const catResponse = convertToCatSpeech(transcript);
+                            addMessageToChat(catResponse, 'cat');
+                            speakText(catResponse);
+                        }, 1000);
+                    };
+
+                    recognition.onerror = function (event) {
+                        console.error('Speech recognition error', event.error);
+                        statusText.textContent = "Error: " + event.error;
+                        isListening = false;
+                        micBtn.classList.remove('listening');
+                        resetMouth();
+                    };
+
+                    recognition.onend = function () {
+                        isListening = false;
+                        micBtn.classList.remove('listening');
+                        statusText.textContent = "Click to talk";
+                        resetMouth();
+                    };
+                } else {
+                    throw new Error('Speech recognition not supported');
+                }
+            } catch (e) {
+                console.error('Speech recognition not supported', e);
+                statusText.textContent = "Speech recognition not supported in your browser";
+                micBtn.style.display = 'none';
+
+                // Fallback - show a message about browser compatibility
+                addMessageToChat("Sorry, speech recognition is not supported in your browser. Try Chrome or Edge.", 'cat');
+            }
+
+            // Convert text to cat-like speech
+            function convertToCatSpeech(text) {
+                const words = text.toLowerCase().split(' ');
+                let catText = '';
+
+                // Replace some words with cat sounds
+                for (let word of words) {
+                    if (Math.random() < 0.3) {
+                        // Replace with cat sound
+                        const sounds = ['meow', 'purr', 'mrow', 'prrr', 'mew', 'nya'];
+                        catText += sounds[Math.floor(Math.random() * sounds.length)] + ' ';
+                    } else {
+                        // Sometimes modify the word
+                        if (Math.random() < 0.2) {
+                            catText += 'm' + word + ' ';
+                        } else {
+                            catText += word + ' ';
+                        }
+                    }
+                }
+
+                // Add cat-like ending
+                const endings = ['~meow', '~purr', '~mrow', '... prrr'];
+                catText += endings[Math.floor(Math.random() * endings.length)];
+
+                return catText;
+            }
+
+            // Text-to-speech function
+            function speakText(text) {
+                if ('speechSynthesis' in window) {
+                    // Cancel any ongoing speech
+                    window.speechSynthesis.cancel();
+
+                    const utterance = new SpeechSynthesisUtterance(text);
+
+                    // Make voice higher pitched like a cat
+                    utterance.pitch = 1.8;
+                    utterance.rate = 1.1;
+                    utterance.volume = 0.8;
+
+                    // Animate mouth while speaking
+                    animateMouth();
+                    utterance.onend = function () {
+                        resetMouth();
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+                }
+            }
+
+            function addMessageToChat(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message');
+                messageElement.classList.add(sender === 'user' ? 'user-message' : 'cat-message');
+                messageElement.textContent = message;
+
+                chatContainer.appendChild(messageElement);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            function showReaction(text) {
+                reaction.textContent = text;
+                reaction.classList.add('show');
+
+                setTimeout(() => {
+                    reaction.classList.remove('show');
+                }, 2000);
+            }
+
+            function movePupils(e) {
+                const rect = catContainer.getBoundingClientRect();
+                const containerCenterX = rect.left + rect.width / 2;
+                const containerCenterY = rect.top + rect.height / 2;
+
+                const angleX = (e.clientX - containerCenterX) / (rect.width / 2);
+                const angleY = (e.clientY - containerCenterY) / (rect.height / 2);
+
+                const maxMove = 3;
+
+                leftPupil.setAttribute('cx', 130 + angleX * maxMove);
+                leftPupil.setAttribute('cy', 112 + angleY * maxMove);
+                rightPupil.setAttribute('cx', 170 + angleX * maxMove);
+                rightPupil.setAttribute('cy', 112 + angleY * maxMove);
+            }
+
+            function createPawPrint(x, y) {
+                const pawPrint = document.createElement('div');
+                pawPrint.className = 'paw-print';
+                pawPrint.style.left = (x - 20) + 'px';
+                pawPrint.style.top = (y - 20) + 'px';
+                document.body.appendChild(pawPrint);
+
+                pawPrint.style.opacity = '0.7';
+
+                setTimeout(() => {
+                    pawPrint.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(pawPrint);
+                    }, 300);
+                }, 1000);
+            }
+
+            function blink() {
+                leftPupil.setAttribute('ry', '2');
+                rightPupil.setAttribute('ry', '2');
+
+                setTimeout(() => {
+                    leftPupil.setAttribute('ry', '15');
+                    rightPupil.setAttribute('ry', '15');
+                }, 200);
+            }
+
+            function animateEars() {
+                leftEar.style.transform = 'rotate(-5deg)';
+                rightEar.style.transform = 'rotate(5deg)';
+
+                setTimeout(() => {
+                    leftEar.style.transform = 'rotate(0)';
+                    rightEar.style.transform = 'rotate(0)';
+                }, 300);
+            }
+
+            function animateMouth() {
+                mouthLeft.setAttribute('d', 'M 150,138 Q 145,150 140,148');
+                mouthRight.setAttribute('d', 'M 150,138 Q 155,150 160,148');
+            }
+
+            function resetMouth() {
+                mouthLeft.setAttribute('d', 'M 150,138 Q 145,145 140,143');
+                mouthRight.setAttribute('d', 'M 150,138 Q 155,145 160,143');
+            }
+
+            function animateTail() {
+                tail.setAttribute('d', 'M 195,200 Q 220,190 230,170 Q 235,160 240,140');
+
+                setTimeout(() => {
+                    tail.setAttribute('d', 'M 195,200 Q 220,190 230,170 Q 235,150 230,130');
+                }, 300);
+            }
+
+            // CONVERSATION FLOW FUNCTIONS - FIXED LOGIC
+
+            function handleSorry() {
+                addMessageToChat("Sorry", 'user');
+                setTimeout(() => {
+                    addMessageToChat("I'm sorry to make you feel guilty or make you say sorry for something that I did.", 'cat');
+                    speakText("I'm sorry to make you feel guilty or make you say sorry for something that I did.");
+
+                    // Hide sorry button, show thanks button
+                    sorryBtn.style.display = 'none';
+                    thanksBtn.style.display = 'inline-block';
+                    badKittyBtn.style.display = 'none';
+                    oopsSorryBtn.style.display = 'none';
+                }, 1000);
+            }
+
+            function handleThanks() {
+                addMessageToChat("Thanks", 'user');
+
+                if (conversationRound === 1) {
+                    // First round - shorter response
+                    setTimeout(() => {
+                        addMessageToChat("Oohh noo, I do not deserve that, but thanksss a lot for bearing me, and sorry", 'cat');
+                        speakText("Oohh noo, I do not deserve that, but thanksss a lot for bearing me, and sorry");
+
+                        // Hide thanks, show sorry again for next round
+                        thanksBtn.style.display = 'none';
+                        sorryBtn.style.display = 'inline-block';
+                        conversationRound = 2; // Move to second round
+                    }, 1000);
+                } else if (conversationRound === 2) {
+                    // Second round - longer response with options
+                    setTimeout(() => {
+                        addMessageToChat("Oohh noo, I do not deserve that, but thanksss a lot for bearing me, and sorry, please dont be sorry..its me", 'cat');
+                        speakText("Oohh noo, I do not deserve that, but thanksss a lot for bearing me, and sorry, please dont be sorry..its me");
+
+                        // Hide thanks, show both sorry and bad kitty options
+                        thanksBtn.style.display = 'none';
+                        sorryBtn.style.display = 'inline-block';
+                        badKittyBtn.style.display = 'inline-block';
+                    }, 1000);
+                }
+            }
+
+            function handleBadKitty() {
+                addMessageToChat("Bad Kitty", 'user');
+                setTimeout(() => {
+                    // Sad cat response
+                    addMessageToChat("* Sad kitty noise of crying *", 'cat');
+                    speakText("Meeooowww... *crying*");
+                    showReaction("😿");
+
+                    // Hide current buttons, show oops sorry
+                    sorryBtn.style.display = 'none';
+                    badKittyBtn.style.display = 'none';
+                    oopsSorryBtn.style.display = 'inline-block';
+                }, 1000);
+            }
+
+            function handleOopsSorry() {
+                addMessageToChat("Oops Sorry", 'user');
+                setTimeout(() => {
+                    // Go back to the apology loop
+                    addMessageToChat("I'm sorry to make you feel guilty or make you say sorry for something that I did.", 'cat');
+                    speakText("I'm sorry to make you feel guilty or make you say sorry for something that I did.");
+
+                    // Hide oops sorry, show thanks button
+                    oopsSorryBtn.style.display = 'none';
+                    thanksBtn.style.display = 'inline-block';
+                    conversationRound = 2; // Stay in second round
+                }, 1000);
+            }
+
+            // Event listeners
+            micBtn.addEventListener('click', function () {
+                if (!isListening && recognition) {
+                    try {
+                        recognition.start();
+                    } catch (error) {
+                        console.error('Error starting recognition:', error);
+                        statusText.textContent = "Error starting voice recognition";
+                    }
+                }
+            });
+
+            catContainer.addEventListener('click', function (e) {
+                showReaction("Meow!");
+                animateEars();
+                animateTail();
+                createPawPrint(e.clientX, e.clientY);
+            });
+
+            document.addEventListener('mousemove', movePupils);
+
+            sorryBtn.addEventListener('click', handleSorry);
+            thanksBtn.addEventListener('click', handleThanks);
+            badKittyBtn.addEventListener('click', handleBadKitty);
+            oopsSorryBtn.addEventListener('click', handleOopsSorry);
+
+            // Random blinking
+            setInterval(() => {
+                if (Math.random() < 0.3) {
+                    blink();
+                }
+            }, 3000);
+
+            // Random tail wags
+            setInterval(() => {
+                if (Math.random() < 0.4) {
+                    animateTail();
+                }
+            }, 4000);
+        });
+    </script>
+</body>
+
+</html>

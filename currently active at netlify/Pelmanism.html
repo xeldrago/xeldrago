@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelmanism Memory Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            font-size: 2.5em;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .setup-screen,
+        .game-screen,
+        .turn-result-screen,
+        .round-result-screen,
+        .final-result-screen {
+            display: none;
+        }
+
+        .setup-screen.active,
+        .game-screen.active,
+        .turn-result-screen.active,
+        .round-result-screen.active,
+        .final-result-screen.active {
+            display: block;
+        }
+
+        .game-mode-selection {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .game-mode-selection h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .mode-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            padding: 30px 40px;
+            font-size: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 3px solid transparent;
+            min-width: 200px;
+        }
+
+        .mode-btn:hover {
+            border-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .player-setup {
+            margin: 20px 0;
+        }
+
+        .player-input {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            align-items: center;
+        }
+
+        .player-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .player-input button {
+            padding: 12px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .add-player-btn {
+            margin: 10px 0;
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .player-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .player-card.active {
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .player-card.eliminated {
+            background: linear-gradient(135deg, #999 0%, #666 100%);
+            opacity: 0.6;
+        }
+
+        .player-card h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .player-card p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .timer,
+        .turns-left {
+            font-size: 32px;
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .round-info {
+            font-size: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .cards-grid {
+            display: grid;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .cards-grid.level-1 {
+            grid-template-columns: repeat(5, 80px);
+        }
+
+        .cards-grid.level-2 {
+            grid-template-columns: repeat(6, 80px);
+        }
+
+        .cards-grid.level-3 {
+            grid-template-columns: repeat(7, 80px);
+        }
+
+        .cards-grid.level-4 {
+            grid-template-columns: repeat(8, 80px);
+        }
+
+        .cards-grid.level-5 {
+            grid-template-columns: repeat(9, 80px);
+        }
+
+        .card {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card.flipped {
+            background: white;
+            border: 2px solid #667eea;
+        }
+
+        .card.matched {
+            background: #28a745;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .card.matched:hover {
+            transform: none;
+        }
+
+        .card-back {
+            display: none;
+        }
+
+        .card.flipped .card-back {
+            display: block;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-box h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .result-box p {
+            font-size: 1.3em;
+            margin: 10px 0;
+        }
+
+        .scores-table {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .scores-table h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        .score-row.eliminated {
+            background: #ffe6e6;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .score-row.winner {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            font-weight: bold;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .game-controls button {
+            padding: 10px 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .pause-btn {
+            background: #ffc107;
+        }
+
+        .pause-btn:hover {
+            background: #e0a800;
+        }
+
+        .quit-btn {
+            background: #dc3545;
+        }
+
+        .quit-btn:hover {
+            background: #c82333;
+        }
+
+        .restart-btn {
+            background: #28a745;
+        }
+
+        .restart-btn:hover {
+            background: #218838;
+        }
+
+        .pause-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pause-overlay.active {
+            display: flex;
+        }
+
+        .pause-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .pause-box h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .winner-card {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .winner-card h3 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Pelmanism Memory Game</h1>
+            <div class="game-controls" id="gameControlsHeader" style="display: none;">
+                <button class="pause-btn" onclick="togglePause()">⏸️ Pause</button>
+                <button class="restart-btn" onclick="restartTurn()">🔄 Restart</button>
+                <button class="quit-btn" onclick="quitGame()">❌ Quit</button>
+            </div>
+        </div>
+
+        <!-- Setup Screen -->
+        <div class="setup-screen active">
+            <div class="game-mode-selection">
+                <h3>Select Game Mode</h3>
+                <div class="mode-buttons">
+                    <button class="mode-btn" onclick="selectMode('timer')">
+                        ⏱️ Timer Mode<br>
+                        <small style="font-size: 14px;">15 seconds per turn</small>
+                    </button>
+                    <button class="mode-btn" onclick="selectMode('turns')">
+                        🎯 Turns Mode<br>
+                        <small style="font-size: 14px;">Limited flip attempts</small>
+                    </button>
+                </div>
+            </div>
+
+            <div class="player-setup" id="playerSetupSection" style="display: none;">
+                <h2 style="color: #667eea; margin-bottom: 15px;">Add Players (2-5)</h2>
+                <div id="playerInputs"></div>
+                <button class="add-player-btn" onclick="addPlayer()">Add Player</button>
+            </div>
+            <div class="btn-container">
+                <button onclick="startGame()" id="startBtn" disabled style="display: none;">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen">
+            <div class="scoreboard" id="scoreboard"></div>
+
+            <div class="game-info">
+                <div class="round-info" id="roundInfo">Round 1</div>
+                <div id="timerDisplay" style="display: none;">
+                    <div class="timer" id="timer">15</div>
+                </div>
+                <div id="turnsDisplay" style="display: none;">
+                    <div class="turns-left" id="turnsLeft">10</div>
+                </div>
+                <div class="round-info">Playing: <span id="currentPlayer"></span></div>
+            </div>
+
+            <div class="cards-grid level-1" id="cardsGrid"></div>
+        </div>
+
+        <!-- Pause Overlay -->
+        <div class="pause-overlay" id="pauseOverlay">
+            <div class="pause-box">
+                <h2>⏸️ Game Paused</h2>
+                <button onclick="togglePause()" style="font-size: 20px; padding: 15px 40px;">Resume Game</button>
+            </div>
+        </div>
+
+        <!-- Turn Result Screen -->
+        <div class="turn-result-screen">
+            <div class="result-box">
+                <h2 id="turnResultPlayer"></h2>
+                <p id="turnResultScore"></p>
+            </div>
+            <div class="btn-container">
+                <button onclick="continueGame()">Continue</button>
+            </div>
+        </div>
+
+        <!-- Round Result Screen -->
+        <div class="round-result-screen">
+            <div class="result-box">
+                <h2>Round <span id="roundNumber"></span> Complete!</h2>
+            </div>
+            <div class="scores-table">
+                <h3>Round Scores</h3>
+                <div id="roundScoresTable"></div>
+            </div>
+            <div class="scores-table">
+                <h3>Total Scores</h3>
+                <div id="totalScoresTable"></div>
+            </div>
+            <div id="eliminationMessage" style="display: none;" class="result-box">
+                <h2>⚠️ Player Eliminated!</h2>
+                <p id="eliminatedPlayer"></p>
+            </div>
+            <div class="btn-container">
+                <button onclick="nextRound()">Next Round</button>
+            </div>
+        </div>
+
+        <!-- Final Result Screen -->
+        <div class="final-result-screen">
+            <h2 style="text-align: center; color: #667eea; font-size: 2em; margin: 20px 0;">🏆 Game Over!</h2>
+            <div class="winner-card">
+                <h3 id="winnerName"></h3>
+                <p id="winnerScore"></p>
+            </div>
+            <div class="scores-table">
+                <h3>Final Standings</h3>
+                <div id="finalStandings"></div>
+            </div>
+            <div class="btn-container">
+                <button onclick="location.reload()">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cardSymbols = ['🎮', '🎨', '🎭', '🎪', '🎯', '🎲', '🎸', '🎹', '🎺', '🎻', '🏀', '⚽', '🏈', '🎾', '🏐', '🏓', '🎳', '🏏'];
+
+        let players = [];
+        let currentRound = 1;
+        let currentPlayerIndex = 0;
+        let timer = 15;
+        let timerInterval;
+        let cardsArray = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let currentTurnScore = 0;
+        let isPaused = false;
+        let gameMode = null; // 'timer' or 'turns'
+        let turnsRemaining = 0;
+        let maxTurns = 0;
+
+        function initPlayerInputs() {
+            for (let i = 0; i < 2; i++) {
+                addPlayer();
+            }
+        }
+
+        function selectMode(mode) {
+            gameMode = mode;
+            document.getElementById('playerSetupSection').style.display = 'block';
+            document.getElementById('startBtn').style.display = 'block';
+
+            // Hide mode selection
+            document.querySelector('.game-mode-selection').style.display = 'none';
+        }
+
+        function addPlayer() {
+            if (players.length >= 5) {
+                alert('Maximum 5 players allowed!');
+                return;
+            }
+
+            const container = document.getElementById('playerInputs');
+            const div = document.createElement('div');
+            div.className = 'player-input';
+            div.innerHTML = `
+                <input type="text" placeholder="Player ${players.length + 1} Name" id="player${players.length}">
+                ${players.length >= 2 ? '<button onclick="removePlayer(this)">Remove</button>' : ''}
+            `;
+            container.appendChild(div);
+
+            players.push({ name: '', totalScore: 0, roundScores: [], eliminated: false });
+            updateStartButton();
+        }
+
+        function removePlayer(btn) {
+            if (players.length <= 2) return;
+            btn.parentElement.remove();
+            players.pop();
+            updateStartButton();
+        }
+
+        function updateStartButton() {
+            const inputs = document.querySelectorAll('.player-input input');
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) allFilled = false;
+            });
+            document.getElementById('startBtn').disabled = !allFilled || players.length < 2;
+        }
+
+        document.addEventListener('input', (e) => {
+            if (e.target.matches('.player-input input')) {
+                updateStartButton();
+            }
+        });
+
+        function startGame() {
+            const inputs = document.querySelectorAll('.player-input input');
+            players = [];
+            inputs.forEach((input, i) => {
+                players.push({
+                    name: input.value.trim(),
+                    totalScore: 0,
+                    roundScores: [],
+                    eliminated: false
+                });
+            });
+
+            // Show game controls
+            document.getElementById('gameControlsHeader').style.display = 'flex';
+
+            showScreen('game-screen');
+            startPlayerTurn();
+        }
+
+        function startPlayerTurn() {
+            // Skip eliminated players
+            while (players[currentPlayerIndex] && players[currentPlayerIndex].eliminated) {
+                currentPlayerIndex++;
+                if (currentPlayerIndex >= players.length) {
+                    endRound();
+                    return;
+                }
+            }
+
+            // Safety check
+            if (!players[currentPlayerIndex]) {
+                endRound();
+                return;
+            }
+
+            const cardsCount = 10 + (currentRound - 1) * 2;
+            matchedPairs = 0;
+            currentTurnScore = 0;
+
+            document.getElementById('roundInfo').textContent = `Round ${currentRound} - ${cardsCount} Cards`;
+            document.getElementById('currentPlayer').textContent = players[currentPlayerIndex].name;
+            updateScoreboard();
+            createCards(cardsCount);
+
+            if (gameMode === 'timer') {
+                document.getElementById('timerDisplay').style.display = 'block';
+                document.getElementById('turnsDisplay').style.display = 'none';
+                startTimer();
+            } else {
+                document.getElementById('timerDisplay').style.display = 'none';
+                document.getElementById('turnsDisplay').style.display = 'block';
+                maxTurns = cardsCount;
+                turnsRemaining = maxTurns;
+                document.getElementById('turnsLeft').textContent = `${turnsRemaining} turns left`;
+            }
+        }
+
+        function createCards(count) {
+            const grid = document.getElementById('cardsGrid');
+            grid.innerHTML = '';
+            grid.className = `cards-grid level-${currentRound}`;
+
+            const symbols = cardSymbols.slice(0, count / 2);
+            cardsArray = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+
+            cardsArray.forEach((symbol, i) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.symbol = symbol;
+                card.dataset.index = i;
+                card.innerHTML = `<span class="card-back">${symbol}</span>`;
+                card.onclick = () => flipCard(card);
+                grid.appendChild(card);
+            });
+        }
+
+        function startTimer() {
+            flippedCards = [];
+            timer = 15;
+            document.getElementById('timer').textContent = timer;
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timer--;
+                document.getElementById('timer').textContent = timer;
+                if (timer <= 0) {
+                    clearInterval(timerInterval);
+                    endPlayerTurn();
+                }
+            }, 1000);
+        }
+
+        function flipCard(card) {
+            if (isPaused || card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) {
+                return;
+            }
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                // Decrease turn count in turns mode
+                if (gameMode === 'turns') {
+                    turnsRemaining--;
+                    document.getElementById('turnsLeft').textContent = `${turnsRemaining} turns left`;
+                }
+
+                setTimeout(checkMatch, 500);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+
+            if (card1.dataset.symbol === card2.dataset.symbol) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                currentTurnScore++;
+                matchedPairs++;
+                flippedCards = [];
+
+                // Check if all cards matched
+                if (matchedPairs === cardsArray.length / 2) {
+                    if (gameMode === 'timer') {
+                        clearInterval(timerInterval);
+                    }
+                    endPlayerTurn();
+                }
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+
+                    // Check if turns exhausted in turns mode
+                    if (gameMode === 'turns' && turnsRemaining <= 0) {
+                        endPlayerTurn();
+                    }
+                }, 500);
+            }
+        }
+
+        function endPlayerTurn() {
+            if (gameMode === 'timer') {
+                clearInterval(timerInterval);
+            }
+
+            // Save this turn's score
+            players[currentPlayerIndex].roundScores[currentRound - 1] = currentTurnScore;
+            players[currentPlayerIndex].totalScore += currentTurnScore;
+
+            // Show turn result
+            document.getElementById('turnResultPlayer').textContent = `${players[currentPlayerIndex].name}'s Turn Complete!`;
+            document.getElementById('turnResultScore').textContent = `Matched ${currentTurnScore} pairs`;
+            showScreen('turn-result-screen');
+        }
+
+        function continueGame() {
+            currentPlayerIndex++;
+
+            // Check if round is complete
+            if (currentPlayerIndex >= players.length || players.slice(currentPlayerIndex).every(p => p.eliminated)) {
+                endRound();
+            } else {
+                showScreen('game-screen');
+                startPlayerTurn();
+            }
+        }
+
+        function endRound() {
+            // Display round results
+            document.getElementById('roundNumber').textContent = currentRound;
+
+            // Round scores
+            const roundScoresTable = document.getElementById('roundScoresTable');
+            roundScoresTable.innerHTML = '';
+            players.forEach(player => {
+                const row = document.createElement('div');
+                row.className = `score-row ${player.eliminated ? 'eliminated' : ''}`;
+                row.innerHTML = `
+                    <span>${player.name}${player.eliminated ? ' (Eliminated)' : ''}</span>
+                    <span>${player.roundScores[currentRound - 1] || 0} pairs</span>
+                `;
+                roundScoresTable.appendChild(row);
+            });
+
+            // Total scores
+            const totalScoresTable = document.getElementById('totalScoresTable');
+            totalScoresTable.innerHTML = '';
+            const sortedPlayers = [...players].sort((a, b) => b.totalScore - a.totalScore);
+            sortedPlayers.forEach(player => {
+                const row = document.createElement('div');
+                row.className = `score-row ${player.eliminated ? 'eliminated' : ''}`;
+                row.innerHTML = `
+                    <span>${player.name}${player.eliminated ? ' (Eliminated)' : ''}</span>
+                    <span>${player.totalScore} total</span>
+                `;
+                totalScoresTable.appendChild(row);
+            });
+
+            // Check for elimination
+            const activePlayers = players.filter(p => !p.eliminated);
+            if (activePlayers.length > 1 && currentRound < 5) {
+                // Find lowest scorer this round among active players
+                let lowestScore = Infinity;
+                let lowestPlayer = null;
+
+                activePlayers.forEach(player => {
+                    const roundScore = player.roundScores[currentRound - 1] || 0;
+                    if (roundScore < lowestScore) {
+                        lowestScore = roundScore;
+                        lowestPlayer = player;
+                    }
+                });
+
+                if (lowestPlayer) {
+                    lowestPlayer.eliminated = true;
+                    document.getElementById('eliminationMessage').style.display = 'block';
+                    document.getElementById('eliminatedPlayer').textContent =
+                        `${lowestPlayer.name} scored only ${lowestScore} pairs and is eliminated!`;
+                }
+            } else {
+                document.getElementById('eliminationMessage').style.display = 'none';
+            }
+
+            showScreen('round-result-screen');
+        }
+
+        function nextRound() {
+            const activePlayers = players.filter(p => !p.eliminated);
+
+            // Check if game is over
+            if (currentRound >= 5 || activePlayers.length <= 1) {
+                showFinalResults();
+                return;
+            }
+
+            currentRound++;
+            currentPlayerIndex = 0;
+            showScreen('game-screen');
+            startPlayerTurn();
+        }
+
+        function showFinalResults() {
+            const sortedPlayers = [...players].sort((a, b) => b.totalScore - a.totalScore);
+            const winner = sortedPlayers[0];
+
+            document.getElementById('winnerName').textContent = `🏆 ${winner.name} Wins!`;
+            document.getElementById('winnerScore').textContent = `Final Score: ${winner.totalScore} points`;
+
+            const standings = document.getElementById('finalStandings');
+            standings.innerHTML = '';
+            sortedPlayers.forEach((player, i) => {
+                const row = document.createElement('div');
+                row.className = `score-row ${i === 0 ? 'winner' : ''}`;
+                row.innerHTML = `
+                    <span>${i + 1}. ${player.name}</span>
+                    <span>${player.totalScore} points</span>
+                `;
+                standings.appendChild(row);
+            });
+
+            showScreen('final-result-screen');
+        }
+
+        function updateScoreboard() {
+            const scoreboard = document.getElementById('scoreboard');
+            scoreboard.innerHTML = '';
+
+            players.forEach((player, i) => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                if (i === currentPlayerIndex && !player.eliminated) card.classList.add('active');
+                if (player.eliminated) card.classList.add('eliminated');
+
+                card.innerHTML = `
+                    <h3>${player.name}${player.eliminated ? ' ❌' : ''}</h3>
+                    <p>${player.totalScore} pts</p>
+                `;
+                scoreboard.appendChild(card);
+            });
+        }
+
+        function showScreen(screenClass) {
+            document.querySelectorAll('.setup-screen, .game-screen, .turn-result-screen, .round-result-screen, .final-result-screen').forEach(s => {
+                s.classList.remove('active');
+            });
+            document.querySelector(`.${screenClass}`).classList.add('active');
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            const overlay = document.getElementById('pauseOverlay');
+
+            if (isPaused) {
+                if (gameMode === 'timer') {
+                    clearInterval(timerInterval);
+                }
+                overlay.classList.add('active');
+            } else {
+                overlay.classList.remove('active');
+                // Resume timer only in timer mode
+                if (gameMode === 'timer') {
+                    timerInterval = setInterval(() => {
+                        timer--;
+                        document.getElementById('timer').textContent = timer;
+                        if (timer <= 0) {
+                            clearInterval(timerInterval);
+                            endPlayerTurn();
+                        }
+                    }, 1000);
+                }
+            }
+        }
+
+        function restartTurn() {
+            if (confirm('Restart this turn? Progress will be reset.')) {
+                if (gameMode === 'timer') {
+                    clearInterval(timerInterval);
+                }
+                isPaused = false;
+                document.getElementById('pauseOverlay').classList.remove('active');
+                startPlayerTurn();
+            }
+        }
+
+        function quitGame() {
+            if (confirm('Quit game and return to player setup? All progress will be lost.')) {
+                if (gameMode === 'timer') {
+                    clearInterval(timerInterval);
+                }
+                isPaused = false;
+                document.getElementById('pauseOverlay').classList.remove('active');
+
+                // Hide game controls
+                document.getElementById('gameControlsHeader').style.display = 'none';
+
+                // Reset game state
+                currentRound = 1;
+                currentPlayerIndex = 0;
+                players = [];
+                gameMode = null;
+
+                // Show mode selection again
+                document.querySelector('.game-mode-selection').style.display = 'block';
+                document.getElementById('playerSetupSection').style.display = 'none';
+                document.getElementById('startBtn').style.display = 'none';
+
+                // Reset player inputs
+                document.getElementById('playerInputs').innerHTML = '';
+                initPlayerInputs();
+
+                showScreen('setup-screen');
+            }
+        }
+
+        // Initialize
+        initPlayerInputs();
+    </script>
+</body>
+
+</html>
