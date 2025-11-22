@@ -86,8 +86,12 @@
             padding: 30px 40px;
             font-size: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             border: 3px solid transparent;
+            border-radius: 10px;
             min-width: 200px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .mode-btn:hover {
@@ -422,6 +426,61 @@
             color: #667eea;
             margin-bottom: 10px;
         }
+
+        .tie-breaker-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .elimination-info {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .efficiency-bonus {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .score-breakdown {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .round-score-breakdown {
+            font-size: 0.85em;
+            opacity: 0.7;
+            margin-top: 3px;
+        }
+
+        .no-moves-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            z-index: 100;
+        }
     </style>
 </head>
 
@@ -477,7 +536,7 @@
                 <div class="round-info">Playing: <span id="currentPlayer"></span></div>
             </div>
 
-            <div class="cards-grid level-1" id="cardsGrid"></div>
+            <div class="cards-grid level-1" id="cardsGrid" style="position: relative;"></div>
         </div>
 
         <!-- Pause Overlay -->
@@ -493,6 +552,7 @@
             <div class="result-box">
                 <h2 id="turnResultPlayer"></h2>
                 <p id="turnResultScore"></p>
+                <p id="turnResultEfficiency" class="efficiency-bonus"></p>
             </div>
             <div class="btn-container">
                 <button onclick="continueGame()">Continue</button>
@@ -503,6 +563,9 @@
         <div class="round-result-screen">
             <div class="result-box">
                 <h2>Round <span id="roundNumber"></span> Complete!</h2>
+                <div id="tieBreakerInfo" class="tie-breaker-info" style="display: none;">
+                    Tie Breaker Round! Only tied players continue.
+                </div>
             </div>
             <div class="scores-table">
                 <h3>Round Scores</h3>
@@ -512,8 +575,8 @@
                 <h3>Total Scores</h3>
                 <div id="totalScoresTable"></div>
             </div>
-            <div id="eliminationMessage" style="display: none;" class="result-box">
-                <h2>⚠️ Player Eliminated!</h2>
+            <div id="eliminationMessage" style="display: none;" class="elimination-info">
+                <h3>⚠️ Player Eliminated!</h3>
                 <p id="eliminatedPlayer"></p>
             </div>
             <div class="btn-container">
@@ -533,7 +596,7 @@
                 <div id="finalStandings"></div>
             </div>
             <div class="btn-container">
-                <button onclick="location.reload()">Play Again</button>
+                <button onclick="playAgain()">Play Again</button>
             </div>
         </div>
     </div>
@@ -551,11 +614,22 @@
         let matchedPairs = 0;
         let currentTurnScore = 0;
         let isPaused = false;
-        let gameMode = null; // 'timer' or 'turns'
+        let gameMode = null;
         let turnsRemaining = 0;
         let maxTurns = 0;
+        let isTieBreakerRound = false;
+        let turnsUsed = 0;
+        let totalPairs = 0;
+        let secondsUsed = 0;
+        let turnEnded = false;
+        let canFlipCards = true;
+        let isCheckingMatch = false;
 
         function initPlayerInputs() {
+            const container = document.getElementById('playerInputs');
+            container.innerHTML = '';
+            players = [];
+
             for (let i = 0; i < 2; i++) {
                 addPlayer();
             }
@@ -565,8 +639,6 @@
             gameMode = mode;
             document.getElementById('playerSetupSection').style.display = 'block';
             document.getElementById('startBtn').style.display = 'block';
-
-            // Hide mode selection
             document.querySelector('.game-mode-selection').style.display = 'none';
         }
 
@@ -585,7 +657,15 @@
             `;
             container.appendChild(div);
 
-            players.push({ name: '', totalScore: 0, roundScores: [], eliminated: false });
+            players.push({
+                name: '',
+                totalScore: 0,
+                roundScores: [],
+                efficiencyScores: [],
+                turnsUsed: [],
+                secondsUsed: [],
+                eliminated: false
+            });
             updateStartButton();
         }
 
@@ -619,19 +699,28 @@
                     name: input.value.trim(),
                     totalScore: 0,
                     roundScores: [],
+                    efficiencyScores: [],
+                    turnsUsed: [],
+                    secondsUsed: [],
                     eliminated: false
                 });
             });
 
-            // Show game controls
-            document.getElementById('gameControlsHeader').style.display = 'flex';
+            currentRound = 1;
+            currentPlayerIndex = 0;
+            isTieBreakerRound = false;
 
+            document.getElementById('gameControlsHeader').style.display = 'flex';
             showScreen('game-screen');
             startPlayerTurn();
         }
 
         function startPlayerTurn() {
-            // Skip eliminated players
+            console.log("Starting player turn for:", players[currentPlayerIndex]?.name);
+            turnEnded = false;
+            canFlipCards = true;
+            isCheckingMatch = false;
+
             while (players[currentPlayerIndex] && players[currentPlayerIndex].eliminated) {
                 currentPlayerIndex++;
                 if (currentPlayerIndex >= players.length) {
@@ -640,15 +729,18 @@
                 }
             }
 
-            // Safety check
             if (!players[currentPlayerIndex]) {
                 endRound();
                 return;
             }
 
             const cardsCount = 10 + (currentRound - 1) * 2;
+            totalPairs = cardsCount / 2;
             matchedPairs = 0;
             currentTurnScore = 0;
+            turnsUsed = 0;
+            secondsUsed = 0;
+            flippedCards = [];
 
             document.getElementById('roundInfo').textContent = `Round ${currentRound} - ${cardsCount} Cards`;
             document.getElementById('currentPlayer').textContent = players[currentPlayerIndex].name;
@@ -690,21 +782,46 @@
         function startTimer() {
             flippedCards = [];
             timer = 15;
+            secondsUsed = 0;
             document.getElementById('timer').textContent = timer;
 
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
+                if (turnEnded) {
+                    clearInterval(timerInterval);
+                    return;
+                }
+
                 timer--;
+                secondsUsed++;
                 document.getElementById('timer').textContent = timer;
+
                 if (timer <= 0) {
                     clearInterval(timerInterval);
-                    endPlayerTurn();
+                    // Force end turn when timer runs out
+                    if (!turnEnded) {
+                        console.log("Timer ended, forcing turn end");
+                        endPlayerTurn();
+                    }
                 }
             }, 1000);
         }
 
         function flipCard(card) {
-            if (isPaused || card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) {
+            if (!canFlipCards || turnEnded || isPaused || isCheckingMatch ||
+                card.classList.contains('flipped') || card.classList.contains('matched') ||
+                flippedCards.length >= 2) {
+                return;
+            }
+
+            // Check if player has any resources left
+            const hasResources =
+                (gameMode === 'turns' && turnsRemaining > 0) ||
+                (gameMode === 'timer' && timer > 0);
+
+            if (!hasResources) {
+                console.log("No resources left, ending turn");
+                endPlayerTurn();
                 return;
             }
 
@@ -712,138 +829,298 @@
             flippedCards.push(card);
 
             if (flippedCards.length === 2) {
-                // Decrease turn count in turns mode
+                canFlipCards = false; // Prevent more flips until match is resolved
+                isCheckingMatch = true;
+                turnsUsed++;
+
                 if (gameMode === 'turns') {
                     turnsRemaining--;
                     document.getElementById('turnsLeft').textContent = `${turnsRemaining} turns left`;
+
+                    // Check if this was the last turn
+                    if (turnsRemaining <= 0) {
+                        console.log("Last turn used, will end after match check");
+                    }
                 }
 
-                setTimeout(checkMatch, 500);
+                setTimeout(() => {
+                    checkMatch();
+                }, 500);
             }
         }
 
         function checkMatch() {
+            console.log("Checking match...");
             const [card1, card2] = flippedCards;
 
             if (card1.dataset.symbol === card2.dataset.symbol) {
+                console.log("Match found!");
                 card1.classList.add('matched');
                 card2.classList.add('matched');
                 currentTurnScore++;
                 matchedPairs++;
                 flippedCards = [];
+                isCheckingMatch = false;
 
-                // Check if all cards matched
-                if (matchedPairs === cardsArray.length / 2) {
-                    if (gameMode === 'timer') {
-                        clearInterval(timerInterval);
-                    }
-                    endPlayerTurn();
+                // Check if this was the LAST pair
+                if (matchedPairs === totalPairs) {
+                    console.log("All pairs matched, ending turn");
+                    setTimeout(() => {
+                        if (gameMode === 'timer') {
+                            clearInterval(timerInterval);
+                        }
+                        endPlayerTurn();
+                    }, 300);
+                } else {
+                    canFlipCards = true; // Allow more flips
                 }
             } else {
+                console.log("No match");
                 setTimeout(() => {
                     card1.classList.remove('flipped');
                     card2.classList.remove('flipped');
                     flippedCards = [];
+                    isCheckingMatch = false;
 
-                    // Check if turns exhausted in turns mode
-                    if (gameMode === 'turns' && turnsRemaining <= 0) {
-                        endPlayerTurn();
+                    // Check if we should end the turn due to no more resources
+                    const shouldEndTurn =
+                        (gameMode === 'turns' && turnsRemaining <= 0) ||
+                        (gameMode === 'timer' && timer <= 0);
+
+                    if (shouldEndTurn) {
+                        console.log("No resources left after mismatch, ending turn");
+                        setTimeout(() => {
+                            endPlayerTurn();
+                        }, 300);
+                    } else {
+                        canFlipCards = true; // Allow more flips
                     }
                 }, 500);
             }
         }
 
+        function calculateScore(matches, resourceUsed, maxResource) {
+            // Base score: 1 point per match
+            let baseScore = matches;
+
+            // Efficiency bonus: remaining resources
+            let efficiencyBonus = Math.max(0, maxResource - resourceUsed);
+
+            // Total score
+            return baseScore + efficiencyBonus;
+        }
+
         function endPlayerTurn() {
+            if (turnEnded) {
+                console.log("Turn already ended, skipping");
+                return;
+            }
+
+            console.log("Ending player turn for:", players[currentPlayerIndex]?.name);
+            turnEnded = true;
+            canFlipCards = false;
+            isCheckingMatch = false;
+
             if (gameMode === 'timer') {
                 clearInterval(timerInterval);
             }
 
-            // Save this turn's score
-            players[currentPlayerIndex].roundScores[currentRound - 1] = currentTurnScore;
-            players[currentPlayerIndex].totalScore += currentTurnScore;
+            // Use consistent scoring for both modes
+            let finalScore, efficiencyBonus, resourceUsed, maxResource;
 
-            // Show turn result
+            if (gameMode === 'timer') {
+                resourceUsed = secondsUsed;
+                maxResource = 15; // 15 seconds max
+                finalScore = calculateScore(currentTurnScore, resourceUsed, maxResource);
+                efficiencyBonus = finalScore - currentTurnScore;
+            } else {
+                resourceUsed = turnsUsed;
+                maxResource = maxTurns;
+                finalScore = calculateScore(currentTurnScore, resourceUsed, maxResource);
+                efficiencyBonus = finalScore - currentTurnScore;
+            }
+
+            players[currentPlayerIndex].roundScores[currentRound - 1] = currentTurnScore;
+            players[currentPlayerIndex].efficiencyScores[currentRound - 1] = finalScore;
+            players[currentPlayerIndex].turnsUsed[currentRound - 1] = turnsUsed;
+            players[currentPlayerIndex].secondsUsed[currentRound - 1] = secondsUsed;
+            players[currentPlayerIndex].totalScore += finalScore;
+
             document.getElementById('turnResultPlayer').textContent = `${players[currentPlayerIndex].name}'s Turn Complete!`;
-            document.getElementById('turnResultScore').textContent = `Matched ${currentTurnScore} pairs`;
-            showScreen('turn-result-screen');
+
+            if (gameMode === 'timer') {
+                document.getElementById('turnResultScore').textContent = `Matched ${currentTurnScore} pairs in ${secondsUsed} seconds`;
+            } else {
+                document.getElementById('turnResultScore').textContent = `Matched ${currentTurnScore} pairs in ${turnsUsed} turns`;
+            }
+
+            if (efficiencyBonus > 0) {
+                document.getElementById('turnResultEfficiency').textContent =
+                    `Efficiency Bonus: +${efficiencyBonus} points! Total: ${finalScore}`;
+            } else {
+                document.getElementById('turnResultEfficiency').textContent = `Total: ${finalScore} points`;
+            }
+
+            // Add a small delay to ensure everything is processed
+            setTimeout(() => {
+                showScreen('turn-result-screen');
+            }, 100);
         }
 
         function continueGame() {
+            console.log("Continuing to next player...");
             currentPlayerIndex++;
 
-            // Check if round is complete
             if (currentPlayerIndex >= players.length || players.slice(currentPlayerIndex).every(p => p.eliminated)) {
                 endRound();
             } else {
                 showScreen('game-screen');
-                startPlayerTurn();
+                // Small delay to ensure DOM is ready
+                setTimeout(() => {
+                    startPlayerTurn();
+                }, 100);
             }
         }
 
         function endRound() {
-            // Display round results
+            console.log("Ending round", currentRound);
             document.getElementById('roundNumber').textContent = currentRound;
 
-            // Round scores
+            if (isTieBreakerRound) {
+                document.getElementById('tieBreakerInfo').style.display = 'block';
+            } else {
+                document.getElementById('tieBreakerInfo').style.display = 'none';
+            }
+
+            // Round scores - show only THIS round's score
             const roundScoresTable = document.getElementById('roundScoresTable');
             roundScoresTable.innerHTML = '';
             players.forEach(player => {
                 const row = document.createElement('div');
                 row.className = `score-row ${player.eliminated ? 'eliminated' : ''}`;
+                const roundScore = player.roundScores[currentRound - 1] || 0;
+                const efficiencyScore = player.efficiencyScores[currentRound - 1] || 0;
+                const turns = player.turnsUsed[currentRound - 1] || 0;
+                const seconds = player.secondsUsed[currentRound - 1] || 0;
+
+                let scoreText = `${roundScore} pairs`;
+                if (gameMode === 'timer') {
+                    scoreText += ` (${seconds} seconds)`;
+                } else {
+                    scoreText += ` (${turns} turns)`;
+                }
+
+                if (efficiencyScore > roundScore) {
+                    scoreText += `<br><span class="score-breakdown">+${efficiencyScore - roundScore} efficiency = ${efficiencyScore} points</span>`;
+                } else {
+                    scoreText += `<br><span class="score-breakdown">${efficiencyScore} points</span>`;
+                }
+
                 row.innerHTML = `
                     <span>${player.name}${player.eliminated ? ' (Eliminated)' : ''}</span>
-                    <span>${player.roundScores[currentRound - 1] || 0} pairs</span>
+                    <span>${scoreText}</span>
                 `;
                 roundScoresTable.appendChild(row);
             });
 
-            // Total scores
+            // Total scores - show cumulative total with breakdown
             const totalScoresTable = document.getElementById('totalScoresTable');
             totalScoresTable.innerHTML = '';
             const sortedPlayers = [...players].sort((a, b) => b.totalScore - a.totalScore);
             sortedPlayers.forEach(player => {
                 const row = document.createElement('div');
                 row.className = `score-row ${player.eliminated ? 'eliminated' : ''}`;
+
+                // Calculate previous rounds total
+                let previousTotal = 0;
+                for (let i = 0; i < currentRound - 1; i++) {
+                    previousTotal += player.efficiencyScores[i] || 0;
+                }
+
+                const currentRoundScore = player.efficiencyScores[currentRound - 1] || 0;
+
                 row.innerHTML = `
                     <span>${player.name}${player.eliminated ? ' (Eliminated)' : ''}</span>
-                    <span>${player.totalScore} total</span>
+                    <span>
+                        ${player.totalScore} total
+                        <div class="round-score-breakdown">
+                            Previous: ${previousTotal} + This Round: ${currentRoundScore}
+                        </div>
+                    </span>
                 `;
                 totalScoresTable.appendChild(row);
             });
 
-            // Check for elimination
-            const activePlayers = players.filter(p => !p.eliminated);
-            if (activePlayers.length > 1 && currentRound < 5) {
-                // Find lowest scorer this round among active players
-                let lowestScore = Infinity;
-                let lowestPlayer = null;
+            // Elimination logic - eliminate ALL lowest scorers
+            if (!isTieBreakerRound) {
+                const activePlayers = players.filter(p => !p.eliminated);
+                if (activePlayers.length > 1) {
+                    // Find the lowest total score among active players
+                    const lowestTotalScore = Math.min(...activePlayers.map(p => p.totalScore));
 
-                activePlayers.forEach(player => {
-                    const roundScore = player.roundScores[currentRound - 1] || 0;
-                    if (roundScore < lowestScore) {
-                        lowestScore = roundScore;
-                        lowestPlayer = player;
+                    // Find ALL players with the lowest score
+                    const lowestPlayers = activePlayers.filter(p => p.totalScore === lowestTotalScore);
+
+                    // If ALL active players have the same score, do tie-breaker
+                    if (lowestPlayers.length === activePlayers.length) {
+                        isTieBreakerRound = true;
+                        document.getElementById('eliminationMessage').style.display = 'block';
+                        document.getElementById('eliminatedPlayer').textContent =
+                            `All players tied with ${lowestTotalScore} points! Tie-breaker round!`;
+                    } else {
+                        // Eliminate ALL lowest scorers
+                        lowestPlayers.forEach(player => {
+                            player.eliminated = true;
+                        });
+
+                        document.getElementById('eliminationMessage').style.display = 'block';
+                        if (lowestPlayers.length === 1) {
+                            document.getElementById('eliminatedPlayer').textContent =
+                                `${lowestPlayers[0].name} has the lowest total score (${lowestTotalScore}) and is eliminated!`;
+                        } else {
+                            const names = lowestPlayers.map(p => p.name).join(', ');
+                            document.getElementById('eliminatedPlayer').textContent =
+                                `${names} have the lowest total score (${lowestTotalScore}) and are eliminated!`;
+                        }
                     }
-                });
-
-                if (lowestPlayer) {
-                    lowestPlayer.eliminated = true;
-                    document.getElementById('eliminationMessage').style.display = 'block';
-                    document.getElementById('eliminatedPlayer').textContent =
-                        `${lowestPlayer.name} scored only ${lowestScore} pairs and is eliminated!`;
+                } else {
+                    document.getElementById('eliminationMessage').style.display = 'none';
                 }
             } else {
-                document.getElementById('eliminationMessage').style.display = 'none';
+                // Tie-breaker round elimination
+                const activePlayers = players.filter(p => !p.eliminated);
+                if (activePlayers.length > 1) {
+                    const lowestTotalScore = Math.min(...activePlayers.map(p => p.totalScore));
+                    const lowestPlayers = activePlayers.filter(p => p.totalScore === lowestTotalScore);
+
+                    lowestPlayers.forEach(player => {
+                        player.eliminated = true;
+                    });
+
+                    document.getElementById('eliminationMessage').style.display = 'block';
+                    if (lowestPlayers.length === 1) {
+                        document.getElementById('eliminatedPlayer').textContent =
+                            `${lowestPlayers[0].name} has the lowest score in tie-breaker and is eliminated!`;
+                    } else {
+                        const names = lowestPlayers.map(p => p.name).join(', ');
+                        document.getElementById('eliminatedPlayer').textContent =
+                            `${names} tied for lowest score in tie-breaker and are eliminated!`;
+                    }
+
+                    isTieBreakerRound = false;
+                } else {
+                    document.getElementById('eliminationMessage').style.display = 'none';
+                }
             }
 
             showScreen('round-result-screen');
         }
 
         function nextRound() {
+            console.log("Starting next round...");
             const activePlayers = players.filter(p => !p.eliminated);
 
-            // Check if game is over
-            if (currentRound >= 5 || activePlayers.length <= 1) {
+            if (activePlayers.length <= 1) {
                 showFinalResults();
                 return;
             }
@@ -851,23 +1128,31 @@
             currentRound++;
             currentPlayerIndex = 0;
             showScreen('game-screen');
-            startPlayerTurn();
+            // Small delay to ensure DOM is ready
+            setTimeout(() => {
+                startPlayerTurn();
+            }, 100);
         }
 
         function showFinalResults() {
-            const sortedPlayers = [...players].sort((a, b) => b.totalScore - a.totalScore);
-            const winner = sortedPlayers[0];
+            console.log("Showing final results");
+            const activePlayers = players.filter(p => !p.eliminated);
+            const winner = activePlayers[0];
 
             document.getElementById('winnerName').textContent = `🏆 ${winner.name} Wins!`;
             document.getElementById('winnerScore').textContent = `Final Score: ${winner.totalScore} points`;
 
             const standings = document.getElementById('finalStandings');
             standings.innerHTML = '';
+
+            const sortedPlayers = [...players].sort((a, b) => b.totalScore - a.totalScore);
+
             sortedPlayers.forEach((player, i) => {
                 const row = document.createElement('div');
-                row.className = `score-row ${i === 0 ? 'winner' : ''}`;
+                const isWinner = player.name === winner.name;
+                row.className = `score-row ${isWinner ? 'winner' : ''} ${player.eliminated ? 'eliminated' : ''}`;
                 row.innerHTML = `
-                    <span>${i + 1}. ${player.name}</span>
+                    <span>${i + 1}. ${player.name}${player.eliminated ? ' (Eliminated)' : ''}</span>
                     <span>${player.totalScore} points</span>
                 `;
                 standings.appendChild(row);
@@ -912,14 +1197,22 @@
                 overlay.classList.add('active');
             } else {
                 overlay.classList.remove('active');
-                // Resume timer only in timer mode
                 if (gameMode === 'timer') {
                     timerInterval = setInterval(() => {
+                        if (turnEnded) {
+                            clearInterval(timerInterval);
+                            return;
+                        }
+
                         timer--;
+                        secondsUsed++;
                         document.getElementById('timer').textContent = timer;
+
                         if (timer <= 0) {
                             clearInterval(timerInterval);
-                            endPlayerTurn();
+                            if (!turnEnded) {
+                                endPlayerTurn();
+                            }
                         }
                     }, 1000);
                 }
@@ -945,26 +1238,44 @@
                 isPaused = false;
                 document.getElementById('pauseOverlay').classList.remove('active');
 
-                // Hide game controls
                 document.getElementById('gameControlsHeader').style.display = 'none';
 
-                // Reset game state
                 currentRound = 1;
                 currentPlayerIndex = 0;
                 players = [];
                 gameMode = null;
+                isTieBreakerRound = false;
 
-                // Show mode selection again
                 document.querySelector('.game-mode-selection').style.display = 'block';
                 document.getElementById('playerSetupSection').style.display = 'none';
                 document.getElementById('startBtn').style.display = 'none';
 
-                // Reset player inputs
                 document.getElementById('playerInputs').innerHTML = '';
                 initPlayerInputs();
 
                 showScreen('setup-screen');
             }
+        }
+
+        function playAgain() {
+            // COMPLETELY reset the game state
+            currentRound = 1;
+            currentPlayerIndex = 0;
+            isTieBreakerRound = false;
+            players = [];
+            gameMode = null;
+
+            document.getElementById('gameControlsHeader').style.display = 'none';
+
+            // Clear all player inputs and reset to fresh state
+            document.getElementById('playerInputs').innerHTML = '';
+            initPlayerInputs();
+
+            document.querySelector('.game-mode-selection').style.display = 'block';
+            document.getElementById('playerSetupSection').style.display = 'none';
+            document.getElementById('startBtn').style.display = 'none';
+
+            showScreen('setup-screen');
         }
 
         // Initialize
