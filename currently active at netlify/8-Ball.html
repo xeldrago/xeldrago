@@ -1,121 +1,815 @@
 <!DOCTYPE html>
-<html>
-    <div class="topleft"><a href="index.html"><button class="btn"><i class="fa fa-home"></i> Home</button></a></div>
-<head>
-    <title>Magic 8 Ball</title>
-    <style>
-        .topleft {
-  position: absolute;
-  top: 8px;
-  left: 16px;
-  font-size: 18px;
-}
-         .btn {
-        background-color: DodgerBlue; /* Blue background */
-        border: none; /* Remove borders */
-        color: white; /* White text */
-        padding: 25px 35px; /* Some padding */
-        font-size: 25px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-        border-radius: 30px;
-      }
+<html lang="en">
 
-      /* Darker background on mouse-over */
-      .btn:hover {
-        background-color: RoyalBlue;
-        border-radius: 30px;
-      }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystic Fortune Teller</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 20px;
+            overflow-x: hidden;
         }
-        
+
+        .topleft {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 126, 95, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a0c0;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .fortune-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .magic-ball-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 20px 0;
+        }
+
         .magic-ball {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background-color: #000;
+            background: radial-gradient(circle at 30% 30%, #0c1445, #000);
+            box-shadow:
+                inset -15px -15px 30px rgba(0, 0, 0, 0.8),
+                inset 10px 10px 20px rgba(80, 80, 255, 0.3),
+                0 0 30px rgba(65, 105, 225, 0.6);
             overflow: hidden;
+            transition: transform 0.5s ease;
         }
-        
+
         .magic-ball::before {
             content: "";
             position: absolute;
-            top: 30%;
-            left: 30%;
-            width: 40%;
-            height: 40%;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
             border-radius: 50%;
-            background-color: #fff;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(200, 200, 255, 0.3));
+            opacity: 0.7;
         }
-        
+
         .magic-ball::after {
             content: "";
             position: absolute;
-            top: 40%;
-            left: 40%;
-            width: 20%;
-            height: 20%;
+            top: 35%;
+            left: 35%;
+            width: 30%;
+            height: 30%;
             border-radius: 50%;
-            background-color: #000;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-        
+
+        .triangle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-top: 70px solid rgba(255, 255, 255, 0.9);
+            z-index: 2;
+            opacity: 0.9;
+        }
+
         .button {
-  position: relative;
-  top:80px;
-  left:10px;
-  padding: 15px 50px;
-  color: #fff;
-  background-color: #f4d35e;
-  border: none;
-  font-size: 20px;
-  border-radius: 20px; 22:05 06-07-2023
-  box-shadow: 1px 3px #50514F;
-  outline: none;
-  transition: .3s; 
-}
-
-button:hover, button:active {
-  outline: none;
-  background: #50514F;
-  cursor: pointer;
-  transform: translateY(15px); 
-}
-
-        
-        .response {
+            padding: 15px 40px;
+            color: #fff;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            outline: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
             margin-top: 20px;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #feb47b, #ff7e5f);
+        }
+
+        .button:active {
+            transform: translateY(2px);
+        }
+
+        .response-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .response {
             font-size: 24px;
-            text-align: center;
+            font-weight: bold;
+            color: #feb47b;
+            text-shadow: 0 0 10px rgba(254, 180, 123, 0.5);
+            min-height: 40px;
+            transition: all 0.5s ease;
+        }
+
+        .fortune-cookie {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fortune-cookie h3 {
+            margin-bottom: 15px;
+            color: #feb47b;
+        }
+
+        .fortune-text {
+            font-style: italic;
+            font-size: 18px;
+            color: #e0e0ff;
+            line-height: 1.5;
+        }
+
+        .crystal-ball {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(123, 200, 255, 0.8), rgba(0, 50, 150, 0.5));
+            box-shadow:
+                inset -10px -10px 20px rgba(0, 0, 0, 0.5),
+                inset 5px 5px 15px rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(65, 105, 225, 0.7);
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crystal-ball::before {
+            content: "";
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(200, 200, 255, 0.3));
+            opacity: 0.6;
+        }
+
+        .shake {
+            animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0) rotate(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-10px) rotate(-5deg);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(10px) rotate(5deg);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(65, 105, 225, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(65, 105, 225, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(65, 105, 225, 0);
+            }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .instructions {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #a0a0c0;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            .magic-ball-container {
+                width: 220px;
+                height: 220px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="magic-ball"></div>
-    <button class="button" onclick="shakeBall()">Shake the Ball</button>
-    <div class="response" id="response"></div>
+    <div class="topleft">
+        <a href="index.html"><button class="btn"><i class="fa fa-home"></i> Home</button></a>
+    </div>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Mystic Fortune Teller</h1>
+            <p class="subtitle">Unlock the secrets of your destiny with the ancient Magic 8 Ball</p>
+        </div>
+
+        <div class="content">
+            <div class="fortune-section">
+                <div class="magic-ball-container">
+                    <div class="magic-ball" id="magicBall">
+                        <div class="triangle"></div>
+                    </div>
+                </div>
+
+                <button class="button" onclick="shakeBall()">
+                    <i class="fas fa-crystal-ball"></i> Shake the Ball
+                </button>
+
+                <div class="response-container">
+                    <div class="response" id="response">Your fortune awaits...</div>
+                </div>
+            </div>
+
+            <div class="fortune-section">
+                <div class="crystal-ball pulse"></div>
+                <div class="fortune-cookie">
+                    <h3>Fortune Cookie Wisdom</h3>
+                    <p class="fortune-text" id="fortuneText">The journey of a thousand miles begins with a single step.
+                    </p>
+                    <button class="button" onclick="newFortune()" style="margin-top: 15px; padding: 10px 20px;">
+                        <i class="fas fa-cookie-bite"></i> New Fortune
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <p>Focus your mind, ask a yes/no question, and shake the Magic 8 Ball to reveal your destiny.</p>
+            <p>For daily wisdom, click "New Fortune" to receive guidance from the ancient fortune cookies.</p>
+        </div>
+    </div>
 
     <script>
-        var responses = ["Yes", "No", "Maybe", "Definitely not"];
+        // Create stars in the background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 150;
 
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+
+                // Random size
+                const size = Math.random() * 3;
+
+                // Random animation delay
+                const delay = Math.random() * 5;
+
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.animationDelay = `${delay}s`;
+
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Magic 8 Ball responses
+        const responses = [
+            "It is certain", "It is decidedly so", "Without a doubt", "Yes definitely",
+            "You may rely on it", "As I see it, yes", "Most likely", "Outlook good",
+            "Yes", "Signs point to yes", "Reply hazy, try again", "Ask again later",
+            "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
+            "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good",
+            "Very doubtful"
+        ];
+
+        // Fortune cookie messages
+        const fortunes = [
+            "A beautiful, smart, and loving person will be coming into your life.",
+            "A dubious friend may be an enemy in camouflage.",
+            "A faithful friend is a strong defense.",
+            "A feather in the hand is better than a bird in the air.",
+            "A fresh start will put you on your way.",
+            "A friend asks only for your time, not your money.",
+            "A friend is a present you give yourself.",
+            "A gambler not only will lose what he has, but also will lose what he doesn't have.",
+            "A golden egg of opportunity falls into your lap this month.",
+            "A good friendship is often more important than a passionate romance.",
+            "A good time to finish up old tasks.",
+            "A hunch is creativity trying to tell you something.",
+            "A lifetime of happiness lies ahead of you.",
+            "A light heart carries you through all the hard times.",
+            "A new perspective will come with the new year.",
+            "A person is never too old to learn.",
+            "A person of words and not deeds is like a garden full of weeds.",
+            "A pleasant surprise is waiting for you.",
+            "A short pencil is usually better than a long memory any day.",
+            "A small donation is call for. It's the right thing to do.",
+            "A smile is your personal welcome mat.",
+            "A smooth long journey! Great expectations.",
+            "A soft voice may be awfully persuasive.",
+            "A truly rich life contains love and art in abundance.",
+            "Accept something that you cannot change, and you will feel better.",
+            "Adventure can be real happiness.",
+            "Advice is like kissing. It costs nothing and is a pleasant thing to do.",
+            "Advice, when most needed, is least heeded.",
+            "All the effort you are making will ultimately pay off.",
+            "All the troubles you have will pass away very quickly.",
+            "All will go well with your new project.",
+            "All your hard work will soon pay off.",
+            "Allow compassion to guide your decisions.",
+            "An agreeable romance might begin to take on the appearance.",
+            "An important person will offer you support.",
+            "An inch of time is an inch of gold.",
+            "Any decision you have to make tomorrow is a good decision.",
+            "At the touch of love, everyone becomes a poet.",
+            "Be careful or you could fall for some tricks today.",
+            "Beauty in its various forms appeals to you.",
+            "Because you demand more from yourself, others respect you deeply.",
+            "Believe in yourself and others will too.",
+            "Believe it can be done.",
+            "Better ask twice than lose yourself once.",
+            "Carve your name on your heart and not on marble.",
+            "Chance favors those in motion.",
+            "Courtesy is contagious.",
+            "Courtesy begins in the home.",
+            "Dedicate yourself with a calm mind to the task at hand.",
+            "Depart not from the path which fate has you assigned.",
+            "Determination is what you need now.",
+            "Disbelief destroys the magic.",
+            "Distance yourself from the vain.",
+            "Do not be intimidated by the eloquence of others.",
+            "Do not let ambitions overshadow small success.",
+            "Do not make extra work for yourself.",
+            "Do not underestimate yourself. Human beings have unlimited potentials.",
+            "Do you know that the busiest person has the largest amount of time?",
+            "Don't be discouraged, because every wrong attempt discarded is another step forward.",
+            "Don't confuse recklessness with confidence.",
+            "Don't just spend time. Invest it.",
+            "Don't just think, act!",
+            "Don't let friends impose on you, work calmly and silently.",
+            "Don't let the past and useless detail choke your existence.",
+            "Don't let your limitations overshadow your talents.",
+            "Don't worry; prosperity will knock on your door soon.",
+            "Each day, compel yourself to do something you would rather not do.",
+            "Education is the ability to meet life's situations.",
+            "Embrace this love relationship you have!",
+            "Emulate what you admire in your parents.",
+            "Emulate what you respect in your friends.",
+            "Every flower blooms in its own sweet time.",
+            "Every wise man started out by asking many questions.",
+            "Everyday in your life is a special occasion.",
+            "Failure is the chance to do better next time.",
+            "Feeding a cow with roses does not get extra appreciation.",
+            "For hate is never conquered by hate. Hate is conquered by love.",
+            "Fortune favors the brave.",
+            "From now on your kindness will lead you to success.",
+            "Get your mind set… confidence will lead you on.",
+            "Go take a rest; you deserve it.",
+            "Good news will be brought to you by mail.",
+            "Good news will come to you by mail.",
+            "Good to begin well, better to end well.",
+            "Happiness begins with facing life with a smile and a wink.",
+            "Happiness will bring you good luck.",
+            "Happy life is just in front of you.",
+            "Hard words break no bones, fine words butter no parsnips.",
+            "Have a beautiful day.",
+            "He who expects no gratitude shall never be disappointed.",
+            "He who knows he has enough is rich.",
+            "Help! I'm being held prisoner in a fortune cookie factory!",
+            "How you look depends on where you go.",
+            "I learn by going where I have to go.",
+            "If a true sense of value is to be yours it must come through service.",
+            "If certainty were truth, we would never be wrong.",
+            "If you continually give, you will continually have.",
+            "If you look in the right places, you can find some good offerings.",
+            "If you think you can do a thing or think you can't do a thing, you're right.",
+            "If you wish to see the best in others, show the best of yourself.",
+            "If your desires are not extravagant, they will be granted.",
+            "In order to take, one must first give.",
+            "In the end all things will be known.",
+            "It is better to be an optimist and proven a fool than to be a pessimist and be proven right.",
+            "It is honorable to stand up for what is right, however unpopular it seems.",
+            "It is worth reviewing some old lessons.",
+            "It takes courage to admit fault.",
+            "Keep your face to the sunshine and you will never see shadows.",
+            "Let the world be filled with tranquility and goodwill.",
+            "Listen to everyone. Ideas come from everywhere.",
+            "Love lights up the world.",
+            "Love truth, but pardon error.",
+            "Man is born to live and not prepared to live.",
+            "Man's mind, once stretched by a new idea, never regains its original dimensions.",
+            "Many will travel to hear you speak.",
+            "Meditation with an old enemy is advised.",
+            "Miles are covered one step at a time.",
+            "Nature, time and patience are the three great physicians.",
+            "Never fear! The end of something marks the start of something new.",
+            "New ideas could be profitable.",
+            "New people will bring you new realizations, especially about big issues.",
+            "No one can walk backwards into the future.",
+            "Nothing is more difficult, and therefore more precious, than to be able to decide.",
+            "Now is the time to try something new.",
+            "Now is the time to try something new.",
+            "Others can help you now.",
+            "Pennies from heaven find their way to your doorstep this year!",
+            "People are attracted by your Delicate features.",
+            "People find it difficult to resist your persuasive manner.",
+            "Perhaps you've been focusing too much on saving.",
+            "Physical activity will dramatically improve your outlook today.",
+            "Pick battles big enough to matter, small enough to win.",
+            "Practice makes perfect.",
+            "Protective measures will prevent costly disasters.",
+            "Put your mind into planning today. Look into the future.",
+            "Remember the birthday but never the age.",
+            "Remember to share good fortune as well as bad with your friends.",
+            "Rest has a peaceful effect on your physical and emotional health.",
+            "Resting well is as important as working hard.",
+            "Romance moves you in a new direction.",
+            "Savor your freedom – it is precious.",
+            "Say hello to others. You will have a happier day.",
+            "Self-knowledge is a life long process.",
+            "Share your joys and sorrows with your family.",
+            "Sift through your past to get a better idea of the present.",
+            "Sloth makes all things difficult; industry all easy.",
+            "Small confidences mark the onset of a friendship.",
+            "Society prepares the crime; the criminal commits it.",
+            "Someone you care about seeks reconciliation.",
+            "Soon life will become more interesting.",
+            "Stand tall. Don't look down upon yourself.",
+            "Staying close to home is going to be best for your morale today",
+            "Stop searching forever, happiness is just next to you.",
+            "Success is a journey, not a destination.",
+            "Success is going from failure to failure without loss of enthusiasm.",
+            "Take care and sensitivity you show towards others will return to you.",
+            "Take the high road.",
+            "The austerity you see around you covers the richness of life like a veil.",
+            "The best prediction of future is the past.",
+            "The change you started already have far-reaching effects. Be ready.",
+            "The first man gets the oyster, the second man gets the shell.",
+            "The greatest achievement in life is to stand up again after falling.",
+            "The harder you work, the luckier you get.",
+            "The night life is for you.",
+            "The one that recognizes the illusion does not act as if it is real.",
+            "The only people who never fail are those who never try.",
+            "The person who will not stand for something will fall for anything.",
+            "The philosophy of one century is the common sense of the next.",
+            "The saints are the sinners who keep on trying.",
+            "The secret to good luck is to work hard.",
+            "The small courtesies sweeten life, the greater ennoble it.",
+            "The smart thing to do is to start trusting your intuitions.",
+            "The strong person understands how to withstand substantial loss.",
+            "The sure way to predict the future is to invent it.",
+            "The truly generous share, even with the undeserving.",
+            "The value lies not within any particular thing, but in the desire placed on that thing.",
+            "The weather is wonderful.",
+            "There is no mistake so great as that of being always right.",
+            "There is no wisdom greater than kindness.",
+            "There is not greater pleasure than seeing your lived ones prosper.",
+            "There's no such thing as an ordinary cat.",
+            "Things don't just happen; they happen just.",
+            "Those who care will make the effort.",
+            "Time and patience are called for many surprises await you!.",
+            "Time is precious, but truth is more precious than time.",
+            "To know oneself, one should assert oneself.",
+            "To the world you may be one person, but to one person you may be the world.",
+            "Today is the conserve yourself, as things just won't budge.",
+            "Today, your mouth might be moving but no one is listening.",
+            "Tonight you will be blinded by passion.",
+            "Use your eloquence where it will do the most good.",
+            "Welcome each day with open arms.",
+            "Welcome the change coming into your life.",
+            "Well done is better than well said.",
+            "What's hidden in an empty box?",
+            "What's that in your eye? Oh… it's a sparkle.",
+            "When your heart is pure, your mind is clear.",
+            "Wish you happiness.",
+            "You always bring others happiness.",
+            "You are a person of another time.",
+            "You are a talented storyteller.",
+            "You are admired by everyone for your talent and ability.",
+            "You are almost there.",
+            "You are busy, but you are happy.",
+            "You are generous to an extreme and always think of the other fellow.",
+            "You are going to have some new clothes.",
+            "You are in good hands this evening.",
+            "You are interested in higher education, whether material or spiritual.",
+            "You are modest and courteous.",
+            "You are never selfish with your advice or your help.",
+            "You are next in line for promotion in your firm.",
+            "You are offered the dream of a lifetime. Say yes!",
+            "You are open-minded and quick to make new friends.",
+            "You are solid and dependable.",
+            "You are soon going to change your present line of work.",
+            "You are talented in many ways.",
+            "You are the master of every situation.",
+            "You are very expressive and positive in words, act and feeling.",
+            "You are working hard.",
+            "You begin to appreciate how important it is to share your personal beliefs.",
+            "You can keep a secret.",
+            "You can see a lot just by looking.",
+            "You can't steal second base and keep your foot on first.",
+            "You desire recognition and you will find it.",
+            "You have a deep appreciation of the arts and music.",
+            "You have a deep interest in all that is artistic.",
+            "You have a friendly heart and are well admired.",
+            "You have a shrewd knack for spotting insincerity.",
+            "You have a yearning for perfection.",
+            "You have an active mind and a keen imagination.",
+            "You have an ambitious nature and may make a name for yourself.",
+            "You have an unusual equipment for success, use it properly.",
+            "You have exceeded what was expected.",
+            "You have the power to write your own fortune.",
+            "You have yearning for perfection.",
+            "You know where you are going and how to get there.",
+            "You look pretty.",
+            "You love challenge.",
+            "You love chinese food.",
+            "You make people realize that there exist other beauties in the world.",
+            "You never hesitate to tackle the most difficult problems.",
+            "You never know who you touch.",
+            "You only treasure what you lost.",
+            "You seek to shield those you love and like the role of provider.",
+            "You should be able to make money and hold on to it.",
+            "You should be able to undertake and complete anything.",
+            "You should pay for this check. Be generous.",
+            "You understand how to have fun with others and to enjoy your solitude.",
+            "You will always be surrounded by true friends.",
+            "You will always get what you want through your charm and personality.",
+            "You will always have good luck in your personal affairs.",
+            "You will be a great success both in the business world and society.",
+            "You will be blessed with longevity.",
+            "You will be pleasantly surprised tonight.",
+            "You will be successful in your work.",
+            "You will be traveling and coming into a fortune.",
+            "You will be unusually successful in business.",
+            "You will become a great philanthropist in your later years.",
+            "You will become more and more wealthy.",
+            "You will enjoy good health.",
+            "You will enjoy good health; you will be surrounded by luxury.",
+            "You will find great contentment in the daily, routine activities.",
+            "You will have a fine capacity for the enjoyment of life.",
+            "You will have gold pieces by the bushel.",
+            "You will inherit a large sum of money.",
+            "You will make change for the better.",
+            "You will soon be surrounded by good friends and laughter.",
+            "You will take a chance in something in near future.",
+            "You will travel far and wide, both pleasure and business.",
+            "You will travel far and wide,both pleasure and business.",
+            "Your abilities are unparalleled.",
+            "Your ability is appreciated.",
+            "Your ability to juggle many tasks will take you far.",
+            "Your biggest virtue is your modesty.",
+            "Your character can be described as natural and unrestrained.",
+            "Your difficulties will strengthen you.",
+            "Your dreams are never silly; depend on them to guide you.",
+            "Your dreams are worth your best efforts to achieve them.",
+            "Your energy returns and you get things done.",
+            "Your family is young, gifted and attractive.",
+            "Your first love has never forgotten you.",
+            "Your happiness is before you, not behind you! Cherish it.",
+            "Your hard work will payoff today.",
+            "Your heart will always make itself known through your words.",
+            "Your home is the center of great love.",
+            "Your ideals are well within your reach.",
+            "Your infinite capacity for patience will be rewarded sooner or later.",
+            "Your leadership qualities will be tested and proven.",
+            "Your life will be happy and peaceful.",
+            "Your life will get more and more exciting.",
+            "Your love life will be happy and harmonious.",
+            "Your love of music will be an important part of your life.",
+            "Your loyalty is a virtue, but not when it's wedded with blind stubbornness.",
+            "Your mentality is alert, practical, and analytical.",
+            "Your mind is creative, original and alert.",
+            "Your mind is your greatest asset.",
+            "Your moods signal a period of change.",
+            "Your quick wits will get you out of a tough situation.",
+            "Your success will astonish everyone.",
+            "Your talents will be recognized and suitably rewarded.",
+            "Your work interests can capture the highest status or prestige."
+        ];
+
+        // Shake the Magic 8 Ball
         function shakeBall() {
-            var ball = document.querySelector(".magic-ball");
+            const ball = document.getElementById("magicBall");
+            const responseDiv = document.getElementById("response");
+
+            // Add shake animation
             ball.classList.add("shake");
 
-            setTimeout(function() {
+            // Clear previous response
+            responseDiv.innerText = "";
+            responseDiv.style.opacity = "0";
+
+            // After animation completes, show response
+            setTimeout(function () {
                 ball.classList.remove("shake");
-                displayResponse();
-            }, 1000);
+
+                // Get random response
+                const randomIndex = Math.floor(Math.random() * responses.length);
+                responseDiv.innerText = responses[randomIndex];
+
+                // Fade in response
+                responseDiv.style.opacity = "1";
+
+                // Add some visual flair
+                responseDiv.style.transform = "scale(1.1)";
+                setTimeout(() => {
+                    responseDiv.style.transform = "scale(1)";
+                }, 300);
+
+            }, 800);
         }
 
-        function displayResponse() {
-            var responseDiv = document.getElementById("response");
-            responseDiv.innerText = responses[Math.floor(Math.random() * responses.length)];
+        // Get new fortune cookie message
+        function newFortune() {
+            const fortuneText = document.getElementById("fortuneText");
+
+            // Fade out current fortune
+            fortuneText.style.opacity = "0";
+
+            setTimeout(() => {
+                // Get random fortune
+                const randomIndex = Math.floor(Math.random() * fortunes.length);
+                fortuneText.innerText = fortunes[randomIndex];
+
+                // Fade in new fortune
+                fortuneText.style.opacity = "1";
+
+                // Add some visual flair
+                fortuneText.style.transform = "translateY(-10px)";
+                setTimeout(() => {
+                    fortuneText.style.transform = "translateY(0)";
+                }, 300);
+
+            }, 500);
         }
+
+        // Initialize the page
+        window.onload = function () {
+            createStars();
+            // Start with a random fortune
+            newFortune();
+        };
     </script>
 </body>
+
 </html>
