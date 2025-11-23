@@ -1,284 +1,671 @@
-<html>
-  <div class="topleft"><a href="index.html"><button class="btn"><i class="fa fa-home"></i> Home</button></a></div>
-  
-<div class="game">
-    <div class="container">
-      <div id='dice1' class="dice dice-one">
-        <div id="dice-one-side-one" class='side one'>
-          <div class="dot one-1"></div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Theme Dice & Coin Game</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background particles */
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      animation: float 15s infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      width: 100%;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #ff7e5f, #feb47b, #4da0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 5px rgba(255, 126, 95, 0.5));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 20px rgba(255, 126, 95, 0.8));
+      }
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    .game-area {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .dice-section,
+    .coin-section {
+      flex: 1;
+      min-width: 300px;
+      background: rgba(25, 30, 36, 0.9);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dice-section:hover,
+    .coin-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+      border-color: rgba(255, 126, 95, 0.3);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #feb47b;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .dice-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 20px 0;
+      perspective: 1000px;
+    }
+
+    .dice {
+      width: 100px;
+      height: 100px;
+      background: white;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.6s ease;
+    }
+
+    .dice.rolling {
+      animation: roll 0.6s ease-out;
+    }
+
+    @keyframes roll {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+
+      25% {
+        transform: rotate(90deg) scale(1.1);
+      }
+
+      50% {
+        transform: rotate(180deg) scale(1);
+      }
+
+      75% {
+        transform: rotate(270deg) scale(1.1);
+      }
+
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    .dice-dots {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      padding: 12px;
+      width: 100%;
+      height: 100%;
+      gap: 0;
+    }
+
+    .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #f25f5c;
+      box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Position dots using grid placement */
+    .dot:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      justify-self: start;
+    }
+
+    .dot:nth-child(2) {
+      grid-column: 3;
+      grid-row: 3;
+      align-self: end;
+      justify-self: end;
+    }
+
+    .dot:nth-child(3) {
+      grid-column: 3;
+      grid-row: 1;
+      align-self: start;
+      justify-self: end;
+    }
+
+    .dot:nth-child(4) {
+      grid-column: 1;
+      grid-row: 3;
+      align-self: end;
+      justify-self: start;
+    }
+
+    .dot:nth-child(5) {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: center;
+      justify-self: start;
+    }
+
+    .dot:nth-child(6) {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: center;
+      justify-self: center;
+    }
+
+    .dot:nth-child(7) {
+      grid-column: 3;
+      grid-row: 2;
+      align-self: center;
+      justify-self: end;
+    }
+
+    /* Coin styling */
+    .coin-container {
+      perspective: 1000px;
+      margin: 30px 0;
+    }
+
+    .coin {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+      cursor: pointer;
+    }
+
+    .coin.flipping {
+      animation: flip-coin 1.5s ease-in-out;
+    }
+
+    @keyframes flip-coin {
+      0% {
+        transform: rotateY(0);
+      }
+
+      100% {
+        transform: rotateY(1800deg);
+      }
+    }
+
+    .coin-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s;
+    }
+
+    .coin:hover .coin-face {
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    }
+
+    .heads {
+      background: radial-gradient(circle at 30% 30%, #ffd700, #ff8c00);
+      color: #1e2328;
+      border: 5px solid #ff8c00;
+    }
+
+    .tails {
+      background: radial-gradient(circle at 30% 30%, #c0c0c0, #696969);
+      color: #1e2328;
+      border: 5px solid #696969;
+      transform: rotateY(180deg);
+    }
+
+    /* Buttons */
+    .buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 15px 35px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-roll {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      color: #1e2328;
+    }
+
+    .btn-flip {
+      background: linear-gradient(135deg, #4da0ff, #6dd5ed);
+      color: #1e2328;
+    }
+
+    .btn-home {
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn i {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Result display */
+    .result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      text-align: center;
+      min-height: 40px;
+      color: #4da0ff;
+      font-weight: bold;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
+      background: rgba(77, 160, 255, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(77, 160, 255, 0.3);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .game-area {
+        flex-direction: column;
+      }
+
+      .dice-section,
+      .coin-section {
+        width: 100%;
+      }
+
+      .header h1 {
+        font-size: 2.2rem;
+      }
+
+      .dice-container {
+        gap: 20px;
+      }
+
+      .dice {
+        width: 80px;
+        height: 80px;
+      }
+
+      .dot {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎲 Dice & Coin Game 🪙</h1>
+      <p>Roll the dice and flip the coin for your gaming needs</p>
+    </div>
+
+    <div class="game-area">
+      <div class="dice-section">
+        <h2 class="section-title">🎲 Dice Roller</h2>
+        <div class="dice-container">
+          <div id="dice1" class="dice">
+            <div class="dice-dots" id="dice1-dots"></div>
+          </div>
+
+          <div id="dice2" class="dice">
+            <div class="dice-dots" id="dice2-dots"></div>
+          </div>
         </div>
-        <div id="dice-one-side-two" class='side two'>
-          <div class="dot two-1"></div>
-          <div class="dot two-2"></div>
-        </div>
-        <div id="dice-one-side-three" class='side three'>
-          <div class="dot three-1"></div>
-          <div class="dot three-2"></div>
-          <div class="dot three-3"></div>
-        </div>
-        <div id="dice-one-side-four" class='side four'>
-          <div class="dot four-1"></div>
-          <div class="dot four-2"></div>
-          <div class="dot four-3"></div>
-          <div class="dot four-4"></div>
-        </div>
-        <div id="dice-one-side-five" class='side five'>
-          <div class="dot five-1"></div>
-          <div class="dot five-2"></div>
-          <div class="dot five-3"></div>
-          <div class="dot five-4"></div>
-          <div class="dot five-5"></div>
-        </div>
-        <div id="dice-one-side-six" class='side six'>
-          <div class="dot six-1"></div>
-          <div class="dot six-2"></div>
-          <div class="dot six-3"></div>
-          <div class="dot six-4"></div>
-          <div class="dot six-5"></div>
-          <div class="dot six-6"></div>
+        <div class="result" id="dice-result">Click to roll the dice!</div>
+        <div class="buttons">
+          <button id="roll" class="btn btn-roll">
+            <i class="fa fa-refresh"></i>
+            <span>Roll Dice</span>
+          </button>
         </div>
       </div>
-   </div>
-    <div class="container">
-      <div id='dice2' class="dice dice-two">
-        <div id="dice-two-side-one" class='side one'>
-          <div class="dot one-1"></div>
+
+      <div class="coin-section">
+        <h2 class="section-title">🪙 Coin Flip</h2>
+        <div class="coin-container">
+          <div id="coin" class="coin">
+            <div class="coin-face heads">HEADS</div>
+            <div class="coin-face tails">TAILS</div>
+          </div>
         </div>
-        <div id="dice-two-side-two" class='side two'>
-          <div class="dot two-1"></div>
-          <div class="dot two-2"></div>
+        <div class="result" id="coin-result">Click to flip the coin!</div>
+        <div class="buttons">
+          <button id="flip-coin" class="btn btn-flip">
+            <i class="fa fa-repeat"></i>
+            <span>Flip Coin</span>
+          </button>
         </div>
-        <div id="dice-two-side-three" class='side three'>
-          <div class="dot three-1"></div>
-          <div class="dot three-2"></div>
-          <div class="dot three-3"></div>
-        </div>
-        <div id="dice-two-side-four" class='side four'>
-          <div class="dot four-1"></div>
-          <div class="dot four-2"></div>
-          <div class="dot four-3"></div>
-          <div class="dot four-4"></div>
-        </div>
-        <div id="dice-two-side-five" class='side five'>
-          <div class="dot five-1"></div>
-          <div class="dot five-2"></div>
-          <div class="dot five-3"></div>
-          <div class="dot five-4"></div>
-          <div class="dot five-5"></div>
-        </div>
-        <div id="dice-two-side-six" class='side six'>
-          <div class="dot six-1"></div>
-          <div class="dot six-2"></div>
-          <div class="dot six-3"></div>
-          <div class="dot six-4"></div>
-          <div class="dot six-5"></div>
-          <div class="dot six-6"></div>
-        </div>
-      </div> 
-   </div>
-   <div id='roll' class='roll-button'><button>Roll dice!</button></div>
-  </div> 
-<style>
-  .topleft {
-  position: absolute;
-  top: 8px;
-  left: 16px;
-  font-size: 18px;
-}
-   .btn {
-        background-color: DodgerBlue; /* Blue background */
-        border: none; /* Remove borders */
-        color: white; /* White text */
-        padding: 25px 35px; /* Some padding */
-        font-size: 25px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-        border-radius: 30px;
+      </div>
+    </div>
+
+    <div class="buttons">
+      <a href="index.html" style="text-decoration: none;">
+        <button class="btn btn-home">
+          <i class="fa fa-home"></i>
+          <span>Home</span>
+        </button>
+      </a>
+    </div>
+
+    <div class="footer">
+      <p>🎮 Enjoy the game! | Dark Theme Edition 🎮</p>
+    </div>
+  </div>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        document.body.appendChild(particle);
       }
+    }
 
-      /* Darker background on mouse-over */
-      .btn:hover {
-        background-color: RoyalBlue;
-        border-radius: 30px;
+    // Dice functionality
+    const elDiceOne = document.getElementById('dice1');
+    const elDiceTwo = document.getElementById('dice2');
+    const elDiceOneDots = document.getElementById('dice1-dots');
+    const elDiceTwoDots = document.getElementById('dice2-dots');
+    const elRollBtn = document.getElementById('roll');
+    const elDiceResult = document.getElementById('dice-result');
+
+    // Coin functionality
+    const elCoin = document.getElementById('coin');
+    const elFlipCoin = document.getElementById('flip-coin');
+    const elCoinResult = document.getElementById('coin-result');
+
+    // Function to render dice dots
+    function renderDice(element, value) {
+      element.innerHTML = '';
+
+      // Create all 9 possible positions in a 3x3 grid
+      // Only show dots in the correct positions for each number
+
+      const dotConfigs = {
+        1: [{ row: 2, col: 2 }], // center
+        2: [{ row: 1, col: 1 }, { row: 3, col: 3 }], // top-left, bottom-right
+        3: [{ row: 1, col: 1 }, { row: 2, col: 2 }, { row: 3, col: 3 }], // diagonal
+        4: [{ row: 1, col: 1 }, { row: 1, col: 3 }, { row: 3, col: 1 }, { row: 3, col: 3 }], // four corners
+        5: [{ row: 1, col: 1 }, { row: 1, col: 3 }, { row: 2, col: 2 }, { row: 3, col: 1 }, { row: 3, col: 3 }], // four corners + center
+        6: [{ row: 1, col: 1 }, { row: 1, col: 3 }, { row: 2, col: 1 }, { row: 2, col: 3 }, { row: 3, col: 1 }, { row: 3, col: 3 }] // 3x2 grid
+      };
+
+      const config = dotConfigs[value];
+
+      // Create a 3x3 grid
+      for (let row = 1; row <= 3; row++) {
+        for (let col = 1; col <= 3; col++) {
+          const cell = document.createElement('div');
+          cell.style.gridRow = row;
+          cell.style.gridColumn = col;
+
+          // Check if this position should have a dot
+          const hasDot = config.some(pos => pos.row === row && pos.col === col);
+
+          if (hasDot) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            cell.appendChild(dot);
+          }
+
+          element.appendChild(cell);
+        }
       }
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #70c1b3;
-}
-
-button {
-  position: relative;
-  top:80px;
-  left:10px;
-  padding: 15px 50px;
-  color: #fff;
-  background-color: #f4d35e;
-  border: none;
-  font-size: 20px;
-  border-radius: 20px; 
-  box-shadow: 1px 3px #50514F;
-  outline: none;
-  transition: .3s; 
-}
-
-button:hover, button:active {
-  outline: none;
-  background: #50514F;
-  cursor: pointer;
-  transform: translateY(15px); 
-}
-
-.game {
-  position: relative;
-  width: auto;
-  height: 100%; 
-}
-
-.container {
-  position: relative;
-  display: inline-block;
-  top: 200px;
-}
-
-.dice {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  transform-style: preserve-3d;
-  transition: transform 1s; 
-}
-
-.dot {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  margin: -10px 5px 5px -10px;
-  border-radius: 20px;
-  background-color: #f25f5c;
-  box-shadow: inset 2px 2px #d90429;
-}
-
-.dice-one {
-  position: absolute;
-  left: 150px; 
-}
-
-.dice-two {
-  position: absolute;
-  left: -50px;
-  
-}
-
-.side {
-  position: absolute;
-  background-color: #ffF;
-  border-radius:5px;
-  width: 100px;
-  height: 100px;
-  border: 1px solid #e5e5e5;
-  text-align: center;
-  line-height: 2em;
-}
-
-.side:nth-child(1) {
-  transform: translateZ(3.1em); }
-
-.side:nth-child(6) {
-  transform: rotateY(90deg) translateZ(3.1em); }
-
-.side:nth-child(3) {
-  transform: rotateY(-90deg) translateZ(3.1em); }
-
-.side:nth-child(4) {
-  transform: rotateX(90deg) translateZ(3.1em); }
-
-.side:nth-child(5) {
-  transform: rotateX(-90deg) translateZ(3.1em); }
-
-.side:nth-child(2) {
-  transform: rotateY(-180deg) translateZ(3.1em); }
-
-.show-1 {
-  transform: rotateX(720deg) rotateZ(-720deg); }
-
-.show-6 {
-  transform: rotateX(-900deg) rotateZ(1080deg); }
-
-.show-3 {
-  transform: rotateY(-450deg) rotateZ(-1440deg); }
-
-.show-4 {
-  transform: rotateY(810deg) rotateZ(720deg); }
-
-.show-5 {
-  transform: rotateX(-810deg) rotateZ(-1080deg); }
-
-.show-2 {
-  transform: rotateX(450deg) rotateZ(-720deg); }
-
-.two-1, .three-1, .four-1, .five-1, .six-1 {
-  top: 20%;
-  left: 20%; 
-}
-
-.four-3, .five-3, .six-4 {
-  top: 20%;
-  left: 80%; }
-
-.one-1, .three-2, .five-5 {
-  top: 50%;
-  left: 50%; }
-
-.four-2, .five-2, .six-3 {
-  top: 80%;
-  left: 20%; }
-
-.two-2, .three-3, .four-4, .five-4, .six-6 {
-  top: 80%;
-  left: 80%; }
-
-.six-2 {
-  top: 50%;
-  left: 20%; }
-
-.six-5 {
-  top: 50%;
-  left: 80%; 
-}
-</style>
-<script>var elDiceOne       = document.getElementById('dice1');
-var elDiceTwo       = document.getElementById('dice2');
-var elComeOut       = document.getElementById('roll');
-
-elComeOut.onclick   = function () {rollDice();};
-
-function rollDice() {
-
-  var diceOne   = Math.floor((Math.random() * 6) + 1);
-  var diceTwo   = Math.floor((Math.random() * 6) + 1);
- 
-  console.log(diceOne + ' ' + diceTwo);
-
-  for (var i = 1; i <= 6; i++) {
-    elDiceOne.classList.remove('show-' + i);
-    if (diceOne === i) {
-      elDiceOne.classList.add('show-' + i);
     }
-  }
 
-  for (var k = 1; k <= 6; k++) {
-    elDiceTwo.classList.remove('show-' + k);
-    if (diceTwo === k) {
-      elDiceTwo.classList.add('show-' + k);
+    // Roll dice function
+    function rollDice() {
+      // Disable button during animation
+      elRollBtn.disabled = true;
+
+      // Add rolling animation
+      elDiceOne.classList.add('rolling');
+      elDiceTwo.classList.add('rolling');
+
+      // Generate random numbers
+      const diceOne = Math.floor((Math.random() * 6) + 1);
+      const diceTwo = Math.floor((Math.random() * 6) + 1);
+      const total = diceOne + diceTwo;
+
+      // Wait for animation to complete
+      setTimeout(() => {
+        // Render dice faces
+        renderDice(elDiceOneDots, diceOne);
+        renderDice(elDiceTwoDots, diceTwo);
+
+        // Display result with special messages
+        let message = `You rolled: ${diceOne} and ${diceTwo} (Total: ${total})`;
+        if (total === 12) message += ' 🎉 JACKPOT!';
+        else if (total === 2) message += ' 🐍 Snake Eyes!';
+        else if (diceOne === diceTwo) message += ' 🎲 Doubles!';
+
+        elDiceResult.textContent = message;
+
+        // Remove animation class
+        elDiceOne.classList.remove('rolling');
+        elDiceTwo.classList.remove('rolling');
+
+        // Re-enable button
+        elRollBtn.disabled = false;
+      }, 600);
     }
-  } 
-  setTimeout(rollDice(), 1000);
-}
-</script>
 
+    // Flip coin function
+    function flipCoin() {
+      // Disable button during animation
+      elFlipCoin.disabled = true;
 
+      // Remove any existing animation class
+      elCoin.classList.remove('flipping');
 
+      // Trigger reflow
+      void elCoin.offsetWidth;
 
+      // Randomly determine heads or tails
+      const isHeads = Math.random() >= 0.5;
 
+      // Add the animation class
+      elCoin.classList.add('flipping');
+
+      // Display result after animation
+      setTimeout(() => {
+        if (isHeads) {
+          elCoin.style.transform = 'rotateY(0deg)';
+          elCoinResult.textContent = "🥇 It's HEADS!";
+        } else {
+          elCoin.style.transform = 'rotateY(180deg)';
+          elCoinResult.textContent = "🥈 It's TAILS!";
+        }
+
+        // Re-enable button
+        elFlipCoin.disabled = false;
+      }, 1500);
+    }
+
+    // Event listeners
+    elRollBtn.addEventListener('click', rollDice);
+    elFlipCoin.addEventListener('click', flipCoin);
+
+    // Also allow clicking on coin to flip
+    elCoin.addEventListener('click', flipCoin);
+
+    // Initialize
+    createParticles();
+
+    // Set initial dice values
+    renderDice(elDiceOneDots, 1);
+    renderDice(elDiceTwoDots, 1);
+
+    // Auto-demo on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        rollDice();
+      }, 800);
+      setTimeout(() => {
+        flipCoin();
+      }, 1600);
+    });
+  </script>
+</body>
+
+</html>
