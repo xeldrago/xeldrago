@@ -1,94 +1,558 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Xeldrago" />
-    <meta
-      name="keywords"
-      content="freelancer, Technopreneur, movies for free, services, advertising, games for free, free movies, free games"
-    />
-    <meta
-      name="description"
-      content="Freelance Technopreneurs Hub - A XELDRAGO CREATION"
-    />
-    <meta
-      property="og:title"
-      content="Freelance Technopreneurs Hub - A XELDRAGO CREATION"
-    />
-    <meta
-      property="og:description"
-      content="XELDRAGO | A Startup initiated for fellow freelance technopreneurs | Interested can join us!, to learn &amp; for fun"
-    />
-    <meta property="og:image" content="media/images/logo.jpg" />
-    <meta
-      name="google-site-verification"
-      content="pTSGbBOhvssU15exEBaLuNyVSNDxB12W-xkOvRqiUqQ"
-    />
-    <link
-      rel="icon"
-      class="logo"
-      href="media/images/logo.jpg"
-      type="image/x-icon"
-    />
+<html lang="en">
 
-    <meta name="chain reaction game online" content="play with your friends!" />
-    <meta
-      name="google-site-verification"
-      content="pTSGbBOhvssU15exEBaLuNyVSNDxB12W-xkOvRqiUqQ"
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Tic Tac Toe - XELDRAGO</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298, #1c3b70);
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-    <!-- CSS file Included -->
-    <link rel="stylesheet" type="text/css" href="tic.css" />
-    <link rel="stylesheet" href="index.css" />
-    <!-- JavaScript file included -->
-    <script src="tic.js"></script>
-  </head>
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      width: 100%;
+    }
 
-  <body class="body2">
-    <a href="index.html"
-      ><button class="btn"><i class="fa fa-home"></i> Home</button></a
-    >
-    <div id="main">
-      <h1>TIC TAC TOE</h1>
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
 
-      <!-- Game Instructions -->
-      <p id="ins">
-        Game starts by just Tap on box<br /><br />First Player starts as
-        <b>Player X</b><br />And<br />Second Player as <b>Player 0</b>
-      </p>
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid white;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #1e3c72;
+    }
 
-      <br /><br />
-      <!-- 3*3 grid of Boxes -->
-      <input type="text" id="b1" onclick="myfunc_3(); myfunc();" readonly />
+    h1 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 5px;
+    }
 
-      <input type="text" id="b2" onclick="myfunc_4(); myfunc();" readonly />
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
 
-      <input type="text" id="b3" onclick="myfunc_5(); myfunc();" readonly />
-      <br /><br />
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-width: 800px;
+      width: 100%;
+    }
 
-      <input type="text" id="b4" onclick="myfunc_6(); myfunc();" readonly />
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
 
-      <input type="text" id="b5" onclick="myfunc_7(); myfunc();" readonly />
+    .btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-      <input type="text" id="b6" onclick="myfunc_8(); myfunc();" readonly />
-      <br /><br />
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
 
-      <input type="text" id="b7" onclick="myfunc_9(); myfunc();" readonly />
+    .btn.active {
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-      <input type="text" id="b8" onclick="myfunc_10();myfunc();" readonly />
+    .game-info {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-      <input type="text" id="b9" onclick="myfunc_11();myfunc();" readonly />
+    .player-turn {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
 
-      <!-- Grid end here -->
-      <br /><br /><br />
-      <!-- Button to reset game -->
-      <button id="but" onclick="myfunc_2()">RESET</button>
+    .stats {
+      display: flex;
+      gap: 20px;
+    }
 
-      <br /><br />
-      <!-- Space to show player turn -->
-      <p id="print"></p>
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .game-board {
+      display: grid;
+      gap: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .cell {
+      width: 60px;
+      height: 60px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cell:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .cell.x {
+      color: #ff5252;
+    }
+
+    .cell.o {
+      color: #4fc3f7;
+    }
+
+    .winning-cell {
+      background-color: rgba(76, 175, 80, 0.3);
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .message {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      width: 100%;
+    }
+
+    .win-message {
+      background: rgba(76, 175, 80, 0.3);
+      animation: celebrate 2s infinite;
+    }
+
+    @keyframes celebrate {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .instructions {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .instructions h3 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .instructions p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .cell {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+
+      .game-info {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .stats {
+        width: 100%;
+        justify-content: space-around;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cell {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo-container">
+      <img src="media/images/logo.jpg" alt="XELDRAGO Logo" class="logo">
+      
+      <h1>Enhanced Tic Tac Toe</h1>
     </div>
-  </body>
+    <p class="subtitle">A XELDRAGO Creation - Play with different grid sizes!</p>
+  </div>
+
+  <div class="game-container">
+    <div class="controls">
+      <a href="index.html" style="text-decoration: none;">
+        <button class="btn" id="home-btn">
+          <i class="fas fa-home"></i> Home
+        </button>
+      </a>
+      <button class="btn active" id="size-3">3×3 (3 in a row)</button>
+      <button class="btn" id="size-5">5×5 (4 in a row)</button>
+      <button class="btn" id="size-7">7×7 (4 in a row)</button>
+      <button class="btn" id="reset-btn">Reset Game</button>
+    </div>
+
+    <div class="game-info">
+      <div class="player-turn" id="player-turn">Player X's Turn</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value" id="x-wins">0</div>
+          <div class="stat-label">Player X Wins</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="o-wins">0</div>
+          <div class="stat-label">Player O Wins</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="draws">0</div>
+          <div class="stat-label">Draws</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-board" id="game-board">
+      <!-- Game board will be generated here -->
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <div class="instructions">
+    <h3>How to Play</h3>
+    <p><strong>3×3 Grid:</strong> Get 3 of your marks in a row (horizontally, vertically, or diagonally) to win.</p>
+    <p><strong>5×5 & 7×7 Grids:</strong> Get 4 of your marks in a row (horizontally, vertically, or diagonally) to win.
+    </p>
+    <p>Player X always starts first. Click on any empty cell to place your mark.</p>
+  </div>
+
+  <script>
+    // Game state
+    let currentPlayer = 'X';
+    let gameBoard = [];
+    let gameActive = true;
+    let boardSize = 3;
+    let winCondition = 3;
+    let xWins = 0;
+    let oWins = 0;
+    let draws = 0;
+    let winningCells = [];
+
+    // DOM elements
+    const gameBoardElement = document.getElementById('game-board');
+    const playerTurnElement = document.getElementById('player-turn');
+    const messageElement = document.getElementById('message');
+    const xWinsElement = document.getElementById('x-wins');
+    const oWinsElement = document.getElementById('o-wins');
+    const drawsElement = document.getElementById('draws');
+    const resetButton = document.getElementById('reset-btn');
+    const size3Button = document.getElementById('size-3');
+    const size5Button = document.getElementById('size-5');
+    const size7Button = document.getElementById('size-7');
+
+    // Initialize the game
+    function initGame() {
+      createBoard();
+      updateStats();
+      resetGame();
+    }
+
+    // Create the game board based on selected size
+    function createBoard() {
+      gameBoardElement.innerHTML = '';
+      gameBoardElement.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`;
+
+      for (let i = 0; i < boardSize; i++) {
+        gameBoard[i] = [];
+        for (let j = 0; j < boardSize; j++) {
+          gameBoard[i][j] = '';
+          const cell = document.createElement('button');
+          cell.className = 'cell';
+          cell.dataset.row = i;
+          cell.dataset.col = j;
+          cell.addEventListener('click', () => cellClick(i, j));
+          gameBoardElement.appendChild(cell);
+        }
+      }
+    }
+
+    // Handle cell click
+    function cellClick(row, col) {
+      if (!gameActive || gameBoard[row][col] !== '') return;
+
+      gameBoard[row][col] = currentPlayer;
+      const cellIndex = row * boardSize + col;
+      const cell = gameBoardElement.children[cellIndex];
+      cell.textContent = currentPlayer;
+      cell.classList.add(currentPlayer.toLowerCase());
+
+      if (checkWinner(row, col)) {
+        endGame(`${currentPlayer} Wins!`);
+        highlightWinningCells();
+        updateWins();
+      } else if (isBoardFull()) {
+        endGame("It's a Draw!");
+        draws++;
+        updateStats();
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        playerTurnElement.textContent = `Player ${currentPlayer}'s Turn`;
+      }
+    }
+
+    // Check for winner
+    function checkWinner(row, col) {
+      const directions = [
+        [0, 1],  // horizontal
+        [1, 0],  // vertical
+        [1, 1],  // diagonal
+        [1, -1]  // anti-diagonal
+      ];
+
+      for (const [dx, dy] of directions) {
+        let count = 1;
+        let tempWinningCells = [[row, col]];
+
+        // Check in positive direction
+        for (let i = 1; i < winCondition; i++) {
+          const newRow = row + i * dx;
+          const newCol = col + i * dy;
+
+          if (
+            newRow >= 0 && newRow < boardSize &&
+            newCol >= 0 && newCol < boardSize &&
+            gameBoard[newRow][newCol] === currentPlayer
+          ) {
+            count++;
+            tempWinningCells.push([newRow, newCol]);
+          } else {
+            break;
+          }
+        }
+
+        // Check in negative direction
+        for (let i = 1; i < winCondition; i++) {
+          const newRow = row - i * dx;
+          const newCol = col - i * dy;
+
+          if (
+            newRow >= 0 && newRow < boardSize &&
+            newCol >= 0 && newCol < boardSize &&
+            gameBoard[newRow][newCol] === currentPlayer
+          ) {
+            count++;
+            tempWinningCells.push([newRow, newCol]);
+          } else {
+            break;
+          }
+        }
+
+        if (count >= winCondition) {
+          winningCells = tempWinningCells;
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    // Highlight winning cells
+    function highlightWinningCells() {
+      winningCells.forEach(([row, col]) => {
+        const cellIndex = row * boardSize + col;
+        const cell = gameBoardElement.children[cellIndex];
+        cell.classList.add('winning-cell');
+      });
+    }
+
+    // Check if board is full
+    function isBoardFull() {
+      for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+          if (gameBoard[i][j] === '') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    // End the game
+    function endGame(message) {
+      gameActive = false;
+      messageElement.textContent = message;
+      messageElement.classList.add('win-message');
+    }
+
+    // Update win counts
+    function updateWins() {
+      if (currentPlayer === 'X') {
+        xWins++;
+      } else {
+        oWins++;
+      }
+      updateStats();
+    }
+
+    // Update statistics display
+    function updateStats() {
+      xWinsElement.textContent = xWins;
+      oWinsElement.textContent = oWins;
+      drawsElement.textContent = draws;
+    }
+
+    // Reset the game
+    function resetGame() {
+      gameBoard = [];
+      gameActive = true;
+      currentPlayer = 'X';
+      winningCells = [];
+      playerTurnElement.textContent = `Player ${currentPlayer}'s Turn`;
+      messageElement.textContent = '';
+      messageElement.classList.remove('win-message');
+      createBoard();
+    }
+
+    // Change board size
+    function changeBoardSize(size) {
+      boardSize = size;
+      winCondition = size === 3 ? 3 : 4;
+      resetGame();
+
+      // Update active button
+      size3Button.classList.remove('active');
+      size5Button.classList.remove('active');
+      size7Button.classList.remove('active');
+
+      if (size === 3) size3Button.classList.add('active');
+      else if (size === 5) size5Button.classList.add('active');
+      else if (size === 7) size7Button.classList.add('active');
+    }
+
+    // Event listeners
+    resetButton.addEventListener('click', resetGame);
+    size3Button.addEventListener('click', () => changeBoardSize(3));
+    size5Button.addEventListener('click', () => changeBoardSize(5));
+    size7Button.addEventListener('click', () => changeBoardSize(7));
+
+    // Initialize the game when page loads
+    window.onload = initGame;
+  </script>
+</body>
+
 </html>
