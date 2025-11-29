@@ -103,7 +103,8 @@
             margin-bottom: 0.5rem;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 0.75rem;
             border-radius: 10px;
@@ -112,7 +113,8 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             border-color: #4299e1;
             box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
             outline: none;
@@ -141,6 +143,63 @@
             transform: translateY(0);
         }
 
+        .btn-secondary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-mode {
+            flex: 1;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-mode.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .time-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .time-option {
+            flex: 1;
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 10px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .time-option.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
         .hidden {
             display: none !important;
         }
@@ -154,15 +213,29 @@
             gap: 1rem;
         }
 
-        .wrong-count {
+        .game-stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .stat {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #e53e3e;
             padding: 0.75rem 1.5rem;
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wrong-count {
             color: #e53e3e;
+        }
+
+        .timer {
+            color: #2b6cb0;
         }
 
         .game-content {
@@ -331,6 +404,11 @@
             color: white;
         }
 
+        .toast.warning {
+            background: #ed8936;
+            color: white;
+        }
+
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -363,6 +441,15 @@
                 padding: 0.75rem 0.25rem;
                 font-size: 1rem;
             }
+
+            .game-stats {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .stat {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -373,15 +460,15 @@
             <div class="logo"><img src="media/images/logo.jpg" alt="XELDRAGO Logo" class="logo"></div>
             <h1>Hangman Game</h1>
         </div>
-        <p class="subtitle">A XELDRAGO Creation - Create your own word puzzle!</p>
+        <p class="subtitle">A XELDRAGO Creation - Choose your game mode!</p>
     </div>
 
     <div class="container">
         <!-- Setup Screen -->
         <div class="card" id="setupScreen">
             <h2 class="card-title">Setup New Game</h2>
-            <p style="text-align: center; margin-bottom: 1.5rem; color: #4a5568;">Enter a word and provide three clues
-                to help the player</p>
+            <p style="text-align: center; margin-bottom: 1.5rem; color: #4a5568;">Enter a word and provide clues, then
+                choose your game mode</p>
 
             <form id="setupForm">
                 <div class="form-group">
@@ -404,6 +491,22 @@
                     <input type="text" id="clue2" placeholder="e.g., It has wheels in it" required>
                 </div>
 
+                <div class="form-group">
+                    <label>Game Mode</label>
+                    <div class="btn-group">
+                        <button type="button" class="btn-mode active" id="timelessMode">Timeless Mode</button>
+                        <button type="button" class="btn-mode" id="timedMode">Time Limit Mode</button>
+                    </div>
+                    <div id="timeOptions" class="hidden">
+                        <p style="margin-bottom: 0.5rem; font-weight: 600;">Select Time Limit:</p>
+                        <div class="time-options">
+                            <div class="time-option" data-time="120">2 Minutes</div>
+                            <div class="time-option" data-time="240">4 Minutes</div>
+                            <div class="time-option active" data-time="360">6 Minutes</div>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn">Start Game</button>
             </form>
         </div>
@@ -412,7 +515,16 @@
         <div class="hidden" id="playingScreen">
             <div class="game-header">
                 <h1>Hangman Game</h1>
-                <div class="wrong-count">Wrong Guesses: <span id="wrongCount">0</span> / 7</div>
+                <div class="game-stats">
+                    <div class="stat wrong-count">
+                        <i class="fas fa-times-circle"></i>
+                        Wrong: <span id="wrongCount">0</span>/7
+                    </div>
+                    <div class="stat timer hidden" id="timerContainer">
+                        <i class="fas fa-clock"></i>
+                        Time: <span id="timerDisplay">06:00</span>
+                    </div>
+                </div>
             </div>
 
             <div class="game-content">
@@ -482,7 +594,11 @@
                     <div class="game-over hidden" id="gameOverSection">
                         <h2 id="gameResult"></h2>
                         <p>The word was: <strong id="revealWord"></strong></p>
-                        <button class="btn" onclick="resetGame()">Play Again</button>
+                        <p id="gameStats"></p>
+                        <div style="display: flex; gap: 10px; margin-top: 1.5rem;">
+                            <button class="btn btn-secondary" onclick="resetGame()">Play Again</button>
+                            <button class="btn" onclick="returnToSetup()">New Word</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -498,7 +614,11 @@
             clue2: '',
             guessedLetters: [],
             wrongGuesses: 0,
-            status: 'playing' // playing, won, lost
+            status: 'playing', // playing, won, lost
+            gameMode: 'timeless', // timeless, timed
+            timeLimit: 360, // in seconds
+            timeLeft: 360,
+            timerInterval: null
         };
 
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -520,6 +640,37 @@
                 toast.remove();
             }, 3000);
         }
+
+        // Game mode selection
+        document.getElementById('timelessMode').addEventListener('click', function () {
+            setGameMode('timeless');
+        });
+
+        document.getElementById('timedMode').addEventListener('click', function () {
+            setGameMode('timed');
+        });
+
+        function setGameMode(mode) {
+            gameState.gameMode = mode;
+
+            // Update UI
+            document.getElementById('timelessMode').classList.toggle('active', mode === 'timeless');
+            document.getElementById('timedMode').classList.toggle('active', mode === 'timed');
+            document.getElementById('timeOptions').classList.toggle('hidden', mode === 'timeless');
+        }
+
+        // Time option selection
+        document.querySelectorAll('.time-option').forEach(option => {
+            option.addEventListener('click', function () {
+                document.querySelectorAll('.time-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+                gameState.timeLimit = parseInt(this.dataset.time);
+                gameState.timeLeft = gameState.timeLimit;
+                updateTimerDisplay();
+            });
+        });
 
         // Setup form submission
         document.getElementById('setupForm').addEventListener('submit', function (e) {
@@ -549,7 +700,11 @@
                 clue2: clue2,
                 guessedLetters: [],
                 wrongGuesses: 0,
-                status: 'playing'
+                status: 'playing',
+                gameMode: gameState.gameMode,
+                timeLimit: gameState.timeLimit,
+                timeLeft: gameState.timeLimit,
+                timerInterval: null
             };
 
             startGame();
@@ -559,6 +714,9 @@
             // Show playing screen
             document.getElementById('setupScreen').classList.add('hidden');
             document.getElementById('playingScreen').classList.remove('hidden');
+
+            // Show/hide timer based on game mode
+            document.getElementById('timerContainer').classList.toggle('hidden', gameState.gameMode === 'timeless');
 
             // Display clues
             document.getElementById('displayCategory').textContent = gameState.category;
@@ -574,7 +732,40 @@
             // Reset hangman
             resetHangman();
 
+            // Start timer if timed mode
+            if (gameState.gameMode === 'timed') {
+                startTimer();
+            }
+
             showToast('Game created! Start guessing!', 'success');
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+
+            gameState.timerInterval = setInterval(function () {
+                gameState.timeLeft--;
+                updateTimerDisplay();
+
+                if (gameState.timeLeft <= 0) {
+                    clearInterval(gameState.timerInterval);
+                    gameState.status = 'lost';
+                    showGameOver(false, 'time');
+                } else if (gameState.timeLeft <= 30) {
+                    // Warning when 30 seconds left
+                    document.getElementById('timerDisplay').style.color = '#e53e3e';
+                    if (gameState.timeLeft === 30) {
+                        showToast('Only 30 seconds left!', 'warning');
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(gameState.timeLeft / 60);
+            const seconds = gameState.timeLeft % 60;
+            document.getElementById('timerDisplay').textContent =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
         function createKeyboard() {
@@ -665,6 +856,9 @@
 
             if (!revealed.includes('_')) {
                 gameState.status = 'won';
+                if (gameState.gameMode === 'timed') {
+                    clearInterval(gameState.timerInterval);
+                }
                 setTimeout(() => {
                     showGameOver(true);
                 }, 500);
@@ -674,23 +868,35 @@
         function checkLose() {
             if (gameState.wrongGuesses >= 7) {
                 gameState.status = 'lost';
+                if (gameState.gameMode === 'timed') {
+                    clearInterval(gameState.timerInterval);
+                }
                 setTimeout(() => {
-                    showGameOver(false);
+                    showGameOver(false, 'hangman');
                 }, 500);
             }
         }
 
-        function showGameOver(won) {
+        function showGameOver(won, reason = '') {
             document.getElementById('keyboard').classList.add('hidden');
             document.getElementById('gameOverSection').classList.remove('hidden');
 
             const resultEl = document.getElementById('gameResult');
+            const statsEl = document.getElementById('gameStats');
+
             if (won) {
                 resultEl.textContent = '🎉 You Won!';
                 resultEl.className = 'win-text';
+                statsEl.textContent = `You guessed the word with ${gameState.wrongGuesses} wrong guesses${gameState.gameMode === 'timed' ? ` and ${Math.floor((gameState.timeLimit - gameState.timeLeft) / 60)}:${((gameState.timeLimit - gameState.timeLeft) % 60).toString().padStart(2, '0')} remaining` : ''}!`;
                 showToast('🎉 You won! The word was: ' + gameState.word, 'success');
             } else {
-                resultEl.textContent = '😔 Game Over!';
+                if (reason === 'time') {
+                    resultEl.textContent = '⏰ Time\'s Up!';
+                    statsEl.textContent = 'You ran out of time before guessing the word.';
+                } else {
+                    resultEl.textContent = '😔 Game Over!';
+                    statsEl.textContent = 'The hangman was completed before you guessed the word.';
+                }
                 resultEl.className = 'lose-text';
                 showToast('😔 Game Over! The word was: ' + gameState.word, 'error');
             }
@@ -699,6 +905,46 @@
         }
 
         function resetGame() {
+            // Stop timer if running
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+
+            // Reset game state but keep the same word and clues
+            gameState.guessedLetters = [];
+            gameState.wrongGuesses = 0;
+            gameState.status = 'playing';
+            gameState.timeLeft = gameState.timeLimit;
+
+            // Reset UI
+            document.getElementById('gameOverSection').classList.add('hidden');
+            document.getElementById('keyboard').classList.remove('hidden');
+            document.getElementById('timerDisplay').style.color = '#2b6cb0';
+
+            // Reset hangman
+            resetHangman();
+
+            // Create keyboard
+            createKeyboard();
+
+            // Display word
+            updateWordDisplay();
+
+            // Update wrong count
+            updateWrongCount();
+
+            // Start timer if timed mode
+            if (gameState.gameMode === 'timed') {
+                startTimer();
+            }
+        }
+
+        function returnToSetup() {
+            // Stop timer if running
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+
             // Reset game state
             gameState = {
                 word: '',
@@ -707,7 +953,11 @@
                 clue2: '',
                 guessedLetters: [],
                 wrongGuesses: 0,
-                status: 'playing'
+                status: 'playing',
+                gameMode: gameState.gameMode,
+                timeLimit: gameState.timeLimit,
+                timeLeft: gameState.timeLimit,
+                timerInterval: null
             };
 
             // Reset form
