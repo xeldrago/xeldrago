@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense & Income Tracker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .app-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .export-btn {
+            background-color: #27ae60;
+        }
+
+        .export-btn:hover {
+            background-color: #219653;
+        }
+
+        .import-btn {
+            background-color: #9b59b6;
+        }
+
+        .import-btn:hover {
+            background-color: #8e44ad;
+        }
+
+        .reset-btn {
+            background-color: #e74c3c;
+        }
+
+        .reset-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .undo-btn {
+            background-color: #f39c12;
+        }
+
+        .undo-btn:hover {
+            background-color: #d68910;
+        }
+
+        .email-btn {
+            background-color: #e67e22;
+        }
+
+        .email-btn:hover {
+            background-color: #d35400;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .expense-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .expense-item:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .expense-name {
+            font-weight: 500;
+        }
+
+        .expense-amount {
+            font-weight: 600;
+            color: #e74c3c;
+        }
+
+        .income-amount {
+            color: #27ae60;
+        }
+
+        .summary-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .summary-box {
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .summary-box h3 {
+            margin-top: 0;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .monthly-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .monthly-table th,
+        .monthly-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .monthly-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .monthly-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .positive {
+            color: #27ae60;
+        }
+
+        .negative {
+            color: #e74c3c;
+        }
+
+        .neutral {
+            color: #7f8c8d;
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .import-modal,
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .import-modal-content,
+        .email-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .import-modal h2,
+        .email-modal h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .import-options {
+            margin: 20px 0;
+        }
+
+        .import-option {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .import-option:hover {
+            background-color: #f8f9fa;
+            border-color: #3498db;
+        }
+
+        .import-option.selected {
+            background-color: #e8f4fc;
+            border-color: #3498db;
+        }
+
+        .import-option h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .import-option p {
+            margin: 0;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .cancel-btn {
+            background-color: #95a5a6;
+        }
+
+        .cancel-btn:hover {
+            background-color: #7f8c8d;
+        }
+
+        .data-storage-info {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e8f4fc;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            text-align: center;
+            color: #7f8c8d;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-input-label:hover {
+            background-color: #e8f4fc;
+            border-color: #3498db;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        .undo-history {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .month-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .nav-btn {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .current-month {
+            font-weight: 600;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        .month-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .toggle-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+
+        .toggle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .toggle-header h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .toggle-content.expanded {
+            max-height: 500px;
+        }
+
+        .category-breakdown {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .category-name {
+            font-weight: 500;
+        }
+
+        .category-amount {
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .email-format-options {
+            margin: 15px 0;
+        }
+
+        .format-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .format-option input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .format-option label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .email-preview {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .email-preview h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Expense & Income Tracker</h1>
+            <div class="subtitle">Track your finances offline - Data stored locally in your browser</div>
+        </header>
+
+        <div class="app-controls">
+            <div>
+                <button id="addExpenseBtn">Add Expense/Income</button>
+                <button id="undoBtn" class="undo-btn">Undo Last Entry</button>
+            </div>
+            <div>
+                <button id="importBtn" class="import-btn">Import Data</button>
+                <button id="exportBtn" class="export-btn">Export Data</button>
+                <button id="emailBtn" class="email-btn">Email Report</button>
+                <button id="resetBtn" class="reset-btn">Reset All Data</button>
+            </div>
+        </div>
+
+        <div id="statusMessage" class="status-message" style="display: none;"></div>
+
+        <div class="app-container">
+            <div class="left-panel">
+                <div class="card">
+                    <h2>Add Expense or Income</h2>
+                    <div class="form-group">
+                        <label for="expenseType">Type</label>
+                        <select id="expenseType">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category">
+                            <option value="Flipkart">Flipkart</option>
+                            <option value="Swiggy">Swiggy</option>
+                            <option value="Zomato">Zomato</option>
+                            <option value="Amazon">Amazon</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Stocks">Stocks</option>
+                            <option value="Bank">Bank</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="relatives">relatives</option>
+                            <option value="function/event/ocassion">function/event/ocassion</option>
+                            <option value="Hospital">Hospital</option>
+                            <option value="Bike">Bike</option>
+                            <option value="Vacation trip">Vacation trip</option>
+                            <option value="MISC">MISC</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" placeholder="Enter amount">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Notes (Optional)</label>
+                        <input type="text" id="notes" placeholder="Add any additional notes">
+                    </div>
+
+                    <button id="saveEntryBtn">Save Entry</button>
+                    <div id="undoHistory" class="undo-history"></div>
+                </div>
+
+                <div class="card">
+                    <div class="month-navigation">
+                        <button id="prevMonthBtn" class="nav-btn">&larr; Prev</button>
+                        <div id="currentMonthDisplay" class="current-month">Month</div>
+                        <button id="nextMonthBtn" class="nav-btn">Next &rarr;</button>
+                    </div>
+
+                    <h2>Recent Entries</h2>
+                    <div id="expenseList" class="expense-list">
+                        <!-- Expenses will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="card">
+                    <div class="month-selector">
+                        <label for="summaryMonth">View Month:</label>
+                        <input type="month" id="summaryMonth" style="width: auto;">
+                        <button id="viewAllBtn">View All</button>
+                    </div>
+
+                    <h2>Monthly Financial Summary</h2>
+                    <div class="summary-section">
+                        <div class="summary-box">
+                            <h3>Total Income</h3>
+                            <div id="totalIncome" class="summary-value positive">₹0</div>
+                        </div>
+                        <div class="summary-box">
+                            <h3>Total Expenses</h3>
+                            <div id="totalExpenses" class="summary-value negative">₹0</div>
+                        </div>
+                        <div class="summary-box">
+                            <h3>Total Savings</h3>
+                            <div id="totalSavings" class="summary-value">₹0</div>
+                        </div>
+                        <div class="summary-box">
+                            <h3>Missing Amount</h3>
+                            <div id="missingAmount" class="summary-value neutral">₹0</div>
+                        </div>
+                    </div>
+
+                    <div class="toggle-section">
+                        <div class="toggle-header" id="monthlyToggle">
+                            <h3>Monthly Breakdown</h3>
+                            <span id="toggleIcon">▼</span>
+                        </div>
+                        <div class="toggle-content" id="monthlyContent">
+                            <table class="monthly-table">
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Income</th>
+                                        <th>Expenses</th>
+                                        <th>Savings</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monthlyData">
+                                    <!-- Monthly data will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="toggle-section">
+                        <div class="toggle-header" id="categoryToggle">
+                            <h3>Category Breakdown</h3>
+                            <span id="categoryToggleIcon">▼</span>
+                        </div>
+                        <div class="toggle-content" id="categoryContent">
+                            <div id="categoryBreakdown" class="category-breakdown">
+                                <!-- Category breakdown will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Quick Stats</h2>
+                    <div id="quickStats">
+                        <p>Total entries: <span id="totalEntries">0</span></p>
+                        <p>Last 30 days spending: <span id="last30Days">₹0</span></p>
+                        <p>Average monthly expenses: <span id="avgMonthlyExpenses">₹0</span></p>
+                        <p>Biggest expense: <span id="biggestExpense">₹0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Import Modal -->
+        <div id="importModal" class="import-modal">
+            <div class="import-modal-content">
+                <h2>Import Data</h2>
+                <p>Select a CSV file exported from this app to import your data.</p>
+
+                <div class="file-input-wrapper">
+                    <input type="file" id="csvFileInput" accept=".csv">
+                    <div class="file-input-label" id="fileInputLabel">
+                        Click to select CSV file or drag and drop here
+                    </div>
+                    <div id="fileName" class="file-name"></div>
+                </div>
+
+                <div class="import-options">
+                    <h4>Import Options:</h4>
+                    <div class="import-option" id="replaceOption">
+                        <h4>Replace All Data</h4>
+                        <p>Clear existing data and replace with imported data</p>
+                    </div>
+                    <div class="import-option selected" id="mergeOption">
+                        <h4>Merge Data</h4>
+                        <p>Add imported data to existing data (duplicates may occur)</p>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button id="cancelImportBtn" class="cancel-btn">Cancel</button>
+                    <button id="confirmImportBtn" class="import-btn">Import Data</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Modal -->
+        <div id="emailModal" class="email-modal">
+            <div class="email-modal-content">
+                <h2>Email Expense Report</h2>
+                <p>Enter your email address to receive a report of your financial data.</p>
+
+                <div class="form-group">
+                    <label for="emailAddress">Email Address</label>
+                    <input type="email" id="emailAddress" placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="emailSubject">Subject</label>
+                    <input type="text" id="emailSubject" value="Expense Tracker Report">
+                </div>
+
+                <div class="email-format-options">
+                    <h4>Report Format:</h4>
+                    <div class="format-option">
+                        <input type="radio" id="formatCsv" name="emailFormat" value="csv" checked>
+                        <label for="formatCsv">CSV File Attachment</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="formatHtml" name="emailFormat" value="html">
+                        <label for="formatHtml">HTML Report in Email Body</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="formatBoth" name="emailFormat" value="both">
+                        <label for="formatBoth">Both (CSV + HTML)</label>
+                    </div>
+                </div>
+
+                <div class="email-preview">
+                    <h4>Report Preview:</h4>
+                    <div id="emailPreview">
+                        <!-- Email preview will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button id="cancelEmailBtn" class="cancel-btn">Cancel</button>
+                    <button id="sendEmailBtn" class="email-btn">Send Email</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Use This Expense Tracker</h3>
+            <p>1. <strong>Add individual expenses/income</strong>: Use the left panel to record daily expenses and
+                income. Data is automatically saved in your browser.</p>
+            <p>2. <strong>Automatic monthly tracking</strong>: The app automatically groups your entries by month based
+                on their dates.</p>
+            <p>3. <strong>Undo feature</strong>: Use the "Undo Last Entry" button to remove the most recent entry. You
+                can undo multiple times.</p>
+            <p>4. <strong>View by month</strong>: Use the month selector or navigation buttons to view entries for
+                specific months.</p>
+            <p>5. <strong>Export your data</strong>: Use the "Export Data" button to download a CSV file with all your
+                financial data.</p>
+            <p>6. <strong>Email report</strong>: Use the "Email Report" button to send your financial data to your
+                email.</p>
+            <p>7. <strong>Import data</strong>: Use the "Import Data" button to restore previously exported CSV files.
+            </p>
+            <p>8. <strong>Works offline</strong>: All data is stored locally in your browser, so you can use this app
+                even without an internet connection.</p>
+        </div>
+
+        <div class="data-storage-info">
+            <strong>Note:</strong> All your financial data is stored locally in your browser. It will not be uploaded to
+            any server. The "Email Report" feature simulates email sending and provides the data for you to copy and
+            send manually.
+        </div>
+
+        <footer>
+            <p>Expense & Income Tracker | Inspired by Excel template | Data stored locally in your browser</p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize data structures
+        let expenses = [];
+        let undoStack = []; // Stack to keep track of entries for undo
+        let importMode = 'merge'; // 'replace' or 'merge'
+        let selectedFile = null;
+
+        // Current month view settings
+        let currentViewYear = new Date().getFullYear();
+        let currentViewMonth = new Date().getMonth() + 1; // 1-12
+        let viewAllMonths = false;
+
+        // DOM elements
+        const expenseList = document.getElementById('expenseList');
+        const monthlyDataTable = document.getElementById('monthlyData');
+        const totalIncomeEl = document.getElementById('totalIncome');
+        const totalExpensesEl = document.getElementById('totalExpenses');
+        const totalSavingsEl = document.getElementById('totalSavings');
+        const missingAmountEl = document.getElementById('missingAmount');
+        const statusMessage = document.getElementById('statusMessage');
+        const importModal = document.getElementById('importModal');
+        const emailModal = document.getElementById('emailModal');
+        const csvFileInput = document.getElementById('csvFileInput');
+        const fileName = document.getElementById('fileName');
+        const fileInputLabel = document.getElementById('fileInputLabel');
+        const replaceOption = document.getElementById('replaceOption');
+        const mergeOption = document.getElementById('mergeOption');
+        const cancelImportBtn = document.getElementById('cancelImportBtn');
+        const confirmImportBtn = document.getElementById('confirmImportBtn');
+        const undoHistory = document.getElementById('undoHistory');
+        const currentMonthDisplay = document.getElementById('currentMonthDisplay');
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const summaryMonth = document.getElementById('summaryMonth');
+        const viewAllBtn = document.getElementById('viewAllBtn');
+        const monthlyToggle = document.getElementById('monthlyToggle');
+        const monthlyContent = document.getElementById('monthlyContent');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const categoryToggle = document.getElementById('categoryToggle');
+        const categoryContent = document.getElementById('categoryContent');
+        const categoryToggleIcon = document.getElementById('categoryToggleIcon');
+        const categoryBreakdown = document.getElementById('categoryBreakdown');
+        const totalEntries = document.getElementById('totalEntries');
+        const last30Days = document.getElementById('last30Days');
+        const avgMonthlyExpenses = document.getElementById('avgMonthlyExpenses');
+        const biggestExpense = document.getElementById('biggestExpense');
+        const emailAddress = document.getElementById('emailAddress');
+        const emailSubject = document.getElementById('emailSubject');
+        const emailPreview = document.getElementById('emailPreview');
+        const cancelEmailBtn = document.getElementById('cancelEmailBtn');
+        const sendEmailBtn = document.getElementById('sendEmailBtn');
+
+        // Buttons
+        const saveEntryBtn = document.getElementById('saveEntryBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const emailBtn = document.getElementById('emailBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const importBtn = document.getElementById('importBtn');
+        const undoBtn = document.getElementById('undoBtn');
+
+        // Form elements
+        const expenseType = document.getElementById('expenseType');
+        const category = document.getElementById('category');
+        const amount = document.getElementById('amount');
+        const dateInput = document.getElementById('date');
+        const notes = document.getElementById('notes');
+
+        // Set today's date as default
+        const today = new Date();
+        dateInput.value = today.toISOString().split('T')[0];
+
+        // Set current month in summary selector
+        summaryMonth.value = `${currentViewYear}-${String(currentViewMonth).padStart(2, '0')}`;
+
+        // Load data from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadData();
+            updateMonthDisplay();
+            updateUI();
+            updateUndoHistory();
+            showStatus('Data loaded from local storage', 'success');
+
+            // Initialize toggle sections
+            monthlyContent.classList.add('expanded');
+            categoryContent.classList.add('expanded');
+        });
+
+        // Save expense/income entry
+        saveEntryBtn.addEventListener('click', function () {
+            if (!amount.value || amount.value <= 0) {
+                showStatus('Please enter a valid amount', 'error');
+                return;
+            }
+
+            if (!dateInput.value) {
+                showStatus('Please select a date', 'error');
+                return;
+            }
+
+            const entry = {
+                id: Date.now(),
+                type: expenseType.value,
+                category: category.value,
+                amount: parseFloat(amount.value),
+                date: dateInput.value,
+                notes: notes.value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Add to expenses
+            expenses.push(entry);
+
+            // Save to undo stack
+            undoStack.push({
+                action: 'add',
+                entry: entry
+            });
+
+            saveData();
+            updateUI();
+            updateUndoHistory();
+
+            // Reset form
+            amount.value = '';
+            notes.value = '';
+
+            showStatus(`${entry.type === 'expense' ? 'Expense' : 'Income'} added successfully`, 'success');
+        });
+
+        // Undo last entry
+        undoBtn.addEventListener('click', function () {
+            if (undoStack.length === 0) {
+                showStatus('Nothing to undo', 'warning');
+                return;
+            }
+
+            const lastAction = undoStack.pop();
+
+            if (lastAction.action === 'add') {
+                // Remove the last added entry
+                const index = expenses.findIndex(e => e.id === lastAction.entry.id);
+                if (index !== -1) {
+                    expenses.splice(index, 1);
+                    saveData();
+                    updateUI();
+                    updateUndoHistory();
+                    showStatus('Last entry undone', 'info');
+                }
+            }
+        });
+
+        // Export data as CSV
+        exportBtn.addEventListener('click', function () {
+            exportData();
+        });
+
+        // Open email modal
+        emailBtn.addEventListener('click', function () {
+            updateEmailPreview();
+            emailModal.style.display = 'flex';
+        });
+
+        // Close email modal
+        cancelEmailBtn.addEventListener('click', function () {
+            emailModal.style.display = 'none';
+            resetEmailForm();
+        });
+
+        // Send email (simulated)
+        sendEmailBtn.addEventListener('click', function () {
+            const email = emailAddress.value.trim();
+            const subject = emailSubject.value.trim();
+            const format = document.querySelector('input[name="emailFormat"]:checked').value;
+
+            if (!email) {
+                showStatus('Please enter an email address', 'error');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showStatus('Please enter a valid email address', 'error');
+                return;
+            }
+
+            // Simulate sending email
+            simulateEmailSending(email, subject, format);
+        });
+
+        // Reset all data
+        resetBtn.addEventListener('click', function () {
+            if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
+                localStorage.removeItem('expenseTrackerData');
+                localStorage.removeItem('expenseTrackerUndoStack');
+                expenses = [];
+                undoStack = [];
+                updateUI();
+                updateUndoHistory();
+                showStatus('All data has been reset', 'success');
+            }
+        });
+
+        // Open import modal
+        importBtn.addEventListener('click', function () {
+            importModal.style.display = 'flex';
+        });
+
+        // Close import modal
+        cancelImportBtn.addEventListener('click', function () {
+            importModal.style.display = 'none';
+            resetImportForm();
+        });
+
+        // Handle file selection
+        csvFileInput.addEventListener('change', function (e) {
+            if (e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                fileName.textContent = `Selected file: ${selectedFile.name}`;
+                fileInputLabel.textContent = "Change file";
+                fileInputLabel.style.backgroundColor = '#e8f4fc';
+                fileInputLabel.style.borderColor = '#3498db';
+            }
+        });
+
+        // Handle drag and drop for file input
+        fileInputLabel.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            fileInputLabel.style.backgroundColor = '#e8f4fc';
+            fileInputLabel.style.borderColor = '#3498db';
+        });
+
+        fileInputLabel.addEventListener('dragleave', function () {
+            if (!selectedFile) {
+                fileInputLabel.style.backgroundColor = '#f8f9fa';
+                fileInputLabel.style.borderColor = '#ddd';
+            }
+        });
+
+        fileInputLabel.addEventListener('drop', function (e) {
+            e.preventDefault();
+            if (e.dataTransfer.files.length > 0) {
+                selectedFile = e.dataTransfer.files[0];
+                fileName.textContent = `Selected file: ${selectedFile.name}`;
+                fileInputLabel.textContent = "Change file";
+                fileInputLabel.style.backgroundColor = '#e8f4fc';
+                fileInputLabel.style.borderColor = '#3498db';
+
+                // Update the file input element
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(selectedFile);
+                csvFileInput.files = dataTransfer.files;
+            }
+        });
+
+        // Import option selection
+        replaceOption.addEventListener('click', function () {
+            replaceOption.classList.add('selected');
+            mergeOption.classList.remove('selected');
+            importMode = 'replace';
+        });
+
+        mergeOption.addEventListener('click', function () {
+            mergeOption.classList.add('selected');
+            replaceOption.classList.remove('selected');
+            importMode = 'merge';
+        });
+
+        // Confirm import
+        confirmImportBtn.addEventListener('click', function () {
+            if (!selectedFile) {
+                showStatus('Please select a CSV file to import', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                try {
+                    const csvData = e.target.result;
+                    importCSVData(csvData);
+                } catch (error) {
+                    showStatus('Error reading CSV file: ' + error.message, 'error');
+                }
+            };
+
+            reader.onerror = function () {
+                showStatus('Error reading file', 'error');
+            };
+
+            reader.readAsText(selectedFile);
+        });
+
+        // Month navigation
+        prevMonthBtn.addEventListener('click', function () {
+            currentViewMonth--;
+            if (currentViewMonth < 1) {
+                currentViewMonth = 12;
+                currentViewYear--;
+            }
+            updateMonthDisplay();
+            updateUI();
+        });
+
+        nextMonthBtn.addEventListener('click', function () {
+            currentViewMonth++;
+            if (currentViewMonth > 12) {
+                currentViewMonth = 1;
+                currentViewYear++;
+            }
+            updateMonthDisplay();
+            updateUI();
+        });
+
+        // Summary month selector
+        summaryMonth.addEventListener('change', function () {
+            if (summaryMonth.value) {
+                const [year, month] = summaryMonth.value.split('-');
+                currentViewYear = parseInt(year);
+                currentViewMonth = parseInt(month);
+                viewAllMonths = false;
+                updateMonthDisplay();
+                updateUI();
+            }
+        });
+
+        // View all months
+        viewAllBtn.addEventListener('click', function () {
+            viewAllMonths = !viewAllMonths;
+            if (viewAllMonths) {
+                viewAllBtn.textContent = 'View Specific Month';
+                currentMonthDisplay.textContent = 'All Months';
+            } else {
+                viewAllBtn.textContent = 'View All';
+                const today = new Date();
+                currentViewYear = today.getFullYear();
+                currentViewMonth = today.getMonth() + 1;
+                updateMonthDisplay();
+            }
+            updateUI();
+        });
+
+        // Toggle monthly breakdown
+        monthlyToggle.addEventListener('click', function () {
+            monthlyContent.classList.toggle('expanded');
+            toggleIcon.textContent = monthlyContent.classList.contains('expanded') ? '▼' : '▶';
+        });
+
+        // Toggle category breakdown
+        categoryToggle.addEventListener('click', function () {
+            categoryContent.classList.toggle('expanded');
+            categoryToggleIcon.textContent = categoryContent.classList.contains('expanded') ? '▼' : '▶';
+        });
+
+        // Update month display
+        function updateMonthDisplay() {
+            if (viewAllMonths) {
+                currentMonthDisplay.textContent = 'All Months';
+            } else {
+                const monthName = getMonthName(currentViewMonth);
+                currentMonthDisplay.textContent = `${monthName} ${currentViewYear}`;
+                summaryMonth.value = `${currentViewYear}-${String(currentViewMonth).padStart(2, '0')}`;
+            }
+        }
+
+        // Update email preview
+        function updateEmailPreview() {
+            if (expenses.length === 0) {
+                emailPreview.innerHTML = '<p>No data to send. Add some expenses or income first.</p>';
+                return;
+            }
+
+            // Calculate summary
+            const totalIncome = expenses
+                .filter(item => item.type === 'income')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalExpenses = expenses
+                .filter(item => item.type === 'expense')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalSavings = totalIncome - totalExpenses;
+            const totalEntriesCount = expenses.length;
+
+            // Create preview
+            const preview = `
+                <p><strong>Report Summary:</strong></p>
+                <p>Total Entries: ${totalEntriesCount}</p>
+                <p>Total Income: ₹${totalIncome.toLocaleString('en-IN')}</p>
+                <p>Total Expenses: ₹${totalExpenses.toLocaleString('en-IN')}</p>
+                <p>Total Savings: ₹${totalSavings.toLocaleString('en-IN')}</p>
+                <p>Period: ${getDateRange()}</p>
+                <p><em>This email will contain your complete financial data in the selected format.</em></p>
+            `;
+
+            emailPreview.innerHTML = preview;
+        }
+
+        // Get date range for email
+        function getDateRange() {
+            if (expenses.length === 0) return 'No data';
+
+            const dates = expenses.map(e => new Date(e.date));
+            const minDate = new Date(Math.min(...dates));
+            const maxDate = new Date(Math.max(...dates));
+
+            return `${minDate.toLocaleDateString()} to ${maxDate.toLocaleDateString()}`;
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const savedExpenses = localStorage.getItem('expenseTrackerData');
+            const savedUndoStack = localStorage.getItem('expenseTrackerUndoStack');
+
+            if (savedExpenses) {
+                expenses = JSON.parse(savedExpenses);
+            }
+
+            if (savedUndoStack) {
+                undoStack = JSON.parse(savedUndoStack);
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('expenseTrackerData', JSON.stringify(expenses));
+            localStorage.setItem('expenseTrackerUndoStack', JSON.stringify(undoStack));
+        }
+
+        // Update the UI with current data
+        function updateUI() {
+            updateExpenseList();
+            updateMonthlyTable();
+            updateSummary();
+            updateCategoryBreakdown();
+            updateQuickStats();
+        }
+
+        // Update the expense list for current month
+        function updateExpenseList() {
+            let filteredExpenses = expenses;
+
+            if (!viewAllMonths) {
+                filteredExpenses = expenses.filter(expense => {
+                    const expenseDate = new Date(expense.date);
+                    return expenseDate.getFullYear() === currentViewYear &&
+                        expenseDate.getMonth() + 1 === currentViewMonth;
+                });
+            }
+
+            if (filteredExpenses.length === 0) {
+                expenseList.innerHTML = '<div class="empty-state">No entries found for this period</div>';
+                return;
+            }
+
+            // Sort by date (newest first)
+            const sortedExpenses = [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            expenseList.innerHTML = '';
+            sortedExpenses.forEach(expense => {
+                const expenseItem = document.createElement('div');
+                expenseItem.className = 'expense-item';
+
+                const formattedDate = new Date(expense.date).toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+
+                expenseItem.innerHTML = `
+                    <div>
+                        <div class="expense-name">${expense.category}</div>
+                        <div style="font-size: 12px; color: #7f8c8d;">${formattedDate} ${expense.notes ? '• ' + expense.notes : ''}</div>
+                    </div>
+                    <div class="${expense.type === 'income' ? 'income-amount' : 'expense-amount'}">
+                        ${expense.type === 'expense' ? '-' : '+'}₹${expense.amount.toLocaleString('en-IN')}
+                    </div>
+                `;
+
+                expenseList.appendChild(expenseItem);
+            });
+        }
+
+        // Update the monthly table (auto-generated from entries)
+        function updateMonthlyTable() {
+            // Group expenses by month
+            const monthlySummary = {};
+
+            expenses.forEach(expense => {
+                const date = new Date(expense.date);
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1;
+                const key = `${year}-${month}`;
+
+                if (!monthlySummary[key]) {
+                    monthlySummary[key] = {
+                        year: year,
+                        month: month,
+                        monthName: getMonthName(month),
+                        income: 0,
+                        expenses: 0,
+                        balance: 0
+                    };
+                }
+
+                if (expense.type === 'income') {
+                    monthlySummary[key].income += expense.amount;
+                    monthlySummary[key].balance += expense.amount;
+                } else {
+                    monthlySummary[key].expenses += expense.amount;
+                    monthlySummary[key].balance -= expense.amount;
+                }
+            });
+
+            // Convert to array and sort by year and month
+            const monthlyArray = Object.values(monthlySummary);
+            monthlyArray.sort((a, b) => {
+                if (a.year !== b.year) return b.year - a.year; // Newest first
+                return b.month - a.month;
+            });
+
+            // Calculate running balance
+            let runningBalance = 0;
+            monthlyArray.forEach(month => {
+                runningBalance += month.balance;
+                month.runningBalance = runningBalance;
+            });
+
+            if (monthlyArray.length === 0) {
+                monthlyDataTable.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center;">No monthly data available</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            monthlyDataTable.innerHTML = '';
+            monthlyArray.forEach(month => {
+                const row = document.createElement('tr');
+                const savings = month.income - month.expenses;
+
+                row.innerHTML = `
+                    <td>${month.monthName} ${month.year}</td>
+                    <td class="positive">₹${month.income.toLocaleString('en-IN')}</td>
+                    <td class="negative">₹${month.expenses.toLocaleString('en-IN')}</td>
+                    <td class="${savings >= 0 ? 'positive' : 'negative'}">₹${savings.toLocaleString('en-IN')}</td>
+                    <td class="${month.runningBalance >= 0 ? 'positive' : 'negative'}">₹${month.runningBalance.toLocaleString('en-IN')}</td>
+                `;
+
+                monthlyDataTable.appendChild(row);
+            });
+        }
+
+        // Update the summary section
+        function updateSummary() {
+            // Calculate totals
+            const totalIncome = expenses
+                .filter(item => item.type === 'income')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalExpenses = expenses
+                .filter(item => item.type === 'expense')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalSavings = totalIncome - totalExpenses;
+            const missingAmount = calculateMissingAmount(totalIncome, totalExpenses);
+
+            totalIncomeEl.textContent = `₹${totalIncome.toLocaleString('en-IN')}`;
+            totalExpensesEl.textContent = `₹${totalExpenses.toLocaleString('en-IN')}`;
+            totalSavingsEl.textContent = `₹${totalSavings.toLocaleString('en-IN')}`;
+            missingAmountEl.textContent = `₹${missingAmount.toLocaleString('en-IN')}`;
+
+            // Color coding for savings
+            if (totalSavings >= 0) {
+                totalSavingsEl.className = 'summary-value positive';
+            } else {
+                totalSavingsEl.className = 'summary-value negative';
+            }
+        }
+
+        // Update category breakdown
+        function updateCategoryBreakdown() {
+            let filteredExpenses = expenses;
+
+            if (!viewAllMonths) {
+                filteredExpenses = expenses.filter(expense => {
+                    const expenseDate = new Date(expense.date);
+                    return expenseDate.getFullYear() === currentViewYear &&
+                        expenseDate.getMonth() + 1 === currentViewMonth;
+                });
+            }
+
+            // Group by category
+            const categorySummary = {};
+            let totalForPeriod = 0;
+
+            filteredExpenses.forEach(expense => {
+                if (expense.type === 'expense') {
+                    if (!categorySummary[expense.category]) {
+                        categorySummary[expense.category] = 0;
+                    }
+                    categorySummary[expense.category] += expense.amount;
+                    totalForPeriod += expense.amount;
+                }
+            });
+
+            // Convert to array and sort by amount (highest first)
+            const categoryArray = Object.entries(categorySummary)
+                .map(([category, amount]) => ({ category, amount }))
+                .sort((a, b) => b.amount - a.amount);
+
+            if (categoryArray.length === 0) {
+                categoryBreakdown.innerHTML = '<div class="empty-state">No expense data for this period</div>';
+                return;
+            }
+
+            categoryBreakdown.innerHTML = '';
+            categoryArray.forEach(item => {
+                const percentage = totalForPeriod > 0 ? Math.round((item.amount / totalForPeriod) * 100) : 0;
+
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'category-item';
+                categoryItem.innerHTML = `
+                    <div class="category-name">${item.category}</div>
+                    <div class="category-amount negative">
+                        ₹${item.amount.toLocaleString('en-IN')} (${percentage}%)
+                    </div>
+                `;
+                categoryBreakdown.appendChild(categoryItem);
+            });
+        }
+
+        // Update quick stats
+        function updateQuickStats() {
+            totalEntries.textContent = expenses.length;
+
+            // Last 30 days spending
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+            const last30DaysSpending = expenses
+                .filter(item => item.type === 'expense' && new Date(item.date) >= thirtyDaysAgo)
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            last30Days.textContent = `₹${last30DaysSpending.toLocaleString('en-IN')}`;
+
+            // Average monthly expenses
+            const monthlyExpensesMap = {};
+            expenses.forEach(expense => {
+                if (expense.type === 'expense') {
+                    const date = new Date(expense.date);
+                    const key = `${date.getFullYear()}-${date.getMonth() + 1}`;
+                    if (!monthlyExpensesMap[key]) {
+                        monthlyExpensesMap[key] = 0;
+                    }
+                    monthlyExpensesMap[key] += expense.amount;
+                }
+            });
+
+            const monthlyExpensesArray = Object.values(monthlyExpensesMap);
+            const avgMonthly = monthlyExpensesArray.length > 0
+                ? monthlyExpensesArray.reduce((sum, amount) => sum + amount, 0) / monthlyExpensesArray.length
+                : 0;
+
+            avgMonthlyExpenses.textContent = `₹${Math.round(avgMonthly).toLocaleString('en-IN')}`;
+
+            // Biggest expense
+            const expensesOnly = expenses.filter(item => item.type === 'expense');
+            const biggest = expensesOnly.length > 0
+                ? Math.max(...expensesOnly.map(item => item.amount))
+                : 0;
+
+            biggestExpense.textContent = `₹${biggest.toLocaleString('en-IN')}`;
+        }
+
+        // Update undo history display
+        function updateUndoHistory() {
+            if (undoStack.length === 0) {
+                undoHistory.textContent = 'No recent entries to undo';
+                undoBtn.disabled = true;
+                undoBtn.style.opacity = '0.6';
+            } else {
+                const lastEntry = undoStack[undoStack.length - 1].entry;
+                const entryType = lastEntry.type === 'expense' ? 'Expense' : 'Income';
+                undoHistory.textContent = `Last entry: ${entryType} of ₹${lastEntry.amount} on ${new Date(lastEntry.date).toLocaleDateString()}`;
+                undoBtn.disabled = false;
+                undoBtn.style.opacity = '1';
+            }
+        }
+
+        // Calculate missing amount (based on your Excel formula)
+        function calculateMissingAmount(totalIncome, totalExpenses) {
+            const missing = totalIncome - totalExpenses;
+            return Math.abs(missing);
+        }
+
+        // Get month name from month number
+        function getMonthName(monthNumber) {
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            return months[monthNumber - 1];
+        }
+
+        // Export data as CSV
+        function exportData() {
+            const csvContent = generateCSV();
+
+            // Create download link
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `expense-tracker-${new Date().toISOString().slice(0, 10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            showStatus('Data exported successfully as CSV file', 'success');
+        }
+
+        // Generate CSV content
+        function generateCSV() {
+            let csvContent = "Expense/Income Data\n";
+            csvContent += "Type,Category,Amount,Date,Notes\n";
+
+            expenses.forEach(expense => {
+                csvContent += `${expense.type},${expense.category},${expense.amount},${expense.date},"${expense.notes || ''}"\n`;
+            });
+
+            return csvContent;
+        }
+
+        // Generate HTML report
+        function generateHTMLReport() {
+            // Calculate totals
+            const totalIncome = expenses
+                .filter(item => item.type === 'income')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalExpenses = expenses
+                .filter(item => item.type === 'expense')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalSavings = totalIncome - totalExpenses;
+
+            // Group expenses by month for summary
+            const monthlySummary = {};
+            expenses.forEach(expense => {
+                const date = new Date(expense.date);
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1;
+                const key = `${year}-${month}`;
+
+                if (!monthlySummary[key]) {
+                    monthlySummary[key] = {
+                        year: year,
+                        month: month,
+                        monthName: getMonthName(month),
+                        income: 0,
+                        expenses: 0
+                    };
+                }
+
+                if (expense.type === 'income') {
+                    monthlySummary[key].income += expense.amount;
+                } else {
+                    monthlySummary[key].expenses += expense.amount;
+                }
+            });
+
+            const monthlyArray = Object.values(monthlySummary);
+            monthlyArray.sort((a, b) => {
+                if (a.year !== b.year) return b.year - a.year;
+                return b.month - a.month;
+            });
+
+            // Generate HTML
+            let html = `
+                <html>
+                <head>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                        h1 { color: #2c3e50; }
+                        h2 { color: #3498db; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+                        .summary { background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+                        .summary-item { display: flex; justify-content: space-between; padding: 5px 0; }
+                        .positive { color: #27ae60; }
+                        .negative { color: #e74c3c; }
+                        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+                        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+                        th { background-color: #f8f9fa; font-weight: bold; }
+                        .footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee; font-size: 12px; color: #7f8c8d; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Expense Tracker Report</h1>
+                    <p>Generated on: ${new Date().toLocaleDateString()}</p>
+                    
+                    <div class="summary">
+                        <h2>Summary</h2>
+                        <div class="summary-item">
+                            <span>Total Entries:</span>
+                            <span>${expenses.length}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Income:</span>
+                            <span class="positive">₹${totalIncome.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Expenses:</span>
+                            <span class="negative">₹${totalExpenses.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Savings:</span>
+                            <span class="${totalSavings >= 0 ? 'positive' : 'negative'}">₹${totalSavings.toLocaleString('en-IN')}</span>
+                        </div>
+                    </div>
+                    
+                    <h2>Monthly Breakdown</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Income</th>
+                                <th>Expenses</th>
+                                <th>Savings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            monthlyArray.forEach(month => {
+                const savings = month.income - month.expenses;
+                html += `
+                    <tr>
+                        <td>${month.monthName} ${month.year}</td>
+                        <td class="positive">₹${month.income.toLocaleString('en-IN')}</td>
+                        <td class="negative">₹${month.expenses.toLocaleString('en-IN')}</td>
+                        <td class="${savings >= 0 ? 'positive' : 'negative'}">₹${savings.toLocaleString('en-IN')}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                    
+                    <h2>Recent Transactions</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            // Show last 20 entries
+            const recentExpenses = [...expenses].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 20);
+            recentExpenses.forEach(expense => {
+                html += `
+                    <tr>
+                        <td>${new Date(expense.date).toLocaleDateString()}</td>
+                        <td>${expense.type}</td>
+                        <td>${expense.category}</td>
+                        <td class="${expense.type === 'income' ? 'positive' : 'negative'}">₹${expense.amount.toLocaleString('en-IN')}</td>
+                        <td>${expense.notes || ''}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                    
+                    <div class="footer">
+                        <p>Generated by Expense & Income Tracker</p>
+                        <p>This is an automated report. For detailed data, please use the CSV attachment.</p>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            return html;
+        }
+
+        // Simulate email sending
+        function simulateEmailSending(email, subject, format) {
+            const csvContent = generateCSV();
+            const htmlContent = generateHTMLReport();
+
+            // Create a summary of what would be sent
+            let message = `Email would be sent to: ${email}\n`;
+            message += `Subject: ${subject}\n`;
+            message += `Format: ${format}\n\n`;
+
+            if (format === 'csv' || format === 'both') {
+                message += `CSV File (${csvContent.length} bytes):\n`;
+                message += "Contains all your expense/income data in CSV format.\n\n";
+            }
+
+            if (format === 'html' || format === 'both') {
+                message += `HTML Report (${htmlContent.length} bytes):\n`;
+                message += "Contains a formatted summary of your financial data.\n";
+            }
+
+            message += "\nSince this is a front-end only app, the email is not actually sent.\n";
+            message += "You can copy your data using the Export Data button or save the report below:\n\n";
+
+            // Show the data to the user
+            alert(message);
+
+            // Also provide download options
+            if (format === 'csv' || format === 'both') {
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `expense-report-${new Date().toISOString().slice(0, 10)}.csv`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }
+
+            if (format === 'html' || format === 'both') {
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `expense-report-${new Date().toISOString().slice(0, 10)}.html`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }
+
+            // Close modal and show status
+            emailModal.style.display = 'none';
+            resetEmailForm();
+            showStatus('Email report generated and saved locally', 'success');
+        }
+
+        // Validate email format
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Reset email form
+        function resetEmailForm() {
+            emailAddress.value = '';
+            emailSubject.value = 'Expense Tracker Report';
+            document.getElementById('formatCsv').checked = true;
+        }
+
+        // Import CSV data
+        function importCSVData(csvText) {
+            try {
+                // Parse CSV data
+                const lines = csvText.split('\n');
+                const importedExpenses = [];
+
+                let currentSection = null;
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+
+                    // Skip empty lines
+                    if (!line) continue;
+
+                    // Check for section headers
+                    if (line === 'Expense/Income Data') {
+                        currentSection = 'expenses';
+                        // Skip the header row
+                        i++;
+                        continue;
+                    }
+
+                    // Parse data based on current section
+                    if (currentSection === 'expenses') {
+                        // Parse expense/income data
+                        const parts = parseCSVLine(line);
+                        if (parts.length >= 5) {
+                            const [type, category, amount, date, notes] = parts;
+                            importedExpenses.push({
+                                id: Date.now() + i, // Simple ID generation
+                                type: type.trim(),
+                                category: category.trim(),
+                                amount: parseFloat(amount.trim()),
+                                date: date.trim(),
+                                notes: notes.trim().replace(/"/g, ''),
+                                timestamp: new Date().toISOString()
+                            });
+                        }
+                    }
+                }
+
+                // Apply import based on selected mode
+                if (importMode === 'replace') {
+                    // Replace all data
+                    expenses = importedExpenses;
+                    undoStack = [];
+                    showStatus('All data replaced with imported data', 'success');
+                } else {
+                    // Merge data
+                    // For expenses, add only if not already present (simple check)
+                    const existingExpenseKeys = new Set(expenses.map(e => `${e.type}-${e.category}-${e.amount}-${e.date}`));
+
+                    importedExpenses.forEach(expense => {
+                        const key = `${expense.type}-${expense.category}-${expense.amount}-${expense.date}`;
+                        if (!existingExpenseKeys.has(key)) {
+                            expenses.push(expense);
+                            // Add to undo stack for each new entry
+                            undoStack.push({
+                                action: 'add',
+                                entry: expense
+                            });
+                        }
+                    });
+
+                    showStatus('Imported data merged with existing data', 'success');
+                }
+
+                // Save to localStorage and update UI
+                saveData();
+                updateUI();
+                updateUndoHistory();
+
+                // Close modal and reset form
+                importModal.style.display = 'none';
+                resetImportForm();
+
+            } catch (error) {
+                showStatus('Error importing CSV file. Please make sure it was exported from this app.', 'error');
+                console.error('Import error:', error);
+            }
+        }
+
+        // Parse CSV line considering quoted fields
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+
+            // Add the last field
+            result.push(current);
+            return result;
+        }
+
+        // Reset import form
+        function resetImportForm() {
+            selectedFile = null;
+            csvFileInput.value = '';
+            fileName.textContent = '';
+            fileInputLabel.textContent = 'Click to select CSV file or drag and drop here';
+            fileInputLabel.style.backgroundColor = '#f8f9fa';
+            fileInputLabel.style.borderColor = '#ddd';
+
+            // Reset to default import mode
+            mergeOption.classList.add('selected');
+            replaceOption.classList.remove('selected');
+            importMode = 'merge';
+        }
+
+        // Show status message
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.style.display = 'block';
+
+            // Hide message after 3 seconds
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 3000);
+        }
+        
+    </script>
+    <!-- Add this to the existing script section -->
+    
+    <script>
+        // In the simulateEmailSending function, replace it with:
+
+        function sendEmailViaMailto(email, subject, format) {
+            const csvContent = generateCSV();
+            const htmlContent = generateHTMLReport();
+
+            let emailBody = `Expense Tracker Report\n`;
+            emailBody += `Generated on: ${new Date().toLocaleDateString()}\n`;
+            emailBody += `Total Entries: ${expenses.length}\n\n`;
+
+            // Add summary
+            const totalIncome = expenses
+                .filter(item => item.type === 'income')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalExpenses = expenses
+                .filter(item => item.type === 'expense')
+                .reduce((sum, item) => sum + item.amount, 0);
+
+            const totalSavings = totalIncome - totalExpenses;
+
+            emailBody += `SUMMARY:\n`;
+            emailBody += `Total Income: ₹${totalIncome.toLocaleString('en-IN')}\n`;
+            emailBody += `Total Expenses: ₹${totalExpenses.toLocaleString('en-IN')}\n`;
+            emailBody += `Total Savings: ₹${totalSavings.toLocaleString('en-IN')}\n\n`;
+
+            emailBody += `Your data is attached as ${format} file(s).\n\n`;
+            emailBody += `---\n`;
+            emailBody += `This report was generated by Expense & Income Tracker\n`;
+            emailBody += `(Offline web app)`;
+
+            // Create mailto link
+            let mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+
+            // Create files for attachment simulation
+            const files = [];
+
+            if (format === 'csv' || format === 'both') {
+                const csvBlob = new Blob([csvContent], { type: 'text/csv' });
+                const csvUrl = URL.createObjectURL(csvBlob);
+                files.push({
+                    name: `expense-report-${new Date().toISOString().slice(0, 10)}.csv`,
+                    url: csvUrl,
+                    type: 'CSV file'
+                });
+            }
+
+            if (format === 'html' || format === 'both') {
+                const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+                const htmlUrl = URL.createObjectURL(htmlBlob);
+                files.push({
+                    name: `expense-report-${new Date().toISOString().slice(0, 10)}.html`,
+                    url: htmlUrl,
+                    type: 'HTML report'
+                });
+            }
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Show download links for files (since mailto can't attach files)
+            setTimeout(() => {
+                let downloadMessage = `Email client opened with report summary.\n\n`;
+                downloadMessage += `Since mailto links can't attach files, please download:\n\n`;
+
+                files.forEach((file, index) => {
+                    downloadMessage += `${index + 1}. ${file.type}: Click OK to download\n`;
+                });
+
+                if (confirm(downloadMessage)) {
+                    files.forEach(file => {
+                        const a = document.createElement('a');
+                        a.href = file.url;
+                        a.download = file.name;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        setTimeout(() => URL.revokeObjectURL(file.url), 100);
+                    });
+                }
+
+                // Clean up
+                files.forEach(file => {
+                    setTimeout(() => URL.revokeObjectURL(file.url), 1000);
+                });
+            }, 500);
+
+            // Close modal and show status
+            emailModal.style.display = 'none';
+            resetEmailForm();
+            showStatus('Email client opened with report. Download files when prompted.', 'success');
+        }
+    </script>
+</body>
+
+</html>

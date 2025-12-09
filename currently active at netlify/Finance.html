@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Finance Guide: GoldBees SIP + Smart Money Management</title>
+  <style>
+    :root {
+      --bg: #0f1720;
+      --card: #0b1220;
+      --muted: #95a0ab;
+      --accent: #16a34a;
+      --gold: #FFD700;
+      --silver: #C0C0C0;
+      --bronze: #CD7F32;
+      --glass: rgba(255, 255, 255, 0.03);
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #07101a 0%, #0c1821 100%);
+      color: #e6eef6;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 0;
+      background: linear-gradient(90deg, var(--gold), #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin: 10px 0 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    @media(max-width:900px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    /* Typography */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 {
+      font-size: 18px;
+      margin: 0;
+      color: #e6eef6;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    ul,
+    ol {
+      margin: 12px 0 12px 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* Highlights */
+    .highlight {
+      background: linear-gradient(90deg, rgba(22, 163, 74, 0.1), transparent);
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      margin: 16px 0;
+    }
+
+    .warning {
+      background: linear-gradient(90deg, rgba(220, 38, 38, 0.1), transparent);
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 4px solid #dc2626;
+      margin: 16px 0;
+    }
+
+    .tip {
+      background: linear-gradient(90deg, rgba(234, 179, 8, 0.1), transparent);
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 4px solid #eab308;
+      margin: 16px 0;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #0ea5a4, #0891b2);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 15px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(14, 165, 164, 0.3);
+    }
+
+    .btn-gold {
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      color: #1a1a1a;
+    }
+
+    .btn-danger {
+      background: linear-gradient(90deg, #dc2626, #b91c1c);
+      color: white;
+    }
+
+    /* Download Cards */
+    .download-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .file-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .file-card:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    }
+
+    .file-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .file-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: #e6eef6;
+    }
+
+    .file-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .file-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Progress & Stats */
+    .progress-container {
+      margin: 20px 0;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #0ea5a4);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Timeline */
+    .timeline {
+      margin: 24px 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .timeline-item {
+      margin-bottom: 24px;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .timeline-content {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.3s ease;
+    }
+
+    .tab.active {
+      background: var(--card);
+      color: #e6eef6;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Code */
+    code {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: #cfead3;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Coming Soon */
+    .coming-soon {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 165, 0, 0.05));
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .coming-soon h3 {
+      margin-top: 0;
+      color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>💰 Financial Freedom Guide</h1>
+        <p class="lead">Master GoldBees SIP, track expenses like a pro, and build wealth with these offline tools</p>
+      </div>
+      <div style="text-align:right">
+        <button id="downloadPageBtn" class="btn">
+          <span>📥 Download Complete Guide</span>
+        </button>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px">Take it offline • Share with friends</div>
+      </div>
+    </header>
+
+    <div class="tabs" id="tabContainer">
+      <div class="tab active" onclick="switchTab('gold')">🥇 GoldBees Guide</div>
+      <div class="tab" onclick="switchTab('tracker')">📊 Expense Trackers</div>
+      <div class="tab" onclick="switchTab('tips')">💡 Smart Money Tips</div>
+    </div>
+
+    <div class="grid">
+      <!-- Left: Main Content -->
+      <div>
+        <!-- GoldBees Tab -->
+        <div id="goldTab" class="tab-content">
+          <div class="card">
+            <div class="section-title">
+              <div
+                style="width:40px;height:40px;background:linear-gradient(135deg, var(--gold), #FFA500);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;">
+                🥇</div>
+              <div>
+                <h2>The GoldBees SIP Strategy</h2>
+                <div class="muted" style="font-size:14px">How to automate gold investment safely with Paytm Money</div>
+              </div>
+            </div>
+
+            <div class="highlight">
+              <strong>🎯 The Golden Rule:</strong> Paytm Money SIPs need funds in your trading account BEFORE the SIP
+              date. It doesn't auto-debit your bank via GPay.
+            </div>
+
+            <div class="progress-container">
+              <div class="muted" style="margin-bottom:8px;">SIP Success Probability</div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="sipProgress" style="width: 95%"></div>
+              </div>
+              <div class="progress-text">
+                <span>Without Funds: 30%</span>
+                <span>With Pre-loaded Funds: 95%</span>
+              </div>
+            </div>
+
+            <h3 style="margin-top:24px;color:#e6eef6;">📈 Your 4-Year Gold Investment Roadmap</h3>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">Month 0-6</div>
+                <div class="timeline-content">Set up ₹6,000/month SIP. Learn to pre-load funds. Build consistency habit.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Year 1-2</div>
+                <div class="timeline-content">Accumulation phase. Gold may fluctuate 15-20%. Stay invested through
+                  volatility.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Year 3</div>
+                <div class="timeline-content">Review performance. Consider increasing SIP amount by 10% if possible.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Year 4</div>
+                <div class="timeline-content">Decision time: Continue, convert to physical gold, or rebalance portfolio.
+                </div>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value">~2-3%</div>
+                <div class="stat-label">Annual Expense Ratio</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">20-30%</div>
+                <div class="stat-label">Possible Short-term Drop</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">₹2.88L</div>
+                <div class="stat-label">4-Year Investment (₹6K/mo)</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">₹8K-12K</div>
+                <div class="stat-label">Estimated Fees (4 years)</div>
+              </div>
+            </div>
+
+            <div class="tip" style="margin-top:24px;">
+              <strong>💡 Pro Tip:</strong> Set a calendar reminder 2 days before each SIP date to pre-load funds. Make
+              it a ritual!
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:20px;">
+            <div class="section-title">
+              <h2>Digital Gold vs Physical Gold: The Smart Choice</h2>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;">
+              <div style="padding:16px;background:rgba(22,163,74,0.05);border-radius:10px;">
+                <div style="font-weight:600;color:var(--accent);margin-bottom:8px;">🏆 Digital Gold (GoldBees)</div>
+                <ul style="margin:8px 0;font-size:14px;">
+                  <li>Fractional investment possible</li>
+                  <li>No storage/insurance costs</li>
+                  <li>Instant buying/selling</li>
+                  <li>Perfect for SIPs</li>
+                  <li>Transparent pricing</li>
+                </ul>
+              </div>
+
+              <div style="padding:16px;background:rgba(220,38,38,0.05);border-radius:10px;">
+                <div style="font-weight:600;color:#dc2626;margin-bottom:8px;">📦 Physical Gold</div>
+                <ul style="margin:8px 0;font-size:14px;">
+                  <li>Making charges (8-15%)</li>
+                  <li>Storage & insurance needed</li>
+                  <li>Purity concerns possible</li>
+                  <li>Not fractional</li>
+                  <li>Hard to sell quickly</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="warning" style="margin-top:20px;">
+              <strong>⚠️ Critical:</strong> If converting digital to physical after 4 years, you'll pay making charges +
+              GST. Buy back is typically at 2-5% discount to market price.
+            </div>
+          </div>
+        </div>
+
+        <!-- Tracker Tab -->
+        <div id="trackerTab" class="tab-content" style="display:none;">
+          <div class="card">
+            <div class="section-title">
+              <div
+                style="width:40px;height:40px;background:linear-gradient(135deg, #3b82f6, #1d4ed8);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;">
+                📊</div>
+              <div>
+                <h2>Master Your Money with These Tools</h2>
+                <div class="muted" style="font-size:14px">Track every rupee, understand spending patterns, build wealth
+                </div>
+              </div>
+            </div>
+
+            <div class="highlight">
+              <strong>📈 The 50/30/20 Rule:</strong> 50% needs, 30% wants, 20% savings/investments. Our trackers help
+              you monitor this.
+            </div>
+
+            <div style="margin:24px 0;">
+              <h3 style="color:#e6eef6;margin-bottom:16px;">🎯 Choose Your Tracking Level</h3>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div
+                  style="padding:20px;background:linear-gradient(135deg, rgba(59,130,246,0.1), transparent);border-radius:12px;border:1px solid rgba(59,130,246,0.2);">
+                  <div style="font-weight:700;color:#3b82f6;margin-bottom:8px;">🏁 Beginner Level</div>
+                  <div style="font-size:14px;color:var(--muted);margin-bottom:12px;">Perfect for starting your financial
+                    journey</div>
+                  <ul style="font-size:14px;">
+                    <li>Track Income & Expenses</li>
+                    <li>Basic categorization</li>
+                    <li>CSV export/import</li>
+                    <li>Monthly summaries</li>
+                    <li>Simple & clean interface</li>
+                  </ul>
+                </div>
+
+                <div
+                  style="padding:20px;background:linear-gradient(135deg, rgba(139,92,246,0.1), transparent);border-radius:12px;border:1px solid rgba(139,92,246,0.2);">
+                  <div style="font-weight:700;color:#8b5cf6;margin-bottom:8px;">🚀 Pro Level</div>
+                  <div style="font-size:14px;color:var(--muted);margin-bottom:12px;">For serious money management</div>
+                  <ul style="font-size:14px;">
+                    <li>+ Debt & Investment tracking</li>
+                    <li>Advanced analytics</li>
+                    <li>Category breakdowns</li>
+                    <li>Downloadable app</li>
+                    <li>Quick stats dashboard</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">Week 1-2</div>
+                <div class="timeline-content">Track EVERY expense. No judgments, just observation.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Month 1</div>
+                <div class="timeline-content">Identify top 3 spending categories. Look for easy cuts.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Month 3</div>
+                <div class="timeline-content">Set specific saving goals. Automate investments.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Month 6</div>
+                <div class="timeline-content">Review progress. Celebrate wins. Adjust strategy.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips Tab -->
+        <div id="tipsTab" class="tab-content" style="display:none;">
+          <div class="card">
+            <div class="section-title">
+              <div
+                style="width:40px;height:40px;background:linear-gradient(135deg, #10b981, #059669);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;">
+                💡</div>
+              <div>
+                <h2>Smart Money Habits That Build Wealth</h2>
+                <div class="muted" style="font-size:14px">Small changes, big impact over time</div>
+              </div>
+            </div>
+
+            <div class="tip">
+              <strong>🎯 The Latte Factor:</strong> That daily ₹200 coffee = ₹6,000/month = ₹72,000/year. Invested at
+              12% for 10 years = ₹12+ lakhs!
+            </div>
+
+            <div style="margin:24px 0;">
+              <h3 style="color:#e6eef6;margin-bottom:16px;">💰 5 Money Rules That Work</h3>
+
+              <div style="display:grid;gap:12px;">
+                <div
+                  style="padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:4px solid #10b981;">
+                  <div style="font-weight:600;color:#10b981;">1. Pay Yourself First</div>
+                  <div style="color:var(--muted);font-size:14px;margin-top:4px;">Transfer 20% to savings/investments
+                    immediately when you get paid</div>
+                </div>
+
+                <div
+                  style="padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:4px solid #3b82f6;">
+                  <div style="font-weight:600;color:#3b82f6;">2. The 24-Hour Rule</div>
+                  <div style="color:var(--muted);font-size:14px;margin-top:4px;">Wait 24 hours before any non-essential
+                    purchase over ₹2,000</div>
+                </div>
+
+                <div
+                  style="padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:4px solid #f59e0b;">
+                  <div style="font-weight:600;color:#f59e0b;">3. One-In, One-Out</div>
+                  <div style="color:var(--muted);font-size:14px;margin-top:4px;">For every new item you buy, sell or
+                    donate an old one</div>
+                </div>
+
+                <div
+                  style="padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:4px solid #8b5cf6;">
+                  <div style="font-weight:600;color:#8b5cf6;">4. Track Net Worth Monthly</div>
+                  <div style="color:var(--muted);font-size:14px;margin-top:4px;">Assets minus liabilities. Focus on
+                    growing this number</div>
+                </div>
+
+                <div
+                  style="padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:4px solid #ec4899;">
+                  <div style="font-weight:600;color:#ec4899;">5. Automate Everything</div>
+                  <div style="color:var(--muted);font-size:14px;margin-top:4px;">SIPs, bill payments, savings transfers.
+                    Remove willpower from equation</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="warning">
+              <strong>⚠️ Common Pitfall:</strong> "I'll start investing when I earn more." Start with ₹500/month TODAY.
+              Habit > Amount.
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:20px;">
+            <div class="section-title">
+              <h2>🔄 The Compounding Magic</h2>
+            </div>
+
+            <div style="text-align:center;margin:20px 0;">
+              <div style="font-size:48px;font-weight:700;color:var(--accent);">8.4X</div>
+              <div style="color:var(--muted);">Your money grows in 20 years at 12% annual return</div>
+            </div>
+
+            <div class="progress-container">
+              <div class="progress-text">
+                <span>Year 1: ₹60,000</span>
+                <span>Year 10: ₹10.5 lakhs</span>
+                <span>Year 20: ₹50 lakhs+</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill"
+                  style="width: 100%;background:linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);"></div>
+              </div>
+              <div class="progress-text" style="margin-top:8px;">
+                <span>Start with ₹5,000/month</span>
+                <span>12% annual return</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="coming-soon">
+          <h3>🎁 More Guides Coming Soon!</h3>
+          <p style="color:var(--muted);margin-bottom:16px;">We're creating comprehensive guides on:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+            <span
+              style="padding:8px 16px;background:rgba(255,255,255,0.05);border-radius:20px;font-size:14px;">Emergency
+              Funds</span>
+            <span style="padding:8px 16px;background:rgba(255,255,255,0.05);border-radius:20px;font-size:14px;">Tax
+              Saving</span>
+            <span style="padding:8px 16px;background:rgba(255,255,255,0.05);border-radius:20px;font-size:14px;">Stock
+              Basics</span>
+            <span style="padding:8px 16px;background:rgba(255,255,255,0.05);border-radius:20px;font-size:14px;">Real
+              Estate</span>
+            <span
+              style="padding:8px 16px;background:rgba(255,255,255,0.05);border-radius:20px;font-size:14px;">Retirement
+              Planning</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Downloads & Tools -->
+      <aside>
+        <div class="card download-row">
+          <div class="section-title">
+            <h2>📥 Your Financial Tools</h2>
+          </div>
+
+          <div class="file-card">
+            <div class="file-header">
+              <div>
+                <div class="file-title">Expense Tracker (Basic)</div>
+                <div class="file-meta">Perfect for beginners • Track income & expenses • CSV export</div>
+              </div>
+              <div class="file-actions">
+                <button class="btn" onclick="downloadFile('Expense Tracker Offline App.html')">
+                  <span>⬇️ Download</span>
+                </button>
+              </div>
+            </div>
+            <div style="font-size:13px;color:var(--muted);">
+              <strong>Best for:</strong> Starting your tracking journey. Simple, clean, effective.
+            </div>
+          </div>
+
+          <div class="file-card">
+            <div class="file-header">
+              <div>
+                <div class="file-title">Expense Tracker Pro</div>
+                <div class="file-meta">Advanced features • Debt & Investment tracking • Analytics</div>
+              </div>
+              <div class="file-actions">
+                <button class="btn btn-gold" onclick="downloadFile('ExpTrackOfflinePro.html')">
+                  <span>🚀 Download Pro</span>
+                </button>
+              </div>
+            </div>
+            <div style="font-size:13px;color:var(--muted);">
+              <strong>Best for:</strong> Serious money management. Complete financial picture.
+            </div>
+          </div>
+
+          <div class="warning" style="margin-top:12px;">
+            <strong>⚠️ Safety First:</strong>
+            <ul style="margin:8px 0 0 16px;font-size:13px;">
+              <li>Export CSV before clearing browser cache</li>
+              <li>Backup your data monthly</li>
+              <li>Use on your personal devices only</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <button class="btn" id="tutorialBtn" onclick="showTutorial()">
+              <span>🎬 Quick Tutorial</span>
+            </button>
+            <button class="btn btn-danger" onclick="showBackupReminder()">
+              <span>💾 Backup Reminder</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+          <div class="section-title">
+            <h2>📈 Your 30-Day Challenge</h2>
+          </div>
+
+          <div id="challengeProgress" class="progress-container">
+            <div class="progress-text">
+              <span>Day <span id="currentDay">1</span> of 30</span>
+              <span><span id="progressPercent">0</span>% Complete</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="challengeBar" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <div style="font-weight:600;color:#e6eef6;margin-bottom:8px;">Today's Task:</div>
+            <div id="dailyTask" style="color:var(--muted);font-size:14px;">Download and open the basic tracker</div>
+          </div>
+
+          <button class="btn" style="width:100%;margin-top:16px;justify-content:center;" onclick="completeTask()">
+            <span>✅ Mark Today Complete</span>
+          </button>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+          <div class="section-title">
+            <h2>🔗 Quick Resources</h2>
+          </div>
+
+          <div style="display:grid;gap:10px;">
+            <a href="https://www.paytmmoney.com/" target="_blank"
+              style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;color:var(--muted);text-decoration:none;transition:all 0.3s;">
+              <span style="font-size:20px;">📱</span>
+              <div>
+                <div style="color:#e6eef6;font-weight:500;">Paytm Money</div>
+                <div style="font-size:12px;">Gold ETF & SIP platform</div>
+              </div>
+            </a>
+
+            <a href="https://www.nseindia.com/market-data/etf-exchange-traded-fund" target="_blank"
+              style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;color:var(--muted);text-decoration:none;transition:all 0.3s;">
+              <span style="font-size:20px;">📈</span>
+              <div>
+                <div style="color:#e6eef6;font-weight:500;">NSE ETF Data</div>
+                <div style="font-size:12px;">Live ETF prices & performance</div>
+              </div>
+            </a>
+
+            <a href="https://in.investing.com/etfs/gold-etfs-india" target="_blank"
+              style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;color:var(--muted);text-decoration:none;transition:all 0.3s;">
+              <span style="font-size:20px;">💰</span>
+              <div>
+                <div style="color:#e6eef6;font-weight:500;">Gold ETF Comparison</div>
+                <div style="font-size:12px;">Expense ratios & returns</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+        <div>
+          <div style="color:#e6eef6;font-weight:500;margin-bottom:4px;">Financial Freedom Guide</div>
+          <div style="color:var(--muted);font-size:13px;">Start today. Be consistent. Build wealth.</div>
+        </div>
+        <div style="display:flex;gap:16px;">
+          <button class="btn" style="padding:8px 16px;font-size:13px;" onclick="sharePage()">📤 Share Guide</button>
+          <button class="btn btn-gold" style="padding:8px 16px;font-size:13px;" onclick="showMotivation()">💪 Daily
+            Motivation</button>
+        </div>
+      </div>
+      <div style="color:var(--muted);font-size:12px;margin-top:20px;text-align:center;">
+        Note: This guide is for educational purposes. Consult a financial advisor for personal advice.
+        <br>Tools work 100% offline. Data stored in your browser.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Tab switching
+    function switchTab(tabName) {
+      // Update tabs
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+
+      event.target.classList.add('active');
+      document.getElementById(tabName + 'Tab').style.display = 'block';
+    }
+
+    // Download helper - directly accesses files in same folder
+    function downloadFile(filename) {
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = filename;
+      link.download = filename;
+      link.target = '_blank';
+
+      // Append to body, click, and remove
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Show success message
+      alert(`✅ ${filename} downloaded!\n\nSave it and double-click to use offline.\n\nRemember to:\n1. Export data regularly\n2. Backup CSV files\n3. Keep learning!`);
+
+      // Also track the download in challenge if it's day 1
+      if (filename.includes('Expense Tracker Offline App.html') && challengeDay === 1) {
+        setTimeout(() => {
+          alert("🎉 Great! You've completed Day 1 of your 30-Day Challenge!\n\nTomorrow: Track ALL today's expenses in your new tracker.");
+        }, 1000);
+      }
+    }
+
+    // Download current page
+    document.getElementById('downloadPageBtn').addEventListener('click', function () {
+      const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Financial-Freedom-Guide.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      alert('📚 Complete guide downloaded!\n\nYou can now access this financial wisdom anytime, even offline!');
+    });
+
+    // 30-Day Challenge
+    let challengeDay = parseInt(localStorage.getItem('challengeDay')) || 1;
+    const tasks = [
+      "Download and open the basic tracker",
+      "Track ALL today's expenses",
+      "Identify your biggest spending category",
+      "Set a weekly eating-out budget",
+      "Review last week's spending",
+      "Cancel one unused subscription",
+      "Create a 'needs vs wants' list",
+      "Set up a ₹500/month investment",
+      "Track income for the month",
+      "Export your data as CSV",
+      "Try the 24-hour rule on a purchase",
+      "Calculate your net worth",
+      "Review investment performance",
+      "Plan next month's budget",
+      "Find one expense to reduce by 20%",
+      "Set up a savings goal",
+      "Automate one bill payment",
+      "Learn about emergency funds",
+      "Review insurance coverage",
+      "Calculate retirement needs",
+      "Start a side hustle idea list",
+      "Track time vs money trade-offs",
+      "Practice saying 'no' to impulse buys",
+      "Share a money tip with a friend",
+      "Review all financial accounts",
+      "Plan next quarter's investments",
+      "Celebrate one money win",
+      "Set 1-year financial goal",
+      "Create a debt payoff plan",
+      "Commit to continuing tracking"
+    ];
+
+    function updateChallenge() {
+      document.getElementById('currentDay').textContent = challengeDay;
+      const progressPercent = Math.min(Math.round((challengeDay / 30) * 100), 100);
+      document.getElementById('progressPercent').textContent = progressPercent;
+      document.getElementById('challengeBar').style.width = progressPercent + '%';
+      document.getElementById('dailyTask').textContent = tasks[challengeDay - 1];
+    }
+
+    function completeTask() {
+      if (challengeDay < 30) {
+        challengeDay++;
+        localStorage.setItem('challengeDay', challengeDay);
+        updateChallenge();
+
+        // Show motivation
+        const motivations = [
+          "Great start! Consistency is key. 🎯",
+          "Day 2 done! Small steps lead to big changes. 👣",
+          "Building momentum! You're forming a habit. 💪",
+          "Past the first week! Most people quit here, but not you. 🏆",
+          "Double digits! You're in the top 10% who stick with it. 🌟",
+          "Halfway there! Look how far you've come. 🎉",
+          "Final stretch! Financial freedom awaits. 🚀",
+          "Complete! You've built a powerful money habit. 🏅"
+        ];
+
+        const motivationIndex = Math.min(Math.floor(challengeDay / 4), 7);
+        alert(`✅ Day ${challengeDay - 1} complete!\n\n${motivations[motivationIndex]}\n\nToday: ${tasks[challengeDay - 1]}`);
+      } else {
+        alert("🎉 30-Day Challenge Complete!\n\nYou've built a powerful money management habit. Keep going - financial freedom is a journey, not a destination!");
+      }
+    }
+
+    // Tutorial
+    function showTutorial() {
+      alert(`📚 How to Use Your Financial Tools:\n\n1. DOWNLOAD: Click the download buttons for the trackers\n2. SAVE: Keep the .html files on your device\n3. OPEN: Double-click to use in any browser\n4. TRACK: Add your income, expenses, etc.\n5. EXPORT: Regularly export as CSV for backup\n6. IMPORT: Restore data if needed\n\n💡 Pro Tip: Start with Basic, move to Pro after 1 month.`);
+    }
+
+    function showBackupReminder() {
+      alert(`💾 CRITICAL BACKUP REMINDER:\n\nThese tools store data in your browser's memory (localStorage).\n\n🔴 You WILL LOSE DATA if you:\n• Clear browser cache/cookies\n• Use private/incognito mode\n• Switch browsers/devices\n\n🟢 PROTECT YOUR DATA:\n1. Click "Export Data" in the tracker weekly\n2. Save the CSV file somewhere safe\n3. Email it to yourself or use cloud storage\n\nBetter safe than sorry!`);
+    }
+
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Financial Freedom Guide',
+          text: 'Check out this amazing guide to GoldBees SIP and expense tracking!',
+          url: window.location.href
+        });
+      } else {
+        alert('Share this URL: ' + window.location.href + '\n\nHelp others start their financial journey!');
+      }
+    }
+
+    function showMotivation() {
+      const quotes = [
+        "The best time to start investing was 20 years ago. The second best time is now.",
+        "Don't save what is left after spending; spend what is left after saving.",
+        "Rich people have small TVs and big libraries. Poor people have big TVs and small libraries.",
+        "Financial freedom is available to those who learn about it and work for it.",
+        "Every rupee you don't spend today is a rupee working for you tomorrow.",
+        "The habit of saving is itself an education; it fosters every virtue.",
+        "Wealth is not about having a lot of money; it's about having a lot of options."
+      ];
+      alert(`💪 Daily Motivation:\n\n"${quotes[Math.floor(Math.random() * quotes.length)]}"`);
+    }
+
+    // Check if files exist
+    function checkFilesExist() {
+      const files = ['ExpTrackOfflinePro.html', 'Expense Tracker Offline App.html'];
+      files.forEach(file => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', file, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 404) {
+              console.warn(`File not found: ${file}`);
+            }
+          }
+        };
+        xhr.send();
+      });
+    }
+
+    // Initialize
+    updateChallenge();
+    checkFilesExist();
+
+    // Auto-open tracker tab if there's a hash in URL
+    window.addEventListener('load', function () {
+      if (window.location.hash === '#trackers') {
+        switchTab('tracker');
+      }
+    });
+  </script>
+</body>
+
+</html>
