@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense & Income Tracker</title>
+    <title>Expense & Income Tracker with Charts</title>
+    <!-- Add Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -103,6 +105,30 @@
 
         .download-btn:hover {
             background-color: #d35400;
+        }
+
+        .calculator-btn {
+            background-color: #2c3e50;
+        }
+
+        .calculator-btn:hover {
+            background-color: #1a252f;
+        }
+
+        .split-btn {
+            background-color: #8e44ad;
+        }
+
+        .split-btn:hover {
+            background-color: #7d3c98;
+        }
+
+        .charts-btn {
+            background-color: #16a085;
+        }
+
+        .charts-btn:hover {
+            background-color: #138a72;
         }
 
         .app-container {
@@ -585,7 +611,6 @@
             border-bottom: none;
         }
 
-        /* New styles for additional summary boxes */
         .summary-section-four {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -606,13 +631,484 @@
         .investment-amount-color {
             color: #9b59b6;
         }
+
+        /* Calculator Styles */
+        .calculator-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calculator-content {
+            background-color: rgb(238, 255, 0);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .calculator-display {
+            width: 100%;
+            height: 60px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calc-btn {
+            padding: 15px;
+            font-size: 20px;
+            background-color: #780a0a;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calc-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .calc-btn.number {
+            background-color: rgb(0, 0, 0);
+            font-weight: 500;
+        }
+
+        .calc-btn.operator {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+            font-weight: 500;
+        }
+
+        .calc-btn.operator:hover {
+            background-color: #2980b9;
+        }
+
+        .calc-btn.clear {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+            font-weight: 500;
+        }
+
+        .calc-btn.clear:hover {
+            background-color: #c0392b;
+        }
+
+        .calc-btn.equals {
+            background-color: #27ae60;
+            color: white;
+            border-color: #219653;
+            grid-column: span 2;
+            font-weight: 500;
+        }
+
+        .calc-btn.equals:hover {
+            background-color: #219653;
+        }
+
+        .calculator-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+        /* Split Bill Styles */
+        .split-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .split-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .split-person {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .split-person input {
+            flex: 1;
+        }
+
+        .split-person-amount {
+            min-width: 100px;
+            font-weight: 600;
+            color: #27ae60;
+            text-align: right;
+        }
+
+        .split-results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .split-result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .split-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .split-method-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .split-method-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .split-method-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .split-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .fraction-input {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .fraction-input input {
+            width: 60px;
+            text-align: center;
+        }
+
+        .percentage-input {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .percentage-input input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .percentage-input span {
+            font-weight: 600;
+        }
+
+        .split-error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: center;
+            padding: 5px;
+            background-color: #f8d7da;
+            border-radius: 3px;
+        }
+
+        .split-total {
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            margin: 15px 0;
+            color: #2c3e50;
+        }
+
+        .remaining-amount {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .split-remaining {
+            color: #e67e22;
+            font-weight: 600;
+        }
+
+        .custom-remaining {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff3cd;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Charts Styles - WHITE AND BLUE THEME */
+        .charts-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .charts-content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .chart-toggle-btn {
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .chart-toggle-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            margin: 20px 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 1px dashed #ddd;
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            padding: 5px 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+
+        .legend-label {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .legend-value {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .chart-title {
+            text-align: center;
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        .time-period-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .time-period-btn {
+            padding: 8px 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .time-period-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .charts-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .no-data-chart {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 40px;
+        }
+
+        .chart-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .chart-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+        }
+
+        .chart-option input[type="checkbox"] {
+            width: auto;
+        }
+
+        .chart-type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .chart-type-btn {
+            padding: 8px 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .chart-type-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        /* For canvas charts */
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>Expense & Income Tracker</h1>
+            <h1>Expense & Income Tracker with Charts</h1>
             <div class="subtitle">Track your finances offline - Data stored locally in your browser</div>
         </header>
 
@@ -620,6 +1116,9 @@
             <div>
                 <button id="addExpenseBtn">Add Transaction</button>
                 <button id="undoBtn" class="undo-btn">Undo Last Entry</button>
+                <button id="calculatorBtn" class="calculator-btn">Calculator</button>
+                <button id="splitBtn" class="split-btn">Split Bill</button>
+                <button id="chartsBtn" class="charts-btn">View Charts</button>
             </div>
             <div>
                 <button id="downloadAppBtn" class="download-btn">Download App</button>
@@ -662,6 +1161,7 @@
                             <option value="Bike">Bike</option>
                             <option value="Vacation trip">Vacation trip</option>
                             <option value="MISC">MISC</option>
+                            <option value="Salary">Salary</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -821,6 +1321,171 @@
             </div>
         </div>
 
+        <!-- Calculator Modal -->
+        <div id="calculatorModal" class="calculator-container">
+            <div class="calculator-content">
+                <h2 style="margin-top: 0; text-align: center;">Quick Calculator</h2>
+                <div class="calculator-display" id="calcDisplay">0</div>
+                <div class="calculator-buttons">
+                    <button class="calc-btn clear" onclick="clearCalculator()">C</button>
+                    <button class="calc-btn clear" onclick="backspaceCalculator()">⌫</button>
+                    <button class="calc-btn operator" onclick="appendToCalc('%')">%</button>
+                    <button class="calc-btn operator" onclick="appendToCalc('/')">÷</button>
+
+                    <button class="calc-btn number" onclick="appendToCalc('7')">7</button>
+                    <button class="calc-btn number" onclick="appendToCalc('8')">8</button>
+                    <button class="calc-btn number" onclick="appendToCalc('9')">9</button>
+                    <button class="calc-btn operator" onclick="appendToCalc('*')">×</button>
+
+                    <button class="calc-btn number" onclick="appendToCalc('4')">4</button>
+                    <button class="calc-btn number" onclick="appendToCalc('5')">5</button>
+                    <button class="calc-btn number" onclick="appendToCalc('6')">6</button>
+                    <button class="calc-btn operator" onclick="appendToCalc('-')">−</button>
+
+                    <button class="calc-btn number" onclick="appendToCalc('1')">1</button>
+                    <button class="calc-btn number" onclick="appendToCalc('2')">2</button>
+                    <button class="calc-btn number" onclick="appendToCalc('3')">3</button>
+                    <button class="calc-btn operator" onclick="appendToCalc('+')">+</button>
+
+                    <button class="calc-btn number" onclick="appendToCalc('0')">0</button>
+                    <button class="calc-btn number" onclick="appendToCalc('.')">.</button>
+                    <button class="calc-btn equals" onclick="calculateResult()">=</button>
+                </div>
+                <div class="calculator-actions">
+                    <button onclick="useCalculatorResult()" style="background-color: #27ae60;">Use in Amount</button>
+                    <button onclick="closeCalculator()" class="cancel-btn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Split Bill Modal -->
+        <div id="splitModal" class="split-container">
+            <div class="split-content">
+                <h2 style="margin-top: 0; text-align: center;">Split Bill Calculator</h2>
+
+                <div class="form-group">
+                    <label for="splitTotalAmount">Total Amount to Split</label>
+                    <input type="number" id="splitTotalAmount" placeholder="Enter total amount" value="907" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="splitPeopleCount">Number of People</label>
+                    <input type="number" id="splitPeopleCount" min="2" max="20" value="3">
+                </div>
+
+                <div class="split-method-selector">
+                    <button class="split-method-btn active" onclick="setSplitMethod('equal')">Equal Split</button>
+                    <button class="split-method-btn" onclick="setSplitMethod('percentage')">Percentage</button>
+                    <button class="split-method-btn" onclick="setSplitMethod('fraction')">Fraction</button>
+                    <button class="split-method-btn" onclick="setSplitMethod('custom')">Custom</button>
+                </div>
+
+                <div id="splitPeopleContainer">
+                    <!-- People inputs will be dynamically added here -->
+                </div>
+
+                <div class="split-total" id="splitTotalDisplay">Total: ₹907.00</div>
+
+                <div id="customRemainingDisplay" class="custom-remaining" style="display: none;">
+                    Remaining to allocate: ₹<span id="remainingAmount">907.00</span>
+                </div>
+
+                <div class="split-results" id="splitResults">
+                    <div class="split-result-item">
+                        <span>Person 1:</span>
+                        <span class="split-person-amount">₹302.33</span>
+                    </div>
+                    <div class="split-result-item">
+                        <span>Person 2:</span>
+                        <span class="split-person-amount">₹302.33</span>
+                    </div>
+                    <div class="split-result-item">
+                        <span>Person 3:</span>
+                        <span class="split-person-amount">₹302.34</span>
+                    </div>
+                </div>
+
+                <div class="split-actions">
+                    <button onclick="applySplitToExpense()" style="background-color: #27ae60;">Use in Amount</button>
+                    <button onclick="closeSplitBill()" class="cancel-btn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Modal -->
+        <div id="chartsModal" class="charts-container">
+            <div class="charts-content">
+                <h2 style="margin-top: 0; text-align: center;">Financial Charts</h2>
+
+                <div class="time-period-selector">
+                    <label for="chartPeriod">Time Period:</label>
+                    <select id="chartPeriod" onchange="updateCharts()">
+                        <option value="all">All Time</option>
+                        <option value="year">This Year</option>
+                        <option value="month">This Month</option>
+                        <option value="last3months">Last 3 Months</option>
+                        <option value="last6months">Last 6 Months</option>
+                    </select>
+                </div>
+
+                <div class="chart-type-selector">
+                    <button class="chart-type-btn active" onclick="setChartType('overview')">Overview</button>
+                    <button class="chart-type-btn" onclick="setChartType('category')">Category Analysis</button>
+                    <button class="chart-type-btn" onclick="setChartType('monthly')">Monthly Trends</button>
+                    <button class="chart-type-btn" onclick="setChartType('type')">Transaction Types</button>
+                </div>
+
+                <div class="chart-toggle">
+                    <button class="chart-toggle-btn active" onclick="showChart('pie')">Pie Chart</button>
+                    <button class="chart-toggle-btn" onclick="showChart('bar')">Bar Chart</button>
+                </div>
+
+                <div class="chart-options">
+                    <div class="chart-option">
+                        <input type="checkbox" id="showIncome" checked onchange="updateCharts()">
+                        <label for="showIncome">Income</label>
+                    </div>
+                    <div class="chart-option">
+                        <input type="checkbox" id="showExpenses" checked onchange="updateCharts()">
+                        <label for="showExpenses">Expenses</label>
+                    </div>
+                    <div class="chart-option">
+                        <input type="checkbox" id="showDebt" checked onchange="updateCharts()">
+                        <label for="showDebt">Debt</label>
+                    </div>
+                    <div class="chart-option">
+                        <input type="checkbox" id="showInvestment" checked onchange="updateCharts()">
+                        <label for="showInvestment">Investment</label>
+                    </div>
+                </div>
+
+                <div id="pieChartContainer" class="chart-container">
+                    <canvas id="pieChart"></canvas>
+                    <div id="pieChartLegend" class="chart-legend"></div>
+                </div>
+
+                <div id="barChartContainer" class="chart-container" style="display: none;">
+                    <canvas id="barChart"></canvas>
+                    <div id="barChartLegend" class="chart-legend"></div>
+                </div>
+
+                <div id="categoryChartContainer" class="chart-container" style="display: none;">
+                    <canvas id="categoryChart"></canvas>
+                    <div id="categoryChartLegend" class="chart-legend"></div>
+                </div>
+
+                <div id="monthlyTrendChartContainer" class="chart-container" style="display: none;">
+                    <canvas id="monthlyTrendChart"></canvas>
+                    <div id="monthlyTrendChartLegend" class="chart-legend"></div>
+                </div>
+
+                <div class="charts-actions">
+                    <button onclick="downloadChart()" style="background-color: #27ae60;">Download Chart</button>
+                    <button onclick="closeCharts()" class="cancel-btn">Close</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Import Modal -->
         <div id="importModal" class="import-modal">
             <div class="import-modal-content">
@@ -858,14 +1523,21 @@
             <h3>How to Use This Expense Tracker</h3>
             <p>1. <strong>Four transaction types</strong>: Track Income, Expenses, Debt (money owed), and Investments.
             </p>
-            <p>2. <strong>Debt tracking</strong>: Use Debt type for money you owe to others or loans taken.</p>
-            <p>3. <strong>Investment tracking</strong>: Use Investment type for stocks, mutual funds, gold, etc.</p>
-            <p>4. <strong>Net Balance</strong>: Calculated as (Income - Expenses - Debt + Investment).</p>
-            <p>5. <strong>View modes</strong>: Toggle between "View Month" (shows specific month) and "View All" (shows
+            <p>2. <strong>Calculator</strong>: Quick calculations for amounts. Click "Use in Amount" to transfer result
+                to transaction form.</p>
+            <p>3. <strong>Split Bill</strong>: Split amounts equally, by percentage, fraction, or custom amounts like
+                Google Pay.</p>
+            <p>4. <strong>Financial Charts</strong>: Visualize your financial data with pie and bar charts.</p>
+            <p>5. <strong>Custom Split</strong>: Shows remaining amount to allocate as you enter amounts for each
+                person.</p>
+            <p>6. <strong>Debt tracking</strong>: Use Debt type for money you owe to others or loans taken.</p>
+            <p>7. <strong>Investment tracking</strong>: Use Investment type for stocks, mutual funds, gold, etc.</p>
+            <p>8. <strong>Net Balance</strong>: Calculated as (Income - Expenses - Debt + Investment).</p>
+            <p>9. <strong>View modes</strong>: Toggle between "View Month" (shows specific month) and "View All" (shows
                 all entries).</p>
-            <p>6. <strong>Download App</strong>: Save this app as an HTML file to use offline anywhere.</p>
-            <p>7. <strong>Export/Import</strong>: Backup or restore your financial data.</p>
-            <p>8. <strong>Undo feature</strong>: Remove the most recent entry with one click.</p>
+            <p>10. <strong>Download App</strong>: Save this app as an HTML file to use offline anywhere.</p>
+            <p>11. <strong>Export/Import</strong>: Backup or restore your financial data.</p>
+            <p>12. <strong>Undo feature</strong>: Remove the most recent entry with one click.</p>
         </div>
 
         <div class="data-storage-info">
@@ -890,6 +1562,32 @@
         let currentViewMonth = new Date().getMonth() + 1;
         let viewMode = 'month'; // 'month' or 'all'
 
+        // Split bill variables
+        let splitMethod = 'equal';
+        let splitPeople = [];
+
+        // Calculator variables
+        let calculatorValue = '0';
+        let calculatorPreviousValue = '';
+        let calculatorOperator = '';
+        let calculatorWaitingForOperand = false;
+
+        // Chart variables
+        let currentChartType = 'pie'; // 'pie' or 'bar'
+        let currentChartView = 'overview'; // 'overview', 'category', 'monthly', 'type'
+        let pieChart = null;
+        let barChart = null;
+        let categoryChart = null;
+        let monthlyTrendChart = null;
+
+        // Blue and white color scheme
+        const BLUE_COLORS = [
+            '#3498db', '#2980b9', '#1f618d', '#21618c', '#1b4f72',
+            '#5dade2', '#85c1e9', '#aed6f1', '#d6eaf8', '#ebf5fb',
+            '#2e86c1', '#2874a6', '#21618c', '#1b4f72', '#154360',
+            '#48c9b0', '#1abc9c', '#17a589', '#148f77', '#117864'
+        ];
+
         // DOM elements
         const expenseList = document.getElementById('expenseList');
         const monthlyDataTable = document.getElementById('monthlyData');
@@ -901,6 +1599,9 @@
         const missingAmountEl = document.getElementById('missingAmount');
         const statusMessage = document.getElementById('statusMessage');
         const importModal = document.getElementById('importModal');
+        const calculatorModal = document.getElementById('calculatorModal');
+        const splitModal = document.getElementById('splitModal');
+        const chartsModal = document.getElementById('chartsModal');
         const csvFileInput = document.getElementById('csvFileInput');
         const fileName = document.getElementById('fileName');
         const fileInputLabel = document.getElementById('fileInputLabel');
@@ -935,6 +1636,13 @@
         const currentMonthDebt = document.getElementById('currentMonthDebt');
         const currentMonthInvestment = document.getElementById('currentMonthInvestment');
         const currentMonthBalance = document.getElementById('currentMonthBalance');
+        const splitPeopleContainer = document.getElementById('splitPeopleContainer');
+        const splitResults = document.getElementById('splitResults');
+        const splitTotalDisplay = document.getElementById('splitTotalDisplay');
+        const calcDisplay = document.getElementById('calcDisplay');
+        const customRemainingDisplay = document.getElementById('customRemainingDisplay');
+        const remainingAmountSpan = document.getElementById('remainingAmount');
+        const chartsBtn = document.getElementById('chartsBtn');
 
         // Buttons
         const saveEntryBtn = document.getElementById('saveEntryBtn');
@@ -942,6 +1650,8 @@
         const resetBtn = document.getElementById('resetBtn');
         const importBtn = document.getElementById('importBtn');
         const undoBtn = document.getElementById('undoBtn');
+        const calculatorBtn = document.getElementById('calculatorBtn');
+        const splitBtn = document.getElementById('splitBtn');
 
         // Form elements
         const expenseType = document.getElementById('expenseType');
@@ -949,6 +1659,16 @@
         const amount = document.getElementById('amount');
         const dateInput = document.getElementById('date');
         const notes = document.getElementById('notes');
+
+        // Split bill elements
+        const splitTotalAmount = document.getElementById('splitTotalAmount');
+        const splitPeopleCount = document.getElementById('splitPeopleCount');
+
+        // Chart elements
+        const pieChartContainer = document.getElementById('pieChartContainer');
+        const barChartContainer = document.getElementById('barChartContainer');
+        const categoryChartContainer = document.getElementById('categoryChartContainer');
+        const monthlyTrendChartContainer = document.getElementById('monthlyTrendChartContainer');
 
         // Set today's date as default
         const today = new Date();
@@ -968,6 +1688,9 @@
             // Initialize toggle sections
             monthlyContent.classList.add('expanded');
             categoryContent.classList.add('expanded');
+
+            // Initialize split bill with default values
+            updateSplitBill();
         });
 
         // Save expense/income/debt/investment entry
@@ -1031,6 +1754,24 @@
                     showStatus('Last entry undone', 'info-message');
                 }
             }
+        });
+
+        // Open calculator
+        calculatorBtn.addEventListener('click', function () {
+            calculatorModal.style.display = 'flex';
+            clearCalculator();
+        });
+
+        // Open split bill
+        splitBtn.addEventListener('click', function () {
+            splitModal.style.display = 'flex';
+            updateSplitBill();
+        });
+
+        // Open charts
+        chartsBtn.addEventListener('click', function () {
+            chartsModal.style.display = 'flex';
+            updateCharts();
         });
 
         // Export data as CSV
@@ -1175,6 +1916,16 @@
             categoryToggleIcon.textContent = categoryContent.classList.contains('expanded') ? '▼' : '▶';
         });
 
+        // Split bill event listeners
+        splitTotalAmount.addEventListener('input', function () {
+            updateSplitBill();
+        });
+
+        splitPeopleCount.addEventListener('input', function () {
+            updateSplitPeople();
+            updateSplitBill();
+        });
+
         // Set view mode
         function setViewMode(mode) {
             viewMode = mode;
@@ -1209,6 +1960,1085 @@
                 currentMonthDisplay.textContent = `${monthName} ${currentViewYear}`;
                 summaryMonth.value = `${currentViewYear}-${String(currentViewMonth).padStart(2, '0')}`;
             }
+        }
+
+        // Calculator Functions
+        function updateCalculatorDisplay() {
+            calcDisplay.textContent = calculatorValue;
+        }
+
+        function appendToCalc(value) {
+            if (calculatorWaitingForOperand) {
+                calculatorValue = value;
+                calculatorWaitingForOperand = false;
+            } else {
+                calculatorValue = calculatorValue === '0' ? value : calculatorValue + value;
+            }
+            updateCalculatorDisplay();
+        }
+
+        function clearCalculator() {
+            calculatorValue = '0';
+            calculatorPreviousValue = '';
+            calculatorOperator = '';
+            calculatorWaitingForOperand = false;
+            updateCalculatorDisplay();
+        }
+
+        function backspaceCalculator() {
+            if (calculatorValue.length > 1) {
+                calculatorValue = calculatorValue.slice(0, -1);
+            } else {
+                calculatorValue = '0';
+            }
+            updateCalculatorDisplay();
+        }
+
+        function handleOperator(nextOperator) {
+            const inputValue = parseFloat(calculatorValue);
+
+            if (calculatorOperator && calculatorWaitingForOperand) {
+                calculatorOperator = nextOperator;
+                return;
+            }
+
+            if (calculatorPreviousValue === '') {
+                calculatorPreviousValue = inputValue;
+            } else if (calculatorOperator) {
+                const currentValue = calculatorPreviousValue || 0;
+                const newValue = performCalculation(currentValue, inputValue);
+
+                calculatorValue = String(newValue);
+                calculatorPreviousValue = newValue;
+            }
+
+            calculatorWaitingForOperand = true;
+            calculatorOperator = nextOperator;
+            updateCalculatorDisplay();
+        }
+
+        function performCalculation(firstValue, secondValue) {
+            switch (calculatorOperator) {
+                case '+':
+                    return firstValue + secondValue;
+                case '-':
+                    return firstValue - secondValue;
+                case '*':
+                    return firstValue * secondValue;
+                case '/':
+                    return firstValue / secondValue;
+                case '%':
+                    return firstValue * (secondValue / 100);
+                default:
+                    return secondValue;
+            }
+        }
+
+        function calculateResult() {
+            const inputValue = parseFloat(calculatorValue);
+
+            if (calculatorPreviousValue === '') {
+                return;
+            }
+
+            if (calculatorOperator) {
+                const result = performCalculation(calculatorPreviousValue, inputValue);
+
+                calculatorValue = String(result);
+                calculatorPreviousValue = '';
+                calculatorOperator = '';
+                calculatorWaitingForOperand = true;
+                updateCalculatorDisplay();
+            }
+        }
+
+        function useCalculatorResult() {
+            const result = parseFloat(calculatorValue);
+            if (!isNaN(result)) {
+                amount.value = result.toFixed(2);
+                closeCalculator();
+                showStatus('Calculator result applied to amount field', 'success');
+            }
+        }
+
+        function closeCalculator() {
+            calculatorModal.style.display = 'none';
+        }
+
+        // Split Bill Functions
+        function setSplitMethod(method) {
+            splitMethod = method;
+
+            // Update button styles
+            document.querySelectorAll('.split-method-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            updateSplitPeople();
+            updateSplitBill();
+        }
+
+        function updateSplitPeople() {
+            const peopleCount = parseInt(splitPeopleCount.value) || 3;
+            splitPeopleContainer.innerHTML = '';
+            splitPeople = [];
+
+            // Show/hide remaining amount display for custom method
+            if (splitMethod === 'custom') {
+                customRemainingDisplay.style.display = 'block';
+            } else {
+                customRemainingDisplay.style.display = 'none';
+            }
+
+            for (let i = 0; i < peopleCount; i++) {
+                const person = {
+                    id: i + 1,
+                    name: `Person ${i + 1}`,
+                    amount: 0,
+                    percentage: 100 / peopleCount,
+                    fraction: {
+                        numerator: 1,
+                        denominator: peopleCount
+                    }
+                };
+                splitPeople.push(person);
+
+                const personDiv = document.createElement('div');
+                personDiv.className = 'split-person';
+                personDiv.id = `splitPerson${i + 1}`;
+
+                let inputField = '';
+
+                switch (splitMethod) {
+                    case 'equal':
+                        inputField = `<span style="flex: 1;">${person.name}</span>`;
+                        break;
+                    case 'percentage':
+                        inputField = `
+                            <span style="flex: 1;">${person.name}</span>
+                            <div class="percentage-input">
+                                <input type="number" min="0" max="100" step="0.01" value="${person.percentage.toFixed(2)}" 
+                                       oninput="updateSplitPersonPercentage(${i}, this.value)">
+                                <span>%</span>
+                            </div>
+                        `;
+                        break;
+                    case 'fraction':
+                        inputField = `
+                            <span style="flex: 1;">${person.name}</span>
+                            <div class="fraction-input">
+                                <input type="number" min="1" value="${person.fraction.numerator}" 
+                                       oninput="updateSplitPersonFraction(${i}, 'numerator', this.value)">
+                                <span>/</span>
+                                <input type="number" min="1" value="${person.fraction.denominator}" 
+                                       oninput="updateSplitPersonFraction(${i}, 'denominator', this.value)">
+                            </div>
+                        `;
+                        break;
+                    case 'custom':
+                        inputField = `
+                            <span style="flex: 1;">${person.name}</span>
+                            <input type="number" min="0" step="0.01" placeholder="Amount" 
+                                   oninput="updateSplitPersonCustom(${i}, this.value)" style="width: 120px;">
+                        `;
+                        break;
+                }
+
+                personDiv.innerHTML = `
+                    ${inputField}
+                    <div class="split-person-amount" id="splitPersonAmount${i + 1}">₹0</div>
+                `;
+
+                splitPeopleContainer.appendChild(personDiv);
+            }
+        }
+
+        function updateSplitPersonPercentage(index, value) {
+            if (splitPeople[index]) {
+                splitPeople[index].percentage = parseFloat(value) || 0;
+                updateSplitBill();
+            }
+        }
+
+        function updateSplitPersonFraction(index, type, value) {
+            if (splitPeople[index]) {
+                if (type === 'numerator') {
+                    splitPeople[index].fraction.numerator = parseInt(value) || 1;
+                } else {
+                    splitPeople[index].fraction.denominator = parseInt(value) || 1;
+                }
+                updateSplitBill();
+            }
+        }
+
+        function updateSplitPersonCustom(index, value) {
+            if (splitPeople[index]) {
+                splitPeople[index].amount = parseFloat(value) || 0;
+                updateSplitBill();
+            }
+        }
+
+        function updateSplitBill() {
+            const totalAmount = parseFloat(splitTotalAmount.value) || 907;
+            const peopleCount = parseInt(splitPeopleCount.value) || 3;
+
+            // Update splitTotalDisplay
+            splitTotalDisplay.textContent = `Total: ₹${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            // Calculate amounts based on method
+            let totalCalculated = 0;
+            let hasError = false;
+            let errorMessage = '';
+
+            switch (splitMethod) {
+                case 'equal':
+                    const equalAmount = totalAmount / peopleCount;
+                    // Handle rounding to avoid floating point issues
+                    let remainder = totalAmount;
+                    splitPeople.forEach((person, index) => {
+                        if (index === peopleCount - 1) {
+                            // Last person gets the remainder
+                            person.amount = parseFloat(remainder.toFixed(2));
+                        } else {
+                            person.amount = parseFloat(equalAmount.toFixed(2));
+                            remainder -= person.amount;
+                        }
+                        totalCalculated += person.amount;
+                    });
+                    break;
+
+                case 'percentage':
+                    let percentageTotal = 0;
+                    splitPeople.forEach(person => {
+                        percentageTotal += person.percentage || 0;
+                    });
+
+                    if (Math.abs(percentageTotal - 100) > 0.01) {
+                        hasError = true;
+                        errorMessage = `Percentages total is ${percentageTotal.toFixed(2)}%. Must equal 100%`;
+                    } else {
+                        let remainder = totalAmount;
+                        splitPeople.forEach((person, index) => {
+                            if (index === peopleCount - 1) {
+                                // Last person gets the remainder
+                                person.amount = parseFloat(remainder.toFixed(2));
+                            } else {
+                                person.amount = parseFloat((totalAmount * person.percentage / 100).toFixed(2));
+                                remainder -= person.amount;
+                            }
+                            totalCalculated += person.amount;
+                        });
+                    }
+                    break;
+
+                case 'fraction':
+                    let fractionTotal = 0;
+                    splitPeople.forEach(person => {
+                        if (person.fraction.denominator === 0) {
+                            hasError = true;
+                            errorMessage = 'Denominator cannot be zero';
+                            return;
+                        }
+                        fractionTotal += person.fraction.numerator / person.fraction.denominator;
+                    });
+
+                    if (Math.abs(fractionTotal - 1) > 0.001) {
+                        hasError = true;
+                        errorMessage = `Fractions total is ${fractionTotal.toFixed(3)}. Must equal 1`;
+                    } else {
+                        let remainder = totalAmount;
+                        splitPeople.forEach((person, index) => {
+                            if (index === peopleCount - 1) {
+                                // Last person gets the remainder
+                                person.amount = parseFloat(remainder.toFixed(2));
+                            } else {
+                                const fraction = person.fraction.numerator / person.fraction.denominator;
+                                person.amount = parseFloat((totalAmount * fraction).toFixed(2));
+                                remainder -= person.amount;
+                            }
+                            totalCalculated += person.amount;
+                        });
+                    }
+                    break;
+
+                case 'custom':
+                    let customTotal = 0;
+                    splitPeople.forEach(person => {
+                        customTotal += person.amount || 0;
+                    });
+
+                    const remaining = totalAmount - customTotal;
+
+                    // Show remaining amount
+                    remainingAmountSpan.textContent = remaining.toFixed(2);
+
+                    if (Math.abs(remaining) > 0.01) {
+                        hasError = true;
+                        errorMessage = `Custom amounts total is ₹${customTotal.toFixed(2)}. Remaining: ₹${remaining.toFixed(2)}`;
+                        // Don't break - still show what's been entered
+                    }
+
+                    splitPeople.forEach(person => {
+                        totalCalculated += person.amount;
+                    });
+                    break;
+            }
+
+            // Update display
+            splitResults.innerHTML = '';
+
+            if (hasError) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'split-error';
+                errorDiv.textContent = errorMessage;
+                splitResults.appendChild(errorDiv);
+            }
+
+            splitPeople.forEach((person, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'split-result-item';
+                resultItem.innerHTML = `
+                    <span>${person.name}:</span>
+                    <span class="split-person-amount">₹${person.amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                `;
+                splitResults.appendChild(resultItem);
+            });
+
+            // Add total verification
+            const totalItem = document.createElement('div');
+            totalItem.className = 'split-result-item';
+            totalItem.style.fontWeight = 'bold';
+            totalItem.style.borderTop = '2px solid #ddd';
+            totalItem.style.marginTop = '10px';
+            totalItem.style.paddingTop = '10px';
+            const displayTotal = hasError && splitMethod === 'custom' ? totalCalculated : totalAmount;
+            totalItem.innerHTML = `
+                <span>Total:</span>
+                <span class="split-person-amount">₹${displayTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            `;
+            splitResults.appendChild(totalItem);
+
+            if (splitMethod === 'custom' && !hasError) {
+                const remainingInfo = document.createElement('div');
+                remainingInfo.className = 'remaining-amount';
+                remainingInfo.innerHTML = `<span class="split-remaining">✓ Fully allocated</span>`;
+                splitResults.appendChild(remainingInfo);
+            }
+
+            // Update individual person amounts
+            splitPeople.forEach((person, index) => {
+                const amountElement = document.getElementById(`splitPersonAmount${index + 1}`);
+                if (amountElement) {
+                    amountElement.textContent = `₹${person.amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                }
+            });
+        }
+
+        function applySplitToExpense() {
+            const totalAmount = parseFloat(splitTotalAmount.value) || 0;
+
+            // Set the total amount in the main form
+            amount.value = totalAmount.toFixed(2);
+
+            // Create notes with split details
+            let splitNotes = `Split ${splitMethod}: `;
+            splitPeople.forEach((person, index) => {
+                splitNotes += `${person.name}=₹${person.amount.toFixed(2)}`;
+                if (index < splitPeople.length - 1) splitNotes += ', ';
+            });
+
+            // Add split notes to the notes field
+            if (notes.value) {
+                notes.value += ' | ' + splitNotes;
+            } else {
+                notes.value = splitNotes;
+            }
+
+            closeSplitBill();
+            showStatus('Split bill details applied to transaction', 'success');
+        }
+
+        function closeSplitBill() {
+            splitModal.style.display = 'none';
+        }
+
+        // Chart Functions
+        function showChart(type) {
+            currentChartType = type;
+            
+            // Update button styles
+            document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            const clickedBtn = event.target.closest('.chart-toggle-btn');
+            if (clickedBtn) {
+                clickedBtn.classList.add('active');
+            }
+            
+            // Update charts
+            updateCharts();
+        }
+
+        function setChartType(type) {
+            currentChartView = type;
+            
+            // Update button styles
+            document.querySelectorAll('.chart-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const clickedBtn = event.target.closest('.chart-type-btn');
+            if (clickedBtn) {
+                clickedBtn.classList.add('active');
+            }
+            
+            // Update charts
+            updateCharts();
+        }
+
+        function updateCharts() {
+            // Hide all chart containers first
+            pieChartContainer.style.display = 'none';
+            barChartContainer.style.display = 'none';
+            categoryChartContainer.style.display = 'none';
+            monthlyTrendChartContainer.style.display = 'none';
+            
+            // Show the appropriate chart based on view and type
+            if (currentChartView === 'category') {
+                categoryChartContainer.style.display = 'block';
+                updateCategoryChart();
+            } else if (currentChartView === 'monthly') {
+                monthlyTrendChartContainer.style.display = 'block';
+                updateMonthlyTrendChart();
+            } else {
+                // For 'overview' and 'type'
+                if (currentChartType === 'pie') {
+                    pieChartContainer.style.display = 'block';
+                    updatePieChart();
+                } else {
+                    barChartContainer.style.display = 'block';
+                    updateBarChart();
+                }
+            }
+        }
+
+        function getFilteredExpenses() {
+            const period = document.getElementById('chartPeriod').value;
+            const now = new Date();
+            let filteredExpenses = [...expenses];
+
+            switch (period) {
+                case 'year':
+                    const currentYear = now.getFullYear();
+                    filteredExpenses = expenses.filter(expense => {
+                        const expenseDate = new Date(expense.date);
+                        return expenseDate.getFullYear() === currentYear;
+                    });
+                    break;
+                case 'month':
+                    const currentMonth = now.getMonth();
+                    const currentYearMonth = now.getFullYear();
+                    filteredExpenses = expenses.filter(expense => {
+                        const expenseDate = new Date(expense.date);
+                        return expenseDate.getFullYear() === currentYearMonth && 
+                               expenseDate.getMonth() === currentMonth;
+                    });
+                    break;
+                case 'last3months':
+                    const threeMonthsAgo = new Date();
+                    threeMonthsAgo.setMonth(now.getMonth() - 3);
+                    filteredExpenses = expenses.filter(expense => {
+                        const expenseDate = new Date(expense.date);
+                        return expenseDate >= threeMonthsAgo;
+                    });
+                    break;
+                case 'last6months':
+                    const sixMonthsAgo = new Date();
+                    sixMonthsAgo.setMonth(now.getMonth() - 6);
+                    filteredExpenses = expenses.filter(expense => {
+                        const expenseDate = new Date(expense.date);
+                        return expenseDate >= sixMonthsAgo;
+                    });
+                    break;
+                // 'all' is default
+            }
+
+            return filteredExpenses;
+        }
+
+        function updatePieChart() {
+            const filteredExpenses = getFilteredExpenses();
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            
+            // Check if we have data
+            if (filteredExpenses.length === 0) {
+                if (pieChart) {
+                    pieChart.destroy();
+                }
+                document.getElementById('pieChartLegend').innerHTML = 
+                    '<div class="no-data-chart">No data available for the selected period</div>';
+                return;
+            }
+
+            // Get data based on current view
+            let data = [];
+            let labels = [];
+            let backgroundColors = [];
+            let legendHtml = '';
+
+            if (currentChartView === 'overview' || currentChartView === 'type') {
+                // Overview: Show all transaction types
+                const showIncome = document.getElementById('showIncome').checked;
+                const showExpenses = document.getElementById('showExpenses').checked;
+                const showDebt = document.getElementById('showDebt').checked;
+                const showInvestment = document.getElementById('showInvestment').checked;
+
+                const income = showIncome ? filteredExpenses.filter(item => item.type === 'income').reduce((sum, item) => sum + item.amount, 0) : 0;
+                const expensesTotal = showExpenses ? filteredExpenses.filter(item => item.type === 'expense').reduce((sum, item) => sum + item.amount, 0) : 0;
+                const debt = showDebt ? filteredExpenses.filter(item => item.type === 'debt').reduce((sum, item) => sum + item.amount, 0) : 0;
+                const investment = showInvestment ? filteredExpenses.filter(item => item.type === 'investment').reduce((sum, item) => sum + item.amount, 0) : 0;
+
+                if (showIncome && income > 0) {
+                    data.push(income);
+                    labels.push('Income');
+                    backgroundColors.push('#27ae60');
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #27ae60;"></div>
+                        <span class="legend-label">Income:</span>
+                        <span class="legend-value">₹${income.toLocaleString('en-IN')}</span>
+                    </div>`;
+                }
+
+                if (showExpenses && expensesTotal > 0) {
+                    data.push(expensesTotal);
+                    labels.push('Expenses');
+                    backgroundColors.push('#e74c3c');
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #e74c3c;"></div>
+                        <span class="legend-label">Expenses:</span>
+                        <span class="legend-value">₹${expensesTotal.toLocaleString('en-IN')}</span>
+                    </div>`;
+                }
+
+                if (showDebt && debt > 0) {
+                    data.push(debt);
+                    labels.push('Debt');
+                    backgroundColors.push('#f39c12');
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #f39c12;"></div>
+                        <span class="legend-label">Debt:</span>
+                        <span class="legend-value">₹${debt.toLocaleString('en-IN')}</span>
+                    </div>`;
+                }
+
+                if (showInvestment && investment > 0) {
+                    data.push(investment);
+                    labels.push('Investment');
+                    backgroundColors.push('#9b59b6');
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #9b59b6;"></div>
+                        <span class="legend-label">Investment:</span>
+                        <span class="legend-value">₹${investment.toLocaleString('en-IN')}</span>
+                    </div>`;
+                }
+            }
+
+            // Destroy existing chart if it exists
+            if (pieChart) {
+                pieChart.destroy();
+            }
+
+            // Create new pie chart if we have data
+            if (data.length > 0) {
+                pieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: backgroundColors,
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.raw || 0;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((value / total) * 100);
+                                        return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Update legend
+                document.getElementById('pieChartLegend').innerHTML = legendHtml;
+            } else {
+                document.getElementById('pieChartLegend').innerHTML = 
+                    '<div class="no-data-chart">No data available for the selected filters</div>';
+            }
+        }
+
+        function updateBarChart() {
+            const filteredExpenses = getFilteredExpenses();
+            const ctx = document.getElementById('barChart').getContext('2d');
+            
+            // Check if we have data
+            if (filteredExpenses.length === 0) {
+                if (barChart) {
+                    barChart.destroy();
+                }
+                document.getElementById('barChartLegend').innerHTML = 
+                    '<div class="no-data-chart">No data available for the selected period</div>';
+                return;
+            }
+
+            // Get data based on current view
+            let labels = [];
+            let datasets = [];
+            let legendHtml = '';
+
+            if (currentChartView === 'overview' || currentChartView === 'type') {
+                // For overview, show transaction types over time/months
+                const monthlyMap = {};
+                filteredExpenses.forEach(expense => {
+                    const date = new Date(expense.date);
+                    const monthYear = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+                    const monthName = `${getMonthName(date.getMonth() + 1).substring(0, 3)} ${date.getFullYear()}`;
+                    
+                    if (!monthlyMap[monthYear]) {
+                        monthlyMap[monthYear] = {
+                            name: monthName,
+                            income: 0,
+                            expenses: 0,
+                            debt: 0,
+                            investment: 0
+                        };
+                    }
+                    
+                    switch (expense.type) {
+                        case 'income': monthlyMap[monthYear].income += expense.amount; break;
+                        case 'expense': monthlyMap[monthYear].expenses += expense.amount; break;
+                        case 'debt': monthlyMap[monthYear].debt += expense.amount; break;
+                        case 'investment': monthlyMap[monthYear].investment += expense.amount; break;
+                    }
+                });
+
+                // Sort by date
+                const sortedMonths = Object.entries(monthlyMap)
+                    .sort((a, b) => a[0].localeCompare(b[0]))
+                    .slice(-12); // Show last 12 months
+
+                labels = sortedMonths.map(([_, data]) => data.name);
+                
+                // Create datasets based on checked boxes
+                if (document.getElementById('showIncome').checked) {
+                    datasets.push({
+                        label: 'Income',
+                        data: sortedMonths.map(([_, data]) => data.income),
+                        backgroundColor: '#27ae60',
+                        borderColor: '#219653',
+                        borderWidth: 1
+                    });
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #27ae60;"></div>
+                        <span class="legend-label">Income</span>
+                    </div>`;
+                }
+                
+                if (document.getElementById('showExpenses').checked) {
+                    datasets.push({
+                        label: 'Expenses',
+                        data: sortedMonths.map(([_, data]) => data.expenses),
+                        backgroundColor: '#e74c3c',
+                        borderColor: '#c0392b',
+                        borderWidth: 1
+                    });
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #e74c3c;"></div>
+                        <span class="legend-label">Expenses</span>
+                    </div>`;
+                }
+                
+                if (document.getElementById('showDebt').checked) {
+                    datasets.push({
+                        label: 'Debt',
+                        data: sortedMonths.map(([_, data]) => data.debt),
+                        backgroundColor: '#f39c12',
+                        borderColor: '#d68910',
+                        borderWidth: 1
+                    });
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #f39c12;"></div>
+                        <span class="legend-label">Debt</span>
+                    </div>`;
+                }
+                
+                if (document.getElementById('showInvestment').checked) {
+                    datasets.push({
+                        label: 'Investment',
+                        data: sortedMonths.map(([_, data]) => data.investment),
+                        backgroundColor: '#9b59b6',
+                        borderColor: '#8e44ad',
+                        borderWidth: 1
+                    });
+                    legendHtml += `<div class="legend-item">
+                        <div class="legend-color" style="background-color: #9b59b6;"></div>
+                        <span class="legend-label">Investment</span>
+                    </div>`;
+                }
+            }
+
+            // Destroy existing chart if it exists
+            if (barChart) {
+                barChart.destroy();
+            }
+
+            // Create new bar chart if we have data
+            if (datasets.length > 0) {
+                barChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '₹' + value.toLocaleString('en-IN');
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(52, 152, 219, 0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(52, 152, 219, 0.1)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.dataset.label || '';
+                                        const value = context.raw || 0;
+                                        return `${label}: ₹${value.toLocaleString('en-IN')}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Update legend
+                document.getElementById('barChartLegend').innerHTML = legendHtml;
+            } else {
+                document.getElementById('barChartLegend').innerHTML = 
+                    '<div class="no-data-chart">No data available for the selected filters</div>';
+            }
+        }
+
+        function updateCategoryChart() {
+            const filteredExpenses = getFilteredExpenses();
+            const ctx = document.getElementById('categoryChart').getContext('2d');
+            
+            if (filteredExpenses.length === 0) {
+                if (categoryChart) {
+                    categoryChart.destroy();
+                }
+                document.getElementById('categoryChartLegend').innerHTML = 
+                    '<div class="no-data-chart">No data available for the selected period</div>';
+                return;
+            }
+            
+            // Category analysis
+            const categoryMap = {};
+            filteredExpenses.forEach(expense => {
+                if (!categoryMap[expense.category]) {
+                    categoryMap[expense.category] = 0;
+                }
+                categoryMap[expense.category] += expense.amount;
+            });
+            
+            const sortedCategories = Object.entries(categoryMap)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
+
+            const labels = sortedCategories.map(([category, _]) => category);
+            const data = sortedCategories.map(([_, amount]) => amount);
+            
+            if (categoryChart) {
+                categoryChart.destroy();
+            }
+            
+            // Determine chart type based on currentChartType
+            const chartType = currentChartType === 'pie' ? 'pie' : 'bar';
+            
+            categoryChart = new Chart(ctx, {
+                type: chartType,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: BLUE_COLORS.slice(0, data.length),
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: chartType === 'bar' ? {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '₹' + value.toLocaleString('en-IN');
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(52, 152, 219, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(52, 152, 219, 0.1)'
+                            }
+                        }
+                    } : undefined
+                }
+            });
+            
+            // Update legend
+            let legendHtml = '';
+            sortedCategories.forEach(([category, amount], index) => {
+                legendHtml += `<div class="legend-item">
+                    <div class="legend-color" style="background-color: ${BLUE_COLORS[index % BLUE_COLORS.length]}"></div>
+                    <span class="legend-label">${category}:</span>
+                    <span class="legend-value">₹${amount.toLocaleString('en-IN')}</span>
+                </div>`;
+            });
+            document.getElementById('categoryChartLegend').innerHTML = legendHtml;
+        }
+
+        function updateMonthlyTrendChart() {
+            const filteredExpenses = getFilteredExpenses();
+            const ctx = document.getElementById('monthlyTrendChart').getContext('2d');
+            
+            if (filteredExpenses.length === 0) {
+                if (monthlyTrendChart) {
+                    monthlyTrendChart.destroy();
+                }
+                document.getElementById('monthlyTrendChartLegend').innerHTML = 
+                    '<div class="no-data-chart">No data available for the selected period</div>';
+                return;
+            }
+            
+            // Monthly trend logic
+            const monthlyMap = {};
+            filteredExpenses.forEach(expense => {
+                const date = new Date(expense.date);
+                const monthYear = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+                const monthName = `${getMonthName(date.getMonth() + 1).substring(0, 3)} ${date.getFullYear()}`;
+                
+                if (!monthlyMap[monthYear]) {
+                    monthlyMap[monthYear] = {
+                        name: monthName,
+                        income: 0,
+                        expenses: 0,
+                        debt: 0,
+                        investment: 0
+                    };
+                }
+                
+                switch (expense.type) {
+                    case 'income': monthlyMap[monthYear].income += expense.amount; break;
+                    case 'expense': monthlyMap[monthYear].expenses += expense.amount; break;
+                    case 'debt': monthlyMap[monthYear].debt += expense.amount; break;
+                    case 'investment': monthlyMap[monthYear].investment += expense.amount; break;
+                }
+            });
+
+            const sortedMonths = Object.entries(monthlyMap)
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .slice(-12);
+
+            const labels = sortedMonths.map(([_, data]) => data.name);
+
+            const datasets = [];
+            let legendHtml = '';
+            
+            if (document.getElementById('showIncome').checked) {
+                datasets.push({
+                    label: 'Income',
+                    data: sortedMonths.map(([_, data]) => data.income),
+                    backgroundColor: '#27ae60',
+                    borderColor: '#219653',
+                    borderWidth: 2,
+                    fill: false
+                });
+                legendHtml += `<div class="legend-item">
+                    <div class="legend-color" style="background-color: #27ae60;"></div>
+                    <span class="legend-label">Income</span>
+                </div>`;
+            }
+            
+            if (document.getElementById('showExpenses').checked) {
+                datasets.push({
+                    label: 'Expenses',
+                    data: sortedMonths.map(([_, data]) => data.expenses),
+                    backgroundColor: '#e74c3c',
+                    borderColor: '#c0392b',
+                    borderWidth: 2,
+                    fill: false
+                });
+                legendHtml += `<div class="legend-item">
+                    <div class="legend-color" style="background-color: #e74c3c;"></div>
+                    <span class="legend-label">Expenses</span>
+                </div>`;
+            }
+            
+            if (document.getElementById('showDebt').checked) {
+                datasets.push({
+                    label: 'Debt',
+                    data: sortedMonths.map(([_, data]) => data.debt),
+                    backgroundColor: '#f39c12',
+                    borderColor: '#d68910',
+                    borderWidth: 2,
+                    fill: false
+                });
+                legendHtml += `<div class="legend-item">
+                    <div class="legend-color" style="background-color: #f39c12;"></div>
+                    <span class="legend-label">Debt</span>
+                </div>`;
+            }
+            
+            if (document.getElementById('showInvestment').checked) {
+                datasets.push({
+                    label: 'Investment',
+                    data: sortedMonths.map(([_, data]) => data.investment),
+                    backgroundColor: '#9b59b6',
+                    borderColor: '#8e44ad',
+                    borderWidth: 2,
+                    fill: false
+                });
+                legendHtml += `<div class="legend-item">
+                    <div class="legend-color" style="background-color: #9b59b6;"></div>
+                    <span class="legend-label">Investment</span>
+                </div>`;
+            }
+
+            if (monthlyTrendChart) {
+                monthlyTrendChart.destroy();
+            }
+
+            if (datasets.length > 0) {
+                monthlyTrendChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '₹' + value.toLocaleString('en-IN');
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(52, 152, 219, 0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(52, 152, 219, 0.1)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+
+                document.getElementById('monthlyTrendChartLegend').innerHTML = legendHtml;
+            } else {
+                document.getElementById('monthlyTrendChartLegend').innerHTML = 
+                    '<div class="no-data-chart">No data available for the selected filters</div>';
+            }
+        }
+
+        function downloadChart() {
+            let canvas;
+            let filename;
+            
+            if (currentChartView === 'category') {
+                canvas = document.getElementById('categoryChart');
+                filename = 'category-chart.png';
+            } else if (currentChartView === 'monthly') {
+                canvas = document.getElementById('monthlyTrendChart');
+                filename = 'monthly-trend-chart.png';
+            } else {
+                if (currentChartType === 'pie') {
+                    canvas = document.getElementById('pieChart');
+                    filename = 'financial-pie-chart.png';
+                } else {
+                    canvas = document.getElementById('barChart');
+                    filename = 'financial-bar-chart.png';
+                }
+            }
+            
+            if (!canvas) {
+                showStatus('No chart available to download', 'error');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            showStatus('Chart downloaded successfully', 'success');
+        }
+
+        function closeCharts() {
+            chartsModal.style.display = 'none';
         }
 
         // Download app as HTML file
@@ -1786,6 +3616,16 @@
                 statusMessage.style.display = 'none';
             }, 3000);
         }
+
+        // Initialize calculator button listeners
+        document.querySelectorAll('.calc-btn.operator').forEach(btn => {
+            const operator = btn.textContent;
+            if (operator === '÷') btn.onclick = () => handleOperator('/');
+            else if (operator === '×') btn.onclick = () => handleOperator('*');
+            else if (operator === '−') btn.onclick = () => handleOperator('-');
+            else if (operator === '+') btn.onclick = () => handleOperator('+');
+            else if (operator === '%') btn.onclick = () => handleOperator('%');
+        });
     </script>
 </body>
 
