@@ -647,7 +647,7 @@
         }
 
         .calculator-content {
-            background-color: rgb(238, 255, 0);
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
             width: 90%;
@@ -658,7 +658,7 @@
         .calculator-display {
             width: 100%;
             height: 60px;
-            background-color: #ffffff;
+            background-color: #f8f9fa;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
@@ -680,8 +680,8 @@
         .calc-btn {
             padding: 15px;
             font-size: 20px;
-            background-color: #780a0a;
-            border: 1px solid #000000;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
@@ -696,7 +696,7 @@
         }
 
         .calc-btn.number {
-            background-color: rgb(0, 0, 0);
+            background-color: white;
             font-weight: 500;
         }
 
@@ -2366,25 +2366,25 @@
         // Chart Functions
         function showChart(type) {
             currentChartType = type;
-            
+
             // Update button styles
             document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
+
             // Find and activate the clicked button
             const clickedBtn = event.target.closest('.chart-toggle-btn');
             if (clickedBtn) {
                 clickedBtn.classList.add('active');
             }
-            
+
             // Update charts
             updateCharts();
         }
 
         function setChartType(type) {
             currentChartView = type;
-            
+
             // Update button styles
             document.querySelectorAll('.chart-type-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -2393,7 +2393,7 @@
             if (clickedBtn) {
                 clickedBtn.classList.add('active');
             }
-            
+
             // Update charts
             updateCharts();
         }
@@ -2404,7 +2404,7 @@
             barChartContainer.style.display = 'none';
             categoryChartContainer.style.display = 'none';
             monthlyTrendChartContainer.style.display = 'none';
-            
+
             // Show the appropriate chart based on view and type
             if (currentChartView === 'category') {
                 categoryChartContainer.style.display = 'block';
@@ -2442,8 +2442,8 @@
                     const currentYearMonth = now.getFullYear();
                     filteredExpenses = expenses.filter(expense => {
                         const expenseDate = new Date(expense.date);
-                        return expenseDate.getFullYear() === currentYearMonth && 
-                               expenseDate.getMonth() === currentMonth;
+                        return expenseDate.getFullYear() === currentYearMonth &&
+                            expenseDate.getMonth() === currentMonth;
                     });
                     break;
                 case 'last3months':
@@ -2471,13 +2471,13 @@
         function updatePieChart() {
             const filteredExpenses = getFilteredExpenses();
             const ctx = document.getElementById('pieChart').getContext('2d');
-            
+
             // Check if we have data
             if (filteredExpenses.length === 0) {
                 if (pieChart) {
                     pieChart.destroy();
                 }
-                document.getElementById('pieChartLegend').innerHTML = 
+                document.getElementById('pieChartLegend').innerHTML =
                     '<div class="no-data-chart">No data available for the selected period</div>';
                 return;
             }
@@ -2572,7 +2572,7 @@
                             },
                             tooltip: {
                                 callbacks: {
-                                    label: function(context) {
+                                    label: function (context) {
                                         const label = context.label || '';
                                         const value = context.raw || 0;
                                         const total = context.dataset.data.reduce((a, b) => a + b, 0);
@@ -2588,7 +2588,7 @@
                 // Update legend
                 document.getElementById('pieChartLegend').innerHTML = legendHtml;
             } else {
-                document.getElementById('pieChartLegend').innerHTML = 
+                document.getElementById('pieChartLegend').innerHTML =
                     '<div class="no-data-chart">No data available for the selected filters</div>';
             }
         }
@@ -2596,13 +2596,13 @@
         function updateBarChart() {
             const filteredExpenses = getFilteredExpenses();
             const ctx = document.getElementById('barChart').getContext('2d');
-            
+
             // Check if we have data
             if (filteredExpenses.length === 0) {
                 if (barChart) {
                     barChart.destroy();
                 }
-                document.getElementById('barChartLegend').innerHTML = 
+                document.getElementById('barChartLegend').innerHTML =
                     '<div class="no-data-chart">No data available for the selected period</div>';
                 return;
             }
@@ -2619,7 +2619,7 @@
                     const date = new Date(expense.date);
                     const monthYear = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
                     const monthName = `${getMonthName(date.getMonth() + 1).substring(0, 3)} ${date.getFullYear()}`;
-                    
+
                     if (!monthlyMap[monthYear]) {
                         monthlyMap[monthYear] = {
                             name: monthName,
@@ -2629,7 +2629,7 @@
                             investment: 0
                         };
                     }
-                    
+
                     switch (expense.type) {
                         case 'income': monthlyMap[monthYear].income += expense.amount; break;
                         case 'expense': monthlyMap[monthYear].expenses += expense.amount; break;
@@ -2644,7 +2644,7 @@
                     .slice(-12); // Show last 12 months
 
                 labels = sortedMonths.map(([_, data]) => data.name);
-                
+
                 // Create datasets based on checked boxes
                 if (document.getElementById('showIncome').checked) {
                     datasets.push({
@@ -2659,7 +2659,7 @@
                         <span class="legend-label">Income</span>
                     </div>`;
                 }
-                
+
                 if (document.getElementById('showExpenses').checked) {
                     datasets.push({
                         label: 'Expenses',
@@ -2673,7 +2673,7 @@
                         <span class="legend-label">Expenses</span>
                     </div>`;
                 }
-                
+
                 if (document.getElementById('showDebt').checked) {
                     datasets.push({
                         label: 'Debt',
@@ -2687,7 +2687,7 @@
                         <span class="legend-label">Debt</span>
                     </div>`;
                 }
-                
+
                 if (document.getElementById('showInvestment').checked) {
                     datasets.push({
                         label: 'Investment',
@@ -2723,7 +2723,7 @@
                             y: {
                                 beginAtZero: true,
                                 ticks: {
-                                    callback: function(value) {
+                                    callback: function (value) {
                                         return '₹' + value.toLocaleString('en-IN');
                                     }
                                 },
@@ -2743,7 +2743,7 @@
                             },
                             tooltip: {
                                 callbacks: {
-                                    label: function(context) {
+                                    label: function (context) {
                                         const label = context.dataset.label || '';
                                         const value = context.raw || 0;
                                         return `${label}: ₹${value.toLocaleString('en-IN')}`;
@@ -2757,7 +2757,7 @@
                 // Update legend
                 document.getElementById('barChartLegend').innerHTML = legendHtml;
             } else {
-                document.getElementById('barChartLegend').innerHTML = 
+                document.getElementById('barChartLegend').innerHTML =
                     '<div class="no-data-chart">No data available for the selected filters</div>';
             }
         }
@@ -2765,16 +2765,16 @@
         function updateCategoryChart() {
             const filteredExpenses = getFilteredExpenses();
             const ctx = document.getElementById('categoryChart').getContext('2d');
-            
+
             if (filteredExpenses.length === 0) {
                 if (categoryChart) {
                     categoryChart.destroy();
                 }
-                document.getElementById('categoryChartLegend').innerHTML = 
+                document.getElementById('categoryChartLegend').innerHTML =
                     '<div class="no-data-chart">No data available for the selected period</div>';
                 return;
             }
-            
+
             // Category analysis
             const categoryMap = {};
             filteredExpenses.forEach(expense => {
@@ -2783,21 +2783,21 @@
                 }
                 categoryMap[expense.category] += expense.amount;
             });
-            
+
             const sortedCategories = Object.entries(categoryMap)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 10);
 
             const labels = sortedCategories.map(([category, _]) => category);
             const data = sortedCategories.map(([_, amount]) => amount);
-            
+
             if (categoryChart) {
                 categoryChart.destroy();
             }
-            
+
             // Determine chart type based on currentChartType
             const chartType = currentChartType === 'pie' ? 'pie' : 'bar';
-            
+
             categoryChart = new Chart(ctx, {
                 type: chartType,
                 data: {
@@ -2821,7 +2821,7 @@
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                callback: function(value) {
+                                callback: function (value) {
                                     return '₹' + value.toLocaleString('en-IN');
                                 }
                             },
@@ -2837,7 +2837,7 @@
                     } : undefined
                 }
             });
-            
+
             // Update legend
             let legendHtml = '';
             sortedCategories.forEach(([category, amount], index) => {
@@ -2853,23 +2853,23 @@
         function updateMonthlyTrendChart() {
             const filteredExpenses = getFilteredExpenses();
             const ctx = document.getElementById('monthlyTrendChart').getContext('2d');
-            
+
             if (filteredExpenses.length === 0) {
                 if (monthlyTrendChart) {
                     monthlyTrendChart.destroy();
                 }
-                document.getElementById('monthlyTrendChartLegend').innerHTML = 
+                document.getElementById('monthlyTrendChartLegend').innerHTML =
                     '<div class="no-data-chart">No data available for the selected period</div>';
                 return;
             }
-            
+
             // Monthly trend logic
             const monthlyMap = {};
             filteredExpenses.forEach(expense => {
                 const date = new Date(expense.date);
                 const monthYear = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
                 const monthName = `${getMonthName(date.getMonth() + 1).substring(0, 3)} ${date.getFullYear()}`;
-                
+
                 if (!monthlyMap[monthYear]) {
                     monthlyMap[monthYear] = {
                         name: monthName,
@@ -2879,7 +2879,7 @@
                         investment: 0
                     };
                 }
-                
+
                 switch (expense.type) {
                     case 'income': monthlyMap[monthYear].income += expense.amount; break;
                     case 'expense': monthlyMap[monthYear].expenses += expense.amount; break;
@@ -2896,7 +2896,7 @@
 
             const datasets = [];
             let legendHtml = '';
-            
+
             if (document.getElementById('showIncome').checked) {
                 datasets.push({
                     label: 'Income',
@@ -2911,7 +2911,7 @@
                     <span class="legend-label">Income</span>
                 </div>`;
             }
-            
+
             if (document.getElementById('showExpenses').checked) {
                 datasets.push({
                     label: 'Expenses',
@@ -2926,7 +2926,7 @@
                     <span class="legend-label">Expenses</span>
                 </div>`;
             }
-            
+
             if (document.getElementById('showDebt').checked) {
                 datasets.push({
                     label: 'Debt',
@@ -2941,7 +2941,7 @@
                     <span class="legend-label">Debt</span>
                 </div>`;
             }
-            
+
             if (document.getElementById('showInvestment').checked) {
                 datasets.push({
                     label: 'Investment',
@@ -2975,7 +2975,7 @@
                             y: {
                                 beginAtZero: true,
                                 ticks: {
-                                    callback: function(value) {
+                                    callback: function (value) {
                                         return '₹' + value.toLocaleString('en-IN');
                                     }
                                 },
@@ -2999,7 +2999,7 @@
 
                 document.getElementById('monthlyTrendChartLegend').innerHTML = legendHtml;
             } else {
-                document.getElementById('monthlyTrendChartLegend').innerHTML = 
+                document.getElementById('monthlyTrendChartLegend').innerHTML =
                     '<div class="no-data-chart">No data available for the selected filters</div>';
             }
         }
@@ -3007,7 +3007,7 @@
         function downloadChart() {
             let canvas;
             let filename;
-            
+
             if (currentChartView === 'category') {
                 canvas = document.getElementById('categoryChart');
                 filename = 'category-chart.png';
@@ -3023,17 +3023,17 @@
                     filename = 'financial-bar-chart.png';
                 }
             }
-            
+
             if (!canvas) {
                 showStatus('No chart available to download', 'error');
                 return;
             }
-            
+
             const link = document.createElement('a');
             link.download = filename;
             link.href = canvas.toDataURL('image/png');
             link.click();
-            
+
             showStatus('Chart downloaded successfully', 'success');
         }
 

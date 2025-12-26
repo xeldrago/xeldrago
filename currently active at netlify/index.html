@@ -211,7 +211,7 @@
             <div class="entertainment-card">
               <h3>Click the button below and play if you're bored, no download needed all you have to do is click and
                 play!!</h3>
-              <p>(Minecraft+Rpg Shoote+Android games)<br />If you're playing from android<br />please Tilt your phone and switch on
+              <p>(Minecraft+Rpg Shooter+Android games)<br />If you're playing from android<br />please Tilt your phone and switch on
                 rotate screen on your device.</p>
               <a href="https://venge.io/" target="_blank" rel="noopener noreferrer" class="ent-button green-gradient">
                 <span>Super cool RPG cloud game</span>
@@ -318,6 +318,153 @@
                 <span>Zoom into an adventurous journey!!</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
+              <br></br>  
+              <h3>Oh and here a small Christmas special</h3>
+              <button id="icy-btn" style="
+                      padding: 25px 60px;
+                      font-size: 1.4em;
+                      font-weight: 600;
+                      font-family: 'Segoe UI', sans-serif;
+                      border: 2px solid rgba(135, 206, 235, 0.3);
+                      border-radius: 50px;
+                      cursor: pointer;
+                      position: relative;
+                      overflow: hidden;
+                      background: linear-gradient(135deg, #4682b4 0%, #1e5a7a 50%, #0d3a52 100%);
+                      color: white;
+                      box-shadow: 0 8px 25px rgba(70, 130, 180, 0.4), inset 0 2px 10px rgba(255, 255, 255, 0.2), inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+                      transition: all 0.4s ease;
+                  ">
+                🎄 Christmas Special games
+              </button>
+              
+              <style>
+                #icy-btn:hover {
+                  transform: translateY(-3px);
+                  background: linear-gradient(135deg, #5a9fd4 0%, #2e7a9a 50%, #1d5a72 100%);
+                  box-shadow: 0 12px 35px rgba(70, 130, 180, 0.6), inset 0 2px 15px rgba(255, 255, 255, 0.3), inset 0 -2px 15px rgba(0, 0, 0, 0.2), 0 0 30px rgba(135, 206, 235, 0.5);
+                  border-color: rgba(135, 206, 235, 0.6);
+                }
+              
+                #icy-btn:active {
+                  transform: translateY(-1px) scale(0.98);
+                }
+              
+                #icy-btn::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(135, 206, 235, 0.15) 0%, transparent 50%);
+                  border-radius: 50px;
+                  opacity: 0;
+                  transition: opacity 0.4s ease;
+                  pointer-events: none;
+                }
+              
+                #icy-btn:hover::before {
+                  opacity: 1;
+                }
+              
+                #icy-btn::after {
+                  content: '';
+                  position: absolute;
+                  top: -50%;
+                  left: -50%;
+                  width: 200%;
+                  height: 200%;
+                  background: linear-gradient(45deg, transparent 30%, rgba(135, 206, 235, 0.3) 50%, transparent 70%);
+                  transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                  animation: icy-shimmer 3s infinite;
+                  pointer-events: none;
+                }
+              
+                @keyframes icy-shimmer {
+                  0% {
+                    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                  }
+              
+                  100% {
+                    transform: translateX(100%) translateY(100%) rotate(45deg);
+                  }
+                }
+              
+                .icy-snowflake {
+                  position: absolute;
+                  color: rgba(255, 255, 255, 0.9);
+                  font-size: 12px;
+                  pointer-events: none;
+                  animation: icy-fall linear forwards;
+                  text-shadow: 0 0 5px rgba(135, 206, 235, 0.8);
+                  opacity: 0;
+                  z-index: 10;
+                }
+              
+                @keyframes icy-fall {
+                  0% {
+                    opacity: 0;
+                    transform: translateY(-10px) rotate(0deg);
+                  }
+              
+                  10% {
+                    opacity: 1;
+                  }
+              
+                  90% {
+                    opacity: 1;
+                  }
+              
+                  100% {
+                    opacity: 0;
+                    transform: translateY(100px) rotate(360deg);
+                  }
+                }
+              </style>
+              
+              <script>
+                (function () {
+                  const button = document.getElementById('icy-btn');
+                  let snowInterval;
+
+                  function createSnowflake() {
+                    const snowflake = document.createElement('div');
+                    snowflake.className = 'icy-snowflake';
+                    snowflake.innerHTML = '❄';
+
+                    const buttonRect = button.getBoundingClientRect();
+                    const startX = Math.random() * (buttonRect.width - 20);
+                    snowflake.style.left = startX + 'px';
+                    snowflake.style.top = '0px';
+
+                    const duration = Math.random() * 2 + 2;
+                    snowflake.style.animationDuration = duration + 's';
+
+                    const size = Math.random() * 8 + 8;
+                    snowflake.style.fontSize = size + 'px';
+
+                    button.appendChild(snowflake);
+
+                    setTimeout(() => {
+                      snowflake.remove();
+                    }, duration * 1000);
+                  }
+
+                  button.addEventListener('mouseenter', () => {
+                    snowInterval = setInterval(createSnowflake, 100);
+                  });
+
+                  button.addEventListener('mouseleave', () => {
+                    clearInterval(snowInterval);
+                  });
+
+                  button.addEventListener('click', () => {
+                    window.open('https://santatracker.google.com/', '_blank');
+                  });
+                })();
+              </script>
+
             </div>
           </div>
         </div>

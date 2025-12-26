@@ -281,7 +281,43 @@
         padding: 8px 16px;
         font-size: 0.9rem;
       }
+      .blue-gradient {
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+}
+
+    .blue-gradient:hover {
+  background: linear-gradient(to right, #1d4ed8, #4338ca);
+}
     }
+    
+.link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.link-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.link-button span {
+  margin-right: 8px;
+}
+
+.blue-btn {
+  background-color: #2563eb;
+}
+
+.blue-btn:hover {
+  background-color: #ffffff;
+}
+
   </style>
 </head>
 
@@ -339,6 +375,13 @@
     <p><strong>5×5 & 7×7 Grids:</strong> Get 4 of your marks in a row (horizontally, vertically, or diagonally) to win.
     </p>
     <p>Player X always starts first. Click on any empty cell to place your mark.</p>
+    <a href="https://toytheater.com/category/games/" target="_blank" rel="noopener noreferrer" class="link-button blue-gradient">
+      <span>More fun games such as above</span>
+      <i class="fas fa-arrow-right"></i>
+    </a>
+    </div>
+    </div>
+
   </div>
 
   <script>
