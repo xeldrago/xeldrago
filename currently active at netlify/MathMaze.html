@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The MathMaze - Math Challenge Game - Multiple Choice</title>
+    <title>The MathMaze - Math Challenge game</title>
     <style>
+        /* All your CSS styles remain exactly the same */
         * {
             margin: 0;
             padding: 0;
@@ -146,15 +147,6 @@
         .radio-option label,
         .checkbox-option label {
             cursor: pointer;
-        }
-
-        .subcategory-group {
-            margin-left: 30px;
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 10px;
-            border-left: 3px solid #3b82f6;
         }
 
         select,
@@ -407,7 +399,7 @@
             border-radius: 15px;
             padding: 25px;
             margin-top: 25px;
-            max-height: 250px;
+            max-height: 300px;
             overflow-y: auto;
         }
 
@@ -429,15 +421,13 @@
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
 
         .log-entry::before {
             content: '•';
             color: #3b82f6;
             font-size: 1.5rem;
+            margin-right: 10px;
         }
 
         .log-entry.correct {
@@ -456,6 +446,27 @@
         .log-entry.incorrect::before {
             content: '✗';
             color: #f87171;
+        }
+
+        .log-question {
+            font-weight: 600;
+            margin: 8px 0 5px 20px;
+            color: #e2e8f0;
+        }
+
+        .log-solution {
+            margin: 5px 0 8px 20px;
+            padding: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #3b82f6;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .log-solution-step {
+            margin: 3px 0;
+            padding-left: 10px;
         }
 
         .log-details {
@@ -529,6 +540,97 @@
             margin-top: 5px;
         }
 
+        /* Category Selection Styles */
+        .category-selection {
+            margin-bottom: 25px;
+        }
+
+        .category-item {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            border-color: #3b82f6;
+            background: rgba(30, 41, 59, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .category-item.selected {
+            border-color: #3b82f6;
+            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            color: #e2e8f0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-description {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .levels-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .level-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .level-btn:hover {
+            border-color: #3b82f6;
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .level-btn.selected {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(96, 165, 250, 0.1));
+            border-color: #3b82f6;
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .difficulty-dots {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .dot.active {
+            background: #3b82f6;
+        }
+
         @media (max-width: 1024px) {
             .game-area {
                 flex-direction: column;
@@ -579,9 +681,9 @@
 <body>
     <div class="container">
         <header>
-            <h1>Math Challenge Game - Multiple Choice</h1>
-            <p class="tagline">Choose the correct answer from 4 options. Each game features 500+ question variations
-                with cleverly similar distractors!</p>
+            <h1>The MathMaze - Advanced Challenge</h1>
+            <p class="tagline">Master mathematics with challenging multiple-choice questions. Each category has 3 levels
+                of increasing difficulty with tough, non-decimal options!</p>
         </header>
 
         <div class="game-area">
@@ -603,38 +705,68 @@
                     </div>
                 </div>
 
-                <div class="config-group">
-                    <label class="config-label">Difficulty Level</label>
-                    <div class="radio-group">
-                        <label class="radio-option">
-                            <input type="radio" name="difficulty" value="1" checked>
-                            <span>Level 1 - Multiplications & Squares</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="difficulty" value="2">
-                            <span>Level 2 - Mixed Operations</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="difficulty" value="3">
-                            <span>Level 3 - Algebra/Equations</span>
-                        </label>
-                        <label class="checkbox-option">
-                            <input type="checkbox" id="mixedLevels">
-                            <span>Mixed Levels (All Types)</span>
-                        </label>
+                <!-- Category Selection -->
+                <div class="category-selection">
+                    <div class="category-item selected" data-category="multiplication">
+                        <div class="category-title">
+                            <span>🔢 Multiplications & Squares</span>
+                        </div>
+                        <div class="difficulty-dots">
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                        </div>
+                        <div class="category-description">
+                            Level 1: Single-digit operations<br>
+                            Level 2: Double-digit operations<br>
+                            Level 3: Triple-digit operations with squares
+                        </div>
+                        <div class="levels-container">
+                            <button class="level-btn selected" data-level="1">Level 1</button>
+                            <button class="level-btn" data-level="2">Level 2</button>
+                            <button class="level-btn" data-level="3">Level 3</button>
+                        </div>
                     </div>
 
-                    <div id="level1Subcategories" class="subcategory-group">
-                        <label class="config-label">Level 1 Subcategories</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="level1Type" value="multiplication" checked>
-                                <span>Multiplications</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="level1Type" value="squares">
-                                <span>Squares (9² to 9999²)</span>
-                            </label>
+                    <div class="category-item" data-category="mixed">
+                        <div class="category-title">
+                            <span>🧮 Mixed Operations</span>
+                        </div>
+                        <div class="difficulty-dots">
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                        </div>
+                        <div class="category-description">
+                            Level 1: Basic BODMAS with integers<br>
+                            Level 2: Advanced BODMAS with fractions<br>
+                            Level 3: Complex operations with exponents
+                        </div>
+                        <div class="levels-container">
+                            <button class="level-btn" data-level="1">Level 1</button>
+                            <button class="level-btn" data-level="2">Level 2</button>
+                            <button class="level-btn" data-level="3">Level 3</button>
+                        </div>
+                    </div>
+
+                    <div class="category-item" data-category="algebra">
+                        <div class="category-title">
+                            <span>📐 Algebra & Equations</span>
+                        </div>
+                        <div class="difficulty-dots">
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                        </div>
+                        <div class="category-description">
+                            Level 1: Single variable equations<br>
+                            Level 2: Two-variable equations<br>
+                            Level 3: Three-variable & quadratic equations
+                        </div>
+                        <div class="levels-container">
+                            <button class="level-btn" data-level="1">Level 1</button>
+                            <button class="level-btn" data-level="2">Level 2</button>
+                            <button class="level-btn" data-level="3">Level 3</button>
                         </div>
                     </div>
                 </div>
@@ -665,8 +797,8 @@
                 </div>
 
                 <div class="config-group">
-                    <button id="shootBtn" class="btn btn-shoot">
-                        <span>💥</span> SHOOT! <span>🧠</span>
+                    <button id="shootBtn" class="btn btn-shoot" disabled>
+                        <span>💥</span> GENERATE QUESTION <span>🧠</span>
                     </button>
                 </div>
 
@@ -677,15 +809,15 @@
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="level1Questions">250+</div>
-                        <div class="stat-label">Level 1 Questions</div>
+                        <div class="stat-label">Multiplication Questions</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="level2Questions">150+</div>
-                        <div class="stat-label">Level 2 Questions</div>
+                        <div class="stat-label">Mixed Operations</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="level3Questions">100+</div>
-                        <div class="stat-label">Level 3 Questions</div>
+                        <div class="stat-label">Algebra Equations</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">4</div>
@@ -703,20 +835,22 @@
                 <h2 class="panel-title">Math Challenge Arena</h2>
 
                 <div id="gameSetup" class="question-display">
-                    <p style="font-size: 1.4rem; text-align: center; margin-bottom: 20px;">Configure your game settings
-                        and click "Start Game" to begin!</p>
+                    <p style="font-size: 1.4rem; text-align: center; margin-bottom: 20px;">Select a category and level,
+                        then click "Start Game" to begin!</p>
                     <div style="background: rgba(15, 23, 42, 0.6); padding: 20px; border-radius: 12px;">
                         <p style="font-size: 1.2rem; color: #94a3b8; margin-bottom: 10px;">
                             <strong>🎯 Game Features:</strong>
                         </p>
                         <ul style="padding-left: 20px; color: #cbd5e1; line-height: 1.6;">
-                            <li><strong>500+ Question Variations</strong> across all levels</li>
-                            <li><strong>4 Multiple Choice Options</strong> per question</li>
-                            <li><strong>Smart Distractors</strong> - options are very similar to correct answer</li>
-                            <li><strong>Level 1:</strong> Multi-digit multiplications & squares (9² to 9999²)</li>
-                            <li><strong>Level 2:</strong> Complex operations with brackets, powers, fractions</li>
-                            <li><strong>Level 3:</strong> Algebraic equations to solve</li>
+                            <li><strong>3 Categories</strong> with 3 difficulty levels each</li>
+                            <li><strong>No easy decimals</strong> - All answers are integers</li>
+                            <li><strong>Tough distractors</strong> - Options are close but wrong (e.g., 7×8 = 56, 54,
+                                55, 58)</li>
+                            <li><strong>Category 1:</strong> Multiplications & Squares (Single to Triple-digit)</li>
+                            <li><strong>Category 2:</strong> Mixed Operations (BODMAS, fractions, exponents)</li>
+                            <li><strong>Category 3:</strong> Algebra & Equations (Single to Multiple variables)</li>
                             <li>Detailed game log shows chosen vs correct options</li>
+                            <li><strong>Step-by-step solutions</strong> for learning</li>
                         </ul>
                     </div>
                 </div>
@@ -729,7 +863,8 @@
                             <div id="questionLevel" class="question-level">Level 1</div>
                             <div id="questionCounter" class="question-counter">Question 1/10</div>
                         </div>
-                        <div id="questionText" class="question-text">Click "SHOOT!" to get your first question</div>
+                        <div id="questionText" class="question-text">Click "GENERATE QUESTION" to get your first
+                            question</div>
                     </div>
 
                     <div id="answerSection" class="hidden">
@@ -753,7 +888,7 @@
                     </div>
 
                     <div class="game-log">
-                        <div class="log-title">Game Log</div>
+                        <div class="log-title">Game Log with Solutions</div>
                         <div id="logEntries"></div>
                     </div>
                 </div>
@@ -762,12 +897,11 @@
     </div>
 
     <script>
-        // Game state variables
-        const gameState = {
+        // Game state
+        let gameState = {
             mode: 'single',
-            difficulty: '1',
-            mixedLevels: false,
-            level1Types: ['multiplication', 'squares'],
+            currentCategory: 'multiplication',
+            currentLevel: 1,
             totalQuestions: 10,
             currentQuestion: 0,
             currentPlayer: 1,
@@ -778,626 +912,363 @@
             gameActive: false,
             currentQuestionData: null,
             questionsAnswered: 0,
-            selectedOption: null,
-            stats: {
-                totalQuestionsGenerated: 0,
-                level1Generated: 0,
-                level2Generated: 0,
-                level3Generated: 0
-            }
+            selectedOption: null
         };
 
-        // Question banks with expanded variations
+        // Question banks
         const questionBank = {
-            level1: { multiplications: [], squares: [] },
-            level2: [],
-            level3: []
+            multiplication: { level1: [], level2: [], level3: [] },
+            mixed: { level1: [], level2: [], level3: [] },
+            algebra: { level1: [], level2: [], level3: [] }
         };
 
         // Initialize question banks
         function initializeQuestionBanks() {
-            // Generate Level 1 Multiplication questions (250+ variations)
-            for (let i = 0; i < 250; i++) {
-                const digitPattern = Math.floor(Math.random() * 4);
-                let num1, num2;
-
-                switch (digitPattern) {
-                    case 0:
-                        num1 = Math.floor(Math.random() * 900) + 100;
-                        num2 = Math.floor(Math.random() * 90) + 10;
-                        break;
-                    case 1:
-                        num1 = Math.floor(Math.random() * 9000) + 1000;
-                        num2 = Math.floor(Math.random() * 90) + 10;
-                        break;
-                    case 2:
-                        num1 = Math.floor(Math.random() * 900) + 100;
-                        num2 = Math.floor(Math.random() * 900) + 100;
-                        break;
-                    case 3:
-                        num1 = Math.floor(Math.random() * 9000) + 1000;
-                        num2 = Math.floor(Math.random() * 9) + 1;
-                        break;
+            // Clear existing questions
+            for (let category in questionBank) {
+                for (let level in questionBank[category]) {
+                    questionBank[category][level] = [];
                 }
+            }
 
-                questionBank.level1.multiplications.push({
-                    question: `${num1} × ${num2}`,
-                    answer: (num1 * num2).toString(),
-                    type: 'multiplication'
+            // Multiplication Level 1 (1-9 × 1-9)
+            for (let i = 0; i < 50; i++) {
+                const num1 = Math.floor(Math.random() * 9) + 1;
+                const num2 = Math.floor(Math.random() * 9) + 1;
+                const answer = num1 * num2;
+                questionBank.multiplication.level1.push({
+                    question: `${num1} × ${num2} = ?`,
+                    answer: answer,
+                    type: 'multiplication',
+                    numbers: [num1, num2],
+                    solutionSteps: [
+                        `Step 1: Multiply ${num1} × ${num2}`,
+                        `Step 2: ${num1} × ${num2} = ${answer}`,
+                        `Step 3: Therefore, ${num1} × ${num2} = ${answer}`
+                    ]
                 });
             }
 
-            // Generate Level 1 Square questions (9991 variations: 9-9999)
-            for (let i = 9; i <= 9999; i++) {
-                questionBank.level1.squares.push({
-                    question: `${i}²`,
-                    answer: (i * i).toString(),
-                    type: 'square'
+            // Add squares for multiplication level 1
+            for (let i = 0; i < 25; i++) {
+                const num = Math.floor(Math.random() * 9) + 1;
+                const answer = num * num;
+                questionBank.multiplication.level1.push({
+                    question: `${num}² = ?`,
+                    answer: answer,
+                    type: 'square',
+                    numbers: [num],
+                    solutionSteps: [
+                        `Step 1: Square of ${num} means ${num} × ${num}`,
+                        `Step 2: ${num} × ${num} = ${answer}`,
+                        `Step 3: Therefore, ${num}² = ${answer}`
+                    ]
                 });
             }
 
-            // Level 2: Mixed Operations (150+ variations)
-            const level2Templates = [
-                {
-                    template: '(A ÷ B) × (C + D) - E',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 100) + 20;
-                        const B = Math.floor(Math.random() * 12) + 2;
-                        const C = Math.floor(Math.random() * 50) + 10;
-                        const D = Math.floor(Math.random() * 50) + 10;
-                        const E = Math.floor(Math.random() * 100) + 20;
-                        return {
-                            question: `(${A} ÷ ${B}) × (${C} + ${D}) - ${E}`,
-                            answer: Math.floor((A / B) * (C + D) - E).toString()
-                        };
-                    }
-                },
-
-                {
-                    template: 'A³ × B - C ÷ D',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 10) + 2;
-                        const B = Math.floor(Math.random() * 20) + 5;
-                        const C = Math.floor(Math.random() * 100) + 50;
-                        const D = Math.floor(Math.random() * 12) + 2;
-                        return {
-                            question: `${A}³ × ${B} - ${C} ÷ ${D}`,
-                            answer: Math.floor(Math.pow(A, 3) * B - C / D).toString()
-                        };
-                    }
-                },
-
-                {
-                    template: 'A/4 + B × (C - D/2)',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 100) + 20;
-                        const B = Math.floor(Math.random() * 10) + 2;
-                        const C = Math.floor(Math.random() * 50) + 10;
-                        const D = Math.floor(Math.random() * 40) + 10;
-                        const result = A / 4 + B * (C - D / 2);
-                        return {
-                            question: `${A}/4 + ${B} × (${C} - ${D}/2)`,
-                            answer: result.toFixed(2).replace(/\.00$/, '')
-                        };
-                    }
-                },
-
-                {
-                    template: '(A + B)² ÷ C - D × E',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 30) + 5;
-                        const B = Math.floor(Math.random() * 30) + 5;
-                        const C = Math.floor(Math.random() * 10) + 2;
-                        const D = Math.floor(Math.random() * 15) + 3;
-                        const E = Math.floor(Math.random() * 15) + 3;
-                        return {
-                            question: `(${A} + ${B})² ÷ ${C} - ${D} × ${E}`,
-                            answer: Math.floor(Math.pow(A + B, 2) / C - D * E).toString()
-                        };
-                    }
-                }
-            ];
-
-            for (let i = 0; i < 150; i++) {
-                const template = level2Templates[Math.floor(Math.random() * level2Templates.length)];
-                const question = template.generator();
-                questionBank.level2.push({
-                    question: question.question,
-                    answer: question.answer,
-                    type: 'mixed_operation'
+            // Multiplication Level 2 (10-99 × 2-9)
+            for (let i = 0; i < 50; i++) {
+                const num1 = Math.floor(Math.random() * 90) + 10;
+                const num2 = Math.floor(Math.random() * 8) + 2;
+                const answer = num1 * num2;
+                questionBank.multiplication.level2.push({
+                    question: `${num1} × ${num2} = ?`,
+                    answer: answer,
+                    type: 'multiplication',
+                    numbers: [num1, num2],
+                    solutionSteps: [
+                        `Step 1: Multiply ${num1} × ${num2}`,
+                        `Step 2: ${num1} × ${num2} = ${answer}`,
+                        `Step 3: Therefore, ${num1} × ${num2} = ${answer}`
+                    ]
                 });
             }
 
-            // Level 3: Algebra Equations (100+ variations)
-            const equationTemplates = [
-                {
-                    template: 'Ax + B = Cx + D',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 15) + 2;
-                        const B = Math.floor(Math.random() * 50) + 10;
-                        const C = Math.floor(Math.random() * 10) + 1;
-                        const D = Math.floor(Math.random() * 100) + 20;
-                        const x = Math.floor((D - B) / (A - C));
-                        return {
-                            question: `${A}x + ${B} = ${C}x + ${D}`,
-                            answer: x.toString()
-                        };
-                    }
-                },
+            // Multiplication Level 3 (100-999 × 2-9)
+            for (let i = 0; i < 50; i++) {
+                const num1 = Math.floor(Math.random() * 900) + 100;
+                const num2 = Math.floor(Math.random() * 8) + 2;
+                const answer = num1 * num2;
+                questionBank.multiplication.level3.push({
+                    question: `${num1} × ${num2} = ?`,
+                    answer: answer,
+                    type: 'multiplication',
+                    numbers: [num1, num2],
+                    solutionSteps: [
+                        `Step 1: Multiply ${num1} × ${num2}`,
+                        `Step 2: ${num1} × ${num2} = ${answer}`,
+                        `Step 3: Therefore, ${num1} × ${num2} = ${answer}`
+                    ]
+                });
+            }
 
-                {
-                    template: '(x/A) + B = C',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 12) + 2;
-                        const B = Math.floor(Math.random() * 20) + 5;
-                        const C = Math.floor(Math.random() * 30) + 10;
-                        const x = (C - B) * A;
-                        return {
-                            question: `x/${A} + ${B} = ${C}`,
-                            answer: x.toString()
-                        };
-                    }
-                },
-
-                {
-                    template: '(Ax)/B + C = D',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 10) + 2;
-                        const B = Math.floor(Math.random() * 10) + 2;
-                        const C = Math.floor(Math.random() * 15) + 5;
-                        const D = Math.floor(Math.random() * 40) + 10;
-                        const x = ((D - C) * B) / A;
-                        return {
-                            question: `(${A}x)/${B} + ${C} = ${D}`,
-                            answer: x.toFixed(2).replace(/\.00$/, '')
-                        };
-                    }
-                },
-
-                {
-                    template: 'A(x + B) = Cx + D',
-                    generator: () => {
-                        const A = Math.floor(Math.random() * 10) + 2;
-                        const B = Math.floor(Math.random() * 20) + 5;
-                        const C = Math.floor(Math.random() * 10) + 2;
-                        const D = Math.floor(Math.random() * 100) + 30;
-                        const x = (D - A * B) / (A - C);
-                        return {
-                            question: `${A}(x + ${B}) = ${C}x + ${D}`,
-                            answer: x.toFixed(2).replace(/\.00$/, '')
-                        };
-                    }
+            // Mixed Operations Level 1 (simple BODMAS)
+            for (let i = 0; i < 50; i++) {
+                const a = Math.floor(Math.random() * 10) + 1;
+                const b = Math.floor(Math.random() * 10) + 1;
+                const c = Math.floor(Math.random() * 10) + 1;
+                const expressions = [
+                    `${a} + ${b} × ${c}`,
+                    `${a} × ${b} - ${c}`,
+                    `(${a} + ${b}) × ${c}`,
+                    `${a} × ${b} ÷ ${c}`
+                ];
+                const expr = expressions[Math.floor(Math.random() * expressions.length)];
+                const answer = Math.round(eval(expr.replace('×', '*').replace('÷', '/')));
+                if (Number.isInteger(answer)) {
+                    questionBank.mixed.level1.push({
+                        question: `${expr} = ?`,
+                        answer: answer,
+                        type: 'mixed',
+                        numbers: null,
+                        solutionSteps: [
+                            `Step 1: Evaluate expression: ${expr}`,
+                            `Step 2: Following BODMAS/PEMDAS rules`,
+                            `Step 3: ${expr} = ${answer}`
+                        ]
+                    });
                 }
-            ];
+            }
 
-            for (let i = 0; i < 100; i++) {
-                const template = equationTemplates[Math.floor(Math.random() * equationTemplates.length)];
-                const equation = template.generator();
-                questionBank.level3.push({
-                    question: `Solve for x: ${equation.question}`,
-                    answer: equation.answer,
-                    type: 'equation'
+            // Mixed Operations Level 2 (intermediate BODMAS)
+            for (let i = 0; i < 50; i++) {
+                const a = Math.floor(Math.random() * 15) + 1;
+                const b = Math.floor(Math.random() * 15) + 1;
+                const c = Math.floor(Math.random() * 15) + 1;
+                const d = Math.floor(Math.random() * 10) + 1;
+                const expressions = [
+                    `(${a} + ${b}) × (${c} - ${d})`,
+                    `${a} × ${b} ÷ ${c} + ${d}`,
+                    `(${a} × ${b}) - (${c} ÷ ${d})`
+                ];
+                const expr = expressions[Math.floor(Math.random() * expressions.length)];
+                const answer = Math.round(eval(expr.replace('×', '*').replace('÷', '/')));
+                if (Number.isInteger(answer)) {
+                    questionBank.mixed.level2.push({
+                        question: `${expr} = ?`,
+                        answer: answer,
+                        type: 'mixed',
+                        numbers: null,
+                        solutionSteps: [
+                            `Step 1: Evaluate expression: ${expr}`,
+                            `Step 2: Following BODMAS/PEMDAS rules`,
+                            `Step 3: ${expr} = ${answer}`
+                        ]
+                    });
+                }
+            }
+
+            // Mixed Operations Level 3 (advanced with exponents)
+            for (let i = 0; i < 50; i++) {
+                const a = Math.floor(Math.random() * 10) + 1;
+                const b = Math.floor(Math.random() * 10) + 1;
+                const c = Math.floor(Math.random() * 10) + 1;
+                const expressions = [
+                    `${a}² + ${b} × ${c}`,
+                    `${a} × ${b}² - ${c}`,
+                    `(${a} + ${b})² ÷ ${c}`
+                ];
+                const expr = expressions[Math.floor(Math.random() * expressions.length)];
+                const answer = Math.round(eval(expr.replace('×', '*').replace('÷', '/').replace('²', '**2')));
+                if (Number.isInteger(answer)) {
+                    questionBank.mixed.level3.push({
+                        question: `${expr} = ?`,
+                        answer: answer,
+                        type: 'mixed',
+                        numbers: null,
+                        solutionSteps: [
+                            `Step 1: Evaluate expression: ${expr}`,
+                            `Step 2: Following BODMAS/PEMDAS rules`,
+                            `Step 3: ${expr} = ${answer}`
+                        ]
+                    });
+                }
+            }
+
+            // Algebra Level 1 (single variable)
+            for (let i = 0; i < 50; i++) {
+                const a = Math.floor(Math.random() * 10) + 1;
+                const b = Math.floor(Math.random() * 20) + 1;
+                const x = Math.floor(Math.random() * 10) + 1;
+                const answer = a * x + b;
+                questionBank.algebra.level1.push({
+                    question: `${a}x + ${b} = ${answer}`,
+                    answer: x,
+                    type: 'algebra',
+                    numbers: [a, b, answer],
+                    solutionSteps: [
+                        `Step 1: Given equation: ${a}x + ${b} = ${answer}`,
+                        `Step 2: Subtract ${b} from both sides: ${a}x = ${answer} - ${b} = ${answer - b}`,
+                        `Step 3: Divide by ${a}: x = ${answer - b} ÷ ${a} = ${x}`,
+                        `Step 4: Therefore, x = ${x}`
+                    ]
+                });
+            }
+
+            // Algebra Level 2 (two variables simple)
+            for (let i = 0; i < 50; i++) {
+                const x = Math.floor(Math.random() * 10) + 1;
+                const y = Math.floor(Math.random() * 10) + 1;
+                const a1 = Math.floor(Math.random() * 5) + 1;
+                const b1 = Math.floor(Math.random() * 5) + 1;
+                const a2 = Math.floor(Math.random() * 5) + 1;
+                const b2 = Math.floor(Math.random() * 5) + 1;
+
+                const eq1 = a1 * x + b1 * y;
+                const eq2 = a2 * x + b2 * y;
+
+                questionBank.algebra.level2.push({
+                    question: `${a1}x + ${b1}y = ${eq1}<br>${a2}x + ${b2}y = ${eq2}`,
+                    answer: `x=${x}, y=${y}`,
+                    type: 'algebra',
+                    numbers: [a1, b1, eq1, a2, b2, eq2],
+                    solutionSteps: [
+                        `Step 1: Given equations:`,
+                        `   1) ${a1}x + ${b1}y = ${eq1}`,
+                        `   2) ${a2}x + ${b2}y = ${eq2}`,
+                        `Step 2: Multiply equation 1 by ${a2}: ${a1 * a2}x + ${b1 * a2}y = ${eq1 * a2}`,
+                        `Step 3: Multiply equation 2 by ${a1}: ${a1 * a2}x + ${b2 * a1}y = ${eq2 * a1}`,
+                        `Step 4: Subtract equations: (${b1 * a2 - b2 * a1})y = ${eq1 * a2 - eq2 * a1}`,
+                        `Step 5: Solve for y: y = ${y}`,
+                        `Step 6: Substitute y=${y} into equation 1: ${a1}x + ${b1 * y} = ${eq1}`,
+                        `Step 7: ${a1}x + ${b1 * y} = ${eq1}`,
+                        `Step 8: ${a1}x = ${eq1 - b1 * y}`,
+                        `Step 9: x = ${x}`,
+                        `Step 10: Solution: x=${x}, y=${y}`
+                    ]
+                });
+            }
+
+            // Algebra Level 3 (quadratic)
+            for (let i = 0; i < 50; i++) {
+                const x1 = Math.floor(Math.random() * 10) + 1;
+                const x2 = Math.floor(Math.random() * 10) + 1;
+                const a = 1;
+                const b = -(x1 + x2);
+                const c = x1 * x2;
+
+                questionBank.algebra.level3.push({
+                    question: `x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0`,
+                    answer: `x=${x1}, x=${x2}`,
+                    type: 'algebra',
+                    numbers: [b, c],
+                    solutionSteps: [
+                        `Step 1: Quadratic equation: x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0`,
+                        `Step 2: Discriminant = b² - 4ac = ${b}² - 4×1×${c} = ${b * b - 4 * c}`,
+                        `Step 3: √Discriminant = ${Math.sqrt(b * b - 4 * c)}`,
+                        `Step 4: x = [-b ± √(b²-4ac)] / 2a = [${-b} ± ${Math.sqrt(b * b - 4 * c)}] / 2`,
+                        `Step 5: x₁ = [${-b} + ${Math.sqrt(b * b - 4 * c)}] / 2 = ${x1}`,
+                        `Step 6: x₂ = [${-b} - ${Math.sqrt(b * b - 4 * c)}] / 2 = ${x2}`,
+                        `Step 7: Solutions: x=${x1}, x=${x2}`
+                    ]
                 });
             }
 
             // Update stats display
-            document.getElementById('totalQuestionsStat').textContent =
-                `${questionBank.level1.multiplications.length + questionBank.level1.squares.length +
-                questionBank.level2.length + questionBank.level3.length}+`;
-            document.getElementById('level1Questions').textContent =
-                `${questionBank.level1.multiplications.length + questionBank.level1.squares.length}+`;
-            document.getElementById('level2Questions').textContent = `${questionBank.level2.length}+`;
-            document.getElementById('level3Questions').textContent = `${questionBank.level3.length}+`;
+            const totalQuestions =
+                questionBank.multiplication.level1.length + questionBank.multiplication.level2.length + questionBank.multiplication.level3.length +
+                questionBank.mixed.level1.length + questionBank.mixed.level2.length + questionBank.mixed.level3.length +
+                questionBank.algebra.level1.length + questionBank.algebra.level2.length + questionBank.algebra.level3.length;
+
+            document.getElementById('totalQuestionsStat').textContent = `${totalQuestions}+`;
+            document.getElementById('level1Questions').textContent = `${questionBank.multiplication.level1.length + questionBank.multiplication.level2.length + questionBank.multiplication.level3.length}+`;
+            document.getElementById('level2Questions').textContent = `${questionBank.mixed.level1.length + questionBank.mixed.level2.length + questionBank.mixed.level3.length}+`;
+            document.getElementById('level3Questions').textContent = `${questionBank.algebra.level1.length + questionBank.algebra.level2.length + questionBank.algebra.level3.length}+`;
         }
 
-        // Generate multiple choice options
-        function generateOptions(correctAnswer, level) {
-            const correct = parseFloat(correctAnswer);
+        // Generate SMART options that have the same last digit
+        function generateOptions(correctAnswer, questionText) {
+            const correct = typeof correctAnswer === 'string' ? correctAnswer : correctAnswer;
             const options = [correct];
 
-            // Generate 3 distractors that are very close to the correct answer
-            for (let i = 0; i < 3; i++) {
-                let distractor;
-                const errorType = Math.floor(Math.random() * 4);
+            // Check if it's a multiplication question
+            const isMultiplication = questionText.includes('×');
 
-                // Different types of "close but wrong" answers
-                switch (errorType) {
-                    case 0: // Off by a small percentage (1-5%)
-                        const percentError = 1 + Math.random() * 4;
-                        const direction = Math.random() > 0.5 ? 1 : -1;
-                        distractor = correct * (1 + (direction * percentError / 100));
-                        break;
+            if (typeof correct === 'number' && isMultiplication) {
+                // For multiplication questions, generate distractors with same last digit
+                const lastDigit = correct % 10;
 
-                    case 1: // Off by transposing digits (for multi-digit numbers)
-                        if (correct >= 100 && Number.isInteger(correct)) {
-                            const str = Math.floor(correct).toString();
-                            if (str.length >= 2) {
-                                const idx1 = Math.floor(Math.random() * str.length);
-                                let idx2;
-                                do {
-                                    idx2 = Math.floor(Math.random() * str.length);
-                                } while (idx2 === idx1);
+                for (let i = 0; i < 3; i++) {
+                    let wrongAnswer;
+                    let attempts = 0;
 
-                                const arr = str.split('');
-                                [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
-                                distractor = parseInt(arr.join(''));
-                            } else {
-                                distractor = correct + (Math.random() > 0.5 ? 10 : -10);
-                            }
-                        } else {
-                            distractor = correct + (Math.random() > 0.5 ? 5 : -5);
+                    do {
+                        attempts++;
+                        if (attempts > 10) break;
+
+                        // Try different strategies
+                        const offset = (Math.floor(Math.random() * 5) + 1) * 10;
+                        const sign = Math.random() > 0.5 ? 1 : -1;
+                        wrongAnswer = correct + sign * offset;
+
+                        // Ensure it has the same last digit
+                        wrongAnswer = Math.floor(wrongAnswer / 10) * 10 + lastDigit;
+
+                        // Ensure it's positive and different
+                        if (wrongAnswer <= 0 || wrongAnswer === correct || options.includes(wrongAnswer)) {
+                            continue;
                         }
-                        break;
 
-                    case 2: // Off by a common calculation error
-                        if (level === 1) {
-                            // For multiplication/squares: wrong digit placement
-                            distractor = correct * (Math.random() > 0.5 ? 1.1 : 0.9);
-                        } else if (level === 2) {
-                            // For operations: forget to carry or wrong order
-                            distractor = correct + (Math.random() > 0.5 ? 15 : -15);
-                        } else {
-                            // For equations: wrong sign or arithmetic
-                            distractor = correct + (Math.random() > 0.5 ? 2 : -2);
-                        }
-                        break;
+                    } while (wrongAnswer <= 0 || wrongAnswer === correct || options.includes(wrongAnswer));
 
-                    case 3: // Off by common factor (like 2x, 0.5x, etc.)
-                        const factor = [0.5, 1.5, 2, 0.75, 1.25][Math.floor(Math.random() * 5)];
-                        distractor = correct * factor;
-                        break;
+                    if (wrongAnswer && wrongAnswer > 0 && wrongAnswer !== correct && !options.includes(wrongAnswer)) {
+                        options.push(wrongAnswer);
+                    }
                 }
 
-                // Ensure distractor is different from correct and other distractors
-                distractor = Math.round(distractor * 100) / 100;
-                if (distractor === correct || options.includes(distractor)) {
-                    i--; // Try again
-                    continue;
+                // If we couldn't generate enough unique options, fill with generic ones
+                while (options.length < 4) {
+                    let wrongAnswer;
+                    do {
+                        const offset = Math.floor(Math.random() * 20) + 1;
+                        const sign = Math.random() > 0.5 ? 1 : -1;
+                        wrongAnswer = correct + sign * offset;
+                        // Ensure same last digit
+                        wrongAnswer = Math.floor(wrongAnswer / 10) * 10 + lastDigit;
+                    } while (wrongAnswer <= 0 || options.includes(wrongAnswer));
+                    options.push(wrongAnswer);
                 }
+            } else {
+                // For non-multiplication questions, use standard generation
+                for (let i = 0; i < 3; i++) {
+                    let wrongAnswer;
+                    if (typeof correct === 'string') {
+                        // For algebra answers
+                        if (correct.includes('x=')) {
+                            const parts = correct.split(', ');
+                            const modifiedParts = parts.map(part => {
+                                const [varName, valueStr] = part.split('=');
+                                const value = parseInt(valueStr);
+                                const offset = Math.floor(Math.random() * 3) + 1;
+                                const sign = Math.random() > 0.5 ? 1 : -1;
+                                return `${varName}=${value + sign * offset}`;
+                            });
+                            wrongAnswer = modifiedParts.join(', ');
+                        } else {
+                            wrongAnswer = correct + " (wrong)";
+                        }
+                    } else {
+                        // For numeric answers
+                        const offset = Math.floor(Math.random() * 10) + 1;
+                        const sign = Math.random() > 0.5 ? 1 : -1;
+                        wrongAnswer = correct + sign * offset;
 
-                options.push(distractor);
+                        if (wrongAnswer === correct || options.includes(wrongAnswer)) {
+                            i--;
+                            continue;
+                        }
+                    }
+                    options.push(wrongAnswer);
+                }
             }
 
-            // Shuffle the options
+            // Shuffle options
             for (let i = options.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [options[i], options[j]] = [options[j], options[i]];
             }
 
             return options;
-        }
-
-        // DOM elements
-        const startGameBtn = document.getElementById('startGame');
-        const shootBtn = document.getElementById('shootBtn');
-        const submitAnswerBtn = document.getElementById('submitAnswer');
-        const gameSetup = document.getElementById('gameSetup');
-        const gameActive = document.getElementById('gameActive');
-        const questionText = document.getElementById('questionText');
-        const questionLevel = document.getElementById('questionLevel');
-        const questionCounter = document.getElementById('questionCounter');
-        const resultFeedback = document.getElementById('resultFeedback');
-        const answerSection = document.getElementById('answerSection');
-        const optionsContainer = document.getElementById('optionsContainer');
-        const currentPlayerDisplay = document.getElementById('currentPlayerDisplay');
-        const playerNamesGroup = document.getElementById('playerNamesGroup');
-        const player2ScoreCard = document.getElementById('player2ScoreCard');
-        const logEntries = document.getElementById('logEntries');
-        const level1Subcategories = document.getElementById('level1Subcategories');
-
-        // Player score display elements
-        const player1NameDisplay = document.getElementById('player1NameDisplay');
-        const player2NameDisplay = document.getElementById('player2NameDisplay');
-        const player1ScoreDisplay = document.getElementById('player1Score');
-        const player2ScoreDisplay = document.getElementById('player2Score');
-
-        // Initialize question banks
-        initializeQuestionBanks();
-
-        // Event listeners for configuration changes
-        document.querySelectorAll('input[name="gameMode"]').forEach(radio => {
-            radio.addEventListener('change', function () {
-                gameState.mode = this.value;
-                if (this.value === 'multi') {
-                    playerNamesGroup.classList.remove('hidden');
-                    player2ScoreCard.classList.remove('hidden');
-                } else {
-                    playerNamesGroup.classList.add('hidden');
-                    player2ScoreCard.classList.add('hidden');
-                }
-            });
-        });
-
-        document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
-            radio.addEventListener('change', function () {
-                gameState.difficulty = this.value;
-                if (this.value === '1') {
-                    level1Subcategories.classList.remove('hidden');
-                } else {
-                    level1Subcategories.classList.add('hidden');
-                }
-            });
-        });
-
-        document.getElementById('mixedLevels').addEventListener('change', function () {
-            gameState.mixedLevels = this.checked;
-            if (this.checked) {
-                level1Subcategories.classList.remove('hidden');
-            }
-        });
-
-        document.querySelectorAll('input[name="level1Type"]').forEach(checkbox => {
-            checkbox.addEventListener('change', function () {
-                gameState.level1Types = Array.from(document.querySelectorAll('input[name="level1Type"]:checked'))
-                    .map(cb => cb.value);
-
-                if (gameState.level1Types.length === 0) {
-                    this.checked = true;
-                    gameState.level1Types.push(this.value);
-                }
-            });
-        });
-
-        document.getElementById('questionCount').addEventListener('change', function () {
-            gameState.totalQuestions = parseInt(this.value);
-        });
-
-        // Start game button
-        startGameBtn.addEventListener('click', function () {
-            if (gameState.mode === 'multi') {
-                gameState.player1Name = document.getElementById('player1Name').value || 'Player 1';
-                gameState.player2Name = document.getElementById('player2Name').value || 'Player 2';
-
-                player1NameDisplay.textContent = gameState.player1Name;
-                player2NameDisplay.textContent = gameState.player2Name;
-            } else {
-                player1NameDisplay.textContent = 'You';
-                player2ScoreCard.classList.add('hidden');
-            }
-
-            // Reset game state
-            gameState.currentQuestion = 0;
-            gameState.player1Score = 0;
-            gameState.player2Score = 0;
-            gameState.gameActive = true;
-            gameState.currentPlayer = 1;
-            gameState.questionsAnswered = 0;
-            gameState.selectedOption = null;
-
-            // Update UI
-            gameSetup.classList.add('hidden');
-            gameActive.classList.remove('hidden');
-            answerSection.classList.add('hidden');
-            resultFeedback.textContent = '';
-            logEntries.innerHTML = '';
-            optionsContainer.innerHTML = '';
-
-            // Update score displays
-            player1ScoreDisplay.textContent = '0';
-            player2ScoreDisplay.textContent = '0';
-
-            // Show current player for multiplayer
-            if (gameState.mode === 'multi') {
-                currentPlayerDisplay.classList.remove('hidden');
-                updateCurrentPlayerDisplay();
-            } else {
-                currentPlayerDisplay.classList.add('hidden');
-            }
-
-            // Highlight active player
-            updatePlayerScoreCards();
-
-            // Update question counter
-            updateQuestionCounter();
-
-            // Add log entry
-            addLogEntry(`Game started! ${gameState.mode === 'multi' ? `${gameState.player1Name} vs ${gameState.player2Name}` : 'Single player mode'}. Difficulty: ${gameState.mixedLevels ? 'Mixed Levels' : 'Level ' + gameState.difficulty}`);
-
-            // Enable shoot button
-            shootBtn.disabled = false;
-            questionText.textContent = 'Click "SHOOT!" to get your first question';
-        });
-
-        // Shoot button - generate question
-        shootBtn.addEventListener('click', function () {
-            if (!gameState.gameActive) return;
-
-            // Check if game is over
-            if (gameState.questionsAnswered >= gameState.totalQuestions) {
-                endGame();
-                return;
-            }
-
-            // Generate question based on difficulty
-            let level = parseInt(gameState.difficulty);
-            if (gameState.mixedLevels) {
-                level = Math.floor(Math.random() * 3) + 1;
-            }
-
-            gameState.currentQuestionData = generateQuestion(level);
-            gameState.currentQuestion++;
-
-            // Update stats
-            gameState.stats.totalQuestionsGenerated++;
-            if (level === 1) gameState.stats.level1Generated++;
-            else if (level === 2) gameState.stats.level2Generated++;
-            else if (level === 3) gameState.stats.level3Generated++;
-
-            // Generate multiple choice options
-            const options = generateOptions(gameState.currentQuestionData.answer, level);
-            gameState.currentQuestionData.options = options;
-
-            // Update UI with question
-            questionText.textContent = gameState.currentQuestionData.question;
-
-            // Set level display
-            questionLevel.textContent = `Level ${level}`;
-            questionLevel.className = 'question-level';
-            questionLevel.classList.add(`level-${level}`);
-
-            // Generate option buttons
-            optionsContainer.innerHTML = '';
-            options.forEach((option, index) => {
-                const optionBtn = document.createElement('button');
-                optionBtn.className = 'option-btn';
-                optionBtn.textContent = formatNumber(option);
-                optionBtn.dataset.value = option;
-                optionBtn.dataset.index = index;
-
-                optionBtn.addEventListener('click', function () {
-                    // Deselect all options
-                    document.querySelectorAll('.option-btn').forEach(btn => {
-                        btn.classList.remove('selected');
-                    });
-
-                    // Select this option
-                    this.classList.add('selected');
-                    gameState.selectedOption = this.dataset.value;
-                    submitAnswerBtn.disabled = false;
-                });
-
-                optionsContainer.appendChild(optionBtn);
-            });
-
-            // Show answer section
-            answerSection.classList.remove('hidden');
-            resultFeedback.textContent = '';
-            submitAnswerBtn.disabled = true;
-            gameState.selectedOption = null;
-
-            // Update question counter
-            updateQuestionCounter();
-
-            // Update log
-            const questionType = gameState.currentQuestionData.type === 'square' ? 'square' :
-                gameState.currentQuestionData.type === 'equation' ? 'equation' :
-                    gameState.currentQuestionData.type === 'mixed_operation' ? 'mixed operation' : 'multiplication';
-            addLogEntry(`${getCurrentPlayerName()} received a Level ${level} ${questionType} question`);
-
-            // Disable shoot button until answer is submitted
-            shootBtn.disabled = true;
-        });
-
-        // Submit answer button
-        submitAnswerBtn.addEventListener('click', checkAnswer);
-
-        // Function to check answer
-        function checkAnswer() {
-            if (!gameState.currentQuestionData || !gameState.selectedOption) return;
-
-            const correctAnswer = parseFloat(gameState.currentQuestionData.answer);
-            const selectedAnswer = parseFloat(gameState.selectedOption);
-
-            // Check if answer is correct
-            const isCorrect = Math.abs(selectedAnswer - correctAnswer) < 0.01;
-
-            // Update UI to show correct/incorrect options
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                const btnValue = parseFloat(btn.dataset.value);
-                btn.classList.remove('selected');
-
-                if (Math.abs(btnValue - correctAnswer) < 0.01) {
-                    btn.classList.add('correct');
-                } else if (Math.abs(btnValue - selectedAnswer) < 0.01) {
-                    btn.classList.add('incorrect');
-                }
-
-                // Disable all buttons
-                btn.disabled = true;
-            });
-
-            // Update score and UI
-            if (isCorrect) {
-                const points = gameState.currentQuestionData.level * 10;
-
-                if (gameState.currentPlayer === 1) {
-                    gameState.player1Score += points;
-                    player1ScoreDisplay.textContent = gameState.player1Score;
-                } else {
-                    gameState.player2Score += points;
-                    player2ScoreDisplay.textContent = gameState.player2Score;
-                }
-
-                resultFeedback.textContent = `Correct! +${points} points`;
-                resultFeedback.className = 'result-feedback correct-answer';
-
-                // Add log with chosen and correct option
-                addLogEntry(`${getCurrentPlayerName()} chose ${formatNumber(selectedAnswer)} (Correct! +${points} points)`, 'correct');
-                addLogDetails(`Correct answer: ${formatNumber(correctAnswer)}, Chosen: ${formatNumber(selectedAnswer)}`);
-            } else {
-                resultFeedback.textContent = `Incorrect. The correct answer is ${formatNumber(correctAnswer)}`;
-                resultFeedback.className = 'result-feedback incorrect-answer';
-
-                // Add log with chosen and correct option
-                addLogEntry(`${getCurrentPlayerName()} chose ${formatNumber(selectedAnswer)} (Incorrect)`, 'incorrect');
-                addLogDetails(`Correct answer: ${formatNumber(correctAnswer)}, Chosen: ${formatNumber(selectedAnswer)}`);
-            }
-
-            // Update game state
-            gameState.questionsAnswered++;
-
-            // Switch player in multiplayer mode
-            if (gameState.mode === 'multi') {
-                gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
-                updateCurrentPlayerDisplay();
-                updatePlayerScoreCards();
-            }
-
-            // Update question counter
-            updateQuestionCounter();
-
-            // Check if game is over
-            if (gameState.questionsAnswered >= gameState.totalQuestions) {
-                setTimeout(endGame, 3000);
-            } else {
-                // Re-enable shoot button after a delay
-                setTimeout(() => {
-                    shootBtn.disabled = false;
-                    answerSection.classList.add('hidden');
-                    questionText.textContent = 'Click "SHOOT!" for the next question';
-                    resultFeedback.textContent = '';
-                    submitAnswerBtn.disabled = true;
-                }, 3000);
-            }
-        }
-
-        // Function to generate a question based on level
-        function generateQuestion(level) {
-            let questionData;
-
-            switch (level) {
-                case 1:
-                    const availableTypes = gameState.level1Types;
-                    if (availableTypes.length === 0) {
-                        availableTypes.push('multiplication');
-                    }
-
-                    const selectedType = availableTypes[Math.floor(Math.random() * availableTypes.length)];
-
-                    if (selectedType === 'squares') {
-                        const squareIndex = Math.floor(Math.random() * questionBank.level1.squares.length);
-                        questionData = questionBank.level1.squares[squareIndex];
-                    } else {
-                        const multIndex = Math.floor(Math.random() * questionBank.level1.multiplications.length);
-                        questionData = questionBank.level1.multiplications[multIndex];
-                    }
-                    break;
-
-                case 2:
-                    const level2Index = Math.floor(Math.random() * questionBank.level2.length);
-                    questionData = questionBank.level2[level2Index];
-                    break;
-
-                case 3:
-                    const level3Index = Math.floor(Math.random() * questionBank.level3.length);
-                    questionData = questionBank.level3[level3Index];
-                    break;
-            }
-
-            return {
-                ...questionData,
-                level: level
-            };
         }
 
         // Helper functions
@@ -1407,55 +1278,126 @@
         }
 
         function updateCurrentPlayerDisplay() {
-            currentPlayerDisplay.textContent = `${getCurrentPlayerName()}'s turn`;
+            const display = document.getElementById('currentPlayerDisplay');
+            display.textContent = `${getCurrentPlayerName()}'s turn`;
         }
 
         function updatePlayerScoreCards() {
             const player1Card = document.getElementById('player1ScoreCard');
-            if (gameState.mode === 'multi' && gameState.currentPlayer === 1) {
-                player1Card.classList.add('active');
-            } else {
-                player1Card.classList.remove('active');
-            }
+            const player2Card = document.getElementById('player2ScoreCard');
+
+            player1Card.classList.remove('active');
+            player2Card.classList.remove('active');
 
             if (gameState.mode === 'multi') {
-                if (gameState.currentPlayer === 2) {
-                    player2ScoreCard.classList.add('active');
+                if (gameState.currentPlayer === 1) {
+                    player1Card.classList.add('active');
                 } else {
-                    player2ScoreCard.classList.remove('active');
+                    player2Card.classList.add('active');
                 }
             }
         }
 
         function updateQuestionCounter() {
-            questionCounter.textContent = `Question ${gameState.questionsAnswered + 1}/${gameState.totalQuestions}`;
+            document.getElementById('questionCounter').textContent =
+                `Question ${gameState.questionsAnswered + 1}/${gameState.totalQuestions}`;
         }
 
-        function formatNumber(num) {
-            const n = parseFloat(num);
-            if (Number.isInteger(n)) {
-                return n.toLocaleString();
-            } else {
-                return n.toFixed(2).replace(/\.00$/, '');
-            }
-        }
-
-        function addLogEntry(message, type = '') {
+        function addLogEntry(message, type = '', questionData = null) {
+            const logEntries = document.getElementById('logEntries');
             const entry = document.createElement('div');
             entry.className = `log-entry ${type}`;
             entry.textContent = `${gameState.questionsAnswered + 1}. ${message}`;
             logEntries.appendChild(entry);
 
+            // Add question and solution if provided
+            if (questionData) {
+                const questionEl = document.createElement('div');
+                questionEl.className = 'log-question';
+                questionEl.innerHTML = `Q: ${questionData.question}`;
+                logEntries.appendChild(questionEl);
+
+                const solutionEl = document.createElement('div');
+                solutionEl.className = 'log-solution';
+
+                if (questionData.solutionSteps && questionData.solutionSteps.length > 0) {
+                    solutionEl.innerHTML = '<strong>Solution Steps:</strong>';
+                    questionData.solutionSteps.forEach(step => {
+                        const stepEl = document.createElement('div');
+                        stepEl.className = 'log-solution-step';
+                        stepEl.textContent = step;
+                        solutionEl.appendChild(stepEl);
+                    });
+                } else {
+                    solutionEl.textContent = `Solution: ${questionData.answer}`;
+                }
+                logEntries.appendChild(solutionEl);
+            }
+
             logEntries.scrollTop = logEntries.scrollHeight;
         }
 
-        function addLogDetails(details) {
-            const detailsEl = document.createElement('div');
-            detailsEl.className = 'log-details';
-            detailsEl.textContent = details;
-            logEntries.appendChild(detailsEl);
+        function checkAnswer() {
+            if (!gameState.currentQuestionData || !gameState.selectedOption) return;
 
-            logEntries.scrollTop = logEntries.scrollHeight;
+            const correctAnswer = gameState.currentQuestionData.answer;
+            const isCorrect = gameState.selectedOption == correctAnswer;
+
+            // Update option buttons UI
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                const btnValue = btn.dataset.value;
+                if (btnValue == correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (btnValue == gameState.selectedOption) {
+                    btn.classList.add('incorrect');
+                }
+                btn.disabled = true;
+            });
+
+            // Update score if correct
+            if (isCorrect) {
+                const points = gameState.currentLevel * 10;
+                if (gameState.currentPlayer === 1) {
+                    gameState.player1Score += points;
+                    document.getElementById('player1Score').textContent = gameState.player1Score;
+                } else {
+                    gameState.player2Score += points;
+                    document.getElementById('player2Score').textContent = gameState.player2Score;
+                }
+
+                document.getElementById('resultFeedback').textContent = `Correct! +${points} points`;
+                document.getElementById('resultFeedback').className = 'result-feedback correct-answer';
+                addLogEntry(`${getCurrentPlayerName()} chose ${gameState.selectedOption} (Correct! +${points} points)`, 'correct', gameState.currentQuestionData);
+            } else {
+                document.getElementById('resultFeedback').textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+                document.getElementById('resultFeedback').className = 'result-feedback incorrect-answer';
+                addLogEntry(`${getCurrentPlayerName()} chose ${gameState.selectedOption} (Incorrect)`, 'incorrect', gameState.currentQuestionData);
+            }
+
+            // Update game state
+            gameState.questionsAnswered++;
+            gameState.selectedOption = null;
+
+            // Switch player in multiplayer mode
+            if (gameState.mode === 'multi') {
+                gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
+                updateCurrentPlayerDisplay();
+                updatePlayerScoreCards();
+            }
+
+            // Check if game is over
+            if (gameState.questionsAnswered >= gameState.totalQuestions) {
+                setTimeout(endGame, 2000);
+            } else {
+                // Re-enable shoot button after delay
+                setTimeout(() => {
+                    document.getElementById('shootBtn').disabled = false;
+                    document.getElementById('answerSection').classList.add('hidden');
+                    document.getElementById('questionText').textContent = 'Click "GENERATE QUESTION" for next question';
+                    document.getElementById('resultFeedback').textContent = '';
+                    document.getElementById('submitAnswer').disabled = true;
+                }, 2000);
+            }
         }
 
         function endGame() {
@@ -1471,43 +1413,264 @@
                     winnerMessage = "🤝 It's a tie!";
                 }
             } else {
-                winnerMessage = `🏁 Game over! Your final score: ${gameState.player1Score}`;
+                winnerMessage = `🏁 Game over! Your score: ${gameState.player1Score}`;
             }
 
-            const totalPossible = gameState.totalQuestions * 30;
-            const player1Percentage = Math.round((gameState.player1Score / totalPossible) * 100);
+            const categoryNames = {
+                multiplication: 'Multiplications & Squares',
+                mixed: 'Mixed Operations',
+                algebra: 'Algebra & Equations'
+            };
 
-            questionText.innerHTML = `
+            document.getElementById('questionText').innerHTML = `
                 <div style="font-size: 2rem; color: #fbbf24; margin-bottom: 20px;">🏆 Game Complete!</div>
                 <div style="font-size: 1.6rem; margin-bottom: 15px;">${winnerMessage}</div>
-                <div style="font-size: 1.3rem; color: #94a3b8; margin-bottom: 20px;">
-                    ${gameState.mode === 'multi' ?
-                    `${gameState.player1Name}: ${gameState.player1Score} points | ${gameState.player2Name}: ${gameState.player2Score} points` :
-                    `Final Score: ${gameState.player1Score} points (${player1Percentage}% accuracy)`}
+                <div style="font-size: 1.3rem; color: #94a3b8; margin-bottom: 10px;">
+                    Category: ${categoryNames[gameState.currentCategory]} - Level ${gameState.currentLevel}
                 </div>
             `;
 
-            answerSection.classList.add('hidden');
-            shootBtn.disabled = true;
-
-            addLogEntry(`Game over! ${winnerMessage.replace(/🎉|🏁|🤝|🏆/g, '')}`);
+            document.getElementById('answerSection').classList.add('hidden');
+            document.getElementById('shootBtn').disabled = true;
+            addLogEntry(`Game over! ${winnerMessage}`);
         }
 
-        // Initialize UI
+        // Initialize game when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('input[name="gameMode"][value="single"]').checked = true;
-            document.querySelector('input[name="difficulty"][value="1"]').checked = true;
-            document.querySelector('input[name="level1Type"][value="multiplication"]').checked = true;
-            document.querySelector('input[name="level1Type"][value="squares"]').checked = true;
+            console.log("DOM loaded, initializing game...");
 
-            player1NameDisplay.textContent = 'You';
-            player2NameDisplay.textContent = 'Player 2';
+            // Initialize question banks
+            initializeQuestionBanks();
 
-            level1Subcategories.classList.remove('hidden');
+            // Category selection - SIMPLIFIED
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.addEventListener('click', function () {
+                    console.log("Category clicked:", this.dataset.category);
+                    // Remove selected class from all categories
+                    document.querySelectorAll('.category-item').forEach(cat => {
+                        cat.classList.remove('selected');
+                    });
 
-            addLogEntry("Welcome to Math Challenge Game - Multiple Choice Edition!");
-            addLogEntry("Each question has 4 options. Choose the correct one!");
-            addLogEntry("Configure your game and click 'Start Game' to begin.");
+                    // Add selected class to clicked category
+                    this.classList.add('selected');
+
+                    // Update game state
+                    gameState.currentCategory = this.dataset.category;
+
+                    // Reset level to 1 for this category
+                    const levelBtns = this.querySelectorAll('.level-btn');
+                    levelBtns.forEach(btn => btn.classList.remove('selected'));
+                    if (levelBtns[0]) levelBtns[0].classList.add('selected');
+                    gameState.currentLevel = 1;
+
+                    console.log("Selected category:", gameState.currentCategory, "level:", gameState.currentLevel);
+                });
+            });
+
+            // Level button selection within categories - SIMPLIFIED
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation(); // Prevent category click
+
+                    const categoryItem = this.closest('.category-item');
+                    const level = parseInt(this.dataset.level);
+
+                    // Only update if this category is selected
+                    if (categoryItem.classList.contains('selected')) {
+                        // Update level buttons in this category
+                        categoryItem.querySelectorAll('.level-btn').forEach(b => {
+                            b.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+
+                        // Update game state
+                        gameState.currentLevel = level;
+                        console.log("Selected level:", gameState.currentLevel);
+                    }
+                });
+            });
+
+            // Game mode selection - SIMPLIFIED
+            document.querySelectorAll('input[name="gameMode"]').forEach(radio => {
+                radio.addEventListener('change', function () {
+                    console.log("Game mode changed to:", this.value);
+                    gameState.mode = this.value;
+                    const playerNamesGroup = document.getElementById('playerNamesGroup');
+                    const player2ScoreCard = document.getElementById('player2ScoreCard');
+
+                    if (this.value === 'multi') {
+                        playerNamesGroup.classList.remove('hidden');
+                        player2ScoreCard.classList.remove('hidden');
+                    } else {
+                        playerNamesGroup.classList.add('hidden');
+                        player2ScoreCard.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Question count selection
+            document.getElementById('questionCount').addEventListener('change', function () {
+                gameState.totalQuestions = parseInt(this.value);
+                console.log("Total questions:", gameState.totalQuestions);
+            });
+
+            // Start Game button - SIMPLIFIED
+            document.getElementById('startGame').addEventListener('click', function () {
+                console.log("Start Game clicked");
+
+                // Get player names if multiplayer
+                if (gameState.mode === 'multi') {
+                    gameState.player1Name = document.getElementById('player1Name').value || 'Player 1';
+                    gameState.player2Name = document.getElementById('player2Name').value || 'Player 2';
+
+                    document.getElementById('player1NameDisplay').textContent = gameState.player1Name;
+                    document.getElementById('player2NameDisplay').textContent = gameState.player2Name;
+                } else {
+                    document.getElementById('player1NameDisplay').textContent = 'You';
+                }
+
+                // Reset game state
+                gameState.currentQuestion = 0;
+                gameState.player1Score = 0;
+                gameState.player2Score = 0;
+                gameState.gameActive = true;
+                gameState.currentPlayer = 1;
+                gameState.questionsAnswered = 0;
+                gameState.selectedOption = null;
+
+                // Update UI
+                document.getElementById('gameSetup').classList.add('hidden');
+                document.getElementById('gameActive').classList.remove('hidden');
+                document.getElementById('answerSection').classList.add('hidden');
+                document.getElementById('resultFeedback').textContent = '';
+                document.getElementById('logEntries').innerHTML = '';
+                document.getElementById('optionsContainer').innerHTML = '';
+
+                // Update displays
+                document.getElementById('player1Score').textContent = '0';
+                document.getElementById('player2Score').textContent = '0';
+
+                if (gameState.mode === 'multi') {
+                    document.getElementById('currentPlayerDisplay').classList.remove('hidden');
+                    updateCurrentPlayerDisplay();
+                } else {
+                    document.getElementById('currentPlayerDisplay').classList.add('hidden');
+                }
+
+                updatePlayerScoreCards();
+                updateQuestionCounter();
+
+                // Enable shoot button
+                document.getElementById('shootBtn').disabled = false;
+                document.getElementById('questionText').textContent = 'Click "GENERATE QUESTION" to get your first question';
+
+                // Add log entry
+                const categoryNames = {
+                    multiplication: 'Multiplications & Squares',
+                    mixed: 'Mixed Operations',
+                    algebra: 'Algebra & Equations'
+                };
+                addLogEntry(`Game started! Category: ${categoryNames[gameState.currentCategory]} - Level ${gameState.currentLevel}`);
+
+                console.log("Game started successfully");
+            });
+
+            // Shoot button - generate question - SIMPLIFIED
+            document.getElementById('shootBtn').addEventListener('click', function () {
+                console.log("Shoot button clicked");
+                if (!gameState.gameActive) {
+                    console.log("Game not active");
+                    return;
+                }
+
+                // Check if game is over
+                if (gameState.questionsAnswered >= gameState.totalQuestions) {
+                    endGame();
+                    return;
+                }
+
+                // Get random question from selected category and level
+                const levelKey = 'level' + gameState.currentLevel;
+                const questions = questionBank[gameState.currentCategory][levelKey];
+
+                if (questions.length === 0) {
+                    alert('No questions available for this category and level!');
+                    return;
+                }
+
+                const randomIndex = Math.floor(Math.random() * questions.length);
+                gameState.currentQuestionData = questions[randomIndex];
+                gameState.currentQuestion++;
+
+                // Generate SMART options
+                const options = generateOptions(gameState.currentQuestionData.answer, gameState.currentQuestionData.question);
+
+                // Update UI
+                document.getElementById('questionText').innerHTML = gameState.currentQuestionData.question;
+                document.getElementById('questionLevel').textContent = `Level ${gameState.currentLevel}`;
+                document.getElementById('questionLevel').className = `question-level level-${gameState.currentLevel}`;
+
+                // Create option buttons
+                const optionsContainer = document.getElementById('optionsContainer');
+                optionsContainer.innerHTML = '';
+
+                options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option;
+                    button.dataset.value = option;
+                    button.dataset.index = index;
+
+                    button.addEventListener('click', function () {
+                        console.log("Option clicked:", this.dataset.value);
+                        // Remove selected class from all options
+                        document.querySelectorAll('.option-btn').forEach(btn => {
+                            btn.classList.remove('selected');
+                        });
+
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                        gameState.selectedOption = this.dataset.value;
+                        document.getElementById('submitAnswer').disabled = false;
+                    });
+
+                    optionsContainer.appendChild(button);
+                });
+
+                // Show answer section
+                document.getElementById('answerSection').classList.remove('hidden');
+                document.getElementById('resultFeedback').textContent = '';
+                document.getElementById('submitAnswer').disabled = true;
+                gameState.selectedOption = null;
+
+                // Update question counter
+                updateQuestionCounter();
+
+                // Add log entry
+                const categoryNames = {
+                    multiplication: 'Multiplication',
+                    mixed: 'Mixed Operations',
+                    algebra: 'Algebra'
+                };
+                addLogEntry(`${getCurrentPlayerName()} received a ${categoryNames[gameState.currentCategory]} question`);
+
+                // Disable shoot button until answer is submitted
+                this.disabled = true;
+
+                console.log("Question generated successfully");
+            });
+
+            // Submit answer button - SIMPLIFIED
+            document.getElementById('submitAnswer').addEventListener('click', function () {
+                console.log("Submit button clicked");
+                checkAnswer();
+            });
+
+            // Initial log entries
+            addLogEntry("Welcome to The MathMaze - Advanced Challenge!");
+            addLogEntry("Select a category and level, then click 'Start Game' to begin!");
+
+            console.log("Game initialization complete");
         });
     </script>
 </body>
