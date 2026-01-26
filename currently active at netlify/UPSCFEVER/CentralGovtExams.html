@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SarkariPariksha | Central Government Exams Portal</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        .page-header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            margin-top: 0;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border-left: 5px solid #337ab7;
+        }
+
+        .main-portal-btn {
+            display: block;
+            margin: 0 auto 40px;
+            max-width: 600px;
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .main-portal-btn:hover {
+            background: linear-gradient(to right, #1a2530, #2c3e50);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+            text-decoration: none;
+        }
+
+        .main-portal-btn i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .exam-panel {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .exam-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-primary {
+            border-color: #337ab7;
+        }
+
+        .panel-primary .panel-heading {
+            background-color: #337ab7;
+            border-color: #337ab7;
+            color: white;
+            font-weight: bold;
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .panel-body {
+            padding: 0;
+            text-align: center;
+        }
+
+        .exam-icon {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            padding: 15px;
+            background-color: white;
+        }
+
+        .exam-title {
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+            border-top: 1px solid #eee;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .section-title {
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            border-left: 5px solid #3498db;
+        }
+
+        .exam-link {
+            display: block;
+            text-decoration: none;
+        }
+
+        .exam-link:hover .exam-title {
+            background-color: #e9f7fe;
+        }
+
+        @media (max-width: 768px) {
+            .exam-icon {
+                height: 140px;
+            }
+
+            .main-portal-btn {
+                font-size: 18px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Central Government Exams Portal</h1>
+            <p class="text-center" style="font-size: 16px; color: #555;">
+                Comprehensive study material and resources for various competitive examinations conducted by the
+                Government of India
+            </p>
+        </div>
+
+        <!-- Main Portal Button -->
+        <a href="AccesPortal.html" class="main-portal-btn" target="_blank">
+            <i class="fa fa-university"></i> Access Central Government Exams Portal
+        </a>
+
+        <div class="section-title">
+            <h2>UPSC Examinations</h2>
+            <p class="text-muted">Union Public Service Commission conducts examinations for various civil services and
+                defense services</p>
+        </div>
+
+        <div class="row">
+            <!-- CDS -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">CDS</div>
+                    <a href="https://testbook.com/cds/study-material" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="CDS.jpeg"
+                                alt="Combined Defence Services" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Combined Defence Services</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- UPSC Civil Services -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">UPSC CSE</div>
+                    <a href="https://sarkaripariksha.com/upsc/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="UPSC .jpeg"
+                                alt="UPSC Civil Services" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Civil Services Examination</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- NDA -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">NDA</div>
+                    <a href="https://sarkaripariksha.com/nda/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="NDA.jpeg"
+                                alt="National Defence Academy" class="exam-icon">
+                        </div>
+                        <div class="exam-title">National Defence Academy</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- IFS -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">IFS</div>
+                    <a href="https://www.drishtiias.com/indian-forest-service" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="IFS .jpeg"
+                                alt="Indian Forest Service" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Indian Forest Service</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Staff Selection Commission (SSC) Exams</h2>
+            <p class="text-muted">SSC conducts examinations for recruitment to various posts in ministries, departments
+                and organizations of Government of India</p>
+        </div>
+
+        <div class="row">
+            <!-- SSC CGL -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">SSC CGL</div>
+                    <a href="https://sarkaripariksha.com/ssc-cgl/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="SSC.jpeg"
+                                alt="SSC Combined Graduate Level" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Combined Graduate Level</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SSC CHSL -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">SSC CHSL</div>
+                    <a href="https://sarkaripariksha.com/ssc-chsl/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="SSC.jpeg" alt="SSC CHSL"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">Combined Higher Secondary Level</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SSC JE -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">SSC JE</div>
+                    <a href="https://www.shiksha.com/exams/ssc-je-exam-preparation" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="SSC.jpeg"
+                                alt="SSC Junior Engineer" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Junior Engineer</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SSC MTS -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">SSC MTS</div>
+                    <a href="https://sarkaripariksha.com/ssc/ssc-mts-paper-1/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="SSC.jpeg" alt="SSC MTS"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">Multi-Tasking Staff</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Banking & Financial Sector Exams</h2>
+            <p class="text-muted">Examinations for recruitment in banking and financial institutions</p>
+        </div>
+
+        <div class="row">
+            <!-- IBPS PO -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">IBPS CRP & RRB</div>
+                    <a href="https://sarkaripariksha.com/banking-insurance/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="Banking.jpeg" alt="IBPS PO"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">Probationary Officer</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SBI PO -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">SBI PO</div>
+                    <a href="https://sarkaripariksha.com/sbi-po/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="SBI.jpeg" alt="SBI PO"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">State Bank of India PO</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- RBI Grade B -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">RBI Grade B</div>
+                    <a href="https://sarkaripariksha.com/rbi-grade-b/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="RBI Grade B exam.jpeg" alt="RBI Grade B"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">Reserve Bank of India</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- IBPS Clerk -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">IBPS Clerk</div>
+                    <a href="https://sarkaripariksha.com/banking-insurance/ibps-crp-clerk/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="clerkBanking.jpeg"
+                                alt="IBPS Clerk" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Clerical Cadre</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Other Central Government Exams</h2>
+            <p class="text-muted">Additional important examinations for various government departments and sectors</p>
+        </div>
+
+        <div class="row">
+            <!-- Railway Exams -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">RRB</div>
+                    <a href="https://sarkaripariksha.com/rrb-ntpc/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="RRB.jpeg"
+                                alt="Railway Recruitment Board" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Railway Recruitment Board</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CTET -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">CTET</div>
+                    <a href="https://sarkaripariksha.com/ctet/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="CTET.jpeg"
+                                alt="Central Teacher Eligibility Test" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Teacher Eligibility Test</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- UGC NET -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">UGC NET</div>
+                    <a href="https://sarkaripariksha.com/ugc-net/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="UGCNET.jpeg" alt="UGC NET"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">National Eligibility Test</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- GATE -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">GATE</div>
+                    <a href="https://sarkaripariksha.com/gate/" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="GATE.jpeg" alt="GATE"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">Graduate Aptitude Test</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- ESE -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">ESE</div>
+                    <a href="https://testbook.com/upsc-ies/civil-engineering-preparation-tips" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="ESE.jpeg"
+                                alt="Engineering Services Examination" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Engineering Services</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- AIIMS Nursing -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">AIIMS</div>
+                    <a href="https://testbook.com/aiims-cre/best-books-for-preparation" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="AIIMS.jpeg" alt="AIIMS Nursing"
+                                class="exam-icon">
+                        </div>
+                        <div class="exam-title">Nursing Officer</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CISF -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">CISF</div>
+                    <a href="https://www.pw.live/ssc/exams/cisf-fireman-study-plan" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="CISF.jpeg"
+                                alt="Central Industrial Security Force" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Security Force</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FCI -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="exam-panel panel panel-primary">
+                    <div class="panel-heading">FCI</div>
+                    <a href="https://www.agriaddict.in/blog/fci-exam-pattern-syllabus-eligibility-key-details" class="exam-link" target="_blank">
+                        <div class="panel-body">
+                            <img src="fci.jpeg"
+                                alt="Food Corporation of India" class="exam-icon">
+                        </div>
+                        <div class="exam-title">Food Corporation of India</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center"
+            style="margin: 40px 0 20px; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+            <h3>Study Material for Competitive Exams</h3>
+            <p style="font-size: 16px; color: #555; max-width: 800px; margin: 0 auto;">
+                Comprehensive resources for UPSC, MPSC, IBPS, SBI, SSC, NDA, CDS, RBI, GRE, GMAT, CAT, CET, NMAT and
+                other competitive examinations.
+            </p>
+            <a href="https://sarkaripariksha.com/central-exams/" class="btn btn-primary btn-lg"
+                style="margin-top: 15px; padding: 10px 30px; font-size: 18px;" target="_blank">
+                <i class="fa fa-book"></i> Explore All Study Materials
+            </a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Add animation to exam panels on hover
+            $('.exam-panel').hover(
+                function () {
+                    $(this).find('.exam-title').css('color', '#337ab7');
+                },
+                function () {
+                    $(this).find('.exam-title').css('color', '#333');
+                }
+            );
+
+            // Smooth scroll for anchor links
+            $('a[href*="#"]').on('click', function (e) {
+                if (this.hash !== "") {
+                    e.preventDefault();
+
+                    const hash = this.hash;
+
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 70
+                    }, 800);
+                }
+            });
+        });
+    </script>
+    <!-- Floating legacy button in top-right -->
+    <div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+        <a href="CentralGovtExams - Legacy .html" class="btn btn-warning btn-xs"
+            style="padding: 3px 8px; font-size: 12px; opacity: 0.8;">
+            <i class="fa fa-archive"></i> Legacy
+        </a>
+    </div>
+</body>
+
+</html>

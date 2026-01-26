@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Exam Portals - Direct Access (2026)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-bottom: 5px solid #ff9800;
+        }
+
+        .portal-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .portal-header {
+            background: linear-gradient(135deg, #1976d2 0%, #2196f3 100%);
+            color: white;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .portal-body {
+            padding: 25px;
+        }
+
+        .portal-link {
+            display: block;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            color: #1565c0;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .portal-link:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            text-decoration: none;
+            color: #0d47a1;
+        }
+
+        .portal-link i {
+            margin-right: 10px;
+            color: #2196f3;
+        }
+
+        .info-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 3px;
+        }
+
+        .alert-important {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 3px;
+        }
+
+        .exam-icon {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+            color: #1976d2;
+        }
+
+        .portal-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .portal-desc {
+            color: #666;
+            margin: 10px 0 0 0;
+            font-size: 0.95em;
+        }
+
+        .badge-new {
+            background: #ff4081;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .quick-links {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-link-btn {
+            display: inline-block;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin: 5px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .quick-link-btn:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1565c0;
+            text-decoration: none;
+        }
+
+        .update-badge {
+            background: #4caf50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .footer {
+            background: #263238;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 5px solid #ff9800;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1><i class="fa fa-university"></i> Government Exam Portals</h1>
+                    <p class="lead">Direct access to all official central government examination portals (Updated for
+                        2026)</p>
+                    <p>One-stop portal for all your government exam applications and notifications</p>
+                </div>
+                <div class="col-md-4 text-right">
+                    <div class="alert alert-warning" style="background: rgba(255,255,255,0.9); color: #333;">
+                        <strong><i class="fa fa-exclamation-triangle"></i> Important:</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 0.9em;">Always verify URLs before entering credentials
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for exam portals..." id="searchInput">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fa fa-search"></i> Search
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <h4><i class="fa fa-bolt"></i> Quick Access</h4>
+            <div>
+                <a href="#upsc" class="quick-link-btn">UPSC</a>
+                <a href="#ssc" class="quick-link-btn">SSC</a>
+                <a href="#rrb" class="quick-link-btn">RRB</a>
+                <a href="#ibps" class="quick-link-btn">IBPS</a>
+                <a href="#nta" class="quick-link-btn">NTA</a>
+                <a href="#ncs" class="quick-link-btn">NCS</a>
+                <a href="#others" class="quick-link-btn">Other Portals</a>
+            </div>
+        </div>
+
+        <!-- UPSC Card -->
+        <div class="portal-card" id="upsc">
+            <div class="portal-header">
+                <div class="d-flex align-items-center">
+                    <div class="exam-icon">
+                        <i class="fa fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="portal-title">UPSC (Union Public Service Commission) <span class="badge-new">Updated
+                                2026</span></h3>
+                        <p class="portal-desc">Civil Services, Engineering Services, CDS, NDA, and other examinations
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-body">
+                <a href="https://upsconline.nic.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>New Application Portal:</strong>
+                    https://upsconline.nic.in
+                </a>
+                <a href="https://upsc.gov.in" class="portal-link" target="_blank">
+                    <i class="fa fa-globe"></i> <strong>Main Website:</strong> https://upsc.gov.in
+                </a>
+                <div class="alert-important">
+                    <strong><i class="fa fa-info-circle"></i> Important Note (2026):</strong> UPSC now requires
+                    <strong>One Time Registration (OTR)</strong> for most examinations. After OTR, candidates can apply
+                    for multiple exams without re-entering basic details.
+                </div>
+                <div class="info-box">
+                    <strong>Exams Conducted:</strong> Civil Services (IAS/IPS/IFS), Engineering Services, Combined
+                    Defence Services (CDS), National Defence Academy (NDA), Combined Medical Services (CMS), etc.
+                </div>
+            </div>
+        </div>
+
+        <!-- SSC Card -->
+        <div class="portal-card" id="ssc">
+            <div class="portal-header">
+                <div class="d-flex align-items-center">
+                    <div class="exam-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div>
+                        <h3 class="portal-title">SSC (Staff Selection Commission) <span class="update-badge">New
+                                Portal</span></h3>
+                        <p class="portal-desc">CGL, CHSL, JE, MTS, Stenographer, and other non-technical posts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-body">
+                <a href="https://ssc.gov.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>Official Website:</strong> https://ssc.gov.in
+                </a>
+                <div class="alert-important">
+                    <strong><i class="fa fa-exclamation-triangle"></i> Important Update:</strong> SSC launched a
+                    completely new website for all applications starting in 2024. <strong>Fresh registration is
+                        required</strong> even if you had an account on the old portal.
+                </div>
+                <div class="info-box">
+                    <strong>Regional Websites:</strong> SSC has regional websites for different zones - North, South,
+                    East, West, etc. Check notifications carefully for regional requirements.
+                </div>
+            </div>
+        </div>
+
+        <!-- RRB Card -->
+        <div class="portal-card" id="rrb">
+            <div class="portal-header">
+                <div class="d-flex align-items-center">
+                    <div class="exam-icon">
+                        <i class="fa fa-train"></i>
+                    </div>
+                    <div>
+                        <h3 class="portal-title">Railway Recruitment Board (RRB)</h3>
+                        <p class="portal-desc">NTPC, Group D, ALP, Technician, and other railway posts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-body">
+                <p><strong>Note:</strong> Candidates must log in to their respective <strong>regional RRB
+                        websites</strong> to apply for exams:</p>
+
+                <a href="https://rrbcdg.gov.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>RRB Chandigarh:</strong> https://rrbcdg.gov.in
+                </a>
+                <a href="https://rrbmumbai.gov.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>RRB Mumbai:</strong> https://rrbmumbai.gov.in
+                </a>
+                <a href="https://rrbchennai.gov.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>RRB Chennai:</strong> https://rrbchennai.gov.in
+                </a>
+                <a href="https://rrbkolkata.gov.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>RRB Kolkata:</strong> https://rrbkolkata.gov.in
+                </a>
+
+                <div class="alert-important">
+                    <strong><i class="fa fa-info-circle"></i> Important:</strong> Always apply through the
+                    <strong>specific RRB region</strong> mentioned in the notification. Applications are
+                    region-specific.
+                </div>
+            </div>
+        </div>
+
+        <!-- IBPS Card -->
+        <div class="portal-card" id="ibps">
+            <div class="portal-header">
+                <div class="d-flex align-items-center">
+                    <div class="exam-icon">
+                        <i class="fa fa-bank"></i>
+                    </div>
+                    <div>
+                        <h3 class="portal-title">Banking Exams (IBPS)</h3>
+                        <p class="portal-desc">PO, Clerk, SO, RRB Officer, and other banking sector posts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-body">
+                <a href="https://www.ibps.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>Official Website:</strong> https://www.ibps.in
+                </a>
+                <div class="info-box">
+                    <strong>Participating Banks:</strong> IBPS conducts common recruitment process for Public Sector
+                    Banks (except SBI), Regional Rural Banks (RRBs), and other financial institutions.
+                </div>
+                <div class="alert-important">
+                    <strong>Important:</strong> SBI (State Bank of India) has its own separate recruitment portal: <a
+                        href="https://sbi.co.in" target="_blank">https://sbi.co.in</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- NTA Card -->
+        <div class="portal-card" id="nta">
+            <div class="portal-header">
+                <div class="d-flex align-items-center">
+                    <div class="exam-icon">
+                        <i class="fa fa-flask"></i>
+                    </div>
+                    <div>
+                        <h3 class="portal-title">National Testing Agency (NTA)</h3>
+                        <p class="portal-desc">NEET, CUET, UGC NET, JEE Main, and other national level tests</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-body">
+                <a href="https://nta.ac.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>Official Website:</strong> https://nta.ac.in
+                </a>
+                <div class="info-box">
+                    <strong>Major Exams:</strong>
+                    <ul>
+                        <li>NEET (Medical Entrance)</li>
+                        <li>JEE Main (Engineering Entrance)</li>
+                        <li>CUET (University Entrance)</li>
+                        <li>UGC NET (Research Eligibility)</li>
+                        <li>GPAT (Pharmacy Entrance)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NCS Card -->
+        <div class="portal-card" id="ncs">
+            <div class="portal-header">
+                <div class="d-flex align-items-center">
+                    <div class="exam-icon">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                    <div>
+                        <h3 class="portal-title">National Career Service (NCS)</h3>
+                        <p class="portal-desc">Centralized portal for government and private job opportunities</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-body">
+                <a href="https://www.ncs.gov.in" class="portal-link" target="_blank">
+                    <i class="fa fa-external-link"></i> <strong>Official Portal:</strong> https://www.ncs.gov.in
+                </a>
+                <div class="info-box">
+                    <strong>Services Offered:</strong>
+                    <ul>
+                        <li>Job search across sectors</li>
+                        <li>Career counseling</li>
+                        <li>Skill development resources</li>
+                        <li>Government job notifications</li>
+                        <li>Employer registration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Portals -->
+        <div class="portal-card" id="others">
+            <div class="portal-header">
+                <h3 class="portal-title"><i class="fa fa-th-list"></i> Other Important Exam Portals</h3>
+            </div>
+            <div class="portal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="portal-link">
+                            <i class="fa fa-stethoscope"></i> <strong>AIIMS:</strong> https://aiimsexams.ac.in
+                        </div>
+                        <div class="portal-link">
+                            <i class="fa fa-book"></i> <strong>UGC:</strong> https://www.ugc.ac.in
+                        </div>
+                        <div class="portal-link">
+                            <i class="fa fa-balance-scale"></i> <strong>CLAT:</strong> https://consortiumofnlus.ac.in
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="portal-link">
+                            <i class="fa fa-leaf"></i> <strong>ICAR:</strong> https://icar.org.in
+                        </div>
+                        <div class="portal-link">
+                            <i class="fa fa-shield"></i> <strong>CAPF:</strong> https://upsc.gov.in
+                        </div>
+                        <div class="portal-link">
+                            <i class="fa fa-trophy"></i> <strong>Sports Authority:</strong>
+                            https://sportsauthorityofindia.nic.in
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="alert alert-info">
+            <h4><i class="fa fa-lightbulb-o"></i> Important Tips for Candidates (2026)</h4>
+            <ul>
+                <li>Always use <strong>official government websites</strong> (.gov.in, .nic.in, .ac.in)</li>
+                <li>Beware of phishing websites with similar-looking URLs</li>
+                <li>Keep your registration details and passwords secure</li>
+                <li>Check notification details carefully before applying</li>
+                <li>Download and save your application confirmation</li>
+                <li>Regularly check official websites for updates and corrigendum</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fa fa-info-circle"></i> About This Portal</h4>
+                    <p>This page provides direct links to official government exam portals. All links are verified and
+                        updated regularly.</p>
+                    <p><strong>Last Updated:</strong> January 2026</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <h4>Quick Links</h4>
+                    <a href="#upsc" class="quick-link-btn">UPSC</a>
+                    <a href="#ssc" class="quick-link-btn">SSC</a>
+                    <a href="#rrb" class="quick-link-btn">RRB</a>
+                    <a href="#ibps" class="quick-link-btn">IBPS</a>
+                    <br><br>
+                    <p>© 2026 Government Exam Portals Directory. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Search functionality
+            $('#searchInput').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('.portal-card').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            $('a[href*="#"]').on('click', function (e) {
+                if (this.hash !== "") {
+                    e.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 70
+                    }, 800);
+                }
+            });
+
+            // Add active class to clicked quick links
+            $('.quick-link-btn').on('click', function () {
+                $('.quick-link-btn').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
