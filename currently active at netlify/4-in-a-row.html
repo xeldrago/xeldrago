@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div class="topleft"><a href="index.html"><button class="btn"><i class="fa fa-home"></i> Home</button></a></div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-in-a-Row Multiplayer</title>
+    <style>
+        :root {
+            --player-1-color: #e74c3c;
+            --player-2-color: #3498db;
+            --player-3-color: #2ecc71;
+            --player-4-color: #f39c12;
+            --board-color: #2980b9;
+            --bg-color: #2c3e50;
+            --text-color: #ecf0f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .game-setup {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .setup-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        select,
+        button {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select {
+            background-color: white;
+            color: #2c3e50;
+            min-width: 150px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .game-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .game-board {
+            background-color: var(--board-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .board-grid {
+            display: grid;
+            gap: 8px;
+            background-color: #1a5276;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .cell {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .cell:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chip {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            top: 5%;
+            left: 5%;
+            transform: translateY(-1000px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .chip.placed {
+            transform: translateY(0);
+        }
+
+        .player-1 {
+            background-color: var(--player-1-color);
+        }
+
+        .player-2 {
+            background-color: var(--player-2-color);
+        }
+
+        .player-3 {
+            background-color: var(--player-3-color);
+        }
+
+        .player-4 {
+            background-color: var(--player-4-color);
+        }
+
+        .game-info {
+            flex: 1;
+            min-width: 250px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .current-player {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .player-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .player-indicator {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .player-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
+        .player-name {
+            font-weight: 600;
+        }
+
+        .player-active {
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .winning-message {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 10px;
+            z-index: 10;
+            padding: 20px;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .winning-message.show {
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .restart-btn {
+            background-color: #e74c3c;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+        }
+
+        .instructions {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .instructions h2 {
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .winning-row {
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-area {
+                flex-direction: column;
+            }
+
+            .cell {
+                width: 45px;
+                height: 45px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cell {
+                width: 35px;
+                height: 35px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .game-setup {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>4-in-a-Row Multiplayer</h1>
+            <p class="subtitle">Classic strategy game for 2-4 players. Connect 4 or 5 tokens in a row to win!</p>
+        </header>
+
+        <div class="game-setup">
+            <div class="setup-option">
+                <label for="playerCount">Number of Players</label>
+                <select id="playerCount">
+                    <option value="2">2 Players</option>
+                    <option value="3">3 Players</option>
+                    <option value="4">4 Players</option>
+                </select>
+            </div>
+
+            <div class="setup-option">
+                <label for="winCondition">Win Condition</label>
+                <select id="winCondition">
+                    <option value="4">4 in a Row</option>
+                    <option value="5">5 in a Row</option>
+                </select>
+            </div>
+
+            <button id="startGame">Start New Game</button>
+            <button id="restartGame">Restart Game</button>
+        </div>
+
+        <div class="game-area">
+            <div class="game-board">
+                <div class="board-grid" id="gameBoard"></div>
+                <div class="winning-message" id="winningMessage">
+                    <div id="winnerText"></div>
+                    <button class="restart-btn" id="winRestartBtn">Play Again</button>
+                </div>
+            </div>
+
+            <div class="game-info">
+                <div class="current-player" id="currentPlayer">
+                    Player 1's Turn
+                </div>
+
+                <div class="player-list" id="playerList">
+                    <!-- Player indicators will be added here -->
+                </div>
+
+                <div class="instructions">
+                    <h2>How to Play</h2>
+                    <ul>
+                        <li>Players take turns dropping a token into any column</li>
+                        <li>The token falls to the lowest available position in that column</li>
+                        <li>First player to get <span id="winConditionText">4</span> in a row (horizontally, vertically,
+                            or diagonally) wins</li>
+                        <li>With 3+ players, blocking others becomes crucial as you compete against multiple opponents
+                        </li>
+                    </ul>
+                    <p>Game ends in a draw if the board fills up completely.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state variables
+        let gameBoard = [];
+        let currentPlayer = 1;
+        let gameActive = true;
+        let playerCount = 2;
+        let winCondition = 4;
+        let rows = 6;
+        let cols = 7;
+        const playerColors = ['player-1', 'player-2', 'player-3', 'player-4'];
+        const playerNames = ['Player 1', 'Player 2', 'Player 3', 'Player 4'];
+
+        // DOM elements
+        const gameBoardElement = document.getElementById('gameBoard');
+        const currentPlayerElement = document.getElementById('currentPlayer');
+        const playerListElement = document.getElementById('playerList');
+        const winConditionText = document.getElementById('winConditionText');
+        const winningMessageElement = document.getElementById('winningMessage');
+        const winnerTextElement = document.getElementById('winnerText');
+
+        // Initialize the game
+        function initGame() {
+            // Get selected options
+            playerCount = parseInt(document.getElementById('playerCount').value);
+            winCondition = parseInt(document.getElementById('winCondition').value);
+
+            // Adjust board size based on player count
+            if (playerCount === 2) {
+                rows = 6;
+                cols = 7;
+            } else {
+                // Increase board size for more players
+                rows = 7;
+                cols = 9;
+            }
+
+            // Update win condition text
+            winConditionText.textContent = winCondition;
+
+            // Reset game state
+            gameBoard = Array(rows).fill().map(() => Array(cols).fill(0));
+            currentPlayer = 1;
+            gameActive = true;
+
+            // Create board UI
+            createBoard();
+
+            // Update player info
+            updatePlayerInfo();
+
+            // Hide winning message
+            winningMessageElement.classList.remove('show');
+
+            // Clear any winning animations
+            const winningChips = document.querySelectorAll('.winning-row');
+            winningChips.forEach(chip => {
+                chip.classList.remove('winning-row');
+            });
+        }
+
+        // Create the game board UI
+        function createBoard() {
+            gameBoardElement.innerHTML = '';
+            gameBoardElement.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            gameBoardElement.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+            // Create cells (top to bottom, left to right)
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+
+                    // Add click event to drop chip in column
+                    cell.addEventListener('click', () => dropChip(col));
+
+                    gameBoardElement.appendChild(cell);
+                }
+            }
+        }
+
+        // Drop a chip in the specified column
+        function dropChip(column) {
+            if (!gameActive) return;
+
+            // Find the lowest empty row in the column
+            for (let row = rows - 1; row >= 0; row--) {
+                if (gameBoard[row][column] === 0) {
+                    // Place the chip
+                    gameBoard[row][column] = currentPlayer;
+
+                    // Update UI
+                    const cellIndex = row * cols + column;
+                    const cell = gameBoardElement.children[cellIndex];
+                    const chip = document.createElement('div');
+                    chip.className = `chip ${playerColors[currentPlayer - 1]}`;
+                    cell.appendChild(chip);
+
+                    // Trigger the drop animation
+                    setTimeout(() => {
+                        chip.classList.add('placed');
+                    }, 10);
+
+                    // Check for win
+                    if (checkWin(row, column)) {
+                        gameActive = false;
+                        setTimeout(() => {
+                            showWinner(currentPlayer);
+                        }, 500);
+                        return;
+                    }
+
+                    // Check for draw
+                    if (checkDraw()) {
+                        gameActive = false;
+                        setTimeout(() => {
+                            showDraw();
+                        }, 500);
+                        return;
+                    }
+
+                    // Switch to next player
+                    currentPlayer = (currentPlayer % playerCount) + 1;
+                    updatePlayerInfo();
+
+                    break;
+                }
+            }
+        }
+
+        // Check if the current move resulted in a win
+        function checkWin(row, col) {
+            const player = gameBoard[row][col];
+
+            // Directions: horizontal, vertical, diagonal down-right, diagonal up-right
+            const directions = [
+                [0, 1],  // horizontal
+                [1, 0],  // vertical
+                [1, 1],  // diagonal down-right
+                [-1, 1]  // diagonal up-right
+            ];
+
+            for (const [dx, dy] of directions) {
+                let count = 1; // Start with the current chip
+
+                // Check in positive direction
+                for (let i = 1; i < winCondition; i++) {
+                    const newRow = row + dx * i;
+                    const newCol = col + dy * i;
+
+                    if (
+                        newRow >= 0 && newRow < rows &&
+                        newCol >= 0 && newCol < cols &&
+                        gameBoard[newRow][newCol] === player
+                    ) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+
+                // Check in negative direction
+                for (let i = 1; i < winCondition; i++) {
+                    const newRow = row - dx * i;
+                    const newCol = col - dy * i;
+
+                    if (
+                        newRow >= 0 && newRow < rows &&
+                        newCol >= 0 && newCol < cols &&
+                        gameBoard[newRow][newCol] === player
+                    ) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+
+                // If we have enough in a row, highlight winning chips and return true
+                if (count >= winCondition) {
+                    highlightWinningChips(row, col, dx, dy);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Highlight the winning chips
+        function highlightWinningChips(row, col, dx, dy) {
+            const player = gameBoard[row][col];
+
+            // We need to find all chips in the winning line
+            const winningChips = [];
+
+            // Find the start of the winning line
+            let startRow = row;
+            let startCol = col;
+
+            while (
+                startRow - dx >= 0 && startRow - dx < rows &&
+                startCol - dy >= 0 && startCol - dy < cols &&
+                gameBoard[startRow - dx][startCol - dy] === player
+            ) {
+                startRow -= dx;
+                startCol -= dy;
+            }
+
+            // Collect all chips in the winning line
+            for (let i = 0; i < winCondition; i++) {
+                const chipRow = startRow + dx * i;
+                const chipCol = startCol + dy * i;
+
+                if (
+                    chipRow >= 0 && chipRow < rows &&
+                    chipCol >= 0 && chipCol < cols &&
+                    gameBoard[chipRow][chipCol] === player
+                ) {
+                    winningChips.push({ row: chipRow, col: chipCol });
+                }
+            }
+
+            // Apply winning animation to each chip
+            setTimeout(() => {
+                winningChips.forEach(({ row, col }) => {
+                    const cellIndex = row * cols + col;
+                    const cell = gameBoardElement.children[cellIndex];
+                    const chip = cell.querySelector('.chip');
+                    if (chip) {
+                        chip.classList.add('winning-row');
+                    }
+                });
+            }, 300);
+        }
+
+        // Check if the game is a draw
+        function checkDraw() {
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    if (gameBoard[row][col] === 0) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Show winner message
+        function showWinner(player) {
+            winnerTextElement.textContent = `${playerNames[player - 1]} Wins!`;
+            winningMessageElement.classList.add('show');
+        }
+
+        // Show draw message
+        function showDraw() {
+            winnerTextElement.textContent = "Game Ended in a Draw!";
+            winningMessageElement.classList.add('show');
+        }
+
+        // Update player information display
+        function updatePlayerInfo() {
+            // Update current player display
+            currentPlayerElement.textContent = `${playerNames[currentPlayer - 1]}'s Turn`;
+            currentPlayerElement.className = `current-player ${playerColors[currentPlayer - 1]}-bg`;
+
+            // Update player list
+            playerListElement.innerHTML = '';
+
+            for (let i = 1; i <= playerCount; i++) {
+                const playerIndicator = document.createElement('div');
+                playerIndicator.className = `player-indicator ${i === currentPlayer ? 'player-active' : ''}`;
+
+                const playerColor = document.createElement('div');
+                playerColor.className = `player-color ${playerColors[i - 1]}`;
+
+                const playerName = document.createElement('div');
+                playerName.className = 'player-name';
+                playerName.textContent = playerNames[i - 1];
+
+                playerIndicator.appendChild(playerColor);
+                playerIndicator.appendChild(playerName);
+                playerListElement.appendChild(playerIndicator);
+            }
+        }
+
+        // Event listeners for buttons
+        document.getElementById('startGame').addEventListener('click', initGame);
+        document.getElementById('restartGame').addEventListener('click', initGame);
+        document.getElementById('winRestartBtn').addEventListener('click', initGame);
+
+        // Initialize the game on page load
+        window.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+
+</html>
