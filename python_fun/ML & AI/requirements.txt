@@ -1,0 +1,6 @@
+# iGOT UAT Automation — Setup
+
+selenium
+webdriver-manager
+anthropic
+python-dotenv
