@@ -1,0 +1,14 @@
+{
+  "contexts": [
+    {
+      "name": "Frontend Components",
+      "description": "React component files",
+      "files": ["src/components/**/*.jsx", "src/components/**/*.tsx"]
+    },
+    {
+      "name": "API Routes",
+      "description": "Backend API endpoints",
+      "files": ["src/api/**/*.js", "src/pages/api/**/*.js"]
+    }
+  ]
+}
