@@ -3,6 +3,7 @@
 <a href="index.html"
   style="position:fixed;bottom:20px;right:20px;padding:15px 20px;background:linear-gradient(135deg,#002fff 0%,#05cdff 100%);color:#ffffff;border:none;border-radius:50%;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.2);transition:all 0.3s ease;z-index:100;text-decoration:none;display:inline-block;text-align:center;width:60px;height:60px;line-height:30px;font-size:24px"
   title="Home">⌂</a>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,6 +111,12 @@
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .game-info {
       display: flex;
       justify-content: space-between;
@@ -179,6 +186,11 @@
 
     .cell.o {
       color: #4fc3f7;
+    }
+
+    .cell.selected {
+      background-color: rgba(255, 215, 0, 0.35);
+      box-shadow: 0 0 0 3px gold inset;
     }
 
     .winning-cell {
@@ -283,43 +295,43 @@
         padding: 8px 16px;
         font-size: 0.9rem;
       }
+
       .blue-gradient {
-  background: linear-gradient(to right, #2563eb, #4f46e5);
-}
+        background: linear-gradient(to right, #2563eb, #4f46e5);
+      }
 
-    .blue-gradient:hover {
-  background: linear-gradient(to right, #1d4ed8, #4338ca);
-}
+      .blue-gradient:hover {
+        background: linear-gradient(to right, #1d4ed8, #4338ca);
+      }
     }
-    
-.link-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  border-radius: 8px;
-  color: white;
-  font-weight: 700;
-  transition: all 0.3s;
-}
 
-.link-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
+    .link-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
 
-.link-button span {
-  margin-right: 8px;
-}
+    .link-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
 
-.blue-btn {
-  background-color: #2563eb;
-}
+    .link-button span {
+      margin-right: 8px;
+    }
 
-.blue-btn:hover {
-  background-color: #ffffff;
-}
+    .blue-btn {
+      background-color: #2563eb;
+    }
 
+    .blue-btn:hover {
+      background-color: #ffffff;
+    }
   </style>
 </head>
 
@@ -327,7 +339,7 @@
   <div class="header">
     <div class="logo-container">
       <img src="media/images/logo.jpg" alt="XELDRAGO Logo" class="logo">
-      
+
       <h1>Enhanced Tic Tac Toe</h1>
     </div>
     <p class="subtitle">A XELDRAGO Creation - Play with different grid sizes!</p>
@@ -340,9 +352,18 @@
           <i class="fas fa-home"></i> Home
         </button>
       </a>
+      <button class="btn active" id="mode-classic">Classic</button>
+      <button class="btn" id="mode-never-ends">♾️ Never Ends</button>
+    </div>
+
+    <div class="controls">
       <button class="btn active" id="size-3">3×3 (3 in a row)</button>
       <button class="btn" id="size-5">5×5 (4 in a row)</button>
       <button class="btn" id="size-7">7×7 (4 in a row)</button>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="undo-btn"><i class="fas fa-rotate-left"></i> Undo</button>
       <button class="btn" id="reset-btn">Reset Game</button>
     </div>
 
@@ -364,6 +385,20 @@
       </div>
     </div>
 
+    <div class="game-info" id="pieces-info" style="display: none;">
+      <div class="player-turn" id="phase-label">Placing Phase</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value" id="x-pieces">0</div>
+          <div class="stat-label">X Pieces Left</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="o-pieces">0</div>
+          <div class="stat-label">O Pieces Left</div>
+        </div>
+      </div>
+    </div>
+
     <div class="game-board" id="game-board">
       <!-- Game board will be generated here -->
     </div>
@@ -373,21 +408,33 @@
 
   <div class="instructions">
     <h3>How to Play</h3>
-    <p><strong>3×3 Grid:</strong> Get 3 of your marks in a row (horizontally, vertically, or diagonally) to win.</p>
-    <p><strong>5×5 & 7×7 Grids:</strong> Get 4 of your marks in a row (horizontally, vertically, or diagonally) to win.
+    <p><strong>Classic Mode - 3×3 Grid:</strong> Get 3 of your marks in a row (horizontally, vertically, or diagonally)
+      to win.</p>
+    <p><strong>Classic Mode - 5×5 & 7×7 Grids:</strong> Get 4 of your marks in a row (horizontally, vertically, or
+      diagonally) to win.
     </p>
-    <p>Player X always starts first. Click on any empty cell to place your mark.</p>
-    <a href="https://toytheater.com/category/games/" target="_blank" rel="noopener noreferrer" class="link-button blue-gradient">
+    <p><strong>♾️ Never Ends Mode:</strong> No draws, ever. Each player only gets a limited number of pieces to place -
+      exactly as many as needed to form a winning line (3 pieces each on 3×3, 4 pieces each on 5×5 and 7×7). Since your
+      pieces are always fewer than the empty cells, the board can never fill up completely.</p>
+    <p>Place your pieces one at a time, taking turns. Once <em>both</em> players have placed all their pieces, the
+      <strong>Movement Phase</strong> begins: instead of placing new marks, click one of your own pieces to select it
+      (it glows gold), then click any empty cell to slide it there. Keep sliding pieces on your turn until someone lines
+      up 3 (or 4) in a row - the game literally cannot end in a draw.</p>
+    <p>Player X always starts first. Click on any empty cell to place your mark. Use <strong>Undo</strong> to take back
+      the last move in either mode.</p>
+    <a href="https://toytheater.com/category/games/" target="_blank" rel="noopener noreferrer"
+      class="link-button blue-gradient">
       <span>More fun games such as above</span>
       <i class="fas fa-arrow-right"></i>
     </a>
-    </div>
-    </div>
+  </div>
+  </div>
 
   </div>
 
   <script>
-    // Game state
+    // Shared game state
+    let mode = 'classic'; // 'classic' or 'never-ends'
     let currentPlayer = 'X';
     let gameBoard = [];
     let gameActive = true;
@@ -397,6 +444,13 @@
     let oWins = 0;
     let draws = 0;
     let winningCells = [];
+    let moveHistory = []; // undo stack, shared across both modes
+
+    // Never Ends mode state
+    let piecesPerPlayer = 3;
+    let piecesRemaining = { X: 0, O: 0 };
+    let phase = 'placing'; // 'placing' or 'moving'
+    let selectedCell = null; // {row, col} of the currently selected piece to move
 
     // DOM elements
     const gameBoardElement = document.getElementById('game-board');
@@ -406,13 +460,19 @@
     const oWinsElement = document.getElementById('o-wins');
     const drawsElement = document.getElementById('draws');
     const resetButton = document.getElementById('reset-btn');
+    const undoButton = document.getElementById('undo-btn');
     const size3Button = document.getElementById('size-3');
     const size5Button = document.getElementById('size-5');
     const size7Button = document.getElementById('size-7');
+    const modeClassicButton = document.getElementById('mode-classic');
+    const modeNeverEndsButton = document.getElementById('mode-never-ends');
+    const piecesInfoElement = document.getElementById('pieces-info');
+    const phaseLabelElement = document.getElementById('phase-label');
+    const xPiecesElement = document.getElementById('x-pieces');
+    const oPiecesElement = document.getElementById('o-pieces');
 
     // Initialize the game
     function initGame() {
-      createBoard();
       updateStats();
       resetGame();
     }
@@ -430,35 +490,163 @@
           cell.className = 'cell';
           cell.dataset.row = i;
           cell.dataset.col = j;
-          cell.addEventListener('click', () => cellClick(i, j));
+          cell.addEventListener('click', () => {
+            if (mode === 'classic') {
+              cellClick(i, j);
+            } else {
+              cellClickNeverEnds(i, j);
+            }
+          });
           gameBoardElement.appendChild(cell);
         }
       }
     }
+
+    // Update a single cell's visual content
+    function updateCellDisplay(row, col, val) {
+      const idx = row * boardSize + col;
+      const cell = gameBoardElement.children[idx];
+      if (!cell) return;
+      cell.textContent = val;
+      cell.classList.remove('x', 'o', 'selected', 'winning-cell');
+      if (val === 'X') cell.classList.add('x');
+      if (val === 'O') cell.classList.add('o');
+    }
+
+    function clearWinningHighlights() {
+      Array.from(gameBoardElement.children).forEach(c => c.classList.remove('winning-cell'));
+    }
+
+    function switchPlayer() {
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      playerTurnElement.textContent = `Player ${currentPlayer}'s Turn`;
+    }
+
+    // ---------- CLASSIC MODE ----------
 
     // Handle cell click
     function cellClick(row, col) {
       if (!gameActive || gameBoard[row][col] !== '') return;
 
       gameBoard[row][col] = currentPlayer;
-      const cellIndex = row * boardSize + col;
-      const cell = gameBoardElement.children[cellIndex];
-      cell.textContent = currentPlayer;
-      cell.classList.add(currentPlayer.toLowerCase());
+      updateCellDisplay(row, col, currentPlayer);
+
+      const action = { type: 'place', row, col, player: currentPlayer };
+      moveHistory.push(action);
 
       if (checkWinner(row, col)) {
+        action.wasWin = true;
         endGame(`${currentPlayer} Wins!`);
         highlightWinningCells();
         updateWins();
       } else if (isBoardFull()) {
+        action.wasDraw = true;
         endGame("It's a Draw!");
         draws++;
         updateStats();
       } else {
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        playerTurnElement.textContent = `Player ${currentPlayer}'s Turn`;
+        switchPlayer();
       }
     }
+
+    // ---------- NEVER ENDS MODE ----------
+
+    function cellClickNeverEnds(row, col) {
+      if (!gameActive) return;
+
+      if (phase === 'placing') {
+        if (gameBoard[row][col] !== '') return;
+        if (piecesRemaining[currentPlayer] <= 0) return;
+
+        gameBoard[row][col] = currentPlayer;
+        updateCellDisplay(row, col, currentPlayer);
+        piecesRemaining[currentPlayer]--;
+
+        const action = { type: 'ne-place', row, col, player: currentPlayer };
+        moveHistory.push(action);
+        updatePiecesDisplay();
+
+        if (checkWinner(row, col)) {
+          action.wasWin = true;
+          endGame(`${currentPlayer} Wins!`);
+          highlightWinningCells();
+          updateWins();
+          return;
+        }
+
+        switchPlayer();
+        updatePhaseLabel();
+      } else {
+        // Movement phase
+        if (selectedCell) {
+          const { row: sr, col: sc } = selectedCell;
+
+          if (row === sr && col === sc) {
+            clearSelection();
+            return;
+          }
+
+          if (gameBoard[row][col] === '') {
+            gameBoard[sr][sc] = '';
+            updateCellDisplay(sr, sc, '');
+            gameBoard[row][col] = currentPlayer;
+            updateCellDisplay(row, col, currentPlayer);
+
+            const action = { type: 'ne-move', fromRow: sr, fromCol: sc, toRow: row, toCol: col, player: currentPlayer };
+            moveHistory.push(action);
+            clearSelection();
+
+            if (checkWinner(row, col)) {
+              action.wasWin = true;
+              endGame(`${currentPlayer} Wins!`);
+              highlightWinningCells();
+              updateWins();
+              return;
+            }
+
+            switchPlayer();
+          } else if (gameBoard[row][col] === currentPlayer) {
+            selectCell(row, col);
+          }
+          // clicking the opponent's piece while one is selected: ignore
+        } else if (gameBoard[row][col] === currentPlayer) {
+          selectCell(row, col);
+        }
+      }
+    }
+
+    function selectCell(row, col) {
+      clearSelection();
+      selectedCell = { row, col };
+      const idx = row * boardSize + col;
+      gameBoardElement.children[idx].classList.add('selected');
+    }
+
+    function clearSelection() {
+      if (selectedCell) {
+        const idx = selectedCell.row * boardSize + selectedCell.col;
+        const cell = gameBoardElement.children[idx];
+        if (cell) cell.classList.remove('selected');
+      }
+      selectedCell = null;
+    }
+
+    function updatePhaseLabel() {
+      const bothPlaced = piecesRemaining.X === 0 && piecesRemaining.O === 0;
+      phase = bothPlaced ? 'moving' : 'placing';
+      if (phaseLabelElement) {
+        phaseLabelElement.textContent = phase === 'placing'
+          ? 'Placing Phase'
+          : 'Movement Phase - slide a piece to win!';
+      }
+    }
+
+    function updatePiecesDisplay() {
+      if (xPiecesElement) xPiecesElement.textContent = piecesRemaining.X;
+      if (oPiecesElement) oPiecesElement.textContent = piecesRemaining.O;
+    }
+
+    // ---------- SHARED WIN / STATE LOGIC ----------
 
     // Check for winner
     function checkWinner(row, col) {
@@ -525,7 +713,7 @@
       });
     }
 
-    // Check if board is full
+    // Check if board is full (classic mode only - never possible in Never Ends mode)
     function isBoardFull() {
       for (let i = 0; i < boardSize; i++) {
         for (let j = 0; j < boardSize; j++) {
@@ -561,15 +749,77 @@
       drawsElement.textContent = draws;
     }
 
-    // Reset the game
+    // ---------- UNDO ----------
+
+    function undo() {
+      if (moveHistory.length === 0) return;
+      const last = moveHistory.pop();
+
+      gameActive = true;
+      messageElement.textContent = '';
+      messageElement.classList.remove('win-message');
+      clearWinningHighlights();
+      winningCells = [];
+      clearSelection();
+
+      if (last.type === 'place') {
+        gameBoard[last.row][last.col] = '';
+        updateCellDisplay(last.row, last.col, '');
+        currentPlayer = last.player;
+      } else if (last.type === 'ne-place') {
+        gameBoard[last.row][last.col] = '';
+        updateCellDisplay(last.row, last.col, '');
+        piecesRemaining[last.player]++;
+        currentPlayer = last.player;
+        updatePiecesDisplay();
+        updatePhaseLabel();
+      } else if (last.type === 'ne-move') {
+        gameBoard[last.toRow][last.toCol] = '';
+        updateCellDisplay(last.toRow, last.toCol, '');
+        gameBoard[last.fromRow][last.fromCol] = last.player;
+        updateCellDisplay(last.fromRow, last.fromCol, last.player);
+        currentPlayer = last.player;
+        updatePhaseLabel();
+      }
+
+      if (last.wasWin) {
+        if (last.player === 'X') {
+          xWins = Math.max(0, xWins - 1);
+        } else {
+          oWins = Math.max(0, oWins - 1);
+        }
+        updateStats();
+      }
+      if (last.wasDraw) {
+        draws = Math.max(0, draws - 1);
+        updateStats();
+      }
+
+      playerTurnElement.textContent = `Player ${currentPlayer}'s Turn`;
+    }
+
+    // ---------- RESET / MODE / SIZE ----------
+
+    // Reset the game (keeps current mode and size)
     function resetGame() {
       gameBoard = [];
       gameActive = true;
       currentPlayer = 'X';
       winningCells = [];
+      moveHistory = [];
+      selectedCell = null;
       playerTurnElement.textContent = `Player ${currentPlayer}'s Turn`;
       messageElement.textContent = '';
       messageElement.classList.remove('win-message');
+
+      if (mode === 'never-ends') {
+        piecesPerPlayer = winCondition; // exactly enough pieces to form one winning line
+        piecesRemaining = { X: piecesPerPlayer, O: piecesPerPlayer };
+        phase = 'placing';
+        updatePiecesDisplay();
+        updatePhaseLabel();
+      }
+
       createBoard();
     }
 
@@ -589,11 +839,26 @@
       else if (size === 7) size7Button.classList.add('active');
     }
 
+    // Change game mode
+    function setMode(newMode) {
+      if (mode === newMode) return;
+      mode = newMode;
+
+      modeClassicButton.classList.toggle('active', mode === 'classic');
+      modeNeverEndsButton.classList.toggle('active', mode === 'never-ends');
+      piecesInfoElement.style.display = mode === 'never-ends' ? 'flex' : 'none';
+
+      resetGame();
+    }
+
     // Event listeners
     resetButton.addEventListener('click', resetGame);
+    undoButton.addEventListener('click', undo);
     size3Button.addEventListener('click', () => changeBoardSize(3));
     size5Button.addEventListener('click', () => changeBoardSize(5));
     size7Button.addEventListener('click', () => changeBoardSize(7));
+    modeClassicButton.addEventListener('click', () => setMode('classic'));
+    modeNeverEndsButton.addEventListener('click', () => setMode('never-ends'));
 
     // Initialize the game when page loads
     window.onload = initGame;
