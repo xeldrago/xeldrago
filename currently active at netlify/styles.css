@@ -822,3 +822,115 @@ body {
     margin-left: 0;
   }
 }
+.musical-chair-btn {
+  position: relative;
+  overflow: visible;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ff6a3d, #ffcc33, #3f51b5, #8e24aa);
+  background-size: 300% 300%;
+  animation: chairGradient 6s ease infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@keyframes chairGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.musical-chair-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+}
+
+.musical-chair-btn .chair-icon {
+  display: inline-block;
+  transform-origin: center bottom;
+}
+
+.musical-chair-btn:hover .chair-icon {
+  animation: chairHop 0.6s ease-in-out infinite;
+}
+
+@keyframes chairHop {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-6px) rotate(-10deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  75% {
+    transform: translateY(-6px) rotate(10deg);
+  }
+}
+
+/* occasional "freeze" jitter, like the music just stopped */
+.musical-chair-btn:hover {
+  animation: chairGradient 6s ease infinite, freezeJitter 2.4s steps(1) infinite;
+}
+
+@keyframes freezeJitter {
+
+  0%,
+  92%,
+  100% {
+    filter: none;
+  }
+
+  94% {
+    filter: brightness(1.3);
+  }
+
+  96% {
+    filter: none;
+  }
+}
+
+.musical-chair-btn .notes-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.musical-chair-btn .note {
+  position: absolute;
+  bottom: 15%;
+  font-size: 1rem;
+  opacity: 0;
+  animation: floatNote 1.5s ease-in forwards;
+}
+
+@keyframes floatNote {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-55px) translateX(var(--drift, 10px)) rotate(20deg);
+  }
+}

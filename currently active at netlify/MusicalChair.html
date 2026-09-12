@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>🎵 Xeldrago Musical Chair</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #232526, #E5E5BE);
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            padding: 40px;
+            max-width: 620px;
+            margin: auto;
+            text-align: center;
+            padding-bottom: 120px;
+        }
+
+        .logo {
+            width: 110px;
+            margin-bottom: 14px;
+            margin-top: 6px;
+        }
+
+        input,
+        select,
+        button {
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            margin: 8px 0;
+            padding: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        #songs-dropdown {
+            width: 93%;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.14);
+            color: #222;
+        }
+
+        .controls button {
+            background: #3f51b5;
+            color: #fff;
+            margin: 8px 4px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 12px 25px;
+        }
+
+        .controls button:hover {
+            background: #2196f3;
+        }
+
+        .songname {
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            font-size: 1.15em;
+            word-break: break-word;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        /* --- source tabs --- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin: 18px 0 6px 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            padding: 8px 14px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .tab-btn.active {
+            background: #3f51b5;
+            border-color: #3f51b5;
+        }
+
+        .source-panel {
+            display: none;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .source-panel.active {
+            display: block;
+        }
+
+        .source-panel input[type="text"],
+        .source-panel input[type="file"] {
+            width: 100%;
+            color: #222;
+        }
+
+        .source-panel .row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .source-panel .row input[type="text"] {
+            flex: 1;
+        }
+
+        .source-panel .row button {
+            background: #009688;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .hint {
+            font-size: 0.8em;
+            opacity: 0.75;
+            margin: 2px 0 8px 0;
+        }
+
+        .example-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px dashed rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            margin-top: 4px;
+        }
+
+        .example-btn:hover {
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .warning {
+            font-size: 0.78em;
+            opacity: 0.85;
+            background: rgba(255, 193, 7, 0.15);
+            border-left: 3px solid #ffc107;
+            padding: 6px 8px;
+            margin-top: 8px;
+            border-radius: 4px;
+            line-height: 1.35;
+        }
+
+        .playlist-tools {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .playlist-tools button {
+            background: rgba(255, 80, 80, 0.75);
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 6px 10px;
+        }
+
+        #youtubeContainer,
+        #spotifyContainer {
+            display: none;
+            margin-top: 10px;
+        }
+
+        #youtubeContainer iframe,
+        #spotify-embed-iframe iframe {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .back-home-btn {
+            position: fixed;
+            left: 30px;
+            bottom: 30px;
+            background: linear-gradient(135deg, #007aff, #8e24aa);
+            color: #fff;
+            padding: 14px 22px;
+            font-size: 1.15em;
+            font-family: inherit;
+            border-radius: 30px 15px 35px 15px;
+            box-shadow: 0 4px 18px rgba(40, 80, 150, 0.3);
+            cursor: pointer;
+            z-index: 9999;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.25s ease, box-shadow 0.18s ease, transform 0.1s ease;
+        }
+
+        .back-home-btn:hover {
+            background: linear-gradient(135deg, #6a89cc, #fbc531);
+            color: #232323;
+            box-shadow: 0 6px 20px rgba(120, 60, 180, 0.35);
+            transform: translateY(-2px) scale(1.06);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-home-btn" title="Back to Home">🏠 Home</a>
+
+    <img src="media/images/logo.jpg" alt="Xeldrago Logo" class="logo" />
+    <h2>🎶 Musical Chair Exclusive 🎶</h2>
+
+    <!-- Source tabs -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="local">📂 Folder / Files</button>
+        <button class="tab-btn" data-tab="youtube">🎥 YouTube</button>
+        <button class="tab-btn" data-tab="spotify">🎧 Spotify</button>
+    </div>
+
+    <div id="panel-local" class="source-panel active">
+        <div class="hint">Pick a folder (or select multiple audio files) from your device.</div>
+        <input type="file" id="folderInput" webkitdirectory directory multiple accept="audio/*" />
+        <div class="hint">Browser support for folder-picking varies — if it doesn't open a folder dialog, use this
+            instead:</div>
+        <input type="file" id="filesInput" multiple accept="audio/*" />
+    </div>
+
+    <div id="panel-youtube" class="source-panel">
+        <div class="hint">Paste a YouTube video link and add it to the playlist.</div>
+        <div class="row">
+            <input type="text" id="youtubeInput" placeholder="https://www.youtube.com/watch?v=..." />
+            <button id="addYoutubeBtn">Add</button>
+        </div>
+        <button id="tryYoutubeExampleBtn" class="example-btn">▶ Try example link</button>
+        <div class="warning">⚠️ Some uploaders block their videos from playing inside embeds like this one — if your
+            link shows "video unavailable" here, that's the uploader's own setting, not this page. Tap "Try example
+            link" to confirm the player itself works, then try a different upload of your song (lyric video / audio-only
+            reupload often work) or use Spotify / local files instead.</div>
+    </div>
+
+    <div id="panel-spotify" class="source-panel">
+        <div class="hint">Paste a Spotify track/playlist link and add it to the playlist. (Full playback needs a
+            logged-in Spotify Premium session inside the embed; otherwise a 30s preview plays where available.)</div>
+        <div class="row">
+            <input type="text" id="spotifyInput" placeholder="https://open.spotify.com/track/..." />
+            <button id="addSpotifyBtn">Add</button>
+        </div>
+        <button id="trySpotifyExampleBtn" class="example-btn">▶ Try example link</button>
+        <div class="warning">⚠️ If your link doesn't load or stays silent, it may need a logged-in Spotify Premium
+            session in this browser, or the item may be region/rights-restricted. Tap "Try example link" to confirm the
+            player itself works.</div>
+    </div>
+
+    <input type="text" id="song-search" placeholder="Search playlist..." autocomplete="off" />
+    <br />
+    <select id="songs-dropdown" size="8"></select>
+    <div class="playlist-tools">
+        <button id="removeSelectedBtn">🗑 Remove Selected</button>
+        <button id="clearAllBtn">🧹 Clear Playlist</button>
+    </div>
+
+    <div class="songname" id="current-song-name">No songs yet — add from a folder, YouTube or Spotify above</div>
+
+    <audio id="chairPlayer" controls preload="none"></audio>
+    <div id="youtubeContainer">
+        <div id="ytPlayer"></div>
+    </div>
+    <div id="spotifyContainer">
+        <div id="spotify-embed-iframe"></div>
+    </div>
+
+    <div class="controls">
+        <button id="startChair">Start Musical Chair</button>
+        <button id="stopChair">Stop Musical Chair</button>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
+    <script>
+        // ---------- playlist state ----------
+        let playlist = [];       // { id, type: 'local'|'youtube'|'spotify', name, ref }
+        let nextId = 1;
+        let currentItem = null;
+
+        const searchInput = document.getElementById('song-search');
+        const dropdown = document.getElementById('songs-dropdown');
+        const chairPlayer = document.getElementById('chairPlayer');
+        const currSongName = document.getElementById('current-song-name');
+        const startBtn = document.getElementById('startChair');
+        const stopBtn = document.getElementById('stopChair');
+        const youtubeContainer = document.getElementById('youtubeContainer');
+        const spotifyContainer = document.getElementById('spotifyContainer');
+
+        let musicalChairTimeout = null,
+            musicalChairPauseTimeout = null,
+            musicalChairRunning = false;
+
+        // ---------- tabs ----------
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.source-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ---------- playlist helpers ----------
+        function addToPlaylist(item) {
+            item.id = nextId++;
+            playlist.push(item);
+            return item;
+        }
+
+        function refreshDropdown(filterText) {
+            const q = (filterText || '').trim().toLowerCase();
+            const list = q ? playlist.filter(s => s.name.toLowerCase().includes(q)) : playlist;
+            dropdown.innerHTML = '';
+            list.forEach(item => {
+                const o = document.createElement('option');
+                o.value = item.id;
+                o.text = item.name;
+                dropdown.appendChild(o);
+            });
+        }
+
+        function findById(id) {
+            return playlist.find(p => p.id === Number(id));
+        }
+
+        searchInput.addEventListener('input', function () {
+            refreshDropdown(this.value);
+        });
+
+        dropdown.addEventListener('change', function () {
+            const item = findById(dropdown.value);
+            if (item) selectItem(item);
+        });
+
+        document.getElementById('removeSelectedBtn').addEventListener('click', () => {
+            const id = Number(dropdown.value);
+            if (!id) return;
+            const idx = playlist.findIndex(p => p.id === id);
+            if (idx === -1) return;
+            const [removed] = playlist.splice(idx, 1);
+            if (removed.type === 'local') URL.revokeObjectURL(removed.ref);
+            if (currentItem && currentItem.id === removed.id) {
+                currentItem = null;
+                stopMusicalChairs();
+                currSongName.textContent = 'No songs yet — add from a folder, YouTube or Spotify above';
+                chairPlayer.style.display = 'none';
+                youtubeContainer.style.display = 'none';
+                spotifyContainer.style.display = 'none';
+            }
+            refreshDropdown(searchInput.value);
+        });
+
+        document.getElementById('clearAllBtn').addEventListener('click', () => {
+            playlist.forEach(p => { if (p.type === 'local') URL.revokeObjectURL(p.ref); });
+            playlist = [];
+            currentItem = null;
+            stopMusicalChairs();
+            currSongName.textContent = 'No songs yet — add from a folder, YouTube or Spotify above';
+            chairPlayer.style.display = 'none';
+            youtubeContainer.style.display = 'none';
+            spotifyContainer.style.display = 'none';
+            refreshDropdown();
+        });
+
+        // ---------- local files / folder ----------
+        const audioExt = /\.(mp3|wav|ogg|oga|m4a|flac|aac|wma|opus)$/i;
+
+        function handleLocalFiles(fileList) {
+            const files = Array.from(fileList).filter(f => audioExt.test(f.name));
+            let first = null;
+            files.forEach(f => {
+                const url = URL.createObjectURL(f);
+                const item = addToPlaylist({ type: 'local', name: '🎵 ' + f.name, ref: url });
+                if (!first) first = item;
+            });
+            refreshDropdown(searchInput.value);
+            if (first && !currentItem) selectItem(first);
+        }
+
+        document.getElementById('folderInput').addEventListener('change', e => handleLocalFiles(e.target.files));
+        document.getElementById('filesInput').addEventListener('change', e => handleLocalFiles(e.target.files));
+
+        // ---------- example links (fallback if a user's own link won't embed) ----------
+        const EXAMPLE_YOUTUBE_URL = 'https://youtu.be/7sw6DuSi3HQ?si=inNgi0vYiR2uhmgL';
+        const EXAMPLE_SPOTIFY_URL = 'https://open.spotify.com/playlist/5wiXi9CyGcaleKJTzvAQ16?si=31538b09eaa54d56';
+
+        // ---------- YouTube ----------
+        let ytPlayer = null;
+        let ytApiReady = false;
+        let pendingYoutubeId = null;
+
+        window.onYouTubeIframeAPIReady = function () {
+            ytApiReady = true;
+            if (pendingYoutubeId) {
+                loadYouTube(pendingYoutubeId);
+                pendingYoutubeId = null;
+            }
+        };
+
+        function extractYouTubeId(url) {
+            const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/);
+            return m ? m[1] : null;
+        }
+
+        function loadYouTube(videoId) {
+            if (!ytApiReady || !window.YT || !window.YT.Player) {
+                pendingYoutubeId = videoId;
+                return;
+            }
+            if (!ytPlayer) {
+                ytPlayer = new YT.Player('ytPlayer', {
+                    height: '220',
+                    width: '100%',
+                    videoId: videoId,
+                    playerVars: { autoplay: 1 },
+                    events: { onReady: e => e.target.playVideo() }
+                });
+            } else {
+                ytPlayer.loadVideoById(videoId);
+            }
+        }
+
+        document.getElementById('addYoutubeBtn').addEventListener('click', () => {
+            const url = document.getElementById('youtubeInput').value.trim();
+            const id = extractYouTubeId(url);
+            if (!id) { alert('Could not read a video ID from that YouTube link.'); return; }
+            const item = addToPlaylist({ type: 'youtube', name: '🎥 ' + url, ref: id });
+            refreshDropdown(searchInput.value);
+            document.getElementById('youtubeInput').value = '';
+            if (!currentItem) selectItem(item);
+            fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`)
+                .then(r => r.json())
+                .then(data => { item.name = '🎥 ' + data.title; refreshDropdown(searchInput.value); if (currentItem && currentItem.id === item.id) currSongName.textContent = item.name; })
+                .catch(() => { });
+        });
+
+        document.getElementById('tryYoutubeExampleBtn').addEventListener('click', () => {
+            document.getElementById('youtubeInput').value = EXAMPLE_YOUTUBE_URL;
+            document.getElementById('addYoutubeBtn').click();
+        });
+
+        // ---------- Spotify ----------
+        let spotifyController = null;
+        let spotifyApiReady = false;
+        let pendingSpotifyUri = null;
+
+        window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            spotifyApiReady = true;
+            window.SpotifyIFrameAPI = IFrameAPI;
+            if (pendingSpotifyUri) {
+                loadSpotify(pendingSpotifyUri);
+                pendingSpotifyUri = null;
+            }
+        };
+
+        function extractSpotifyInfo(url) {
+            const m = url.match(/open\.spotify\.com\/(track|playlist|album|episode|show)\/([a-zA-Z0-9]+)/);
+            return m ? { kind: m[1], id: m[2] } : null;
+        }
+
+        function loadSpotify(uri) {
+            if (!spotifyApiReady || !window.SpotifyIFrameAPI) {
+                pendingSpotifyUri = uri;
+                return;
+            }
+            if (!spotifyController) {
+                const element = document.getElementById('spotify-embed-iframe');
+                window.SpotifyIFrameAPI.createController(element, { uri }, controller => {
+                    spotifyController = controller;
+                });
+            } else {
+                spotifyController.loadUri(uri);
+                spotifyController.play();
+            }
+        }
+
+        document.getElementById('addSpotifyBtn').addEventListener('click', () => {
+            const url = document.getElementById('spotifyInput').value.trim();
+            const info = extractSpotifyInfo(url);
+            if (!info) { alert('Could not read a track/playlist ID from that Spotify link.'); return; }
+            const item = addToPlaylist({ type: 'spotify', name: '🎧 ' + url, ref: info });
+            refreshDropdown(searchInput.value);
+            document.getElementById('spotifyInput').value = '';
+            if (!currentItem) selectItem(item);
+            fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`)
+                .then(r => r.json())
+                .then(data => { item.name = '🎧 ' + data.title; refreshDropdown(searchInput.value); if (currentItem && currentItem.id === item.id) currSongName.textContent = item.name; })
+                .catch(() => { });
+        });
+
+        document.getElementById('trySpotifyExampleBtn').addEventListener('click', () => {
+            document.getElementById('spotifyInput').value = EXAMPLE_SPOTIFY_URL;
+            document.getElementById('addSpotifyBtn').click();
+        });
+
+        // ---------- unified player control ----------
+        function selectItem(item) {
+            currentItem = item;
+            currSongName.textContent = item.name;
+
+            chairPlayer.style.display = 'none';
+            youtubeContainer.style.display = 'none';
+            spotifyContainer.style.display = 'none';
+            chairPlayer.pause();
+
+            if (item.type === 'local') {
+                chairPlayer.style.display = 'block';
+                chairPlayer.src = item.ref;
+                chairPlayer.load();
+            } else if (item.type === 'youtube') {
+                youtubeContainer.style.display = 'block';
+                loadYouTube(item.ref);
+            } else if (item.type === 'spotify') {
+                spotifyContainer.style.display = 'block';
+                loadSpotify(`spotify:${item.ref.kind}:${item.ref.id}`);
+            }
+        }
+
+        function playCurrent() {
+            if (!currentItem) return;
+            if (currentItem.type === 'local') chairPlayer.play();
+            else if (currentItem.type === 'youtube') { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }
+            else if (currentItem.type === 'spotify') { if (spotifyController) spotifyController.resume ? spotifyController.resume() : spotifyController.play(); }
+        }
+
+        function pauseCurrent() {
+            if (!currentItem) return;
+            if (currentItem.type === 'local') chairPlayer.pause();
+            else if (currentItem.type === 'youtube') { if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo(); }
+            else if (currentItem.type === 'spotify') { if (spotifyController) spotifyController.pause(); }
+        }
+
+        // ---------- musical chair logic ----------
+        function startMusicalChairs() {
+            if (musicalChairRunning || !currentItem) return;
+            musicalChairRunning = true;
+            playCurrent();
+            runMusicalChairCycle();
+        }
+
+        function runMusicalChairCycle() {
+            if (!musicalChairRunning) return;
+            const randomPlay = Math.floor(Math.random() * 8000) + 5000; // 5-13s of play
+            musicalChairTimeout = setTimeout(() => {
+                pauseCurrent();
+                musicalChairPauseTimeout = setTimeout(() => {
+                    if (!musicalChairRunning) return;
+                    playCurrent();
+                    runMusicalChairCycle();
+                }, 15000); // 15s pause
+            }, randomPlay);
+        }
+
+        function stopMusicalChairs() {
+            musicalChairRunning = false;
+            clearTimeout(musicalChairTimeout);
+            clearTimeout(musicalChairPauseTimeout);
+            pauseCurrent();
+        }
+
+        startBtn.addEventListener('click', startMusicalChairs);
+        stopBtn.addEventListener('click', stopMusicalChairs);
+    </script>
+</body>
+
+</html>

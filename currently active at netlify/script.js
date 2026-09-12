@@ -70,3 +70,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+
+(function () {
+  const btn = document.getElementById('musicalChairBtn');
+  if (!btn) return;
+  const notesContainer = btn.querySelector('.notes-container');
+  const noteChars = ['🎵', '🎶', '🎼'];
+  let spawnInterval = null;
+
+  function spawnNote() {
+    const note = document.createElement('span');
+    note.className = 'note';
+    note.textContent = noteChars[Math.floor(Math.random() * noteChars.length)];
+    note.style.left = (10 + Math.random() * 80) + '%';
+    note.style.setProperty('--drift', (Math.random() * 40 - 20) + 'px');
+    note.style.animationDuration = (1.2 + Math.random() * 0.6) + 's';
+    notesContainer.appendChild(note);
+    setTimeout(() => note.remove(), 2000);
+  }
+
+  btn.addEventListener('mouseenter', () => {
+    spawnNote();
+    spawnInterval = setInterval(spawnNote, 350);
+  });
+  btn.addEventListener('mouseleave', () => {
+    clearInterval(spawnInterval);
+  });
+})();
