@@ -492,7 +492,317 @@
                   });
                 })();
               </script>
+              <br></br>
+<h3>Have a lot of friends? Guessing could be a game. 👀</h3>
 
+<button id="friend-games-btn" type="button" aria-label="Open Friend Group Games">
+  <span class="fgb-glow"></span>
+  <span class="fgb-content">
+    <span class="fgb-icon">🎮</span>
+    <span class="fgb-text">
+      <strong>Friend Group Games</strong>
+      <small>Guess • Laugh • Compete</small>
+    </span>
+    <span class="fgb-arrow">→</span>
+  </span>
+</button>
+
+<style>
+  #friend-games-btn {
+    --pink: #ff2da6;
+    --purple: #8b35ff;
+    --blue: #286cff;
+    --cyan: #20d9ff;
+
+    position: relative;
+    width: min(440px, 92vw);
+    min-height: 105px;
+    padding: 3px;
+    border: none;
+    border-radius: 28px;
+    cursor: pointer;
+    overflow: hidden;
+
+    background:
+      linear-gradient(135deg,
+        var(--pink),
+        var(--purple) 45%,
+        var(--blue) 75%,
+        var(--cyan));
+
+    color: white;
+    font-family: "Segoe UI", system-ui, sans-serif;
+
+    box-shadow:
+      0 15px 40px rgba(117, 42, 255, 0.35),
+      0 5px 18px rgba(255, 45, 166, 0.25);
+
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  /* Animated light running around the button */
+  #friend-games-btn::before {
+    content: "";
+    position: absolute;
+    inset: -150%;
+    background: conic-gradient(transparent 0deg,
+        transparent 285deg,
+        rgba(255, 255, 255, 0.9) 320deg,
+        transparent 350deg);
+    animation: fgb-spin 4s linear infinite;
+  }
+
+  /* Inner glass surface */
+  #friend-games-btn::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 25px;
+
+    background:
+      linear-gradient(135deg,
+        rgba(255, 255, 255, 0.16),
+        rgba(255, 255, 255, 0.04) 45%,
+        rgba(0, 0, 0, 0.15));
+
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+  }
+
+  .fgb-content {
+    position: relative;
+    z-index: 3;
+
+    min-height: 99px;
+    padding: 0 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .fgb-icon {
+    width: 58px;
+    height: 58px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    font-size: 30px;
+
+    box-shadow:
+      inset 0 2px 8px rgba(255, 255, 255, 0.25),
+      0 5px 15px rgba(0, 0, 0, 0.18);
+
+    transition: transform 0.3s ease;
+  }
+
+  .fgb-text {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .fgb-text strong {
+    font-size: 1.25rem;
+    font-weight: 750;
+    letter-spacing: 0.2px;
+  }
+
+  .fgb-text small {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    letter-spacing: 0.5px;
+  }
+
+  .fgb-arrow {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    font-size: 25px;
+    font-weight: 300;
+
+    transition:
+      transform 0.3s ease,
+      background 0.3s ease;
+  }
+
+  /* Floating game particles */
+  .fgb-particle {
+    position: absolute;
+    z-index: 2;
+
+    pointer-events: none;
+    user-select: none;
+
+    opacity: 0;
+    font-size: 14px;
+
+    animation: fgb-float 1.8s ease-out forwards;
+  }
+
+  #friend-games-btn:hover {
+    transform: translateY(-6px) scale(1.015);
+
+    filter: saturate(1.15);
+
+    box-shadow:
+      0 22px 55px rgba(117, 42, 255, 0.45),
+      0 8px 25px rgba(255, 45, 166, 0.35),
+      0 0 35px rgba(32, 217, 255, 0.18);
+  }
+
+  #friend-games-btn:hover .fgb-icon {
+    transform: rotate(-6deg) scale(1.08);
+  }
+
+  #friend-games-btn:hover .fgb-arrow {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  #friend-games-btn:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  #friend-games-btn:focus-visible {
+    outline: 3px solid rgba(32, 217, 255, 0.8);
+    outline-offset: 5px;
+  }
+
+  @keyframes fgb-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fgb-float {
+    0% {
+      transform:
+        translate(0, 15px) scale(0.5) rotate(0deg);
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 0.9;
+    }
+
+    100% {
+      transform:
+        translate(var(--drift), -85px) scale(1.15) rotate(var(--rotation));
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #friend-games-btn::before {
+      animation: none;
+    }
+
+    #friend-games-btn,
+    .fgb-icon,
+    .fgb-arrow {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const button = document.getElementById("friend-games-btn");
+
+    const particles = [
+      "🎲",
+      "🎯",
+      "🃏",
+      "❓",
+      "😂",
+      "🔥",
+      "⭐",
+      "🎮",
+      "🏆",
+      "👀"
+    ];
+
+    let particleInterval = null;
+
+    function createParticle() {
+      const particle = document.createElement("span");
+
+      particle.className = "fgb-particle";
+      particle.textContent =
+        particles[Math.floor(Math.random() * particles.length)];
+
+      particle.style.left =
+        Math.random() * 85 + 7 + "%";
+
+      particle.style.bottom =
+        Math.random() * 10 + 15 + "px";
+
+      particle.style.setProperty(
+        "--drift",
+        (Math.random() * 100 - 50) + "px"
+      );
+
+      particle.style.setProperty(
+        "--rotation",
+        (Math.random() * 80 - 40) + "deg"
+      );
+
+      particle.style.animationDuration =
+        (Math.random() * 0.8 + 1.4) + "s";
+
+      button.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 2200);
+    }
+
+    button.addEventListener("mouseenter", () => {
+      createParticle();
+
+      particleInterval = setInterval(createParticle, 180);
+    });
+
+    button.addEventListener("mouseleave", () => {
+      clearInterval(particleInterval);
+      particleInterval = null;
+    });
+
+    button.addEventListener("click", () => {
+      // Small click burst
+      for (let i = 0; i < 6; i++) {
+        setTimeout(createParticle, i * 45);
+      }
+
+      // Open the friend-group game hub
+      setTimeout(() => {
+        window.open("FriendGroupGames.html", "_blank");
+      }, 120);
+    });
+  })();
+</script>
+
+</script>
             </div>
           </div>
         </div>
