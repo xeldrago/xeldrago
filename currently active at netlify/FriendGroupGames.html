@@ -389,8 +389,8 @@
     <div class="screen active" id="screen-home">
       <div class="card">
         <h2>Two games, one screen, one phone</h2>
-        <p class="lead">Pass one phone around. <b>Heads Up</b> is the forehead-guessing game with Tamil/Malayalam/English movies or Bible names
-        . <b>20 Questions</b> hands a secret word to a "keeper" who answers yes/no while everyone else
+        <p class="lead">Pass one phone around. <b>Heads Up</b> is the forehead-guessing game with Tamil movies
+          (2015–now). <b>20 Questions</b> hands a secret word to a "keeper" who answers yes/no while everyone else
           grills them.</p>
       </div>
     </div>
@@ -408,6 +408,7 @@
           <option value="malayalam">Malayalam Movies (2015–now)</option>
           <option value="english">English Movies (1990–now)</option>
           <option value="bible">Christian Biblical Names</option>
+          <option value="anime">Anime (Titles &amp; Characters)</option>
         </select>
         <label>Round length</label>
         <select id="hu-time">
@@ -430,6 +431,7 @@
           <div class="chip" data-cat="person">Famous Person</div>
           <div class="chip" data-cat="object">Object</div>
           <div class="chip" data-cat="animal">Animal</div>
+          <div class="chip" data-cat="anime">Anime</div>
         </div>
         <div id="tq-card">
           <div id="tq-hint">Tap "Reveal" — only the keeper looks, then pass it face-down.</div>
@@ -463,7 +465,7 @@
         <div class="card">
           <h3>Most Likely To</h3>
           <p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full
-            people circle, no setup needed.</p>
+            People circle, no setup needed.</p>
         </div>
         <div class="card">
           <h3>Category Blurt</h3>
@@ -610,7 +612,29 @@
       "Belshazzar", "Darius", "Cyrus", "Haman", "Vashti", "Jairus", "Bartimaeus", "Anna", "Salome", "Herodias", "Onesimus"
     ].filter((v, i, a) => a.indexOf(v) === i);
 
-    const decks = { tamil: movies, malayalam, english, bible };
+    const anime = ["Naruto", "Naruto Shippuden", "Bleach", "One Piece", "Shin-chan", "Spy x Family", "Dragon Ball Z", "Dragon Ball Super", "Attack on Titan", "Death Note",
+      "Demon Slayer", "Jujutsu Kaisen", "My Hero Academia", "Fullmetal Alchemist: Brotherhood", "Hunter x Hunter", "One Punch Man", "Chainsaw Man", "Tokyo Ghoul", "Sword Art Online", "Fairy Tail",
+      "Black Clover", "Doraemon", "Pokemon", "Detective Conan", "Gintama", "Cowboy Bebop", "Neon Genesis Evangelion", "Steins;Gate", "Code Geass", "Haikyuu!!",
+      "Kuroko's Basketball", "Your Name", "Spirited Away", "My Neighbor Totoro", "Howl's Moving Castle", "Princess Mononoke", "Vinland Saga", "Mob Psycho 100", "Dr. Stone", "Fire Force",
+      "Blue Lock", "Solo Leveling", "Frieren: Beyond Journey's End", "Dandadan", "Kaiju No. 8", "Oshi no Ko", "Bocchi the Rock!", "Yu-Gi-Oh!", "Sailor Moon", "Digimon",
+      "Inuyasha", "Fruits Basket", "Toradora!", "Re:Zero", "Konosuba", "Overlord", "That Time I Got Reincarnated as a Slime", "Tokyo Revengers", "Assassination Classroom", "Ninja Hattori",
+      "Kiteretsu", "Perman", "Rurouni Kenshin", "The Seven Deadly Sins", "Berserk", "JoJo's Bizarre Adventure", "Monster", "Death Parade", "Clannad", "Violet Evergarden",
+      "Weathering with You", "Suzume", "Demon Slayer: Mugen Train", "Jujutsu Kaisen 0", "Dragon Ball", "Slam Dunk", "Initial D", "Hajime no Ippo", "Yu Yu Hakusho", "Lupin the Third",
+      "Yor Forger", "Loid Forger", "Anya Forger", "Bond Forger", "Franky Franklin", "Damian Desmond", "Becky Blackbell", "Yuri Briar", "Fiona Frost", "Sylvia Sherwood",
+      "Naruto Uzumaki", "Sasuke Uchiha", "Sakura Haruno", "Kakashi Hatake", "Itachi Uchiha", "Madara Uchiha", "Jiraiya", "Hinata Hyuga", "Gaara", "Minato Namikaze",
+      "Ichigo Kurosaki", "Rukia Kuchiki", "Sosuke Aizen", "Renji Abarai", "Byakuya Kuchiki", "Kenpachi Zaraki", "Monkey D. Luffy", "Roronoa Zoro", "Nami", "Usopp",
+      "Sanji", "Tony Tony Chopper", "Nico Robin", "Franky", "Brook", "Portgas D. Ace", "Shanks", "Blackbeard", "Trafalgar Law", "Goku",
+      "Vegeta", "Gohan", "Piccolo", "Frieza", "Cell", "Majin Buu", "Eren Yeager", "Mikasa Ackerman", "Armin Arlert", "Levi Ackerman",
+      "Light Yagami", "L Lawliet", "Ryuk", "Tanjiro Kamado", "Nezuko Kamado", "Zenitsu Agatsuma", "Inosuke Hashibira", "Kyojuro Rengoku", "Satoru Gojo", "Yuji Itadori",
+      "Megumi Fushiguro", "Ryomen Sukuna", "Nobara Kugisaki", "Izuku Midoriya", "Katsuki Bakugo", "All Might", "Shoto Todoroki", "Edward Elric", "Alphonse Elric", "Roy Mustang",
+      "Gon Freecss", "Killua Zoldyck", "Saitama", "Genos", "Denji", "Power", "Makima", "Pikachu", "Ash Ketchum", "Doraemon Character",
+      "Nobita Nobi", "Shizuka Minamoto", "Takeshi Gouda", "Suneo Honekawa", "Shinnosuke Nohara", "Misae Nohara", "Hiroshi Nohara", "Himawari Nohara", "Masao Kazama", "Action Kamen",
+      "Conan Edogawa", "Spike Spiegel", "Rimuru Tempest", "Asta", "Lelouch Lamperouge", "Rintaro Okabe", "Subaru Natsuki", "Kirito", "Asuna Yuuki", "Natsu Dragneel",
+      "Kaneki Ken", "Senku Ishigami", "Shoyo Hinata", "Totoro", "Chihiro", "Kenshin Himura", "Meliodas", "Sailor Moon Usagi", "Yugi Muto", "Seto Kaiba"
+    ].filter((v, i, a) => a.indexOf(v) === i);
+
+    const decks = { tamil: movies, malayalam, english, bible, anime };
+    words.anime = anime;
 
     // ---------- nav ----------
     document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
