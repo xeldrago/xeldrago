@@ -1,307 +1,695 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kondattam — Friend Group Games</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#fdf6e9; --bg:#161029; --bg2:#211a3d; --marigold:#f4a51e; --rose:#ef5b6a; --mint:#3ec9a7;
-  --card:#251e46; --line:rgba(253,246,233,0.14);
-}
-*{box-sizing:border-box;}
-html,body{height:100%;}
-body{
-  margin:0; background:radial-gradient(1200px 800px at 80% -10%, #2c2154 0%, var(--bg) 55%);
-  color:var(--ink); font-family:'Inter',sans-serif;
-  padding-top:env(safe-area-inset-top,0); padding-bottom:env(safe-area-inset-bottom,0);
-  min-height:100%; overflow-x:hidden;
-}
-h1,h2,h3,.display{font-family:'Baloo 2',sans-serif;}
-.wrap{max-width:640px; margin:0 auto; padding:28px 20px 60px;}
-header{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:22px;}
-header h1{font-size:1.7rem; font-weight:800; margin:0; color:var(--marigold); letter-spacing:.3px;}
-header span{font-size:.85rem; opacity:.7;}
-.tabs{display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap;}
-.tab{flex:1; min-width:140px; text-align:center; padding:14px 10px; border-radius:14px; background:var(--card);
-  border:1px solid var(--line); cursor:pointer; font-family:'Baloo 2'; font-weight:700; font-size:.95rem; transition:transform .15s;}
-.tab.active{background:var(--marigold); color:#1a1230; transform:translateY(-2px);}
-.screen{display:none;}
-.screen.active{display:block;}
-.card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px; margin-bottom:16px;}
-p.lead{opacity:.8; line-height:1.55; margin-top:4px;}
-button.big{width:100%; padding:16px; border:none; border-radius:14px; font-family:'Baloo 2'; font-weight:700;
-  font-size:1.05rem; background:var(--marigold); color:#1a1230; cursor:pointer; margin-top:10px;}
-button.ghost{background:transparent; border:1px solid var(--line); color:var(--ink);}
-.rowbtns{display:flex; gap:10px;}
-.rowbtns button{flex:1;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kondattam — Friend Group Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #fdf6e9;
+      --bg: #161029;
+      --bg2: #211a3d;
+      --marigold: #f4a51e;
+      --rose: #ef5b6a;
+      --mint: #3ec9a7;
+      --card: #251e46;
+      --line: rgba(253, 246, 233, 0.14);
+    }
 
-/* Heads Up game */
-#hu-setup label{display:block; margin:14px 0 6px; font-weight:600; font-size:.9rem; opacity:.85;}
-select{width:100%; padding:12px; border-radius:10px; background:var(--bg2); color:var(--ink); border:1px solid var(--line); font-size:1rem;}
-#hu-play{position:fixed; inset:0; display:none; flex-direction:column; z-index:50;
-  padding-top:env(safe-area-inset-top,0); padding-bottom:env(safe-area-inset-bottom,0);}
-#hu-play.on{display:flex;}
-.hu-top{display:flex; justify-content:space-between; align-items:center; padding:16px 20px; font-family:'Baloo 2'; font-weight:700;}
-#hu-timer{font-size:1.4rem; color:var(--marigold);}
-#hu-score{font-size:1rem; opacity:.8;}
-.hu-word-zone{flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;}
-#hu-word{font-family:'Baloo 2'; font-weight:800; font-size:clamp(2rem,9vw,3.4rem); line-height:1.15;}
-.hu-actions{display:flex; height:22vh;}
-.hu-actions button{flex:1; border:none; font-family:'Baloo 2'; font-weight:800; font-size:1.3rem; color:#1a1230;}
-#hu-pass{background:var(--rose);}
-#hu-correct{background:var(--mint);}
-#hu-tiltnote{position:absolute; bottom:calc(22vh + 10px); left:0; right:0; text-align:center; font-size:.75rem; opacity:.6;}
-#hu-end{display:none; position:fixed; inset:0; background:var(--bg); z-index:60; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:20px;}
-#hu-end.on{display:flex;}
-#hu-endscore{font-family:'Baloo 2'; font-size:3rem; color:var(--marigold); margin:6px 0 18px;}
-.hu-list{max-height:26vh; overflow-y:auto; text-align:left; font-size:.85rem; opacity:.75; margin:14px 0; padding:0 6px;}
+    * {
+      box-sizing: border-box;
+    }
 
-/* 20Q */
-#tq-cats{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
-.chip{padding:9px 14px; border-radius:999px; background:var(--bg2); border:1px solid var(--line); cursor:pointer; font-size:.85rem;}
-.chip.on{background:var(--mint); color:#0d1a17; border-color:transparent;}
-#tq-card{background:var(--bg2); border-radius:18px; padding:40px 20px; text-align:center; margin-top:10px; min-height:120px; display:flex; align-items:center; justify-content:center;}
-#tq-word{font-family:'Baloo 2'; font-weight:800; font-size:1.8rem; display:none;}
-#tq-hint{opacity:.65; font-size:.9rem;}
+    html,
+    body {
+      height: 100%;
+    }
 
-/* suggestions */
-.sugg{display:grid; gap:12px;}
-.sugg .card{margin:0;}
-.sugg h3{margin:0 0 4px; font-size:1.05rem; color:var(--mint);}
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 800px at 80% -10%, #2c2154 0%, var(--bg) 55%);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      padding-top: env(safe-area-inset-top, 0);
+      padding-bottom: env(safe-area-inset-bottom, 0);
+      min-height: 100%;
+      overflow-x: hidden;
+    }
 
-footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
-@media (prefers-reduced-motion: reduce){ .tab{transition:none;} }
-</style>
+    h1,
+    h2,
+    h3,
+    .display {
+      font-family: 'Baloo 2', sans-serif;
+    }
+
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    header h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin: 0;
+      color: var(--marigold);
+      letter-spacing: .3px;
+    }
+
+    header span {
+      font-size: .85rem;
+      opacity: .7;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+      font-size: .95rem;
+      transition: transform .15s;
+    }
+
+    .tab.active {
+      background: var(--marigold);
+      color: #1a1230;
+      transform: translateY(-2px);
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    p.lead {
+      opacity: .8;
+      line-height: 1.55;
+      margin-top: 4px;
+    }
+
+    button.big {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+      font-size: 1.05rem;
+      background: var(--marigold);
+      color: #1a1230;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button.ghost {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .rowbtns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rowbtns button {
+      flex: 1;
+    }
+
+    /* Heads Up game */
+    #hu-setup label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 600;
+      font-size: .9rem;
+      opacity: .85;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--bg2);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      font-size: 1rem;
+    }
+
+    #hu-play {
+      position: fixed;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      z-index: 50;
+      background: radial-gradient(1200px 800px at 80% -10%, #2c2154 0%, var(--bg) 60%);
+      padding-top: env(safe-area-inset-top, 0);
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    #hu-play.on {
+      display: flex;
+    }
+
+    .hu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+    }
+
+    #hu-timer {
+      font-size: 1.4rem;
+      color: var(--marigold);
+    }
+
+    #hu-score {
+      font-size: 1rem;
+      opacity: .8;
+    }
+
+    .hu-word-zone {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #hu-word {
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: clamp(2rem, 9vw, 3.4rem);
+      line-height: 1.15;
+      width: 100%;
+      max-width: 560px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 44px 22px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+    }
+
+    .hu-actions {
+      display: flex;
+      height: 22vh;
+    }
+
+    .hu-actions button {
+      flex: 1;
+      border: none;
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #1a1230;
+    }
+
+    #hu-pass {
+      background: var(--rose);
+    }
+
+    #hu-correct {
+      background: var(--mint);
+    }
+
+    #hu-tiltnote {
+      position: absolute;
+      bottom: calc(22vh + 10px);
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: .75rem;
+      opacity: .6;
+    }
+
+    #hu-end {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 60;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #hu-end.on {
+      display: flex;
+    }
+
+    #hu-endscore {
+      font-family: 'Baloo 2';
+      font-size: 3rem;
+      color: var(--marigold);
+      margin: 6px 0 18px;
+    }
+
+    .hu-list {
+      max-height: 26vh;
+      overflow-y: auto;
+      text-align: left;
+      font-size: .85rem;
+      opacity: .75;
+      margin: 14px 0;
+      padding: 0 6px;
+    }
+
+    /* 20Q */
+    #tq-cats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .chip {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      font-size: .85rem;
+    }
+
+    .chip.on {
+      background: var(--mint);
+      color: #0d1a17;
+      border-color: transparent;
+    }
+
+    #tq-card {
+      background: var(--bg2);
+      border-radius: 18px;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 10px;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #tq-word {
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: 1.8rem;
+      display: none;
+    }
+
+    #tq-hint {
+      opacity: .65;
+      font-size: .9rem;
+    }
+
+    /* suggestions */
+    .sugg {
+      display: grid;
+      gap: 12px;
+    }
+
+    .sugg .card {
+      margin: 0;
+    }
+
+    .sugg h3 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+      color: var(--mint);
+    }
+
+    footer {
+      text-align: center;
+      font-size: .78rem;
+      opacity: .5;
+      margin-top: 30px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tab {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="wrap">
-  <header>
-    <h1>Kondattam 🎉</h1>
-    <span>6-friend party games</span>
-  </header>
+  <div class="wrap">
+    <header>
+      <h1>Kondattam 🎉</h1>
+      <span>6-friend party games</span>
+    </header>
 
-  <div class="tabs">
-    <div class="tab active" data-screen="home">Home</div>
-    <div class="tab" data-screen="headsup">Heads Up</div>
-    <div class="tab" data-screen="twentyq">20 Questions</div>
-    <div class="tab" data-screen="more">More Ideas</div>
-  </div>
-
-  <div class="screen active" id="screen-home">
-    <div class="card">
-      <h2>Two games, one screen, one phone</h2>
-      <p class="lead">Pass one phone around. <b>Heads Up</b> is the forehead-guessing game with Tamil movies (2015–now). <b>20 Questions</b> hands a secret word to a "keeper" who answers yes/no while everyone else grills them.</p>
+    <div class="tabs">
+      <div class="tab active" data-screen="home">Home</div>
+      <div class="tab" data-screen="headsup">Heads Up</div>
+      <div class="tab" data-screen="twentyq">20 Questions</div>
+      <div class="tab" data-screen="more">More Ideas</div>
     </div>
-  </div>
 
-  <!-- HEADS UP SETUP -->
-  <div class="screen" id="screen-headsup">
-    <div class="card" id="hu-setup">
-      <h2>Tamil Movies — Forehead Edition</h2>
-      <p class="lead">One person holds the phone facing outward on their forehead. Everyone else describes the movie (no titles, actor names as clues are fair game) until they guess it. Tilt the phone down for correct, up to pass — or use the on-screen buttons.</p>
-      <label>Round length</label>
-      <select id="hu-time"><option value="45">45 sec</option><option value="60" selected>60 sec</option><option value="90">90 sec</option></select>
-      <button class="big" id="hu-start">Start round</button>
-    </div>
-  </div>
-
-  <!-- 20Q -->
-  <div class="screen" id="screen-twentyq">
-    <div class="card">
-      <h2>20 Questions</h2>
-      <p class="lead">Pick a category, hand the phone to the "keeper." They read the word secretly, then everyone else asks yes/no questions to figure it out.</p>
-      <div id="tq-cats">
-        <div class="chip on" data-cat="movie">Tamil Movie</div>
-        <div class="chip" data-cat="person">Famous Person</div>
-        <div class="chip" data-cat="object">Object</div>
-        <div class="chip" data-cat="animal">Animal</div>
-      </div>
-      <div id="tq-card">
-        <div id="tq-hint">Tap "Reveal" — only the keeper looks, then pass it face-down.</div>
-        <div id="tq-word"></div>
-      </div>
-      <div class="rowbtns" style="margin-top:14px;">
-        <button class="big ghost" id="tq-hide">Hide</button>
-        <button class="big" id="tq-new">Reveal new word</button>
+    <div class="screen active" id="screen-home">
+      <div class="card">
+        <h2>Two games, one screen, one phone</h2>
+        <p class="lead">Pass one phone around. <b>Heads Up</b> is the forehead-guessing game with Tamil movies
+          (2015–now). <b>20 Questions</b> hands a secret word to a "keeper" who answers yes/no while everyone else
+          grills them.</p>
       </div>
     </div>
+
+    <!-- HEADS UP SETUP -->
+    <div class="screen" id="screen-headsup">
+      <div class="card" id="hu-setup">
+        <h2>Forehead Edition</h2>
+        <p class="lead">One person holds the phone facing outward on their forehead. Everyone else describes the word
+          (without saying it) until they guess it. Tilt the phone down for correct, up to pass — or use the on-screen
+          buttons.</p>
+        <label>Word deck</label>
+        <select id="hu-deck">
+          <option value="tamil" selected>Tamil Movies (2015–now)</option>
+          <option value="malayalam">Malayalam Movies (2015–now)</option>
+          <option value="english">English Movies (1990–now)</option>
+          <option value="bible">Christian Biblical Names</option>
+        </select>
+        <label>Round length</label>
+        <select id="hu-time">
+          <option value="45">45 sec</option>
+          <option value="60" selected>60 sec</option>
+          <option value="90">90 sec</option>
+        </select>
+        <button class="big" id="hu-start">Start round</button>
+      </div>
+    </div>
+
+    <!-- 20Q -->
+    <div class="screen" id="screen-twentyq">
+      <div class="card">
+        <h2>20 Questions</h2>
+        <p class="lead">Pick a category, hand the phone to the "keeper." They read the word secretly, then everyone else
+          asks yes/no questions to figure it out.</p>
+        <div id="tq-cats">
+          <div class="chip on" data-cat="movie">Tamil Movie</div>
+          <div class="chip" data-cat="person">Famous Person</div>
+          <div class="chip" data-cat="object">Object</div>
+          <div class="chip" data-cat="animal">Animal</div>
+        </div>
+        <div id="tq-card">
+          <div id="tq-hint">Tap "Reveal" — only the keeper looks, then pass it face-down.</div>
+          <div id="tq-word"></div>
+        </div>
+        <div class="rowbtns" style="margin-top:14px;">
+          <button class="big ghost" id="tq-hide">Hide</button>
+          <button class="big" id="tq-new">Reveal new word</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MORE -->
+    <div class="screen" id="screen-more">
+      <div class="sugg">
+        <div class="card">
+          <h3>Wavelength</h3>
+          <p class="lead">One team sees a hidden target on a slider between two opposites ("cold ↔ hot"); they give a
+            one-word clue and the rest guess where the dial lands.</p>
+        </div>
+        <div class="card">
+          <h3>Taboo</h3>
+          <p class="lead">Guess the word from a teammate's clues — without them using five forbidden related words.
+            Great with the same phone-timer format as Heads Up.</p>
+        </div>
+        <div class="card">
+          <h3>Fishbowl</h3>
+          <p class="lead">Same word set, three rounds: describe it, act it out (charades), then say one word only —
+            memory carries it home.</p>
+        </div>
+        <div class="card">
+          <h3>Most Likely To</h3>
+          <p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full
+            6-person circle, no setup needed.</p>
+        </div>
+        <div class="card">
+          <h3>Category Blurt</h3>
+          <p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating — last
+            one standing wins the round.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>Works fully offline once loaded · built for one shared phone</footer>
   </div>
 
-  <!-- MORE -->
-  <div class="screen" id="screen-more">
-    <div class="sugg">
-      <div class="card"><h3>Wavelength</h3><p class="lead">One team sees a hidden target on a slider between two opposites ("cold ↔ hot"); they give a one-word clue and the rest guess where the dial lands.</p></div>
-      <div class="card"><h3>Taboo</h3><p class="lead">Guess the word from a teammate's clues — without them using five forbidden related words. Great with the same phone-timer format as Heads Up.</p></div>
-      <div class="card"><h3>Fishbowl</h3><p class="lead">Same word set, three rounds: describe it, act it out (charades), then say one word only — memory carries it home.</p></div>
-      <div class="card"><h3>Most Likely To</h3><p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full 6-person circle, no setup needed.</p></div>
-      <div class="card"><h3>Category Blurt</h3><p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating — last one standing wins the round.</p></div>
+  <!-- HEADS UP FULLSCREEN PLAY -->
+  <div id="hu-play">
+    <div class="hu-top"><span id="hu-score">0 correct</span><span id="hu-timer">60</span></div>
+    <div class="hu-word-zone">
+      <div id="hu-word">Ready?</div>
+    </div>
+    <div id="hu-tiltnote">Tilt phone down = correct · up = pass</div>
+    <div class="hu-actions">
+      <button id="hu-pass">✕ PASS</button>
+      <button id="hu-correct">✓ GOT IT</button>
     </div>
   </div>
-
-  <footer>Works fully offline once loaded · built for one shared phone</footer>
-</div>
-
-<!-- HEADS UP FULLSCREEN PLAY -->
-<div id="hu-play">
-  <div class="hu-top"><span id="hu-score">0 correct</span><span id="hu-timer">60</span></div>
-  <div class="hu-word-zone"><div id="hu-word">Ready?</div></div>
-  <div id="hu-tiltnote">Tilt phone down = correct · up = pass</div>
-  <div class="hu-actions">
-    <button id="hu-pass">✕ PASS</button>
-    <button id="hu-correct">✓ GOT IT</button>
+  <div id="hu-end">
+    <div>Round over!</div>
+    <div id="hu-endscore">0</div>
+    <div class="hu-list" id="hu-endlist"></div>
+    <button class="big" id="hu-again" style="max-width:240px;">Back to setup</button>
   </div>
-</div>
-<div id="hu-end">
-  <div>Round over!</div>
-  <div id="hu-endscore">0</div>
-  <div class="hu-list" id="hu-endlist"></div>
-  <button class="big" id="hu-again" style="max-width:240px;">Back to setup</button>
-</div>
 
-<script>
-  // ---------- data ----------
-  const movies = ["Thani Oruvan", "Papanasam", "Yennai Arindhaal", "Maari", "Puthiya Niyamam", "Uttama Villain", "Dharma Durai", "Miruthan",
-    "Naanum Rowdy Dhaan", "36 Vayadhinile", "Va", "Rajini Murugan", "Jil Jung Juk", "Sathuranga Vettai", "Kabali", "Theri", "24", "Iru Mugan",
-    "Kodi", "Remo", "Kaashmora", "Achcham Yenbadhu Madamaiyada", "Kaththi Sandai", "Rekka", "Bogan", "Kanithan", "Thodari", "Vikram Vedha",
-    "Mersal", "Vivegam", "Bairavaa", "Velaikkaran", "Thupparivaalan", "Aruvi", "Enakku Vaaitha Adimaigal", "Spyder", "Sathya", "Dora",
-    "Kaatru Veliyidai", "Aramm", "Sketch", "Kaala", "Vada Chennai", "Sarkar", "Seemaraja", "Kadaikutty Singam", "Kolamavu Kokila",
-    "Chekka Chivantha Vaanam", "96", "Pariyerum Perumal", "Thaanaa Serndha Koottam", "Iravukku Aayiram Kangal", "Ratsasan", "Mr Chandramouli",
-    "Kanaa", "Kalakalappu 2", "Diya", "Bigil", "Petta", "Viswasam", "NGK", "Asuran", "Kaithi", "Super Deluxe", "Comali", "Sarvam Thaala Mayam",
-    "Adanga Maru", "Airaa", "Game Over", "Dev", "Oh My Kadavule", "Thambi", "90ML", "Devarattam", "Gorilla", "Pyaar Prema Kaadhal", "Kanchana 3",
-    "Darbar", "Soorarai Pottru", "Naadodigal 2", "Vaanam Kottattum", "Ka Pae Ranasingam", "Kannum Kannum Kollaiyadithaal", "Penguin", "Sathru",
-    "Master", "Karnan", "Sulthan", "Doctor", "Annaatthe", "Jagame Thandhiram", "Maara", "Eeswaran", "Netrikann", "Mookuthi Amman", "Raatchasi",
-    "Vikram", "Beast", "Valimai", "Cobra", "Etharkkum Thunindhavan", "Vendhu Thanindhathu Kaadu", "Thiruchitrambalam", "Don", "Maaveeran",
-    "Kadaisi Vivasayi", "Mahaan", "Gargi", "Iravin Nizhal", "Naanum Single Thaan", "Jailer", "Leo", "Ponniyin Selvan", "Ponniyin Selvan 2",
-    "Thunivu", "Vaathi", "Mark Antony", "Japan", "Blue Star", "Maamannan", "Chithha", "Pathu Thala", "Por Thozhil", "Anbarivu",
-    "Maharaja", "Amaran", "Raayan", "Indian 2", "Meiyazhagan", "Garudan", "Vaazhai", "Lubber Pandhu", "Captain Miller", "Aranmanai 4",
-    "Demonte Colony 2", "Kalki 2898 AD", "Star", "Kadaisi Ivan", "Vidaamuyarchi", "Good Bad Ugly", "Coolie", "Thug Life", "Retro", "Dragon",
-    "Sivappu Manjal Pachai", "Kadaram Kondan", "Pizza", "Pa Paandi", "Pizza 2", "Yaanai", "Viswasam", "Kanavu Variyam", "Kutty Story", "Vaathi Coming",
-    "Enemy", "Pichaikkaran 2", "Rocky", "Custody", "Amigos", "Abhi Naanu", "Farhana", "Raid 2 Tamil", "Gangs of Madras", "Vaa Vaathiyaar",
-    "Bison Kaalamaadan", "Madharaasi", "Sir", "Tourist Family", "Paruthi Veeran", "Angadi Theru", "Subramaniapuram", "Naan Kadavul", "Aadukalam",
-    "Vazhakku Enn 18/9", "Soodhu Kavvum", "Jigarthanda", "Cuckoo", "Vaayai Moodi Pesavum", "Kaaka Muttai", "Joker", "Visaranai", "Iraivi",
-    "Metro", "Merku Thodarchi Malai", "Kuttrame Thandanai", "Aramm", "Peranbu", "Nasir", "Kolamaavu Kokila", "Andhaghaaram", "Sarpatta Parambarai",
-    "Koozhangal", "Mandela", "Pebbles", "Semma Botha Aagathey", "Charlie Chaplin 2", "Meesaya Murukku", "Aayirathil Iruvar", "Rangoon",
-    "Hero", "Sivaranjaniyum Innum Sila Pengalum", "Sillu Karuppatti", "Oh My Kadavule 2", "Nan Sirithal", "Mundasupatti", "Nimir",
-    "Gulaebaghavali", "Idam Porul Yaeval", "Sathuranga Vettai 2", "Sulthan Returns", "LKG", "Sangathamizhan", "Vantha Rajavathaan Varuven"
-  ].filter((v, i, a) => a.indexOf(v) === i);
+  <script>
+    // ---------- data ----------
+    const movies = ["Thani Oruvan", "Papanasam", "Yennai Arindhaal", "Maari", "Puthiya Niyamam", "Uttama Villain", "Dharma Durai", "Miruthan",
+      "Naanum Rowdy Dhaan", "36 Vayadhinile", "Va", "Rajini Murugan", "Jil Jung Juk", "Sathuranga Vettai", "Kabali", "Theri", "24", "Iru Mugan",
+      "Kodi", "Remo", "Kaashmora", "Achcham Yenbadhu Madamaiyada", "Kaththi Sandai", "Rekka", "Bogan", "Kanithan", "Thodari", "Vikram Vedha",
+      "Mersal", "Vivegam", "Bairavaa", "Velaikkaran", "Thupparivaalan", "Aruvi", "Enakku Vaaitha Adimaigal", "Spyder", "Sathya", "Dora",
+      "Kaatru Veliyidai", "Aramm", "Sketch", "Kaala", "Vada Chennai", "Sarkar", "Seemaraja", "Kadaikutty Singam", "Kolamavu Kokila",
+      "Chekka Chivantha Vaanam", "96", "Pariyerum Perumal", "Thaanaa Serndha Koottam", "Iravukku Aayiram Kangal", "Ratsasan", "Mr Chandramouli",
+      "Kanaa", "Kalakalappu 2", "Diya", "Bigil", "Petta", "Viswasam", "NGK", "Asuran", "Kaithi", "Super Deluxe", "Comali", "Sarvam Thaala Mayam",
+      "Adanga Maru", "Airaa", "Game Over", "Dev", "Oh My Kadavule", "Thambi", "90ML", "Devarattam", "Gorilla", "Pyaar Prema Kaadhal", "Kanchana 3",
+      "Darbar", "Soorarai Pottru", "Naadodigal 2", "Vaanam Kottattum", "Ka Pae Ranasingam", "Kannum Kannum Kollaiyadithaal", "Penguin", "Sathru",
+      "Master", "Karnan", "Sulthan", "Doctor", "Annaatthe", "Jagame Thandhiram", "Maara", "Eeswaran", "Netrikann", "Mookuthi Amman", "Raatchasi",
+      "Vikram", "Beast", "Valimai", "Cobra", "Etharkkum Thunindhavan", "Vendhu Thanindhathu Kaadu", "Thiruchitrambalam", "Don", "Maaveeran",
+      "Kadaisi Vivasayi", "Mahaan", "Gargi", "Iravin Nizhal", "Naanum Single Thaan", "Jailer", "Leo", "Ponniyin Selvan", "Ponniyin Selvan 2",
+      "Thunivu", "Vaathi", "Mark Antony", "Japan", "Blue Star", "Maamannan", "Chithha", "Pathu Thala", "Por Thozhil", "Anbarivu",
+      "Maharaja", "Amaran", "Raayan", "Indian 2", "Meiyazhagan", "Garudan", "Vaazhai", "Lubber Pandhu", "Captain Miller", "Aranmanai 4",
+      "Demonte Colony 2", "Kalki 2898 AD", "Star", "Kadaisi Ivan", "Vidaamuyarchi", "Good Bad Ugly", "Coolie", "Thug Life", "Retro", "Dragon",
+      "Sivappu Manjal Pachai", "Kadaram Kondan", "Pizza", "Pa Paandi", "Pizza 2", "Yaanai", "Viswasam", "Kanavu Variyam", "Kutty Story", "Vaathi Coming",
+      "Enemy", "Pichaikkaran 2", "Rocky", "Custody", "Amigos", "Abhi Naanu", "Farhana", "Raid 2 Tamil", "Gangs of Madras", "Vaa Vaathiyaar",
+      "Bison Kaalamaadan", "Madharaasi", "Sir", "Tourist Family", "Paruthi Veeran", "Angadi Theru", "Subramaniapuram", "Naan Kadavul", "Aadukalam",
+      "Vazhakku Enn 18/9", "Soodhu Kavvum", "Jigarthanda", "Cuckoo", "Vaayai Moodi Pesavum", "Kaaka Muttai", "Joker", "Visaranai", "Iraivi",
+      "Metro", "Merku Thodarchi Malai", "Kuttrame Thandanai", "Aramm", "Peranbu", "Nasir", "Kolamaavu Kokila", "Andhaghaaram", "Sarpatta Parambarai",
+      "Koozhangal", "Mandela", "Pebbles", "Semma Botha Aagathey", "Charlie Chaplin 2", "Meesaya Murukku", "Aayirathil Iruvar", "Rangoon",
+      "Hero", "Sivaranjaniyum Innum Sila Pengalum", "Sillu Karuppatti", "Oh My Kadavule 2", "Nan Sirithal", "Mundasupatti", "Nimir",
+      "Gulaebaghavali", "Idam Porul Yaeval", "Sathuranga Vettai 2", "Sulthan Returns", "LKG", "Sangathamizhan", "Vantha Rajavathaan Varuven"
+    ].filter((v, i, a) => a.indexOf(v) === i);
 
-  const words = {
-    movie: movies,
-    person: ["Rajinikanth", "Kamal Haasan", "A.R. Rahman", "Vijay", "Ajith Kumar", "Dhanush", "Suriya", "Nayanthara", "Trisha", "Vetrimaaran",
-      "Mani Ratnam", "Lokesh Kanagaraj", "Simbu", "Sivakarthikeyan", "Yogi Babu", "Vijay Sethupathi", "Samantha", "Shah Rukh Khan", "Virat Kohli", "MS Dhoni",
-      "Sarath Kumar", "Vikram", "Karthi", "Arya", "Jyothika", "Nithya Menen", "Aishwarya Rai", "Vijay Deverakonda", "Prabhas", "Yash",
-      "Allu Arjun", "Vetri Maaran", "Bharathiraja", "Gautham Vasudev Menon", "Selvaraghavan", "Pa Ranjith", "Nelson Dilipkumar", "Karthik Subbaraj",
-      "Anirudh Ravichander", "Ilaiyaraaja", "Sid Sriram", "Shreya Ghoshal", "Sathyaraj", "Prakash Raj", "Radhika Sarathkumar", "Khushbu",
-      "Nassar", "Fahadh Faasil", "Mammootty", "Mohanlal", "Sudhir Babu", "Regina Cassandra", "Aditi Rao Hydari", "Keerthy Suresh",
-      "Sai Pallavi", "Anupama Parameswaran", "Rashmika Mandanna", "Pooja Hegde", "Sneha", "Simran", "Meena", "Napoleon",
-      "Vivek", "Santhanam", "Soori", "Karunakaran", "M.S. Bhaskar", "Vijay Sethupathi", "Bala", "Mysskin", "Vignesh Shivan",
-      "Sudha Kongara", "Halitha Shameem", "A.R. Murugadoss", "Siva", "H. Vinoth", "Venkat Prabhu", "Hari", "P.S. Mithran",
-      "Sachin Tendulkar", "Kapil Dev", "Virender Sehwag", "Rohit Sharma", "Ravindra Jadeja", "P.T. Usha", "Saina Nehwal", "P.V. Sindhu",
-      "Mahendra Singh Dhoni", "A.P.J. Abdul Kalam", "Mahatma Gandhi", "Subhas Chandra Bose", "Bharathiyar", "C.V. Raman",
-      "Cristiano Ronaldo", "Lionel Messi", "Albert Einstein", "Steve Jobs", "Elon Musk", "Barack Obama", "Narendra Modi", "Marilyn Monroe", "Michael Jackson"],
-    object: ["Umbrella", "Coconut", "Bicycle", "Guitar", "Camera", "Sandals", "Kite", "Ladder", "Thermos flask", "Broom",
-      "Fan", "Mirror", "Backpack", "Torch light", "Wrist watch", "Filter coffee tumbler", "Autorickshaw", "Slipper", "Bucket", "Key bunch",
-      "Spectacles", "Comb", "Toothbrush", "Pressure cooker", "Idli stand", "Dosa tawa", "Betel leaf box", "Oil lamp", "Incense stick", "Chappal",
-      "Newspaper", "Calendar", "Clothesline", "Sewing machine", "Wall clock", "Ceiling fan", "Mixer grinder", "Water bottle", "School bag", "Pencil box",
-      "Lunch box", "Cricket bat", "Football", "Badminton racket", "Carrom board", "Chess board", "Playing cards", "Table tennis paddle", "Skipping rope", "Slingshot",
-      "Matchbox", "Candle", "Flashlight", "Padlock", "Rope", "Hammer", "Screwdriver", "Nail", "Paintbrush", "Bucket of water",
-      "Rickshaw bell", "Bus ticket", "Train whistle", "Boarding pass", "Passport", "Wallet", "Handbag", "Sunglasses", "Cap", "Scarf",
-      "Necklace", "Bangles", "Anklets", "Bindi", "Veshti", "Saree", "Kurta", "Jeans", "Raincoat", "Flip flops",
-      "Guitar pick", "Drum set", "Violin", "Flute", "Harmonium", "Microphone", "Speaker", "Headphones", "Remote control", "Television",
-      "Refrigerator", "Washing machine", "Iron box", "Vacuum cleaner", "Water heater", "Air conditioner", "Fire extinguisher", "First aid box", "Stethoscope", "Thermometer"],
-    animal: ["Elephant", "Peacock", "Crow", "Squirrel", "Cow", "Tiger", "Dolphin", "Mongoose", "Owl", "Camel",
-      "Kangaroo", "Parrot", "Buffalo", "Snake", "Goat", "Bat", "Crab", "Ant", "Frog", "Deer",
-      "Lion", "Leopard", "Cheetah", "Giraffe", "Zebra", "Rhinoceros", "Hippopotamus", "Panda", "Koala", "Sloth",
-      "Otter", "Beaver", "Raccoon", "Fox", "Wolf", "Hyena", "Jackal", "Porcupine", "Hedgehog", "Armadillo",
-      "Bison", "Buffalo calf", "Ox", "Donkey", "Mule", "Horse", "Pony", "Sheep", "Pig", "Rooster",
-      "Hen", "Duck", "Goose", "Turkey", "Pigeon", "Sparrow", "Eagle", "Vulture", "Falcon", "Hawk",
-      "Kingfisher", "Woodpecker", "Flamingo", "Stork", "Heron", "Swan", "Penguin", "Seal", "Walrus", "Whale",
-      "Shark", "Octopus", "Jellyfish", "Starfish", "Seahorse", "Lobster", "Shrimp", "Snail", "Earthworm", "Butterfly",
-      "Dragonfly", "Grasshopper", "Cockroach", "Mosquito", "Housefly", "Spider", "Scorpion", "Centipede", "Lizard", "Chameleon",
-      "Iguana", "Crocodile", "Alligator", "Turtle", "Tortoise", "Bear", "Panther", "Wild boar", "Bull", "Bullock cart ox"]
-  };
+    const words = {
+      movie: movies,
+      person: ["Rajinikanth", "Kamal Haasan", "A.R. Rahman", "Vijay", "Ajith Kumar", "Dhanush", "Suriya", "Nayanthara", "Trisha", "Vetrimaaran",
+        "Mani Ratnam", "Lokesh Kanagaraj", "Simbu", "Sivakarthikeyan", "Yogi Babu", "Vijay Sethupathi", "Samantha", "Shah Rukh Khan", "Virat Kohli", "MS Dhoni",
+        "Sarath Kumar", "Vikram", "Karthi", "Arya", "Jyothika", "Nithya Menen", "Aishwarya Rai", "Vijay Deverakonda", "Prabhas", "Yash",
+        "Allu Arjun", "Vetri Maaran", "Bharathiraja", "Gautham Vasudev Menon", "Selvaraghavan", "Pa Ranjith", "Nelson Dilipkumar", "Karthik Subbaraj",
+        "Anirudh Ravichander", "Ilaiyaraaja", "Sid Sriram", "Shreya Ghoshal", "Sathyaraj", "Prakash Raj", "Radhika Sarathkumar", "Khushbu",
+        "Nassar", "Fahadh Faasil", "Mammootty", "Mohanlal", "Sudhir Babu", "Regina Cassandra", "Aditi Rao Hydari", "Keerthy Suresh",
+        "Sai Pallavi", "Anupama Parameswaran", "Rashmika Mandanna", "Pooja Hegde", "Sneha", "Simran", "Meena", "Napoleon",
+        "Vivek", "Santhanam", "Soori", "Karunakaran", "M.S. Bhaskar", "Vijay Sethupathi", "Bala", "Mysskin", "Vignesh Shivan",
+        "Sudha Kongara", "Halitha Shameem", "A.R. Murugadoss", "Siva", "H. Vinoth", "Venkat Prabhu", "Hari", "P.S. Mithran",
+        "Sachin Tendulkar", "Kapil Dev", "Virender Sehwag", "Rohit Sharma", "Ravindra Jadeja", "P.T. Usha", "Saina Nehwal", "P.V. Sindhu",
+        "Mahendra Singh Dhoni", "A.P.J. Abdul Kalam", "Mahatma Gandhi", "Subhas Chandra Bose", "Bharathiyar", "C.V. Raman",
+        "Cristiano Ronaldo", "Lionel Messi", "Albert Einstein", "Steve Jobs", "Elon Musk", "Barack Obama", "Narendra Modi", "Marilyn Monroe", "Michael Jackson"],
+      object: ["Umbrella", "Coconut", "Bicycle", "Guitar", "Camera", "Sandals", "Kite", "Ladder", "Thermos flask", "Broom",
+        "Fan", "Mirror", "Backpack", "Torch light", "Wrist watch", "Filter coffee tumbler", "Autorickshaw", "Slipper", "Bucket", "Key bunch",
+        "Spectacles", "Comb", "Toothbrush", "Pressure cooker", "Idli stand", "Dosa tawa", "Betel leaf box", "Oil lamp", "Incense stick", "Chappal",
+        "Newspaper", "Calendar", "Clothesline", "Sewing machine", "Wall clock", "Ceiling fan", "Mixer grinder", "Water bottle", "School bag", "Pencil box",
+        "Lunch box", "Cricket bat", "Football", "Badminton racket", "Carrom board", "Chess board", "Playing cards", "Table tennis paddle", "Skipping rope", "Slingshot",
+        "Matchbox", "Candle", "Flashlight", "Padlock", "Rope", "Hammer", "Screwdriver", "Nail", "Paintbrush", "Bucket of water",
+        "Rickshaw bell", "Bus ticket", "Train whistle", "Boarding pass", "Passport", "Wallet", "Handbag", "Sunglasses", "Cap", "Scarf",
+        "Necklace", "Bangles", "Anklets", "Bindi", "Veshti", "Saree", "Kurta", "Jeans", "Raincoat", "Flip flops",
+        "Guitar pick", "Drum set", "Violin", "Flute", "Harmonium", "Microphone", "Speaker", "Headphones", "Remote control", "Television",
+        "Refrigerator", "Washing machine", "Iron box", "Vacuum cleaner", "Water heater", "Air conditioner", "Fire extinguisher", "First aid box", "Stethoscope", "Thermometer"],
+      animal: ["Elephant", "Peacock", "Crow", "Squirrel", "Cow", "Tiger", "Dolphin", "Mongoose", "Owl", "Camel",
+        "Kangaroo", "Parrot", "Buffalo", "Snake", "Goat", "Bat", "Crab", "Ant", "Frog", "Deer",
+        "Lion", "Leopard", "Cheetah", "Giraffe", "Zebra", "Rhinoceros", "Hippopotamus", "Panda", "Koala", "Sloth",
+        "Otter", "Beaver", "Raccoon", "Fox", "Wolf", "Hyena", "Jackal", "Porcupine", "Hedgehog", "Armadillo",
+        "Bison", "Buffalo calf", "Ox", "Donkey", "Mule", "Horse", "Pony", "Sheep", "Pig", "Rooster",
+        "Hen", "Duck", "Goose", "Turkey", "Pigeon", "Sparrow", "Eagle", "Vulture", "Falcon", "Hawk",
+        "Kingfisher", "Woodpecker", "Flamingo", "Stork", "Heron", "Swan", "Penguin", "Seal", "Walrus", "Whale",
+        "Shark", "Octopus", "Jellyfish", "Starfish", "Seahorse", "Lobster", "Shrimp", "Snail", "Earthworm", "Butterfly",
+        "Dragonfly", "Grasshopper", "Cockroach", "Mosquito", "Housefly", "Spider", "Scorpion", "Centipede", "Lizard", "Chameleon",
+        "Iguana", "Crocodile", "Alligator", "Turtle", "Tortoise", "Bear", "Panther", "Wild boar", "Bull", "Bullock cart ox"]
+    };
 
+    const malayalam = ["Premam", "Charlie", "Ennu Ninte Moideen", "Pathemari", "Kammatipaadam", "Action Hero Biju", "Maheshinte Prathikaaram", "Kali", "Oppam", "Pulimurugan",
+      "Angamaly Diaries", "Thondimuthalum Driksakshiyum", "Take Off", "Godha", "Mayaanadhi", "Sudani from Nigeria", "Varathan", "Ee.Ma.Yau", "Koode", "Njan Prakashan",
+      "Kumbalangi Nights", "Uyare", "Virus", "Ittymaani", "Lucifer", "Jallikattu", "Driving License", "Android Kunjappan", "Ayyappanum Koshiyum", "Anjaam Pathira",
+      "Helen", "Trance", "Sufiyum Sujathayum", "Kappela", "Drishyam 2", "Joji", "Minnal Murali", "Nayattu", "The Great Indian Kitchen", "Malik",
+      "Home", "Kurup", "Aarkkariyam", "Bheeshma Parvam", "Puzhu", "Hridayam", "Jana Gana Mana", "Kaduva", "Thallumaala", "Saudi Vellakka",
+      "Romancham", "2018", "Neymar", "Iratta", "Kaathal The Core", "Kannur Squad", "Nanpakal Nerathu Mayakkam", "Falimy", "Manjummel Boys", "Premalu",
+      "Bramayugam", "Aavesham", "Aadujeevitham", "Turbo", "Guruvayoor Ambalanadayil", "Ullozhukku", "Kishkindha Kaandam", "ARM", "Marco", "Rekhachithram",
+      "Officer on Duty", "Ponman", "L2 Empuraan", "Thudarum", "Hridayapoorvam", "Lokah Chapter 1 Chandra", "Malaikottai Vaaliban", "Vaazha", "Pani", "Bougainvillea",
+      "Sookshmadarshini", "Varshangalkku Shesham", "Ajayante Randam Moshanam", "Anweshippin Kandethum", "Abraham Ozler", "Nadikar", "Jaya Jaya Jaya Jaya Hey", "Palthu Janwar", "Mandakini", "Oru Adaar Love",
+      "Parava", "Ezra", "Villain", "Kayamkulam Kochunni", "Vikruthi", "Unda", "Pathinettam Padi", "Ishq", "Varane Avashyamund", "Kuruthi",
+      "Meppadiyan", "Brother's Day", "Vellam", "Jan.E.Man", "Mahaveeryar", "Nna Thaan Case Kodu", "Paappan", "Pada", "Kooman", "Thankam",
+      "Neelavelicham", "RDX", "Kaapa", "Sulaikha Manzil", "Ayalvashi", "Golam", "Jacobinte Swargarajyam", "Vettah", "Oru Vadakkan Selfie", "Sakhavu",
+      "Adventures of Omanakuttan", "Carbon", "Aadu 2", "Njandukalude Naattil Oridavela", "Sherlock Toms", "Kuttanpillayude Sivarathri", "Pokkiri Simon", "Ente Mezhuthiri Athazhangal", "Sara's", "Marakkar",
+      "Bro Daddy", "Nizhal", "Anugraheethan Antony", "Vaashi", "Jo and Jo", "Ela Veezha Poonchira", "Ullasam", "Veekam", "Gaganachari", "Little Hearts"
+    ].filter((v, i, a) => a.indexOf(v) === i);
 
-// ---------- nav ----------
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
-  t.classList.add('active');
-  document.getElementById('screen-'+t.dataset.screen).classList.add('active');
-}));
+    const english = ["Home Alone", "Pretty Woman", "Ghost", "Goodfellas", "Dances with Wolves", "Terminator 2", "The Silence of the Lambs", "Beauty and the Beast", "Aladdin", "Jurassic Park",
+      "Schindler's List", "Forrest Gump", "The Lion King", "Pulp Fiction", "The Shawshank Redemption", "Speed", "The Mask", "Toy Story", "Braveheart", "Se7en",
+      "Heat", "Casino", "The Usual Suspects", "Independence Day", "Twister", "Titanic", "Men in Black", "Face/Off", "The Fifth Element", "Good Will Hunting",
+      "L.A. Confidential", "The Matrix", "Fight Club", "American Beauty", "The Sixth Sense", "Gladiator", "Toy Story 2", "Saving Private Ryan", "The Truman Show", "Mrs Doubtfire",
+      "Groundhog Day", "Ace Ventura", "Dumb and Dumber", "Liar Liar", "Apollo 13", "Mission Impossible", "Rush Hour", "Bad Boys", "Cast Away", "A Beautiful Mind",
+      "Catch Me If You Can", "Bruce Almighty", "Mean Girls", "The Notebook", "Memento", "Shrek", "Harry Potter and the Sorcerer's Stone", "The Fellowship of the Ring", "Ocean's Eleven", "Spider-Man",
+      "Finding Nemo", "Kill Bill", "Pirates of the Caribbean", "The Incredibles", "The Departed", "The Prestige", "Casino Royale", "The Dark Knight", "WALL-E", "Slumdog Millionaire",
+      "Avatar", "Inception", "The Social Network", "Toy Story 3", "Black Swan", "The King's Speech", "The Avengers", "Django Unchained", "Life of Pi", "Gravity",
+      "Interstellar", "Whiplash", "Mad Max: Fury Road", "The Martian", "La La Land", "Get Out", "Black Panther", "Parasite", "Joker", "1917",
+      "Tenet", "Dune", "Top Gun: Maverick", "Oppenheimer", "Barbie", "Everything Everywhere All at Once", "Avatar: The Way of Water", "Spider-Man: No Way Home", "Avengers: Endgame", "Avengers: Infinity War",
+      "Frozen", "Up", "Coco", "Inside Out", "Zootopia", "Ratatouille", "Monsters, Inc.", "Shrek 2", "Madagascar", "Kung Fu Panda",
+      "How to Train Your Dragon", "Despicable Me", "Minions", "Superbad", "The Hangover", "Bridesmaids", "Iron Man", "Thor", "Captain America", "Guardians of the Galaxy",
+      "Deadpool", "Logan", "Wonder Woman", "Aquaman", "Fast Five", "Furious 7", "John Wick", "Skyfall", "No Time to Die", "Spectre",
+      "Godzilla", "King Kong", "Pacific Rim", "Edge of Tomorrow", "Now You See Me", "The Conjuring", "Insidious", "It", "A Quiet Place", "Hereditary",
+      "Us", "Knives Out", "Ford v Ferrari", "Bohemian Rhapsody", "Rocketman", "The Wolf of Wall Street", "Gone Girl", "Shutter Island", "Zodiac", "No Country for Old Men",
+      "There Will Be Blood", "The Revenant", "Mission: Impossible - Fallout", "Deadpool & Wolverine", "Inside Out 2", "Wicked", "Gladiator II", "The Batman", "Doctor Strange", "Shang-Chi"
+    ].filter((v, i, a) => a.indexOf(v) === i);
 
-// ---------- Heads Up ----------
-let huDeck=[], huIdx=0, huScore=0, huLog=[], huTimer=null, huSecondsLeft=60, huLastTilt=0;
-function huShuffle(){ huDeck=[...movies].sort(()=>Math.random()-0.5); huIdx=0; }
-function huShowWord(){ document.getElementById('hu-word').textContent = huDeck[huIdx % huDeck.length]; }
-function huEndRound(){
-  clearInterval(huTimer);
-  document.getElementById('hu-play').classList.remove('on');
-  document.getElementById('hu-end').classList.add('on');
-  document.getElementById('hu-endscore').textContent = huScore + ' correct';
-  document.getElementById('hu-endlist').innerHTML = huLog.map(l=>(l.ok?'✓ ':'✕ ')+l.w).join('<br>');
-  window.removeEventListener('deviceorientation', huTiltHandler);
-}
-function huNext(ok){
-  huLog.push({w:huDeck[huIdx % huDeck.length], ok});
-  if(ok) huScore++;
-  huIdx++;
-  document.getElementById('hu-score').textContent = huScore+' correct';
-  huShowWord();
-}
-function huTiltHandler(e){
-  const beta = e.beta; // front-back tilt
-  const now = Date.now();
-  if(now - huLastTilt < 900 || beta==null) return;
-  if(beta < 25){ huLastTilt=now; huNext(true); }
-  else if(beta > 155 || beta < -80){ huLastTilt=now; huNext(false); }
-}
-document.getElementById('hu-start').addEventListener('click', ()=>{
-  huScore=0; huLog=[]; huShuffle();
-  huSecondsLeft = parseInt(document.getElementById('hu-time').value,10);
-  document.getElementById('hu-score').textContent='0 correct';
-  document.getElementById('hu-timer').textContent=huSecondsLeft;
-  document.getElementById('hu-play').classList.add('on');
-  huShowWord();
-  if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
-    DeviceOrientationEvent.requestPermission().then(r=>{ if(r==='granted') window.addEventListener('deviceorientation', huTiltHandler); }).catch(()=>{});
-  } else {
-    window.addEventListener('deviceorientation', huTiltHandler);
-  }
-  huTimer = setInterval(()=>{
-    huSecondsLeft--; document.getElementById('hu-timer').textContent=huSecondsLeft;
-    if(huSecondsLeft<=0) huEndRound();
-  },1000);
-});
-document.getElementById('hu-pass').addEventListener('click',()=>huNext(false));
-document.getElementById('hu-correct').addEventListener('click',()=>huNext(true));
-document.getElementById('hu-again').addEventListener('click',()=>{ document.getElementById('hu-end').classList.remove('on'); });
+    const bible = ["Adam", "Eve", "Cain", "Abel", "Seth", "Enoch", "Noah", "Shem", "Ham", "Japheth",
+      "Abraham", "Sarah", "Hagar", "Ishmael", "Isaac", "Rebekah", "Esau", "Jacob", "Leah", "Rachel",
+      "Reuben", "Simeon", "Levi", "Judah", "Dan", "Naphtali", "Gad", "Asher", "Issachar", "Zebulun",
+      "Joseph", "Benjamin", "Lot", "Melchizedek", "Moses", "Aaron", "Miriam", "Joshua", "Caleb", "Rahab",
+      "Deborah", "Gideon", "Samson", "Delilah", "Ruth", "Naomi", "Boaz", "Eli", "Samuel", "Saul",
+      "Jonathan", "David", "Goliath", "Bathsheba", "Solomon", "Absalom", "Elijah", "Elisha", "Jezebel", "Ahab",
+      "Hezekiah", "Josiah", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Shadrach", "Meshach", "Abednego", "Esther",
+      "Mordecai", "Nehemiah", "Ezra", "Job", "Jonah", "Hosea", "Joel", "Amos", "Micah", "Nahum",
+      "Malachi", "Hannah", "Michal", "Abigail", "Uriah", "Nathan", "Zechariah", "Elizabeth", "John the Baptist", "Mary",
+      "Joseph of Nazareth", "Jesus", "Peter", "Andrew", "James", "John", "Philip", "Bartholomew", "Thomas", "Matthew",
+      "Thaddaeus", "Simon the Zealot", "Judas Iscariot", "Matthias", "Paul", "Barnabas", "Timothy", "Titus", "Silas", "Luke",
+      "Mark", "Stephen", "Lazarus", "Martha", "Mary Magdalene", "Nicodemus", "Zacchaeus", "Pontius Pilate", "Herod", "Caiaphas",
+      "Barabbas", "Lydia", "Priscilla", "Aquila", "Apollos", "Philemon", "Cornelius", "Ananias", "Sapphira", "Tabitha",
+      "Eutychus", "Gabriel", "Michael", "Jethro", "Zipporah", "Balaam", "Korah", "Nimrod", "Methuselah", "Tamar",
+      "Dinah", "Manasseh", "Ephraim", "Obed", "Jesse", "Joab", "Abner", "Rehoboam", "Jeroboam", "Nebuchadnezzar",
+      "Belshazzar", "Darius", "Cyrus", "Haman", "Vashti", "Jairus", "Bartimaeus", "Anna", "Salome", "Herodias", "Onesimus"
+    ].filter((v, i, a) => a.indexOf(v) === i);
 
-// ---------- 20 Questions ----------
-let tqCat='movie', tqPool=[], tqCurrent='';
-function tqRefillPool(){ tqPool = [...words[tqCat]].sort(()=>Math.random()-0.5); }
-tqRefillPool();
-document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
-  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
-  c.classList.add('on'); tqCat=c.dataset.cat; tqRefillPool();
-  document.getElementById('tq-word').style.display='none';
-  document.getElementById('tq-hint').style.display='block';
-}));
-document.getElementById('tq-new').addEventListener('click',()=>{
-  if(tqPool.length===0) tqRefillPool();
-  tqCurrent = tqPool.pop();
-  document.getElementById('tq-word').textContent = tqCurrent;
-  document.getElementById('tq-word').style.display='block';
-  document.getElementById('tq-hint').style.display='none';
-});
-document.getElementById('tq-hide').addEventListener('click',()=>{
-  document.getElementById('tq-word').style.display='none';
-  document.getElementById('tq-hint').style.display='block';
-  document.getElementById('tq-hint').textContent='Word hidden — pass the phone.';
-});
-</script>
+    const decks = { tamil: movies, malayalam, english, bible };
+
+    // ---------- nav ----------
+    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById('screen-' + t.dataset.screen).classList.add('active');
+    }));
+
+    // ---------- Heads Up ----------
+    let huDeck = [], huIdx = 0, huScore = 0, huLog = [], huTimer = null, huSecondsLeft = 60, huLastTilt = 0;
+    function huShuffle() { huDeck = [...decks[document.getElementById('hu-deck').value]].sort(() => Math.random() - 0.5); huIdx = 0; }
+    function huShowWord() { document.getElementById('hu-word').textContent = huDeck[huIdx % huDeck.length]; }
+    function huEndRound() {
+      clearInterval(huTimer);
+      document.getElementById('hu-play').classList.remove('on');
+      document.getElementById('hu-end').classList.add('on');
+      document.getElementById('hu-endscore').textContent = huScore + ' correct';
+      document.getElementById('hu-endlist').innerHTML = huLog.map(l => (l.ok ? '✓ ' : '✕ ') + l.w).join('<br>');
+      window.removeEventListener('deviceorientation', huTiltHandler);
+    }
+    function huNext(ok) {
+      huLog.push({ w: huDeck[huIdx % huDeck.length], ok });
+      if (ok) huScore++;
+      huIdx++;
+      document.getElementById('hu-score').textContent = huScore + ' correct';
+      huShowWord();
+    }
+    function huTiltHandler(e) {
+      const beta = e.beta; // front-back tilt
+      const now = Date.now();
+      if (now - huLastTilt < 900 || beta == null) return;
+      if (beta < 25) { huLastTilt = now; huNext(true); }
+      else if (beta > 155 || beta < -80) { huLastTilt = now; huNext(false); }
+    }
+    document.getElementById('hu-start').addEventListener('click', () => {
+      huScore = 0; huLog = []; huShuffle();
+      huSecondsLeft = parseInt(document.getElementById('hu-time').value, 10);
+      document.getElementById('hu-score').textContent = '0 correct';
+      document.getElementById('hu-timer').textContent = huSecondsLeft;
+      document.getElementById('hu-play').classList.add('on');
+      huShowWord();
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission().then(r => { if (r === 'granted') window.addEventListener('deviceorientation', huTiltHandler); }).catch(() => { });
+      } else {
+        window.addEventListener('deviceorientation', huTiltHandler);
+      }
+      huTimer = setInterval(() => {
+        huSecondsLeft--; document.getElementById('hu-timer').textContent = huSecondsLeft;
+        if (huSecondsLeft <= 0) huEndRound();
+      }, 1000);
+    });
+    document.getElementById('hu-pass').addEventListener('click', () => huNext(false));
+    document.getElementById('hu-correct').addEventListener('click', () => huNext(true));
+    document.getElementById('hu-again').addEventListener('click', () => { document.getElementById('hu-end').classList.remove('on'); });
+
+    // ---------- 20 Questions ----------
+    let tqCat = 'movie', tqPool = [], tqCurrent = '';
+    function tqRefillPool() { tqPool = [...words[tqCat]].sort(() => Math.random() - 0.5); }
+    tqRefillPool();
+    document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+      c.classList.add('on'); tqCat = c.dataset.cat; tqRefillPool();
+      document.getElementById('tq-word').style.display = 'none';
+      document.getElementById('tq-hint').style.display = 'block';
+    }));
+    document.getElementById('tq-new').addEventListener('click', () => {
+      if (tqPool.length === 0) tqRefillPool();
+      tqCurrent = tqPool.pop();
+      document.getElementById('tq-word').textContent = tqCurrent;
+      document.getElementById('tq-word').style.display = 'block';
+      document.getElementById('tq-hint').style.display = 'none';
+    });
+    document.getElementById('tq-hide').addEventListener('click', () => {
+      document.getElementById('tq-word').style.display = 'none';
+      document.getElementById('tq-hint').style.display = 'block';
+      document.getElementById('tq-hint').textContent = 'Word hidden — pass the phone.';
+    });
+  </script>
 </body>
+
 </html>
