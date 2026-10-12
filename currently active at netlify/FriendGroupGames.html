@@ -357,6 +357,266 @@
       color: var(--mint);
     }
 
+    /* Board games */
+    #bg-sub {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .bgsub-screen {
+      display: none;
+    }
+
+    .bgsub-screen.on {
+      display: block;
+    }
+
+    .soon {
+      opacity: .75;
+    }
+
+    .plyr-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin: 8px 0;
+    }
+
+    .plyr-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .plyr-row input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: .95rem;
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .stepper button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--bg2);
+      color: var(--ink);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .stepper span {
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: 1.3rem;
+      min-width: 26px;
+      text-align: center;
+    }
+
+    #sl-boardwrap {
+      position: relative;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      padding: 8px;
+      background: #6b3f1d;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    }
+
+    #sl-board {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(10, 1fr);
+      gap: 1px;
+      aspect-ratio: 1;
+      background: #4a2c14;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    #sl-overlay {
+      position: absolute;
+      inset: 8px;
+      z-index: 3;
+      pointer-events: none;
+      border-radius: 8px;
+    }
+
+    .sl-cell {
+      position: relative;
+      font-size: .6rem;
+      font-weight: 700;
+      padding: 3px;
+      color: #6b3f1d;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sl-cell.cell-a {
+      background: #ffb562;
+    }
+
+    .sl-cell.cell-b {
+      background: #ffe8c2;
+    }
+
+    .sl-tokens {
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      right: 2px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1px;
+      z-index: 4;
+    }
+
+    .sl-token {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 0, 0, .35);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+    }
+
+    #sl-turn {
+      text-align: center;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    #sl-die {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 10px;
+      border-radius: 16px;
+      background: #f4f1ea;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .8);
+      padding: 9px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 3px;
+      transition: transform .08s;
+    }
+
+    #sl-die.rolling {
+      animation: sl-shake .35s linear infinite;
+    }
+
+    @keyframes sl-shake {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+
+      25% {
+        transform: rotate(-12deg) scale(1.05);
+      }
+
+      50% {
+        transform: rotate(0deg) scale(.96);
+      }
+
+      75% {
+        transform: rotate(12deg) scale(1.05);
+      }
+
+      100% {
+        transform: rotate(0deg) scale(1);
+      }
+    }
+
+    .die-pip {
+      border-radius: 50%;
+      background: #2b2b2b;
+      align-self: center;
+      justify-self: center;
+      width: 65%;
+      height: 65%;
+    }
+
+    .die-pip.off {
+      background: transparent;
+    }
+
+    #sl-msg {
+      text-align: center;
+      min-height: 20px;
+      opacity: .8;
+      font-size: .88rem;
+      margin-bottom: 8px;
+    }
+
+    .sl-plist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .sl-pchip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      font-size: .8rem;
+    }
+
+    .sl-pchip.turn {
+      border-color: var(--marigold);
+    }
+
+    .sl-pchip.done {
+      opacity: .5;
+    }
+
+    #sl-winbanner {
+      display: none;
+      text-align: center;
+      padding: 16px;
+      background: rgba(244, 165, 30, .15);
+      border: 1px solid var(--marigold);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+    }
+
+    #sl-winbanner.on {
+      display: block;
+    }
+
+    button.undo {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
     footer {
       text-align: center;
       font-size: .78rem;
@@ -376,7 +636,7 @@
   <div class="wrap">
     <header>
       <h1>Kondattam 🎉</h1>
-      <span>friend party games</span>
+      <span>6-friend party games</span>
     </header>
 
     <div class="tabs">
@@ -384,6 +644,7 @@
       <div class="tab" data-screen="headsup">Heads Up</div>
       <div class="tab" data-screen="twentyq">20 Questions</div>
       <div class="tab" data-screen="more">More Ideas</div>
+      <div class="tab" data-screen="board">Board Games</div>
     </div>
 
     <div class="screen active" id="screen-home">
@@ -465,12 +726,74 @@
         <div class="card">
           <h3>Most Likely To</h3>
           <p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full
-            People circle, no setup needed.</p>
+            6-person circle, no setup needed.</p>
         </div>
         <div class="card">
           <h3>Category Blurt</h3>
           <p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating — last
             one standing wins the round.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOARD GAMES -->
+    <div class="screen" id="screen-board">
+      <div id="bg-sub">
+        <div class="chip on" data-bg="sl">Snakes &amp; Ladders</div>
+        <div class="chip" data-bg="ludo">Ludo</div>
+        <div class="chip" data-bg="biz">Business</div>
+        <div class="chip" data-bg="rrmtp">Raja Rani Manthri Thirudan</div>
+      </div>
+
+      <!-- Snakes & Ladders -->
+      <div class="bgsub-screen on" id="bgsub-sl">
+        <div class="card" id="sl-setup">
+          <h2>Snakes &amp; Ladders</h2>
+          <p class="lead">Up to 6 players, one shared phone. You must roll a <b>1, 5 or 6</b> to enter the board. Roll a
+            6 and you go again. Land exactly on 100 to win.</p>
+          <label style="display:block;margin:12px 0 4px;font-weight:600;font-size:.9rem;opacity:.85;">Players</label>
+          <div class="stepper">
+            <button id="sl-pminus">−</button><span id="sl-pcount">4</span><button id="sl-pplus">+</button>
+          </div>
+          <div id="sl-nameinputs"></div>
+          <button class="big" id="sl-start">Start game</button>
+        </div>
+
+        <div class="card" id="sl-play" style="display:none;">
+          <div id="sl-winbanner"></div>
+          <div id="sl-turn">—</div>
+          <div id="sl-boardwrap">
+            <div id="sl-board"></div>
+            <svg id="sl-overlay" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+          </div>
+          <div id="sl-die"></div>
+          <div id="sl-msg"></div>
+          <div class="rowbtns">
+            <button class="big" id="sl-roll">Roll dice</button>
+            <button class="big undo" id="sl-undo" disabled>↶ Undo</button>
+          </div>
+          <div class="sl-plist" id="sl-plist"></div>
+          <button class="big ghost" id="sl-restart" style="margin-top:4px;">New game</button>
+        </div>
+      </div>
+
+      <!-- Placeholders -->
+      <div class="bgsub-screen" id="bgsub-ludo">
+        <div class="card soon">
+          <h3>Ludo</h3>
+          <p class="lead">Coming next — up to 4 players, 1/5/6 to leave base, classic cross board.</p>
+        </div>
+      </div>
+      <div class="bgsub-screen" id="bgsub-biz">
+        <div class="card soon">
+          <h3>Business (BankRoll-style)</h3>
+          <p class="lead">Coming next — up to 6 players, property sets, buying/upgrading, rent.</p>
+        </div>
+      </div>
+      <div class="bgsub-screen" id="bgsub-rrmtp">
+        <div class="card soon">
+          <h3>Raja Rani Manthri Thirudan Police</h3>
+          <p class="lead">Coming next — 4 to 6 players, secret pass-and-hide role cards, scoring built in.</p>
         </div>
       </div>
     </div>
@@ -663,15 +986,20 @@
       document.getElementById('hu-score').textContent = huScore + ' correct';
       huShowWord();
     }
+    let huArmed = false, huGotTilt = false;
     function huTiltHandler(e) {
-      const beta = e.beta; // front-back tilt
-      const now = Date.now();
-      if (now - huLastTilt < 900 || beta == null) return;
-      if (beta < 25) { huLastTilt = now; huNext(true); }
-      else if (beta > 155 || beta < -80) { huLastTilt = now; huNext(false); }
+      const b = e.beta; if (b == null) return;
+      huGotTilt = true;
+      const down = b > 125 || b < -125;   // screen facing floor
+      const up = b < 55 && b > -55;       // screen facing ceiling
+      if (!huArmed) { if (!down && !up) huArmed = true; return; } // must come back to upright first
+      if (down) { huArmed = false; huNext(true); }
+      else if (up) { huArmed = false; huNext(false); }
     }
     document.getElementById('hu-start').addEventListener('click', () => {
-      huScore = 0; huLog = []; huShuffle();
+      huScore = 0; huLog = []; huShuffle(); huArmed = false; huGotTilt = false;
+      document.getElementById('hu-tiltnote').textContent = 'Tilt phone down = correct · up = pass';
+      setTimeout(() => { if (!huGotTilt) document.getElementById('hu-tiltnote').textContent = 'Tilt not available here — use the buttons below'; }, 2500);
       huSecondsLeft = parseInt(document.getElementById('hu-time').value, 10);
       document.getElementById('hu-score').textContent = '0 correct';
       document.getElementById('hu-timer').textContent = huSecondsLeft;
@@ -712,6 +1040,202 @@
       document.getElementById('tq-word').style.display = 'none';
       document.getElementById('tq-hint').style.display = 'block';
       document.getElementById('tq-hint').textContent = 'Word hidden — pass the phone.';
+    });
+
+    // ---------- Board Games sub-nav ----------
+    document.querySelectorAll('#bg-sub .chip').forEach(c => c.addEventListener('click', () => {
+      document.querySelectorAll('#bg-sub .chip').forEach(x => x.classList.remove('on'));
+      c.classList.add('on');
+      document.querySelectorAll('.bgsub-screen').forEach(x => x.classList.remove('on'));
+      document.getElementById('bgsub-' + c.dataset.bg).classList.add('on');
+    }));
+
+    // ---------- Snakes & Ladders ----------
+    const slLadders = { 2: 38, 7: 14, 8: 31, 15: 26, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 78: 98, 87: 94 };
+    const slSnakes = { 16: 6, 46: 25, 49: 11, 62: 19, 64: 60, 74: 53, 89: 68, 92: 88, 95: 75, 99: 80 };
+    const slColors = ['#f4a51e', '#3ec9a7', '#ef5b6a', '#6c9bff', '#c26cff', '#ffd166'];
+    let slPlayers = [], slTurn = 0, slHistory = [], slOver = false;
+
+    function slCellPos(n) { // n 1..100 -> {row,col} 0-indexed from top
+      const idx = n - 1, rowFromBottom = Math.floor(idx / 10), posInRow = idx % 10;
+      const col = rowFromBottom % 2 === 0 ? posInRow : 9 - posInRow;
+      const row = 9 - rowFromBottom;
+      return { row, col };
+    }
+    const slLadderColors = ['#3ec9a7', '#6cc24a', '#2fb8c6', '#6c9bff'];
+    const slSnakeColors = ['#ef5b6a', '#c26cff', '#ff8c42', '#ff5ec4', '#8b5cf6', '#ef4444', '#e85d9c', '#a855f7', '#f97316', '#dc2626'];
+    function slCenter(n) { const { row, col } = slCellPos(n); return { x: col * 10 + 5, y: row * 10 + 5 }; }
+    function slBuildBoard() {
+      const board = document.getElementById('sl-board'); board.innerHTML = '';
+      for (let n = 1; n <= 100; n++) {
+        const { row, col } = slCellPos(n);
+        const d = document.createElement('div');
+        d.className = 'sl-cell ' + ((row + col) % 2 === 0 ? 'cell-a' : 'cell-b');
+        d.style.gridRow = (row + 1); d.style.gridColumn = (col + 1);
+        d.id = 'sl-c' + n;
+        d.innerHTML = '<span>' + n + '</span><div class="sl-tokens"></div>';
+        board.appendChild(d);
+      }
+      let svg = '';
+      Object.keys(slLadders).forEach((k, i) => {
+        const a = slCenter(+k), b = slCenter(slLadders[k]), col = slLadderColors[i % slLadderColors.length];
+        const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len, off = 1.6;
+        const r1 = { x1: a.x + nx * off, y1: a.y + ny * off, x2: b.x + nx * off, y2: b.y + ny * off };
+        const r2 = { x1: a.x - nx * off, y1: a.y - ny * off, x2: b.x - nx * off, y2: b.y - ny * off };
+        svg += '<line x1="' + r1.x1 + '" y1="' + r1.y1 + '" x2="' + r1.x2 + '" y2="' + r1.y2 + '" stroke="' + col + '" stroke-width="1.1"/>';
+        svg += '<line x1="' + r2.x1 + '" y1="' + r2.y1 + '" x2="' + r2.x2 + '" y2="' + r2.y2 + '" stroke="' + col + '" stroke-width="1.1"/>';
+        for (let t = 0.12; t < 1; t += 0.16) {
+          const rx1 = r1.x1 + (r1.x2 - r1.x1) * t, ry1 = r1.y1 + (r1.y2 - r1.y1) * t;
+          const rx2 = r2.x1 + (r2.x2 - r2.x1) * t, ry2 = r2.y1 + (r2.y2 - r2.y1) * t;
+          svg += '<line x1="' + rx1 + '" y1="' + ry1 + '" x2="' + rx2 + '" y2="' + ry2 + '" stroke="' + col + '" stroke-width="1"/>';
+        }
+      });
+      Object.keys(slSnakes).forEach((k, i) => {
+        const a = slCenter(+k), b = slCenter(slSnakes[k]), col = slSnakeColors[i % slSnakeColors.length];
+        const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+        const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1, nx = -dy / len, ny = dx / len;
+        const c1x = mx + nx * 10, c1y = my + ny * 10;
+        svg += '<path d="M' + a.x + ' ' + a.y + ' Q ' + c1x + ' ' + c1y + ' ' + b.x + ' ' + b.y + '" stroke="' + col + '" stroke-width="2.4" fill="none" stroke-linecap="round"/>';
+        svg += '<circle cx="' + a.x + '" cy="' + a.y + '" r="2.1" fill="' + col + '"/>';
+        svg += '<circle cx="' + (a.x - 0.7) + '" cy="' + (a.y - 0.7) + '" r="0.4" fill="#fff"/>';
+        svg += '<circle cx="' + (a.x + 0.7) + '" cy="' + (a.y - 0.7) + '" r="0.4" fill="#fff"/>';
+      });
+      document.getElementById('sl-overlay').innerHTML = svg;
+    }
+    const slPipMap = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+    function slSetDieFace(el, n) {
+      const active = slPipMap[n] || [];
+      let h = '';
+      for (let i = 0; i < 9; i++) h += '<div class="die-pip' + (active.includes(i) ? '' : ' off') + '"></div>';
+      el.innerHTML = h;
+    }
+    slSetDieFace(document.getElementById('sl-die'), 1);
+    function slRenderTokens() {
+      document.querySelectorAll('.sl-tokens').forEach(t => t.innerHTML = '');
+      slPlayers.forEach((p, i) => {
+        if (p.pos < 1) return;
+        const cell = document.getElementById('sl-c' + p.pos);
+        if (!cell) return;
+        const dot = document.createElement('div'); dot.className = 'sl-token'; dot.style.background = p.color;
+        cell.querySelector('.sl-tokens').appendChild(dot);
+      });
+    }
+    function slRenderList() {
+      const list = document.getElementById('sl-plist'); list.innerHTML = '';
+      slPlayers.forEach((p, i) => {
+        const c = document.createElement('div');
+        c.className = 'sl-pchip' + (i === slTurn && !slOver ? ' turn' : '') + (p.finished ? ' done' : '');
+        c.innerHTML = '<span class="plyr-dot" style="background:' + p.color + '"></span>' + p.name + ' — ' + (p.pos < 1 ? 'Home' : 'Sq ' + p.pos) + (p.finished ? ' 🏆' : '');
+        list.appendChild(c);
+      });
+    }
+    function slRenderTurn() {
+      document.getElementById('sl-turn').textContent = slOver ? 'Game over' : (slPlayers[slTurn].name + "'s turn");
+    }
+    function slSnapshot() {
+      slHistory.push(JSON.stringify({ players: slPlayers, turn: slTurn, over: slOver }));
+      document.getElementById('sl-undo').disabled = false;
+    }
+    function slNextTurn() {
+      let tries = 0;
+      do { slTurn = (slTurn + 1) % slPlayers.length; tries++; } while (slPlayers[slTurn].finished && tries <= slPlayers.length);
+    }
+    function slRoll() {
+      if (slOver) return;
+      slSnapshot();
+      const final = 1 + Math.floor(Math.random() * 6);
+      const dieEl = document.getElementById('sl-die');
+      const rollBtn = document.getElementById('sl-roll'), undoBtn = document.getElementById('sl-undo');
+      rollBtn.disabled = true; undoBtn.disabled = true;
+      dieEl.classList.add('rolling');
+      let ticks = 0;
+      const iv = setInterval(() => {
+        slSetDieFace(dieEl, 1 + Math.floor(Math.random() * 6));
+        ticks++;
+        if (ticks >= 9) {
+          clearInterval(iv);
+          slSetDieFace(dieEl, final);
+          dieEl.classList.remove('rolling');
+          rollBtn.disabled = false;
+          undoBtn.disabled = slHistory.length === 0;
+          slApplyRoll(final);
+        }
+      }, 70);
+    }
+    function slApplyRoll(die) {
+      const p = slPlayers[slTurn];
+      let msg = '';
+      if (p.pos < 1) {
+        if (die === 1 || die === 5 || die === 6) { p.pos = 1; msg = p.name + ' enters the board!'; }
+        else { msg = p.name + ' needs a 1, 5 or 6 to enter — turn passed.'; }
+      } else {
+        const target = p.pos + die;
+        if (target > 100) { msg = 'Need exact roll to reach 100 — no move.'; }
+        else {
+          p.pos = target;
+          if (slLadders[p.pos]) { const from = p.pos; p.pos = slLadders[p.pos]; msg = '🪜 Ladder! ' + from + ' → ' + p.pos; }
+          else if (slSnakes[p.pos]) { const from = p.pos; p.pos = slSnakes[p.pos]; msg = '🐍 Snake! ' + from + ' → ' + p.pos; }
+          else msg = p.name + ' moved to ' + p.pos + '.';
+          if (p.pos === 100) { p.finished = true; slOver = true; msg = p.name + ' wins! 🏆'; }
+        }
+      }
+      document.getElementById('sl-msg').textContent = msg;
+      if (slOver) {
+        const b = document.getElementById('sl-winbanner'); b.textContent = '🏆 ' + p.name + ' wins the game!'; b.classList.add('on');
+      } else if (die !== 6 || p.pos < 1) {
+        slNextTurn();
+      } // else: rolled 6 and moved -> same player goes again
+      slRenderTokens(); slRenderList(); slRenderTurn();
+    }
+    function slUndo() {
+      if (slHistory.length === 0) return;
+      const snap = JSON.parse(slHistory.pop());
+      slPlayers = snap.players; slTurn = snap.turn; slOver = snap.over;
+      document.getElementById('sl-winbanner').classList.toggle('on', slOver);
+      if (slOver) document.getElementById('sl-winbanner').textContent = '🏆 ' + slPlayers.find(p => p.finished).name + ' wins the game!';
+      document.getElementById('sl-msg').textContent = 'Undone.';
+      document.getElementById('sl-undo').disabled = slHistory.length === 0;
+      slRenderTokens(); slRenderList(); slRenderTurn();
+    }
+    function slRenderNameInputs() {
+      const n = parseInt(document.getElementById('sl-pcount').textContent, 10);
+      const wrap = document.getElementById('sl-nameinputs'); wrap.innerHTML = '';
+      for (let i = 0; i < n; i++) {
+        const row = document.createElement('div'); row.className = 'plyr-row';
+        row.innerHTML = '<span class="plyr-dot" style="background:' + slColors[i] + '"></span><input id="sl-name' + i + '" placeholder="Player ' + (i + 1) + '" maxlength="14">';
+        wrap.appendChild(row);
+      }
+    }
+    document.getElementById('sl-pminus').addEventListener('click', () => {
+      const el = document.getElementById('sl-pcount'); let v = parseInt(el.textContent, 10);
+      if (v > 2) { el.textContent = v - 1; slRenderNameInputs(); }
+    });
+    document.getElementById('sl-pplus').addEventListener('click', () => {
+      const el = document.getElementById('sl-pcount'); let v = parseInt(el.textContent, 10);
+      if (v < 6) { el.textContent = v + 1; slRenderNameInputs(); }
+    });
+    slRenderNameInputs();
+    document.getElementById('sl-start').addEventListener('click', () => {
+      const n = parseInt(document.getElementById('sl-pcount').textContent, 10);
+      slPlayers = [];
+      for (let i = 0; i < n; i++) {
+        const val = document.getElementById('sl-name' + i).value.trim();
+        slPlayers.push({ name: val || ('Player ' + (i + 1)), color: slColors[i], pos: 0, finished: false });
+      }
+      slTurn = 0; slHistory = []; slOver = false;
+      document.getElementById('sl-undo').disabled = true;
+      document.getElementById('sl-winbanner').classList.remove('on');
+      document.getElementById('sl-msg').textContent = '';
+      slSetDieFace(document.getElementById('sl-die'), 1);
+      document.getElementById('sl-setup').style.display = 'none';
+      document.getElementById('sl-play').style.display = 'block';
+      slBuildBoard(); slRenderTokens(); slRenderList(); slRenderTurn();
+    });
+    document.getElementById('sl-roll').addEventListener('click', slRoll);
+    document.getElementById('sl-undo').addEventListener('click', slUndo);
+    document.getElementById('sl-restart').addEventListener('click', () => {
+      document.getElementById('sl-play').style.display = 'none';
+      document.getElementById('sl-setup').style.display = 'block';
     });
   </script>
 </body>
