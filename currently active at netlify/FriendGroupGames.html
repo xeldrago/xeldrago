@@ -389,6 +389,7 @@
       height: 16px;
       border-radius: 50%;
       flex-shrink: 0;
+      border: 2px solid #000;
     }
 
     .plyr-row input {
@@ -447,7 +448,6 @@
       border-radius: 8px;
       overflow: hidden;
       position: relative;
-      z-index: 2;
     }
 
     #sl-overlay {
@@ -456,16 +456,23 @@
       z-index: 3;
       pointer-events: none;
       border-radius: 8px;
+      opacity: .6;
     }
 
     .sl-cell {
       position: relative;
-      font-size: .6rem;
-      font-weight: 700;
+      font-size: .82rem;
+      font-weight: 800;
       padding: 3px;
-      color: #6b3f1d;
+      color: #2e1a0a;
       display: flex;
       flex-direction: column;
+    }
+
+    .sl-cell span {
+      position: relative;
+      z-index: 4;
+      text-shadow: 0 0 3px rgba(255, 255, 255, .85);
     }
 
     .sl-cell.cell-a {
@@ -476,23 +483,27 @@
       background: #ffe8c2;
     }
 
-    .sl-tokens {
+    #sl-tokens-layer {
       position: absolute;
-      bottom: 2px;
-      left: 2px;
-      right: 2px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1px;
-      z-index: 4;
+      inset: 8px;
+      z-index: 6;
+      pointer-events: none;
     }
 
-    .sl-token {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(0, 0, 0, .35);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+    .token-cone {
+      position: absolute;
+      width: 20px;
+      height: 22px;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5));
+    }
+
+    .token-cone svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
     }
 
     #sl-turn {
@@ -615,6 +626,181 @@
     button:disabled {
       opacity: .35;
       cursor: not-allowed;
+    }
+
+    .proRow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 14px 0 4px;
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+    }
+
+    .proRow small {
+      display: block;
+      opacity: .65;
+      font-size: .75rem;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .switch {
+      position: relative;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #4a4266;
+      border-radius: 26px;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .2s;
+    }
+
+    .switch input:checked+.slider {
+      background: var(--mint);
+    }
+
+    .switch input:checked+.slider:before {
+      transform: translateX(20px);
+    }
+
+    #sl-charge {
+      max-width: 260px;
+      margin: 0 auto 10px;
+      text-align: center;
+    }
+
+    #sl-chargebar {
+      height: 10px;
+      border-radius: 6px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    #sl-chargefill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--mint), var(--marigold), var(--rose));
+    }
+
+    #sl-chargetxt {
+      font-size: .78rem;
+      opacity: .85;
+      margin-top: 4px;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+    }
+
+    #sl-die.pro {
+      cursor: pointer;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      outline: 3px solid var(--marigold);
+      outline-offset: 3px;
+    }
+
+    #sl-hint {
+      text-align: center;
+      font-size: .8rem;
+      opacity: .7;
+      margin-bottom: 6px;
+    }
+
+    #sl-logcard {
+      margin-top: 16px;
+    }
+
+    #sl-logcard h3 {
+      margin: 0 0 8px;
+      color: var(--mint);
+    }
+
+    #sl-log {
+      max-height: 320px;
+      overflow-y: auto;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: .76rem;
+    }
+
+    .log-row {
+      border-left: 3px solid var(--line);
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      background: var(--bg2);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .log-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .log-hash {
+      color: var(--marigold);
+      font-weight: 700;
+    }
+
+    .log-die {
+      background: #f4f1ea;
+      color: #1a1230;
+      border-radius: 5px;
+      padding: 0 6px;
+      font-weight: 700;
+    }
+
+    .log-body {
+      opacity: .85;
+      margin-top: 3px;
+      line-height: 1.35;
+    }
+
+    @media(min-width:1100px) {
+      #sl-logcard {
+        position: fixed;
+        right: 24px;
+        top: 24px;
+        bottom: 24px;
+        width: 300px;
+        margin: 0;
+        overflow: hidden;
+        z-index: 5;
+      }
+
+      #sl-log {
+        max-height: none;
+        height: calc(100% - 34px);
+      }
     }
 
     footer {
@@ -756,17 +942,34 @@
             <button id="sl-pminus">−</button><span id="sl-pcount">4</span><button id="sl-pplus">+</button>
           </div>
           <div id="sl-nameinputs"></div>
+          <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span
+                class="slider"></span></label>
+            <div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time
+                favours different numbers — learn yours.</small></div>
+          </div>
           <button class="big" id="sl-start">Start game</button>
         </div>
 
         <div class="card" id="sl-play" style="display:none;">
           <div id="sl-winbanner"></div>
+          <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span
+                class="slider"></span></label>
+            <div><b>Pro dice</b><small>Switch anytime. Tap or hold the dice itself, release to roll.</small></div>
+          </div>
           <div id="sl-turn">—</div>
           <div id="sl-boardwrap">
             <div id="sl-board"></div>
             <svg id="sl-overlay" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+            <div id="sl-tokens-layer"></div>
           </div>
           <div id="sl-die"></div>
+          <div id="sl-charge" style="display:none;">
+            <div id="sl-chargebar">
+              <div id="sl-chargefill"></div>
+            </div>
+            <div id="sl-chargetxt">Hold the dice · 0.0s / 3.0s</div>
+          </div>
+          <div id="sl-hint"></div>
           <div id="sl-msg"></div>
           <div class="rowbtns">
             <button class="big" id="sl-roll">Roll dice</button>
@@ -774,6 +977,10 @@
           </div>
           <div class="sl-plist" id="sl-plist"></div>
           <button class="big ghost" id="sl-restart" style="margin-top:4px;">New game</button>
+        </div>
+        <div class="card" id="sl-logcard" style="display:none;">
+          <h3>Game log</h3>
+          <div id="sl-log"></div>
         </div>
       </div>
 
@@ -1053,8 +1260,9 @@
     // ---------- Snakes & Ladders ----------
     const slLadders = { 2: 38, 7: 14, 8: 31, 15: 26, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 78: 98, 87: 94 };
     const slSnakes = { 16: 6, 46: 25, 49: 11, 62: 19, 64: 60, 74: 53, 89: 68, 92: 88, 95: 75, 99: 80 };
-    const slColors = ['#f4a51e', '#3ec9a7', '#ef5b6a', '#6c9bff', '#c26cff', '#ffd166'];
-    let slPlayers = [], slTurn = 0, slHistory = [], slOver = false;
+    const slColors = ['#1f5cff', '#e02020', '#1fb83a', '#ffd400', '#9b30ff', '#ffffff'];
+    const slColorNames = ['Blue', 'Red', 'Green', 'Yellow', 'Violet', 'White'];
+    let slPlayers = [], slTurn = 0, slHistory = [], slOver = false, slPro = false, slBusy = false, slGen = 0, slLog = [];
 
     function slCellPos(n) { // n 1..100 -> {row,col} 0-indexed from top
       const idx = n - 1, rowFromBottom = Math.floor(idx / 10), posInRow = idx % 10;
@@ -1073,7 +1281,7 @@
         d.className = 'sl-cell ' + ((row + col) % 2 === 0 ? 'cell-a' : 'cell-b');
         d.style.gridRow = (row + 1); d.style.gridColumn = (col + 1);
         d.id = 'sl-c' + n;
-        d.innerHTML = '<span>' + n + '</span><div class="sl-tokens"></div>';
+        d.innerHTML = '<span>' + n + '</span>';
         board.appendChild(d);
       }
       let svg = '';
@@ -1101,6 +1309,12 @@
         svg += '<circle cx="' + (a.x + 0.7) + '" cy="' + (a.y - 0.7) + '" r="0.4" fill="#fff"/>';
       });
       document.getElementById('sl-overlay').innerHTML = svg;
+      const layer = document.getElementById('sl-tokens-layer'); layer.innerHTML = ''; slTokenEls = [];
+      slPlayers.forEach(p => {
+        const t = document.createElement('div'); t.className = 'token-cone';
+        t.innerHTML = '<svg viewBox="0 0 20 22"><polygon points="10,1.5 1.8,20 18.2,20" fill="' + p.color + '" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+        layer.appendChild(t); slTokenEls.push(t);
+      });
     }
     const slPipMap = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
     function slSetDieFace(el, n) {
@@ -1110,15 +1324,28 @@
       el.innerHTML = h;
     }
     slSetDieFace(document.getElementById('sl-die'), 1);
-    function slRenderTokens() {
-      document.querySelectorAll('.sl-tokens').forEach(t => t.innerHTML = '');
-      slPlayers.forEach((p, i) => {
-        if (p.pos < 1) return;
-        const cell = document.getElementById('sl-c' + p.pos);
-        if (!cell) return;
-        const dot = document.createElement('div'); dot.className = 'sl-token'; dot.style.background = p.color;
-        cell.querySelector('.sl-tokens').appendChild(dot);
-      });
+    let slTokenEls = [];
+    function slTokenXY(i, pos) { const c = slCenter(pos); return { x: c.x + ((i % 3) - 1) * 2.2, y: c.y + (Math.floor(i / 3) - 0.5) * 3 }; }
+    function slPlaceToken(i, pos, instant) {
+      const el = slTokenEls[i]; if (!el) return;
+      if (pos < 1) { el.style.opacity = '0'; return; }
+      const c = slTokenXY(i, pos);
+      el.style.transition = instant ? 'none' : 'left .5s ease, top .5s ease';
+      el.style.left = c.x + '%'; el.style.top = c.y + '%'; el.style.opacity = '1';
+    }
+    function slRenderTokens() { slPlayers.forEach((p, i) => slPlaceToken(i, p.pos, true)); }
+    function slAnimateMove(i, landedPos, finalPos, special, cb) {
+      slPlaceToken(i, landedPos, false);
+      const g = slGen;
+      setTimeout(() => {
+        if (g !== slGen) return;
+        if (special) {
+          const el = slTokenEls[i], c = slTokenXY(i, finalPos);
+          el.style.transition = 'left 1.3s cubic-bezier(.45,0,.4,1), top 1.3s cubic-bezier(.45,0,.4,1)';
+          el.style.left = c.x + '%'; el.style.top = c.y + '%';
+          setTimeout(cb, 1350);
+        } else cb();
+      }, 550);
     }
     function slRenderList() {
       const list = document.getElementById('sl-plist'); list.innerHTML = '';
@@ -1133,76 +1360,106 @@
       document.getElementById('sl-turn').textContent = slOver ? 'Game over' : (slPlayers[slTurn].name + "'s turn");
     }
     function slSnapshot() {
-      slHistory.push(JSON.stringify({ players: slPlayers, turn: slTurn, over: slOver }));
+      slHistory.push(JSON.stringify({ players: slPlayers, turn: slTurn, over: slOver, log: slLog }));
       document.getElementById('sl-undo').disabled = false;
     }
     function slNextTurn() {
       let tries = 0;
       do { slTurn = (slTurn + 1) % slPlayers.length; tries++; } while (slPlayers[slTurn].finished && tries <= slPlayers.length);
     }
-    function slRoll() {
-      if (slOver) return;
+    function slRoll(preset, info) {
+      if (slOver || slBusy) return;
+      slBusy = true; const gen = slGen;
       slSnapshot();
-      const final = 1 + Math.floor(Math.random() * 6);
+      const final = preset || (1 + Math.floor(Math.random() * 6));
       const dieEl = document.getElementById('sl-die');
-      const rollBtn = document.getElementById('sl-roll'), undoBtn = document.getElementById('sl-undo');
-      rollBtn.disabled = true; undoBtn.disabled = true;
+      document.getElementById('sl-roll').disabled = true; document.getElementById('sl-undo').disabled = true;
       dieEl.classList.add('rolling');
       let ticks = 0;
       const iv = setInterval(() => {
+        if (gen !== slGen) { clearInterval(iv); dieEl.classList.remove('rolling'); return; }
         slSetDieFace(dieEl, 1 + Math.floor(Math.random() * 6));
         ticks++;
         if (ticks >= 9) {
           clearInterval(iv);
           slSetDieFace(dieEl, final);
           dieEl.classList.remove('rolling');
-          rollBtn.disabled = false;
-          undoBtn.disabled = slHistory.length === 0;
-          slApplyRoll(final);
+          slApplyRoll(final, info);
         }
       }, 70);
     }
-    function slApplyRoll(die) {
-      const p = slPlayers[slTurn];
-      let msg = '';
-      if (p.pos < 1) {
-        if (die === 1 || die === 5 || die === 6) { p.pos = 1; msg = p.name + ' enters the board!'; }
-        else { msg = p.name + ' needs a 1, 5 or 6 to enter — turn passed.'; }
+    function slApplyRoll(die, info) {
+      const gen = slGen, idx = slTurn, p = slPlayers[idx], startPos = p.pos;
+      let landed = startPos, final = startPos, special = false, msg = '', logText = '';
+      if (startPos < 1) {
+        if (die === 1 || die === 5 || die === 6) { landed = 1; final = 1; msg = p.name + ' enters the board!'; logText = 'entered the board (Home → 1)'; }
+        else { msg = p.name + ' needs a 1, 5 or 6 to enter — turn passed.'; logText = 'needs 1/5/6 to enter · stays Home'; }
       } else {
-        const target = p.pos + die;
-        if (target > 100) { msg = 'Need exact roll to reach 100 — no move.'; }
+        const target = startPos + die;
+        if (target > 100) { msg = 'Need exact roll to reach 100 — no move.'; logText = 'needs exact roll · stays at ' + startPos; }
         else {
-          p.pos = target;
-          if (slLadders[p.pos]) { const from = p.pos; p.pos = slLadders[p.pos]; msg = '🪜 Ladder! ' + from + ' → ' + p.pos; }
-          else if (slSnakes[p.pos]) { const from = p.pos; p.pos = slSnakes[p.pos]; msg = '🐍 Snake! ' + from + ' → ' + p.pos; }
-          else msg = p.name + ' moved to ' + p.pos + '.';
-          if (p.pos === 100) { p.finished = true; slOver = true; msg = p.name + ' wins! 🏆'; }
+          landed = target;
+          if (slLadders[target]) { final = slLadders[target]; special = true; msg = '🪜 Ladder! ' + target + ' → ' + final; logText = startPos + ' → ' + target + ' · 🪜 climbed to ' + final; }
+          else if (slSnakes[target]) { final = slSnakes[target]; special = true; msg = '🐍 Snake! ' + target + ' → ' + final; logText = startPos + ' → ' + target + ' · 🐍 slid down to ' + final; }
+          else { final = target; msg = p.name + ' moved to ' + final + '.'; logText = startPos + ' → ' + final; }
         }
       }
+      if (final === 100) logText += ' · 🏆 wins';
+      else if (die === 6 && final >= 1) logText += ' · 🎲 rolls again';
+      slLog = slLog.concat([{ n: slLog.length + 1, name: p.name, color: p.color, die: die, text: logText, hold: info ? (info.level / 10).toFixed(1) : null }]);
+      slRenderLog();
       document.getElementById('sl-msg').textContent = msg;
-      if (slOver) {
-        const b = document.getElementById('sl-winbanner'); b.textContent = '🏆 ' + p.name + ' wins the game!'; b.classList.add('on');
-      } else if (die !== 6 || p.pos < 1) {
-        slNextTurn();
-      } // else: rolled 6 and moved -> same player goes again
-      slRenderTokens(); slRenderList(); slRenderTurn();
+      function finish() {
+        p.pos = final;
+        if (p.pos === 100) {
+          p.finished = true; slOver = true;
+          document.getElementById('sl-msg').textContent = p.name + ' wins! 🏆';
+          const b = document.getElementById('sl-winbanner'); b.textContent = '🏆 ' + p.name + ' wins the game!'; b.classList.add('on');
+        } else if (die !== 6 || final < 1) {
+          slNextTurn();
+        } // rolled 6 and on board -> same player goes again
+        slBusy = false;
+        slRenderList(); slRenderTurn();
+        document.getElementById('sl-roll').disabled = slOver;
+        document.getElementById('sl-undo').disabled = slHistory.length === 0;
+      }
+      if (landed === startPos && final === startPos) { finish(); return; }
+      slAnimateMove(idx, landed, final, special, () => { if (gen !== slGen) return; finish(); });
+    }
+    function slRenderLog() {
+      const box = document.getElementById('sl-log'); box.innerHTML = '';
+      for (let k = slLog.length - 1; k >= 0; k--) {
+        const e = slLog[k];
+        const row = document.createElement('div'); row.className = 'log-row'; row.style.borderLeftColor = e.color;
+        const head = document.createElement('div'); head.className = 'log-head';
+        const h = document.createElement('span'); h.className = 'log-hash'; h.textContent = '#' + e.n;
+        const dot = document.createElement('span'); dot.className = 'plyr-dot'; dot.style.background = e.color; dot.style.width = '11px'; dot.style.height = '11px';
+        const nm = document.createElement('b'); nm.textContent = e.name;
+        const d = document.createElement('span'); d.className = 'log-die'; d.textContent = 'rolled ' + e.die;
+        head.append(h, dot, nm, d);
+        if (e.hold) { const hs = document.createElement('span'); hs.style.opacity = '.7'; hs.textContent = 'held ' + e.hold + 's'; head.append(hs); }
+        const body = document.createElement('div'); body.className = 'log-body'; body.textContent = e.text;
+        row.append(head, body); box.appendChild(row);
+      }
+      box.scrollTop = 0;
     }
     function slUndo() {
-      if (slHistory.length === 0) return;
+      if (slHistory.length === 0 || slBusy) return;
       const snap = JSON.parse(slHistory.pop());
-      slPlayers = snap.players; slTurn = snap.turn; slOver = snap.over;
+      slPlayers = snap.players; slTurn = snap.turn; slOver = snap.over; slLog = snap.log || [];
       document.getElementById('sl-winbanner').classList.toggle('on', slOver);
       if (slOver) document.getElementById('sl-winbanner').textContent = '🏆 ' + slPlayers.find(p => p.finished).name + ' wins the game!';
       document.getElementById('sl-msg').textContent = 'Undone.';
+      document.getElementById('sl-roll').disabled = false;
       document.getElementById('sl-undo').disabled = slHistory.length === 0;
-      slRenderTokens(); slRenderList(); slRenderTurn();
+      slRenderTokens(); slRenderList(); slRenderTurn(); slRenderLog();
     }
     function slRenderNameInputs() {
       const n = parseInt(document.getElementById('sl-pcount').textContent, 10);
       const wrap = document.getElementById('sl-nameinputs'); wrap.innerHTML = '';
       for (let i = 0; i < n; i++) {
         const row = document.createElement('div'); row.className = 'plyr-row';
-        row.innerHTML = '<span class="plyr-dot" style="background:' + slColors[i] + '"></span><input id="sl-name' + i + '" placeholder="Player ' + (i + 1) + '" maxlength="14">';
+        row.innerHTML = '<span class="plyr-dot" style="background:' + slColors[i] + '"></span><input id="sl-name' + i + '" placeholder="Player ' + (i + 1) + ' (' + slColorNames[i] + ')" maxlength="14">';
         wrap.appendChild(row);
       }
     }
@@ -1222,8 +1479,9 @@
         const val = document.getElementById('sl-name' + i).value.trim();
         slPlayers.push({ name: val || ('Player ' + (i + 1)), color: slColors[i], pos: 0, finished: false });
       }
-      slTurn = 0; slHistory = []; slOver = false;
-      document.getElementById('sl-undo').disabled = true;
+      slTurn = 0; slHistory = []; slOver = false; slLog = []; slBusy = false; slGen++;
+      document.getElementById('sl-undo').disabled = true; document.getElementById('sl-roll').disabled = false;
+      document.getElementById('sl-logcard').style.display = 'block'; slRenderLog();
       document.getElementById('sl-winbanner').classList.remove('on');
       document.getElementById('sl-msg').textContent = '';
       slSetDieFace(document.getElementById('sl-die'), 1);
@@ -1231,12 +1489,71 @@
       document.getElementById('sl-play').style.display = 'block';
       slBuildBoard(); slRenderTokens(); slRenderList(); slRenderTurn();
     });
-    document.getElementById('sl-roll').addEventListener('click', slRoll);
+    document.getElementById('sl-roll').addEventListener('click', () => slRoll());
     document.getElementById('sl-undo').addEventListener('click', slUndo);
     document.getElementById('sl-restart').addEventListener('click', () => {
+      slGen++; slBusy = false;
+      document.getElementById('sl-logcard').style.display = 'none';
       document.getElementById('sl-play').style.display = 'none';
       document.getElementById('sl-setup').style.display = 'block';
     });
+
+    // ---------- Pro dice (tap & hold charge) ----------
+    function slProTable(i) {
+      let seed = 9301 + i * 4973;
+      const rnd = () => { seed = (Math.imul(seed, 1103515245) + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+      const t = [];
+      for (let k = 0; k < 30; k++) { const a = 1 + Math.floor(rnd() * 6); let b; do { b = 1 + Math.floor(rnd() * 6); } while (b === a); t.push([a, b]); }
+      if (i === 0) t[0] = [1, 2]; if (i === 1) t[0] = [3, 6]; if (i === 2) t[0] = [4, 1];
+      return t;
+    }
+    const slProTables = [0, 1, 2, 3, 4, 5].map(slProTable);
+    function slSetPro(on) {
+      slPro = on;
+      document.querySelectorAll('.sl-pro').forEach(c => c.checked = on);
+      document.getElementById('sl-roll').style.display = on ? 'none' : '';
+      document.getElementById('sl-charge').style.display = on ? 'block' : 'none';
+      document.getElementById('sl-die').classList.toggle('pro', on);
+      document.getElementById('sl-hint').textContent = on ? 'Pro dice: tap or hold the dice (max 3.0s), release to roll.' : '';
+    }
+    document.querySelectorAll('.sl-pro').forEach(c => c.addEventListener('change', () => { if (slCharging) { c.checked = slPro; return; } slSetPro(c.checked); }));
+    let slCharging = false, slChargeT0 = 0, slChargeRaf = 0;
+    function slChargeTick() {
+      if (!slCharging) return;
+      const held = Math.min(performance.now() - slChargeT0, 3000);
+      const lvl = Math.min(30, Math.max(1, Math.ceil(held / 100)));
+      document.getElementById('sl-chargefill').style.width = (held / 30) + '%';
+      document.getElementById('sl-chargetxt').textContent = 'Charge ' + (lvl / 10).toFixed(1) + 's' + (held >= 3000 ? ' · MAX' : '');
+      const dieEl = document.getElementById('sl-die');
+      dieEl.style.transform = 'scale(' + (1 + held / 3000 * 0.3) + ')';
+      dieEl.style.boxShadow = '0 0 ' + (8 + held / 3000 * 28) + 'px rgba(244,165,30,' + (0.3 + held / 3000 * 0.6) + ')';
+      slChargeRaf = requestAnimationFrame(slChargeTick);
+    }
+    function slChargeEnd(doRoll) {
+      if (!slCharging) return;
+      slCharging = false; cancelAnimationFrame(slChargeRaf);
+      const held = Math.min(performance.now() - slChargeT0, 3000);
+      const level = Math.min(30, Math.max(1, Math.ceil(held / 100)));
+      const dieEl = document.getElementById('sl-die'); dieEl.style.transform = ''; dieEl.style.boxShadow = '';
+      document.getElementById('sl-chargefill').style.width = '0';
+      document.getElementById('sl-chargetxt').textContent = doRoll ? 'Released at ' + (level / 10).toFixed(1) + 's' : 'Hold the dice · 0.0s / 3.0s';
+      if (!doRoll) return;
+      const pair = slProTables[slTurn][level - 1];
+      slRoll(pair[Math.random() < 0.5 ? 0 : 1], { level: level });
+    }
+    (function () {
+      const dieEl = document.getElementById('sl-die');
+      dieEl.addEventListener('pointerdown', e => {
+        if (!slPro || slBusy || slOver || slCharging || slPlayers.length === 0) return;
+        e.preventDefault();
+        try { dieEl.setPointerCapture(e.pointerId); } catch (_) { }
+        slCharging = true; slChargeT0 = performance.now(); slChargeTick();
+      });
+      dieEl.addEventListener('pointerup', () => slChargeEnd(true));
+      dieEl.addEventListener('pointercancel', () => slChargeEnd(false));
+      dieEl.addEventListener('contextmenu', e => e.preventDefault());
+    })();
+    slSetPro(false);
   </script>
 </body>
 
