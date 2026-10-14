@@ -1,1560 +1,1315 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Kondattam — Friend Group Games</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;600&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --ink: #fdf6e9;
-      --bg: #161029;
-      --bg2: #211a3d;
-      --marigold: #f4a51e;
-      --rose: #ef5b6a;
-      --mint: #3ec9a7;
-      --card: #251e46;
-      --line: rgba(253, 246, 233, 0.14);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      margin: 0;
-      background: radial-gradient(1200px 800px at 80% -10%, #2c2154 0%, var(--bg) 55%);
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      padding-top: env(safe-area-inset-top, 0);
-      padding-bottom: env(safe-area-inset-bottom, 0);
-      min-height: 100%;
-      overflow-x: hidden;
-    }
-
-    h1,
-    h2,
-    h3,
-    .display {
-      font-family: 'Baloo 2', sans-serif;
-    }
-
-    .wrap {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 28px 20px 60px;
-    }
-
-    header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 22px;
-    }
-
-    header h1 {
-      font-size: 1.7rem;
-      font-weight: 800;
-      margin: 0;
-      color: var(--marigold);
-      letter-spacing: .3px;
-    }
-
-    header span {
-      font-size: .85rem;
-      opacity: .7;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-
-    .tab {
-      flex: 1;
-      min-width: 140px;
-      text-align: center;
-      padding: 14px 10px;
-      border-radius: 14px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      cursor: pointer;
-      font-family: 'Baloo 2';
-      font-weight: 700;
-      font-size: .95rem;
-      transition: transform .15s;
-    }
-
-    .tab.active {
-      background: var(--marigold);
-      color: #1a1230;
-      transform: translateY(-2px);
-    }
-
-    .screen {
-      display: none;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 16px;
-    }
-
-    p.lead {
-      opacity: .8;
-      line-height: 1.55;
-      margin-top: 4px;
-    }
-
-    button.big {
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: 14px;
-      font-family: 'Baloo 2';
-      font-weight: 700;
-      font-size: 1.05rem;
-      background: var(--marigold);
-      color: #1a1230;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button.ghost {
-      background: transparent;
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-
-    .rowbtns {
-      display: flex;
-      gap: 10px;
-    }
-
-    .rowbtns button {
-      flex: 1;
-    }
-
-    /* Heads Up game */
-    #hu-setup label {
-      display: block;
-      margin: 14px 0 6px;
-      font-weight: 600;
-      font-size: .9rem;
-      opacity: .85;
-    }
-
-    select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      background: var(--bg2);
-      color: var(--ink);
-      border: 1px solid var(--line);
-      font-size: 1rem;
-    }
-
-    #hu-play {
-      position: fixed;
-      inset: 0;
-      display: none;
-      flex-direction: column;
-      z-index: 50;
-      background: radial-gradient(1200px 800px at 80% -10%, #2c2154 0%, var(--bg) 60%);
-      padding-top: env(safe-area-inset-top, 0);
-      padding-bottom: env(safe-area-inset-bottom, 0);
-    }
-
-    #hu-play.on {
-      display: flex;
-    }
-
-    .hu-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      font-family: 'Baloo 2';
-      font-weight: 700;
-    }
-
-    #hu-timer {
-      font-size: 1.4rem;
-      color: var(--marigold);
-    }
-
-    #hu-score {
-      font-size: 1rem;
-      opacity: .8;
-    }
-
-    .hu-word-zone {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    #hu-word {
-      font-family: 'Baloo 2';
-      font-weight: 800;
-      font-size: clamp(2rem, 9vw, 3.4rem);
-      line-height: 1.15;
-      width: 100%;
-      max-width: 560px;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 44px 22px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
-    }
-
-    .hu-actions {
-      display: flex;
-      height: 22vh;
-    }
-
-    .hu-actions button {
-      flex: 1;
-      border: none;
-      font-family: 'Baloo 2';
-      font-weight: 800;
-      font-size: 1.3rem;
-      color: #1a1230;
-    }
-
-    #hu-pass {
-      background: var(--rose);
-    }
-
-    #hu-correct {
-      background: var(--mint);
-    }
-
-    #hu-tiltnote {
-      position: absolute;
-      bottom: calc(22vh + 10px);
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: .75rem;
-      opacity: .6;
-    }
-
-    #hu-end {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 60;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-    }
-
-    #hu-end.on {
-      display: flex;
-    }
-
-    #hu-endscore {
-      font-family: 'Baloo 2';
-      font-size: 3rem;
-      color: var(--marigold);
-      margin: 6px 0 18px;
-    }
-
-    .hu-list {
-      max-height: 26vh;
-      overflow-y: auto;
-      text-align: left;
-      font-size: .85rem;
-      opacity: .75;
-      margin: 14px 0;
-      padding: 0 6px;
-    }
-
-    /* 20Q */
-    #tq-cats {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .chip {
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      cursor: pointer;
-      font-size: .85rem;
-    }
-
-    .chip.on {
-      background: var(--mint);
-      color: #0d1a17;
-      border-color: transparent;
-    }
-
-    #tq-card {
-      background: var(--bg2);
-      border-radius: 18px;
-      padding: 40px 20px;
-      text-align: center;
-      margin-top: 10px;
-      min-height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #tq-word {
-      font-family: 'Baloo 2';
-      font-weight: 800;
-      font-size: 1.8rem;
-      display: none;
-    }
-
-    #tq-hint {
-      opacity: .65;
-      font-size: .9rem;
-    }
-
-    /* suggestions */
-    .sugg {
-      display: grid;
-      gap: 12px;
-    }
-
-    .sugg .card {
-      margin: 0;
-    }
-
-    .sugg h3 {
-      margin: 0 0 4px;
-      font-size: 1.05rem;
-      color: var(--mint);
-    }
-
-    /* Board games */
-    #bg-sub {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
-    .bgsub-screen {
-      display: none;
-    }
-
-    .bgsub-screen.on {
-      display: block;
-    }
-
-    .soon {
-      opacity: .75;
-    }
-
-    .plyr-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin: 8px 0;
-    }
-
-    .plyr-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      border: 2px solid #000;
-    }
-
-    .plyr-row input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 10px;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      color: var(--ink);
-      font-size: .95rem;
-    }
-
-    .stepper {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      justify-content: center;
-      margin: 10px 0;
-    }
-
-    .stepper button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--line);
-      background: var(--bg2);
-      color: var(--ink);
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .stepper span {
-      font-family: 'Baloo 2';
-      font-weight: 800;
-      font-size: 1.3rem;
-      min-width: 26px;
-      text-align: center;
-    }
-
-    #sl-boardwrap {
-      position: relative;
-      margin-bottom: 14px;
-      border-radius: 14px;
-      padding: 8px;
-      background: #6b3f1d;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
-    }
-
-    #sl-board {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      grid-template-rows: repeat(10, 1fr);
-      gap: 1px;
-      aspect-ratio: 1;
-      background: #4a2c14;
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    #sl-overlay {
-      position: absolute;
-      inset: 8px;
-      z-index: 3;
-      pointer-events: none;
-      border-radius: 8px;
-      opacity: .6;
-    }
-
-    .sl-cell {
-      position: relative;
-      font-size: .82rem;
-      font-weight: 800;
-      padding: 3px;
-      color: #2e1a0a;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sl-cell span {
-      position: relative;
-      z-index: 4;
-      text-shadow: 0 0 3px rgba(255, 255, 255, .85);
-    }
-
-    .sl-cell.cell-a {
-      background: #ffb562;
-    }
-
-    .sl-cell.cell-b {
-      background: #ffe8c2;
-    }
-
-    #sl-tokens-layer {
-      position: absolute;
-      inset: 8px;
-      z-index: 6;
-      pointer-events: none;
-    }
-
-    .token-cone {
-      position: absolute;
-      width: 20px;
-      height: 22px;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5));
-    }
-
-    .token-cone svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      overflow: visible;
-    }
-
-    #sl-turn {
-      text-align: center;
-      font-family: 'Baloo 2';
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    #sl-die {
-      width: 76px;
-      height: 76px;
-      margin: 0 auto 10px;
-      border-radius: 16px;
-      background: #f4f1ea;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .8);
-      padding: 9px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 3px;
-      transition: transform .08s;
-    }
-
-    #sl-die.rolling {
-      animation: sl-shake .35s linear infinite;
-    }
-
-    @keyframes sl-shake {
-      0% {
-        transform: rotate(0deg) scale(1);
-      }
-
-      25% {
-        transform: rotate(-12deg) scale(1.05);
-      }
-
-      50% {
-        transform: rotate(0deg) scale(.96);
-      }
-
-      75% {
-        transform: rotate(12deg) scale(1.05);
-      }
-
-      100% {
-        transform: rotate(0deg) scale(1);
-      }
-    }
-
-    .die-pip {
-      border-radius: 50%;
-      background: #2b2b2b;
-      align-self: center;
-      justify-self: center;
-      width: 65%;
-      height: 65%;
-    }
-
-    .die-pip.off {
-      background: transparent;
-    }
-
-    #sl-msg {
-      text-align: center;
-      min-height: 20px;
-      opacity: .8;
-      font-size: .88rem;
-      margin-bottom: 8px;
-    }
-
-    .sl-plist {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0;
-    }
-
-    .sl-pchip {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      font-size: .8rem;
-    }
-
-    .sl-pchip.turn {
-      border-color: var(--marigold);
-    }
-
-    .sl-pchip.done {
-      opacity: .5;
-    }
-
-    #sl-winbanner {
-      display: none;
-      text-align: center;
-      padding: 16px;
-      background: rgba(244, 165, 30, .15);
-      border: 1px solid var(--marigold);
-      border-radius: 14px;
-      margin-bottom: 10px;
-      font-family: 'Baloo 2';
-      font-weight: 700;
-    }
-
-    #sl-winbanner.on {
-      display: block;
-    }
-
-    button.undo {
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-
-    button:disabled {
-      opacity: .35;
-      cursor: not-allowed;
-    }
-
-    .proRow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 14px 0 4px;
-      padding: 12px;
-      border-radius: 14px;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-    }
-
-    .proRow small {
-      display: block;
-      opacity: .65;
-      font-size: .75rem;
-      margin-top: 2px;
-      line-height: 1.3;
-    }
-
-    .switch {
-      position: relative;
-      width: 46px;
-      height: 26px;
-      flex-shrink: 0;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-      position: absolute;
-    }
-
-    .slider {
-      position: absolute;
-      inset: 0;
-      background: #4a4266;
-      border-radius: 26px;
-      transition: .2s;
-      cursor: pointer;
-    }
-
-    .slider:before {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      left: 3px;
-      top: 3px;
-      background: #fff;
-      border-radius: 50%;
-      transition: .2s;
-    }
-
-    .switch input:checked+.slider {
-      background: var(--mint);
-    }
-
-    .switch input:checked+.slider:before {
-      transform: translateX(20px);
-    }
-
-    #sl-charge {
-      max-width: 260px;
-      margin: 0 auto 10px;
-      text-align: center;
-    }
-
-    #sl-chargebar {
-      height: 10px;
-      border-radius: 6px;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-
-    #sl-chargefill {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, var(--mint), var(--marigold), var(--rose));
-    }
-
-    #sl-chargetxt {
-      font-size: .78rem;
-      opacity: .85;
-      margin-top: 4px;
-      font-family: 'Baloo 2';
-      font-weight: 700;
-    }
-
-    #sl-die.pro {
-      cursor: pointer;
-      touch-action: none;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
-      outline: 3px solid var(--marigold);
-      outline-offset: 3px;
-    }
-
-    #sl-hint {
-      text-align: center;
-      font-size: .8rem;
-      opacity: .7;
-      margin-bottom: 6px;
-    }
-
-    #sl-logcard {
-      margin-top: 16px;
-    }
-
-    #sl-logcard h3 {
-      margin: 0 0 8px;
-      color: var(--mint);
-    }
-
-    #sl-log {
-      max-height: 320px;
-      overflow-y: auto;
-      font-family: ui-monospace, Menlo, Consolas, monospace;
-      font-size: .76rem;
-    }
-
-    .log-row {
-      border-left: 3px solid var(--line);
-      padding: 6px 8px;
-      margin-bottom: 6px;
-      background: var(--bg2);
-      border-radius: 0 8px 8px 0;
-    }
-
-    .log-head {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .log-hash {
-      color: var(--marigold);
-      font-weight: 700;
-    }
-
-    .log-die {
-      background: #f4f1ea;
-      color: #1a1230;
-      border-radius: 5px;
-      padding: 0 6px;
-      font-weight: 700;
-    }
-
-    .log-body {
-      opacity: .85;
-      margin-top: 3px;
-      line-height: 1.35;
-    }
-
-    @media(min-width:1100px) {
-      #sl-logcard {
-        position: fixed;
-        right: 24px;
-        top: 24px;
-        bottom: 24px;
-        width: 300px;
-        margin: 0;
-        overflow: hidden;
-        z-index: 5;
-      }
-
-      #sl-log {
-        max-height: none;
-        height: calc(100% - 34px);
-      }
-    }
-
-    footer {
-      text-align: center;
-      font-size: .78rem;
-      opacity: .5;
-      margin-top: 30px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .tab {
-        transition: none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kondattam — Friend Group Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#fdf6e9; --bg:#161029; --bg2:#211a3d; --marigold:#f4a51e; --rose:#ef5b6a; --mint:#3ec9a7;
+  --card:#251e46; --line:rgba(253,246,233,0.14);
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0; background:radial-gradient(1200px 800px at 80% -10%, #2c2154 0%, var(--bg) 55%);
+  color:var(--ink); font-family:'Inter',sans-serif;
+  padding-top:env(safe-area-inset-top,0); padding-bottom:env(safe-area-inset-bottom,0);
+  min-height:100%; overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Baloo 2',sans-serif;}
+.wrap{max-width:640px; margin:0 auto; padding:28px 20px 60px;}
+header{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:22px;}
+header h1{font-size:1.7rem; font-weight:800; margin:0; color:var(--marigold); letter-spacing:.3px;}
+header span{font-size:.85rem; opacity:.7;}
+.tabs{display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap;}
+.tab{flex:1; min-width:140px; text-align:center; padding:14px 10px; border-radius:14px; background:var(--card);
+  border:1px solid var(--line); cursor:pointer; font-family:'Baloo 2'; font-weight:700; font-size:.95rem; transition:transform .15s;}
+.tab.active{background:var(--marigold); color:#1a1230; transform:translateY(-2px);}
+.screen{display:none;}
+.screen.active{display:block;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px; margin-bottom:16px;}
+p.lead{opacity:.8; line-height:1.55; margin-top:4px;}
+button.big{width:100%; padding:16px; border:none; border-radius:14px; font-family:'Baloo 2'; font-weight:700;
+  font-size:1.05rem; background:var(--marigold); color:#1a1230; cursor:pointer; margin-top:10px;}
+button.ghost{background:transparent; border:1px solid var(--line); color:var(--ink);}
+.rowbtns{display:flex; gap:10px;}
+.rowbtns button{flex:1;}
+
+/* Heads Up game */
+#hu-setup label{display:block; margin:14px 0 6px; font-weight:600; font-size:.9rem; opacity:.85;}
+select{width:100%; padding:12px; border-radius:10px; background:var(--bg2); color:var(--ink); border:1px solid var(--line); font-size:1rem;}
+#hu-play{position:fixed; inset:0; display:none; flex-direction:column; z-index:50; background:radial-gradient(1200px 800px at 80% -10%, #2c2154 0%, var(--bg) 60%);
+  padding-top:env(safe-area-inset-top,0); padding-bottom:env(safe-area-inset-bottom,0);}
+#hu-play.on{display:flex;}
+.hu-top{display:flex; justify-content:space-between; align-items:center; padding:16px 20px; font-family:'Baloo 2'; font-weight:700;}
+#hu-timer{font-size:1.4rem; color:var(--marigold);}
+#hu-score{font-size:1rem; opacity:.8;}
+.hu-word-zone{flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;}
+#hu-word{font-family:'Baloo 2'; font-weight:800; font-size:clamp(2rem,9vw,3.4rem); line-height:1.15; width:100%; max-width:560px; background:var(--bg2); border:1px solid var(--line); border-radius:24px; padding:44px 22px; box-shadow:0 12px 40px rgba(0,0,0,.35);}
+.hu-actions{display:flex; height:22vh;}
+.hu-actions button{flex:1; border:none; font-family:'Baloo 2'; font-weight:800; font-size:1.3rem; color:#1a1230;}
+#hu-pass{background:var(--rose);}
+#hu-correct{background:var(--mint);}
+#hu-tiltnote{position:absolute; bottom:calc(22vh + 10px); left:0; right:0; text-align:center; font-size:.75rem; opacity:.6;}
+#hu-end{display:none; position:fixed; inset:0; background:var(--bg); z-index:60; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:20px;}
+#hu-end.on{display:flex;}
+#hu-endscore{font-family:'Baloo 2'; font-size:3rem; color:var(--marigold); margin:6px 0 18px;}
+.hu-list{max-height:26vh; overflow-y:auto; text-align:left; font-size:.85rem; opacity:.75; margin:14px 0; padding:0 6px;}
+
+/* 20Q */
+#tq-cats{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+.chip{padding:9px 14px; border-radius:999px; background:var(--bg2); border:1px solid var(--line); cursor:pointer; font-size:.85rem;}
+.chip.on{background:var(--mint); color:#0d1a17; border-color:transparent;}
+#tq-card{background:var(--bg2); border-radius:18px; padding:40px 20px; text-align:center; margin-top:10px; min-height:120px; display:flex; align-items:center; justify-content:center;}
+#tq-word{font-family:'Baloo 2'; font-weight:800; font-size:1.8rem; display:none;}
+#tq-hint{opacity:.65; font-size:.9rem;}
+
+/* suggestions */
+.sugg{display:grid; gap:12px;}
+.sugg .card{margin:0;}
+.sugg h3{margin:0 0 4px; font-size:1.05rem; color:var(--mint);}
+
+/* Board games */
+#bg-sub{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+.bgsub-screen{display:none;}
+.bgsub-screen.on{display:block;}
+.soon{opacity:.75;}
+.plyr-row{display:flex; gap:8px; align-items:center; margin:8px 0;}
+.plyr-dot{width:16px; height:16px; border-radius:50%; flex-shrink:0; border:2px solid #000;}
+.plyr-row input{flex:1; padding:10px; border-radius:10px; background:var(--bg2); border:1px solid var(--line); color:var(--ink); font-size:.95rem;}
+.stepper{display:flex; align-items:center; gap:14px; justify-content:center; margin:10px 0;}
+.stepper button{width:40px; height:40px; border-radius:50%; border:1px solid var(--line); background:var(--bg2); color:var(--ink); font-size:1.2rem; cursor:pointer;}
+.stepper span{font-family:'Baloo 2'; font-weight:800; font-size:1.3rem; min-width:26px; text-align:center;}
+#sl-boardwrap{position:relative; margin-bottom:14px; border-radius:14px; padding:8px; background:#6b3f1d; box-shadow:0 10px 30px rgba(0,0,0,.35);}
+#sl-board{display:grid; grid-template-columns:repeat(10,1fr); grid-template-rows:repeat(10,1fr); gap:1px; aspect-ratio:1; background:#4a2c14; border-radius:8px; overflow:hidden; position:relative;}
+#sl-overlay{position:absolute; inset:8px; z-index:3; pointer-events:none; border-radius:8px; opacity:.6;}
+.sl-cell{position:relative; font-size:.82rem; font-weight:800; padding:3px; color:#2e1a0a; display:flex; flex-direction:column;}
+.sl-cell span{position:relative; z-index:4; text-shadow:0 0 3px rgba(255,255,255,.85);}
+.sl-cell.cell-a{background:#ffb562;}
+.sl-cell.cell-b{background:#ffe8c2;}
+#sl-tokens-layer{position:absolute; inset:8px; z-index:6; pointer-events:none;}
+.token-cone{position:absolute; width:20px; height:22px; transform:translate(-50%,-50%); opacity:0; filter:drop-shadow(0 2px 2px rgba(0,0,0,.5));}
+.token-cone svg{width:100%; height:100%; display:block; overflow:visible;}
+#sl-turn{text-align:center; font-family:'Baloo 2'; font-weight:700; margin-bottom:8px;}
+#sl-die{width:76px; height:76px; margin:0 auto 10px; border-radius:16px; background:#f4f1ea; box-shadow:0 6px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.8); padding:9px; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr); gap:3px; transition:transform .08s;}
+#sl-die.rolling{animation:sl-shake .35s linear infinite;}
+@keyframes sl-shake{0%{transform:rotate(0deg) scale(1);}25%{transform:rotate(-12deg) scale(1.05);}50%{transform:rotate(0deg) scale(.96);}75%{transform:rotate(12deg) scale(1.05);}100%{transform:rotate(0deg) scale(1);}}
+.die-pip{border-radius:50%; background:#2b2b2b; align-self:center; justify-self:center; width:65%; height:65%;}
+.die-pip.off{background:transparent;}
+#sl-msg{text-align:center; min-height:20px; opacity:.8; font-size:.88rem; margin-bottom:8px;}
+.sl-plist{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0;}
+.sl-pchip{display:flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--bg2); border:1px solid var(--line); font-size:.8rem;}
+.sl-pchip.turn{border-color:var(--marigold);}
+.sl-pchip.done{opacity:.5;}
+#sl-winbanner{display:none; text-align:center; padding:16px; background:rgba(244,165,30,.15); border:1px solid var(--marigold); border-radius:14px; margin-bottom:10px; font-family:'Baloo 2'; font-weight:700;}
+#sl-winbanner.on{display:block;}
+button.undo{background:var(--bg2); border:1px solid var(--line); color:var(--ink);}
+button:disabled{opacity:.35; cursor:not-allowed;}
+.proRow{display:flex; align-items:center; gap:12px; margin:14px 0 4px; padding:12px; border-radius:14px; background:var(--bg2); border:1px solid var(--line);}
+.proRow small{display:block; opacity:.65; font-size:.75rem; margin-top:2px; line-height:1.3;}
+.switch{position:relative; width:46px; height:26px; flex-shrink:0;}
+.switch input{opacity:0; width:0; height:0; position:absolute;}
+.slider{position:absolute; inset:0; background:#4a4266; border-radius:26px; transition:.2s; cursor:pointer;}
+.slider:before{content:""; position:absolute; width:20px; height:20px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s;}
+.switch input:checked + .slider{background:var(--mint);}
+.switch input:checked + .slider:before{transform:translateX(20px);}
+#sl-charge{max-width:260px; margin:0 auto 10px; text-align:center;}
+#sl-chargebar{height:10px; border-radius:6px; background:var(--bg2); border:1px solid var(--line); overflow:hidden;}
+#sl-chargefill{height:100%; width:0; background:linear-gradient(90deg,var(--mint),var(--marigold),var(--rose));}
+#sl-chargetxt{font-size:.78rem; opacity:.85; margin-top:4px; font-family:'Baloo 2'; font-weight:700;}
+#sl-die.pro{cursor:pointer; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; outline:3px solid var(--marigold); outline-offset:3px;}
+#sl-hint{text-align:center; font-size:.8rem; opacity:.7; margin-bottom:6px;}
+#sl-logcard{margin-top:16px;}
+#sl-logcard h3{margin:0 0 8px; color:var(--mint);}
+#sl-log{max-height:320px; overflow-y:auto; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.76rem;}
+.log-row{border-left:3px solid var(--line); padding:6px 8px; margin-bottom:6px; background:var(--bg2); border-radius:0 8px 8px 0;}
+.log-head{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+.log-hash{color:var(--marigold); font-weight:700;}
+.log-die{background:#f4f1ea; color:#1a1230; border-radius:5px; padding:0 6px; font-weight:700;}
+.log-body{opacity:.85; margin-top:3px; line-height:1.35;}
+@media(min-width:1100px){#sl-logcard{position:fixed; right:24px; top:24px; bottom:24px; width:300px; margin:0; overflow:hidden; z-index:5;} #sl-log{max-height:none; height:calc(100% - 34px);}}
+
+/* Ludo */
+.chk{display:flex; gap:8px; align-items:center; margin:8px 0; font-size:.9rem; opacity:.9;}
+#ld-svg{width:100%; height:auto; max-height:78vh; display:block; border-radius:14px; margin-bottom:12px; touch-action:manipulation;}
+.ld-pawn{transition:transform .14s linear;}
+.ld-pawn.legal{cursor:pointer;}
+.ld-pawn .ring{fill:rgba(255,212,0,.18); stroke:#ffd400; stroke-width:.1; stroke-dasharray:.25 .2; animation:ld-spin 1.2s linear infinite; transform-box:fill-box; transform-origin:center;}
+@keyframes ld-spin{to{transform:rotate(360deg);}}
+#ld-status{font-family:'Baloo 2'; font-weight:700; text-align:center; margin:8px 0; display:flex; align-items:center; justify-content:center; gap:8px;}
+#ld-winbanner{display:none; text-align:center; padding:16px; background:rgba(244,165,30,.15); border:1px solid var(--marigold); border-radius:14px; margin-bottom:10px; font-family:'Baloo 2'; font-weight:700;}
+#ld-winbanner.on{display:block;}
+#ld-msg{text-align:center; min-height:20px; opacity:.85; font-size:.88rem; margin-bottom:8px;}
+.ld-prow{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:8px 10px; margin-bottom:6px; font-size:.82rem;}
+.ld-prow.turn{border-color:var(--marigold);}
+.ld-pawnlist{display:flex; flex-wrap:wrap; gap:5px; margin-top:6px;}
+.ld-chip{border-left:4px solid; padding:2px 7px; background:rgba(255,255,255,.06); border-radius:6px; font-size:.74rem;}
+#ld-tests{white-space:pre-wrap; font-size:.72rem; max-height:260px; overflow:auto; background:var(--bg2); padding:10px; border-radius:10px; margin-top:10px; display:block;}
+#ld-tests:empty{display:none;}
+#ld-logcard{margin-top:16px;}
+#ld-logcard h3{margin:0 0 8px; color:var(--mint);}
+#ld-log{max-height:320px; overflow-y:auto; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.76rem;}
+@media(min-width:1100px){#ld-logcard{position:fixed; right:24px; top:24px; bottom:24px; width:300px; margin:0; overflow:hidden; z-index:5;} #ld-log{max-height:none; height:calc(100% - 34px);}}
+#ld-die{width:76px; height:76px; margin:0 auto 10px; border-radius:16px; background:#f4f1ea; box-shadow:0 6px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.8); padding:9px; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr); gap:3px; transition:transform .08s;}
+#ld-die.rolling{animation:sl-shake .35s linear infinite;}
+#ld-charge{max-width:260px; margin:0 auto 10px; text-align:center;}
+#ld-chargebar{height:10px; border-radius:6px; background:var(--bg2); border:1px solid var(--line); overflow:hidden;}
+#ld-chargefill{height:100%; width:0; background:linear-gradient(90deg,var(--mint),var(--marigold),var(--rose));}
+#ld-chargetxt{font-size:.78rem; opacity:.85; margin-top:4px; font-family:'Baloo 2'; font-weight:700;}
+#ld-die.pro{cursor:pointer; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; outline:3px solid var(--marigold); outline-offset:3px;}
+#ld-hint{text-align:center; font-size:.8rem; opacity:.7; margin-bottom:6px;}
+
+footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
+@media (prefers-reduced-motion: reduce){ .tab{transition:none;} }
+</style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Kondattam 🎉</h1>
-      <span>6-friend party games</span>
-    </header>
+<div class="wrap">
+  <header>
+    <h1>Kondattam 🎉</h1>
+    <span>6-friend party games</span>
+  </header>
 
-    <div class="tabs">
-      <div class="tab active" data-screen="home">Home</div>
-      <div class="tab" data-screen="headsup">Heads Up</div>
-      <div class="tab" data-screen="twentyq">20 Questions</div>
-      <div class="tab" data-screen="more">More Ideas</div>
-      <div class="tab" data-screen="board">Board Games</div>
+  <div class="tabs">
+    <div class="tab active" data-screen="home">Home</div>
+    <div class="tab" data-screen="headsup">Heads Up</div>
+    <div class="tab" data-screen="twentyq">20 Questions</div>
+    <div class="tab" data-screen="more">More Ideas</div>
+    <div class="tab" data-screen="board">Board Games</div>
+  </div>
+
+  <div class="screen active" id="screen-home">
+    <div class="card">
+      <h2>Two games, one screen, one phone</h2>
+      <p class="lead">Pass one phone around. <b>Heads Up</b> is the forehead-guessing game with Tamil movies (2015–now). <b>20 Questions</b> hands a secret word to a "keeper" who answers yes/no while everyone else grills them.</p>
+    </div>
+  </div>
+
+  <!-- HEADS UP SETUP -->
+  <div class="screen" id="screen-headsup">
+    <div class="card" id="hu-setup">
+      <h2>Forehead Edition</h2>
+      <p class="lead">One person holds the phone facing outward on their forehead. Everyone else describes the word (without saying it) until they guess it. Tilt the phone down for correct, up to pass — or use the on-screen buttons.</p>
+      <label>Word deck</label>
+      <select id="hu-deck">
+        <option value="tamil" selected>Tamil Movies (2015–now)</option>
+        <option value="malayalam">Malayalam Movies (2015–now)</option>
+        <option value="english">English Movies (1990–now)</option>
+        <option value="bible">Christian Biblical Names</option>
+        <option value="anime">Anime (Titles &amp; Characters)</option>
+      </select>
+      <label>Round length</label>
+      <select id="hu-time"><option value="45">45 sec</option><option value="60" selected>60 sec</option><option value="90">90 sec</option></select>
+      <button class="big" id="hu-start">Start round</button>
+    </div>
+  </div>
+
+  <!-- 20Q -->
+  <div class="screen" id="screen-twentyq">
+    <div class="card">
+      <h2>20 Questions</h2>
+      <p class="lead">Pick a category, hand the phone to the "keeper." They read the word secretly, then everyone else asks yes/no questions to figure it out.</p>
+      <div id="tq-cats">
+        <div class="chip on" data-cat="movie">Tamil Movie</div>
+        <div class="chip" data-cat="person">Famous Person</div>
+        <div class="chip" data-cat="object">Object</div>
+        <div class="chip" data-cat="animal">Animal</div>
+        <div class="chip" data-cat="anime">Anime</div>
+      </div>
+      <div id="tq-card">
+        <div id="tq-hint">Tap "Reveal" — only the keeper looks, then pass it face-down.</div>
+        <div id="tq-word"></div>
+      </div>
+      <div class="rowbtns" style="margin-top:14px;"><button class="big" id="tq-main">Reveal word (keeper only)</button></div>
+      <div class="rowbtns"><button class="big undo" id="tq-undo" disabled>↶ Undo tap</button><button class="big ghost" id="tq-giveup" disabled>Reveal answer now</button></div>
+    </div>
+  </div>
+
+  <!-- MORE -->
+  <div class="screen" id="screen-more">
+    <div class="sugg">
+      <div class="card"><h3>Wavelength</h3><p class="lead">One team sees a hidden target on a slider between two opposites ("cold ↔ hot"); they give a one-word clue and the rest guess where the dial lands.</p></div>
+      <div class="card"><h3>Taboo</h3><p class="lead">Guess the word from a teammate's clues — without them using five forbidden related words. Great with the same phone-timer format as Heads Up.</p></div>
+      <div class="card"><h3>Fishbowl</h3><p class="lead">Same word set, three rounds: describe it, act it out (charades), then say one word only — memory carries it home.</p></div>
+      <div class="card"><h3>Most Likely To</h3><p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full 6-person circle, no setup needed.</p></div>
+      <div class="card"><h3>Category Blurt</h3><p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating — last one standing wins the round.</p></div>
+    </div>
+  </div>
+
+  <!-- BOARD GAMES -->
+  <div class="screen" id="screen-board">
+    <div id="bg-sub">
+      <div class="chip on" data-bg="sl">Snakes &amp; Ladders</div>
+      <div class="chip" data-bg="ludo">Ludo</div>
+      <div class="chip" data-bg="biz">Business</div>
+      <div class="chip" data-bg="rrmtp">Raja Rani Manthri Thirudan</div>
     </div>
 
-    <div class="screen active" id="screen-home">
+    <!-- Snakes & Ladders -->
+    <div class="bgsub-screen on" id="bgsub-sl">
+      <div class="card" id="sl-setup">
+        <h2>Snakes &amp; Ladders</h2>
+        <p class="lead">Up to 6 players, one shared phone. You must roll a <b>1, 5 or 6</b> to enter the board. Roll a 6 and you go again. Land exactly on 100 to win.</p>
+        <label style="display:block;margin:12px 0 4px;font-weight:600;font-size:.9rem;opacity:.85;">Players</label>
+        <div class="stepper">
+          <button id="sl-pminus">−</button><span id="sl-pcount">4</span><button id="sl-pplus">+</button>
+        </div>
+        <div id="sl-nameinputs"></div>
+        <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time favours different numbers — learn yours.</small></div></div>
+        <button class="big" id="sl-start">Start game</button>
+      </div>
+
+      <div class="card" id="sl-play" style="display:none;">
+        <div id="sl-winbanner"></div>
+        <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Switch anytime. Tap or hold the dice itself, release to roll.</small></div></div>
+        <div id="sl-turn">—</div>
+        <div id="sl-boardwrap">
+          <div id="sl-board"></div>
+          <svg id="sl-overlay" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+          <div id="sl-tokens-layer"></div>
+        </div>
+        <div id="sl-die"></div>
+        <div id="sl-charge" style="display:none;"><div id="sl-chargebar"><div id="sl-chargefill"></div></div><div id="sl-chargetxt">Hold the dice · 0.0s / 3.0s</div></div>
+        <div id="sl-hint"></div>
+        <div id="sl-msg"></div>
+        <div class="rowbtns">
+          <button class="big" id="sl-roll">Roll dice</button>
+          <button class="big undo" id="sl-undo" disabled>↶ Undo</button>
+        </div>
+        <div class="sl-plist" id="sl-plist"></div>
+        <button class="big ghost" id="sl-restart" style="margin-top:4px;">New game</button>
+      </div>
+      <div class="card" id="sl-logcard" style="display:none;"><h3>Game log</h3><div id="sl-log"></div></div>
+    </div>
+
+    <!-- Placeholders -->
+    <div class="bgsub-screen" id="bgsub-ludo">
+      <div class="card" id="ld-setup">
+        <h2>Ludo</h2>
+        <p class="lead">2–6 players on one shared phone. Roll a 6 to leave the yard, a 6 rolls again, finish with an exact roll. 2–4 players use the classic board; 5 and 6 players get their own boards.</p>
+        <div class="stepper"><button id="ld-pminus">−</button><span id="ld-pcount">4</span><button id="ld-pplus">+</button></div>
+        <div id="ld-boardinfo" class="lead" style="text-align:center;margin:0 0 8px;font-size:.82rem;"></div>
+        <div id="ld-nameinputs"></div>
+        <div class="proRow"><label class="switch"><input type="checkbox" class="ld-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time favours different numbers.</small></div></div>
+        <label class="chk"><input type="checkbox" id="ld-opt-cap"> Bonus roll after a capture</label>
+        <label class="chk"><input type="checkbox" id="ld-opt-home"> Bonus roll when a pawn gets home</label>
+        <label class="chk"><input type="checkbox" id="ld-opt-six"> Three sixes in a row forfeit the third roll</label>
+        <button class="big" id="ld-start">Start game</button>
+      </div>
+      <div class="card" id="ld-play" style="display:none;">
+        <div class="proRow"><label class="switch"><input type="checkbox" class="ld-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Switch anytime. Tap or hold the dice itself, release to roll.</small></div></div>
+        <div id="ld-winbanner"></div>
+        <div id="ld-status"></div>
+        <svg id="ld-svg" viewBox="0 0 100 100" role="img" aria-label="Ludo board"></svg>
+        <div id="ld-die"></div>
+        <div id="ld-charge" style="display:none;"><div id="ld-chargebar"><div id="ld-chargefill"></div></div><div id="ld-chargetxt">Hold the dice · 0.0s / 3.0s</div></div>
+        <div id="ld-hint"></div>
+        <div id="ld-msg"></div>
+        <div class="rowbtns"><button class="big" id="ld-roll">Roll dice</button><button class="big undo" id="ld-undo" disabled>↶ Undo</button></div>
+        <div id="ld-plist" style="margin-top:12px;"></div>
+        <button class="big ghost" id="ld-restart" style="margin-top:4px;">New game</button>
+      </div>
+      <div class="card" id="ld-logcard" style="display:none;"><h3>Game log</h3><div id="ld-log"></div></div>
       <div class="card">
-        <h2>Two games, one screen, one phone</h2>
-        <p class="lead">Pass one phone around. <b>Heads Up</b> is the forehead-guessing game with Tamil movies
-          (2015–now). <b>20 Questions</b> hands a secret word to a "keeper" who answers yes/no while everyone else
-          grills them.</p>
+        <details><summary><b>Rules, boards &amp; sources</b></summary>
+          <p class="lead"><b>Shared engine rules (all boards):</b> four pawns each; a 6 brings a pawn onto its start square; a 6 gives another roll; one pawn moves per roll; finish needs an exact roll; landing on a lone opposing pawn on an ordinary square sends it to its yard; passing never captures; star squares (every start square and one more per arm) are safe for everyone; two or more pawns of one colour on an ordinary square form a blockade that opponents cannot land on or pass (no blockades on safe squares); pawns in home lanes cannot be captured. Bonus rolls for captures / reaching home and the three-sixes penalty are options in setup (off by default).</p>
+          <p class="lead"><b>Classic (2–4):</b> traditional four-player layout and rules. The six-to-enter / 56-step / exact-finish / safe-square rules follow the commonly published Traditional Games Federation of India style rules; the blockade rule is this game's custom default, and the TGFI document itself is not bundled here, so check it for official rulings. 2 players sit on opposite arms; 3 players use three arms.</p>
+          <p class="lead"><b>Five-arm (5):</b> a custom variant, not an official ruleset. Same arm design in five equal sectors, 65 shared squares.</p>
+          <p class="lead"><b>Six-arm (6):</b> six equal arms, 78 shared squares, inspired by commercial six-player boards. No manufacturer rule sheet was available offline, so it uses the shared engine rules above and is NOT verified against a specific manufacturer's instructions.</p>
+          <p class="lead"><b>How the boards were calibrated:</b> one generator builds every board from a single arm template (3 wide × 6 long; clockwise track = 6 squares out the left column, a cap square, 6 back along the right column; middle column = private 5-square home lane). The hub size is solved so neighbouring arms' inner corners sit √2 apart, which reproduces the classic board exactly (R=2, 52 squares). Start = right column, 2nd from the cap; turn-in = the cap square, 2 squares before start, so every player walks (13·N − 2) shared squares + 5 lane squares + home. Rules read only these tables, never pixel positions. The self-tests check the topology and the rules on all three boards.</p>
+          <button class="big ghost" id="ld-test">Run self-tests</button>
+          <pre id="ld-tests"></pre>
+        </details>
       </div>
     </div>
-
-    <!-- HEADS UP SETUP -->
-    <div class="screen" id="screen-headsup">
-      <div class="card" id="hu-setup">
-        <h2>Forehead Edition</h2>
-        <p class="lead">One person holds the phone facing outward on their forehead. Everyone else describes the word
-          (without saying it) until they guess it. Tilt the phone down for correct, up to pass — or use the on-screen
-          buttons.</p>
-        <label>Word deck</label>
-        <select id="hu-deck">
-          <option value="tamil" selected>Tamil Movies (2015–now)</option>
-          <option value="malayalam">Malayalam Movies (2015–now)</option>
-          <option value="english">English Movies (1990–now)</option>
-          <option value="bible">Christian Biblical Names</option>
-          <option value="anime">Anime (Titles &amp; Characters)</option>
-        </select>
-        <label>Round length</label>
-        <select id="hu-time">
-          <option value="45">45 sec</option>
-          <option value="60" selected>60 sec</option>
-          <option value="90">90 sec</option>
-        </select>
-        <button class="big" id="hu-start">Start round</button>
-      </div>
-    </div>
-
-    <!-- 20Q -->
-    <div class="screen" id="screen-twentyq">
-      <div class="card">
-        <h2>20 Questions</h2>
-        <p class="lead">Pick a category, hand the phone to the "keeper." They read the word secretly, then everyone else
-          asks yes/no questions to figure it out.</p>
-        <div id="tq-cats">
-          <div class="chip on" data-cat="movie">Tamil Movie</div>
-          <div class="chip" data-cat="person">Famous Person</div>
-          <div class="chip" data-cat="object">Object</div>
-          <div class="chip" data-cat="animal">Animal</div>
-          <div class="chip" data-cat="anime">Anime</div>
-        </div>
-        <div id="tq-card">
-          <div id="tq-hint">Tap "Reveal" — only the keeper looks, then pass it face-down.</div>
-          <div id="tq-word"></div>
-        </div>
-        <div class="rowbtns" style="margin-top:14px;">
-          <button class="big ghost" id="tq-hide">Hide</button>
-          <button class="big" id="tq-new">Reveal new word</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MORE -->
-    <div class="screen" id="screen-more">
-      <div class="sugg">
-        <div class="card">
-          <h3>Wavelength</h3>
-          <p class="lead">One team sees a hidden target on a slider between two opposites ("cold ↔ hot"); they give a
-            one-word clue and the rest guess where the dial lands.</p>
-        </div>
-        <div class="card">
-          <h3>Taboo</h3>
-          <p class="lead">Guess the word from a teammate's clues — without them using five forbidden related words.
-            Great with the same phone-timer format as Heads Up.</p>
-        </div>
-        <div class="card">
-          <h3>Fishbowl</h3>
-          <p class="lead">Same word set, three rounds: describe it, act it out (charades), then say one word only —
-            memory carries it home.</p>
-        </div>
-        <div class="card">
-          <h3>Most Likely To</h3>
-          <p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full
-            6-person circle, no setup needed.</p>
-        </div>
-        <div class="card">
-          <h3>Category Blurt</h3>
-          <p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating — last
-            one standing wins the round.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- BOARD GAMES -->
-    <div class="screen" id="screen-board">
-      <div id="bg-sub">
-        <div class="chip on" data-bg="sl">Snakes &amp; Ladders</div>
-        <div class="chip" data-bg="ludo">Ludo</div>
-        <div class="chip" data-bg="biz">Business</div>
-        <div class="chip" data-bg="rrmtp">Raja Rani Manthri Thirudan</div>
-      </div>
-
-      <!-- Snakes & Ladders -->
-      <div class="bgsub-screen on" id="bgsub-sl">
-        <div class="card" id="sl-setup">
-          <h2>Snakes &amp; Ladders</h2>
-          <p class="lead">Up to 6 players, one shared phone. You must roll a <b>1, 5 or 6</b> to enter the board. Roll a
-            6 and you go again. Land exactly on 100 to win.</p>
-          <label style="display:block;margin:12px 0 4px;font-weight:600;font-size:.9rem;opacity:.85;">Players</label>
-          <div class="stepper">
-            <button id="sl-pminus">−</button><span id="sl-pcount">4</span><button id="sl-pplus">+</button>
-          </div>
-          <div id="sl-nameinputs"></div>
-          <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span
-                class="slider"></span></label>
-            <div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time
-                favours different numbers — learn yours.</small></div>
-          </div>
-          <button class="big" id="sl-start">Start game</button>
-        </div>
-
-        <div class="card" id="sl-play" style="display:none;">
-          <div id="sl-winbanner"></div>
-          <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span
-                class="slider"></span></label>
-            <div><b>Pro dice</b><small>Switch anytime. Tap or hold the dice itself, release to roll.</small></div>
-          </div>
-          <div id="sl-turn">—</div>
-          <div id="sl-boardwrap">
-            <div id="sl-board"></div>
-            <svg id="sl-overlay" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
-            <div id="sl-tokens-layer"></div>
-          </div>
-          <div id="sl-die"></div>
-          <div id="sl-charge" style="display:none;">
-            <div id="sl-chargebar">
-              <div id="sl-chargefill"></div>
-            </div>
-            <div id="sl-chargetxt">Hold the dice · 0.0s / 3.0s</div>
-          </div>
-          <div id="sl-hint"></div>
-          <div id="sl-msg"></div>
-          <div class="rowbtns">
-            <button class="big" id="sl-roll">Roll dice</button>
-            <button class="big undo" id="sl-undo" disabled>↶ Undo</button>
-          </div>
-          <div class="sl-plist" id="sl-plist"></div>
-          <button class="big ghost" id="sl-restart" style="margin-top:4px;">New game</button>
-        </div>
-        <div class="card" id="sl-logcard" style="display:none;">
-          <h3>Game log</h3>
-          <div id="sl-log"></div>
-        </div>
-      </div>
-
-      <!-- Placeholders -->
-      <div class="bgsub-screen" id="bgsub-ludo">
-        <div class="card soon">
-          <h3>Ludo</h3>
-          <p class="lead">Coming next — up to 4 players, 1/5/6 to leave base, classic cross board.</p>
-        </div>
-      </div>
-      <div class="bgsub-screen" id="bgsub-biz">
-        <div class="card soon">
-          <h3>Business (BankRoll-style)</h3>
-          <p class="lead">Coming next — up to 6 players, property sets, buying/upgrading, rent.</p>
-        </div>
-      </div>
-      <div class="bgsub-screen" id="bgsub-rrmtp">
-        <div class="card soon">
-          <h3>Raja Rani Manthri Thirudan Police</h3>
-          <p class="lead">Coming next — 4 to 6 players, secret pass-and-hide role cards, scoring built in.</p>
-        </div>
-      </div>
-    </div>
-
-    <footer>Works fully offline once loaded · built for one shared phone</footer>
+    <div class="bgsub-screen" id="bgsub-biz"><div class="card soon"><h3>Business (BankRoll-style)</h3><p class="lead">Coming next — up to 6 players, property sets, buying/upgrading, rent.</p></div></div>
+    <div class="bgsub-screen" id="bgsub-rrmtp"><div class="card soon"><h3>Raja Rani Manthri Thirudan Police</h3><p class="lead">Coming next — 4 to 6 players, secret pass-and-hide role cards, scoring built in.</p></div></div>
   </div>
 
-  <!-- HEADS UP FULLSCREEN PLAY -->
-  <div id="hu-play">
-    <div class="hu-top"><span id="hu-score">0 correct</span><span id="hu-timer">60</span></div>
-    <div class="hu-word-zone">
-      <div id="hu-word">Ready?</div>
-    </div>
-    <div id="hu-tiltnote">Tilt phone down = correct · up = pass</div>
-    <div class="hu-actions">
-      <button id="hu-pass">✕ PASS</button>
-      <button id="hu-correct">✓ GOT IT</button>
-    </div>
+  <footer>Works fully offline once loaded · built for one shared phone</footer>
+</div>
+
+<!-- HEADS UP FULLSCREEN PLAY -->
+<div id="hu-play">
+  <div class="hu-top"><span id="hu-score">0 correct</span><span id="hu-timer">60</span></div>
+  <div class="hu-word-zone"><div id="hu-word">Ready?</div></div>
+  <div id="hu-tiltnote">Tilt phone down = correct · up = pass</div>
+  <div class="hu-actions">
+    <button id="hu-pass">✕ PASS</button>
+    <button id="hu-correct">✓ GOT IT</button>
   </div>
-  <div id="hu-end">
-    <div>Round over!</div>
-    <div id="hu-endscore">0</div>
-    <div class="hu-list" id="hu-endlist"></div>
-    <button class="big" id="hu-again" style="max-width:240px;">Back to setup</button>
-  </div>
+</div>
+<div id="hu-end">
+  <div>Round over!</div>
+  <div id="hu-endscore">0</div>
+  <div class="hu-list" id="hu-endlist"></div>
+  <button class="big" id="hu-again" style="max-width:240px;">Back to setup</button>
+</div>
 
-  <script>
-    // ---------- data ----------
-    const movies = ["Thani Oruvan", "Papanasam", "Yennai Arindhaal", "Maari", "Puthiya Niyamam", "Uttama Villain", "Dharma Durai", "Miruthan",
-      "Naanum Rowdy Dhaan", "36 Vayadhinile", "Va", "Rajini Murugan", "Jil Jung Juk", "Sathuranga Vettai", "Kabali", "Theri", "24", "Iru Mugan",
-      "Kodi", "Remo", "Kaashmora", "Achcham Yenbadhu Madamaiyada", "Kaththi Sandai", "Rekka", "Bogan", "Kanithan", "Thodari", "Vikram Vedha",
-      "Mersal", "Vivegam", "Bairavaa", "Velaikkaran", "Thupparivaalan", "Aruvi", "Enakku Vaaitha Adimaigal", "Spyder", "Sathya", "Dora",
-      "Kaatru Veliyidai", "Aramm", "Sketch", "Kaala", "Vada Chennai", "Sarkar", "Seemaraja", "Kadaikutty Singam", "Kolamavu Kokila",
-      "Chekka Chivantha Vaanam", "96", "Pariyerum Perumal", "Thaanaa Serndha Koottam", "Iravukku Aayiram Kangal", "Ratsasan", "Mr Chandramouli",
-      "Kanaa", "Kalakalappu 2", "Diya", "Bigil", "Petta", "Viswasam", "NGK", "Asuran", "Kaithi", "Super Deluxe", "Comali", "Sarvam Thaala Mayam",
-      "Adanga Maru", "Airaa", "Game Over", "Dev", "Oh My Kadavule", "Thambi", "90ML", "Devarattam", "Gorilla", "Pyaar Prema Kaadhal", "Kanchana 3",
-      "Darbar", "Soorarai Pottru", "Naadodigal 2", "Vaanam Kottattum", "Ka Pae Ranasingam", "Kannum Kannum Kollaiyadithaal", "Penguin", "Sathru",
-      "Master", "Karnan", "Sulthan", "Doctor", "Annaatthe", "Jagame Thandhiram", "Maara", "Eeswaran", "Netrikann", "Mookuthi Amman", "Raatchasi",
-      "Vikram", "Beast", "Valimai", "Cobra", "Etharkkum Thunindhavan", "Vendhu Thanindhathu Kaadu", "Thiruchitrambalam", "Don", "Maaveeran",
-      "Kadaisi Vivasayi", "Mahaan", "Gargi", "Iravin Nizhal", "Naanum Single Thaan", "Jailer", "Leo", "Ponniyin Selvan", "Ponniyin Selvan 2",
-      "Thunivu", "Vaathi", "Mark Antony", "Japan", "Blue Star", "Maamannan", "Chithha", "Pathu Thala", "Por Thozhil", "Anbarivu",
-      "Maharaja", "Amaran", "Raayan", "Indian 2", "Meiyazhagan", "Garudan", "Vaazhai", "Lubber Pandhu", "Captain Miller", "Aranmanai 4",
-      "Demonte Colony 2", "Kalki 2898 AD", "Star", "Kadaisi Ivan", "Vidaamuyarchi", "Good Bad Ugly", "Coolie", "Thug Life", "Retro", "Dragon",
-      "Sivappu Manjal Pachai", "Kadaram Kondan", "Pizza", "Pa Paandi", "Pizza 2", "Yaanai", "Viswasam", "Kanavu Variyam", "Kutty Story", "Vaathi Coming",
-      "Enemy", "Pichaikkaran 2", "Rocky", "Custody", "Amigos", "Abhi Naanu", "Farhana", "Raid 2 Tamil", "Gangs of Madras", "Vaa Vaathiyaar",
-      "Bison Kaalamaadan", "Madharaasi", "Sir", "Tourist Family", "Paruthi Veeran", "Angadi Theru", "Subramaniapuram", "Naan Kadavul", "Aadukalam",
-      "Vazhakku Enn 18/9", "Soodhu Kavvum", "Jigarthanda", "Cuckoo", "Vaayai Moodi Pesavum", "Kaaka Muttai", "Joker", "Visaranai", "Iraivi",
-      "Metro", "Merku Thodarchi Malai", "Kuttrame Thandanai", "Aramm", "Peranbu", "Nasir", "Kolamaavu Kokila", "Andhaghaaram", "Sarpatta Parambarai",
-      "Koozhangal", "Mandela", "Pebbles", "Semma Botha Aagathey", "Charlie Chaplin 2", "Meesaya Murukku", "Aayirathil Iruvar", "Rangoon",
-      "Hero", "Sivaranjaniyum Innum Sila Pengalum", "Sillu Karuppatti", "Oh My Kadavule 2", "Nan Sirithal", "Mundasupatti", "Nimir",
-      "Gulaebaghavali", "Idam Porul Yaeval", "Sathuranga Vettai 2", "Sulthan Returns", "LKG", "Sangathamizhan", "Vantha Rajavathaan Varuven"
-    ].filter((v, i, a) => a.indexOf(v) === i);
+<script>
+// ---------- data ----------
+const movies = ["Thani Oruvan","Papanasam","Yennai Arindhaal","Maari","Puthiya Niyamam","Uttama Villain","Dharma Durai","Miruthan",
+"Naanum Rowdy Dhaan","36 Vayadhinile","Va","Rajini Murugan","Jil Jung Juk","Sathuranga Vettai","Kabali","Theri","24","Iru Mugan",
+"Kodi","Remo","Kaashmora","Achcham Yenbadhu Madamaiyada","Kaththi Sandai","Rekka","Bogan","Kanithan","Thodari","Vikram Vedha",
+"Mersal","Vivegam","Bairavaa","Velaikkaran","Thupparivaalan","Aruvi","Enakku Vaaitha Adimaigal","Spyder","Sathya","Dora",
+"Kaatru Veliyidai","Aramm","Sketch","Kaala","Vada Chennai","Sarkar","Seemaraja","Kadaikutty Singam","Kolamavu Kokila",
+"Chekka Chivantha Vaanam","96","Pariyerum Perumal","Thaanaa Serndha Koottam","Iravukku Aayiram Kangal","Ratsasan","Mr Chandramouli",
+"Kanaa","Kalakalappu 2","Diya","Bigil","Petta","Viswasam","NGK","Asuran","Kaithi","Super Deluxe","Comali","Sarvam Thaala Mayam",
+"Adanga Maru","Airaa","Game Over","Dev","Oh My Kadavule","Thambi","90ML","Devarattam","Gorilla","Pyaar Prema Kaadhal","Kanchana 3",
+"Darbar","Soorarai Pottru","Naadodigal 2","Vaanam Kottattum","Ka Pae Ranasingam","Kannum Kannum Kollaiyadithaal","Penguin","Sathru",
+"Master","Karnan","Sulthan","Doctor","Annaatthe","Jagame Thandhiram","Maara","Eeswaran","Netrikann","Mookuthi Amman","Raatchasi",
+"Vikram","Beast","Valimai","Cobra","Etharkkum Thunindhavan","Vendhu Thanindhathu Kaadu","Thiruchitrambalam","Don","Maaveeran",
+"Kadaisi Vivasayi","Mahaan","Gargi","Iravin Nizhal","Naanum Single Thaan","Jailer","Leo","Ponniyin Selvan","Ponniyin Selvan 2",
+"Thunivu","Vaathi","Mark Antony","Japan","Blue Star","Maamannan","Chithha","Pathu Thala","Por Thozhil","Anbarivu",
+"Maharaja","Amaran","Raayan","Indian 2","Meiyazhagan","Garudan","Vaazhai","Lubber Pandhu","Captain Miller","Aranmanai 4",
+"Demonte Colony 2","Kalki 2898 AD","Star","Kadaisi Ivan","Vidaamuyarchi","Good Bad Ugly","Coolie","Thug Life","Retro","Dragon",
+"Sivappu Manjal Pachai","Kadaram Kondan","Pizza","Pa Paandi","Pizza 2","Yaanai","Viswasam","Kanavu Variyam","Kutty Story","Vaathi Coming",
+"Enemy","Pichaikkaran 2","Rocky","Custody","Amigos","Abhi Naanu","Farhana","Raid 2 Tamil","Gangs of Madras","Vaa Vaathiyaar",
+"Bison Kaalamaadan","Madharaasi","Sir","Tourist Family","Paruthi Veeran","Angadi Theru","Subramaniapuram","Naan Kadavul","Aadukalam",
+"Vazhakku Enn 18/9","Soodhu Kavvum","Jigarthanda","Cuckoo","Vaayai Moodi Pesavum","Kaaka Muttai","Joker","Visaranai","Iraivi",
+"Metro","Merku Thodarchi Malai","Kuttrame Thandanai","Aramm","Peranbu","Nasir","Kolamaavu Kokila","Andhaghaaram","Sarpatta Parambarai",
+"Koozhangal","Mandela","Pebbles","Semma Botha Aagathey","Charlie Chaplin 2","Meesaya Murukku","Aayirathil Iruvar","Rangoon",
+"Hero","Sivaranjaniyum Innum Sila Pengalum","Sillu Karuppatti","Oh My Kadavule 2","Nan Sirithal","Mundasupatti","Nimir",
+"Gulaebaghavali","Idam Porul Yaeval","Sathuranga Vettai 2","Sulthan Returns","LKG","Sangathamizhan","Vantha Rajavathaan Varuven"
+].filter((v,i,a)=>a.indexOf(v)===i);
 
-    const words = {
-      movie: movies,
-      person: ["Rajinikanth", "Kamal Haasan", "A.R. Rahman", "Vijay", "Ajith Kumar", "Dhanush", "Suriya", "Nayanthara", "Trisha", "Vetrimaaran",
-        "Mani Ratnam", "Lokesh Kanagaraj", "Simbu", "Sivakarthikeyan", "Yogi Babu", "Vijay Sethupathi", "Samantha", "Shah Rukh Khan", "Virat Kohli", "MS Dhoni",
-        "Sarath Kumar", "Vikram", "Karthi", "Arya", "Jyothika", "Nithya Menen", "Aishwarya Rai", "Vijay Deverakonda", "Prabhas", "Yash",
-        "Allu Arjun", "Vetri Maaran", "Bharathiraja", "Gautham Vasudev Menon", "Selvaraghavan", "Pa Ranjith", "Nelson Dilipkumar", "Karthik Subbaraj",
-        "Anirudh Ravichander", "Ilaiyaraaja", "Sid Sriram", "Shreya Ghoshal", "Sathyaraj", "Prakash Raj", "Radhika Sarathkumar", "Khushbu",
-        "Nassar", "Fahadh Faasil", "Mammootty", "Mohanlal", "Sudhir Babu", "Regina Cassandra", "Aditi Rao Hydari", "Keerthy Suresh",
-        "Sai Pallavi", "Anupama Parameswaran", "Rashmika Mandanna", "Pooja Hegde", "Sneha", "Simran", "Meena", "Napoleon",
-        "Vivek", "Santhanam", "Soori", "Karunakaran", "M.S. Bhaskar", "Vijay Sethupathi", "Bala", "Mysskin", "Vignesh Shivan",
-        "Sudha Kongara", "Halitha Shameem", "A.R. Murugadoss", "Siva", "H. Vinoth", "Venkat Prabhu", "Hari", "P.S. Mithran",
-        "Sachin Tendulkar", "Kapil Dev", "Virender Sehwag", "Rohit Sharma", "Ravindra Jadeja", "P.T. Usha", "Saina Nehwal", "P.V. Sindhu",
-        "Mahendra Singh Dhoni", "A.P.J. Abdul Kalam", "Mahatma Gandhi", "Subhas Chandra Bose", "Bharathiyar", "C.V. Raman",
-        "Cristiano Ronaldo", "Lionel Messi", "Albert Einstein", "Steve Jobs", "Elon Musk", "Barack Obama", "Narendra Modi", "Marilyn Monroe", "Michael Jackson"],
-      object: ["Umbrella", "Coconut", "Bicycle", "Guitar", "Camera", "Sandals", "Kite", "Ladder", "Thermos flask", "Broom",
-        "Fan", "Mirror", "Backpack", "Torch light", "Wrist watch", "Filter coffee tumbler", "Autorickshaw", "Slipper", "Bucket", "Key bunch",
-        "Spectacles", "Comb", "Toothbrush", "Pressure cooker", "Idli stand", "Dosa tawa", "Betel leaf box", "Oil lamp", "Incense stick", "Chappal",
-        "Newspaper", "Calendar", "Clothesline", "Sewing machine", "Wall clock", "Ceiling fan", "Mixer grinder", "Water bottle", "School bag", "Pencil box",
-        "Lunch box", "Cricket bat", "Football", "Badminton racket", "Carrom board", "Chess board", "Playing cards", "Table tennis paddle", "Skipping rope", "Slingshot",
-        "Matchbox", "Candle", "Flashlight", "Padlock", "Rope", "Hammer", "Screwdriver", "Nail", "Paintbrush", "Bucket of water",
-        "Rickshaw bell", "Bus ticket", "Train whistle", "Boarding pass", "Passport", "Wallet", "Handbag", "Sunglasses", "Cap", "Scarf",
-        "Necklace", "Bangles", "Anklets", "Bindi", "Veshti", "Saree", "Kurta", "Jeans", "Raincoat", "Flip flops",
-        "Guitar pick", "Drum set", "Violin", "Flute", "Harmonium", "Microphone", "Speaker", "Headphones", "Remote control", "Television",
-        "Refrigerator", "Washing machine", "Iron box", "Vacuum cleaner", "Water heater", "Air conditioner", "Fire extinguisher", "First aid box", "Stethoscope", "Thermometer"],
-      animal: ["Elephant", "Peacock", "Crow", "Squirrel", "Cow", "Tiger", "Dolphin", "Mongoose", "Owl", "Camel",
-        "Kangaroo", "Parrot", "Buffalo", "Snake", "Goat", "Bat", "Crab", "Ant", "Frog", "Deer",
-        "Lion", "Leopard", "Cheetah", "Giraffe", "Zebra", "Rhinoceros", "Hippopotamus", "Panda", "Koala", "Sloth",
-        "Otter", "Beaver", "Raccoon", "Fox", "Wolf", "Hyena", "Jackal", "Porcupine", "Hedgehog", "Armadillo",
-        "Bison", "Buffalo calf", "Ox", "Donkey", "Mule", "Horse", "Pony", "Sheep", "Pig", "Rooster",
-        "Hen", "Duck", "Goose", "Turkey", "Pigeon", "Sparrow", "Eagle", "Vulture", "Falcon", "Hawk",
-        "Kingfisher", "Woodpecker", "Flamingo", "Stork", "Heron", "Swan", "Penguin", "Seal", "Walrus", "Whale",
-        "Shark", "Octopus", "Jellyfish", "Starfish", "Seahorse", "Lobster", "Shrimp", "Snail", "Earthworm", "Butterfly",
-        "Dragonfly", "Grasshopper", "Cockroach", "Mosquito", "Housefly", "Spider", "Scorpion", "Centipede", "Lizard", "Chameleon",
-        "Iguana", "Crocodile", "Alligator", "Turtle", "Tortoise", "Bear", "Panther", "Wild boar", "Bull", "Bullock cart ox"]
-    };
+const words = {
+  movie: movies,
+  person: ["Rajinikanth","Kamal Haasan","A.R. Rahman","Vijay","Ajith Kumar","Dhanush","Suriya","Nayanthara","Trisha","Vetrimaaran",
+  "Mani Ratnam","Lokesh Kanagaraj","Simbu","Sivakarthikeyan","Yogi Babu","Vijay Sethupathi","Samantha","Shah Rukh Khan","Virat Kohli","MS Dhoni",
+  "Sarath Kumar","Vikram","Karthi","Arya","Jyothika","Nithya Menen","Aishwarya Rai","Vijay Deverakonda","Prabhas","Yash",
+  "Allu Arjun","Vetri Maaran","Bharathiraja","Gautham Vasudev Menon","Selvaraghavan","Pa Ranjith","Nelson Dilipkumar","Karthik Subbaraj",
+  "Anirudh Ravichander","Ilaiyaraaja","Sid Sriram","Shreya Ghoshal","Sathyaraj","Prakash Raj","Radhika Sarathkumar","Khushbu",
+  "Nassar","Fahadh Faasil","Mammootty","Mohanlal","Sudhir Babu","Regina Cassandra","Aditi Rao Hydari","Keerthy Suresh",
+  "Sai Pallavi","Anupama Parameswaran","Rashmika Mandanna","Pooja Hegde","Sneha","Simran","Meena","Napoleon",
+  "Vivek","Santhanam","Soori","Karunakaran","M.S. Bhaskar","Vijay Sethupathi","Bala","Mysskin","Vignesh Shivan",
+  "Sudha Kongara","Halitha Shameem","A.R. Murugadoss","Siva","H. Vinoth","Venkat Prabhu","Hari","P.S. Mithran",
+  "Sachin Tendulkar","Kapil Dev","Virender Sehwag","Rohit Sharma","Ravindra Jadeja","P.T. Usha","Saina Nehwal","P.V. Sindhu",
+  "Mahendra Singh Dhoni","A.P.J. Abdul Kalam","Mahatma Gandhi","Subhas Chandra Bose","Bharathiyar","C.V. Raman",
+  "Cristiano Ronaldo","Lionel Messi","Albert Einstein","Steve Jobs","Elon Musk","Barack Obama","Narendra Modi","Marilyn Monroe","Michael Jackson"],
+  object: ["Umbrella","Coconut","Bicycle","Guitar","Camera","Sandals","Kite","Ladder","Thermos flask","Broom",
+  "Fan","Mirror","Backpack","Torch light","Wrist watch","Filter coffee tumbler","Autorickshaw","Slipper","Bucket","Key bunch",
+  "Spectacles","Comb","Toothbrush","Pressure cooker","Idli stand","Dosa tawa","Betel leaf box","Oil lamp","Incense stick","Chappal",
+  "Newspaper","Calendar","Clothesline","Sewing machine","Wall clock","Ceiling fan","Mixer grinder","Water bottle","School bag","Pencil box",
+  "Lunch box","Cricket bat","Football","Badminton racket","Carrom board","Chess board","Playing cards","Table tennis paddle","Skipping rope","Slingshot",
+  "Matchbox","Candle","Flashlight","Padlock","Rope","Hammer","Screwdriver","Nail","Paintbrush","Bucket of water",
+  "Rickshaw bell","Bus ticket","Train whistle","Boarding pass","Passport","Wallet","Handbag","Sunglasses","Cap","Scarf",
+  "Necklace","Bangles","Anklets","Bindi","Veshti","Saree","Kurta","Jeans","Raincoat","Flip flops",
+  "Guitar pick","Drum set","Violin","Flute","Harmonium","Microphone","Speaker","Headphones","Remote control","Television",
+  "Refrigerator","Washing machine","Iron box","Vacuum cleaner","Water heater","Air conditioner","Fire extinguisher","First aid box","Stethoscope","Thermometer"],
+  animal: ["Elephant","Peacock","Crow","Squirrel","Cow","Tiger","Dolphin","Mongoose","Owl","Camel",
+  "Kangaroo","Parrot","Buffalo","Snake","Goat","Bat","Crab","Ant","Frog","Deer",
+  "Lion","Leopard","Cheetah","Giraffe","Zebra","Rhinoceros","Hippopotamus","Panda","Koala","Sloth",
+  "Otter","Beaver","Raccoon","Fox","Wolf","Hyena","Jackal","Porcupine","Hedgehog","Armadillo",
+  "Bison","Buffalo calf","Ox","Donkey","Mule","Horse","Pony","Sheep","Pig","Rooster",
+  "Hen","Duck","Goose","Turkey","Pigeon","Sparrow","Eagle","Vulture","Falcon","Hawk",
+  "Kingfisher","Woodpecker","Flamingo","Stork","Heron","Swan","Penguin","Seal","Walrus","Whale",
+  "Shark","Octopus","Jellyfish","Starfish","Seahorse","Lobster","Shrimp","Snail","Earthworm","Butterfly",
+  "Dragonfly","Grasshopper","Cockroach","Mosquito","Housefly","Spider","Scorpion","Centipede","Lizard","Chameleon",
+  "Iguana","Crocodile","Alligator","Turtle","Tortoise","Bear","Panther","Wild boar","Bull","Bullock cart ox"]
+};
 
-    const malayalam = ["Premam", "Charlie", "Ennu Ninte Moideen", "Pathemari", "Kammatipaadam", "Action Hero Biju", "Maheshinte Prathikaaram", "Kali", "Oppam", "Pulimurugan",
-      "Angamaly Diaries", "Thondimuthalum Driksakshiyum", "Take Off", "Godha", "Mayaanadhi", "Sudani from Nigeria", "Varathan", "Ee.Ma.Yau", "Koode", "Njan Prakashan",
-      "Kumbalangi Nights", "Uyare", "Virus", "Ittymaani", "Lucifer", "Jallikattu", "Driving License", "Android Kunjappan", "Ayyappanum Koshiyum", "Anjaam Pathira",
-      "Helen", "Trance", "Sufiyum Sujathayum", "Kappela", "Drishyam 2", "Joji", "Minnal Murali", "Nayattu", "The Great Indian Kitchen", "Malik",
-      "Home", "Kurup", "Aarkkariyam", "Bheeshma Parvam", "Puzhu", "Hridayam", "Jana Gana Mana", "Kaduva", "Thallumaala", "Saudi Vellakka",
-      "Romancham", "2018", "Neymar", "Iratta", "Kaathal The Core", "Kannur Squad", "Nanpakal Nerathu Mayakkam", "Falimy", "Manjummel Boys", "Premalu",
-      "Bramayugam", "Aavesham", "Aadujeevitham", "Turbo", "Guruvayoor Ambalanadayil", "Ullozhukku", "Kishkindha Kaandam", "ARM", "Marco", "Rekhachithram",
-      "Officer on Duty", "Ponman", "L2 Empuraan", "Thudarum", "Hridayapoorvam", "Lokah Chapter 1 Chandra", "Malaikottai Vaaliban", "Vaazha", "Pani", "Bougainvillea",
-      "Sookshmadarshini", "Varshangalkku Shesham", "Ajayante Randam Moshanam", "Anweshippin Kandethum", "Abraham Ozler", "Nadikar", "Jaya Jaya Jaya Jaya Hey", "Palthu Janwar", "Mandakini", "Oru Adaar Love",
-      "Parava", "Ezra", "Villain", "Kayamkulam Kochunni", "Vikruthi", "Unda", "Pathinettam Padi", "Ishq", "Varane Avashyamund", "Kuruthi",
-      "Meppadiyan", "Brother's Day", "Vellam", "Jan.E.Man", "Mahaveeryar", "Nna Thaan Case Kodu", "Paappan", "Pada", "Kooman", "Thankam",
-      "Neelavelicham", "RDX", "Kaapa", "Sulaikha Manzil", "Ayalvashi", "Golam", "Jacobinte Swargarajyam", "Vettah", "Oru Vadakkan Selfie", "Sakhavu",
-      "Adventures of Omanakuttan", "Carbon", "Aadu 2", "Njandukalude Naattil Oridavela", "Sherlock Toms", "Kuttanpillayude Sivarathri", "Pokkiri Simon", "Ente Mezhuthiri Athazhangal", "Sara's", "Marakkar",
-      "Bro Daddy", "Nizhal", "Anugraheethan Antony", "Vaashi", "Jo and Jo", "Ela Veezha Poonchira", "Ullasam", "Veekam", "Gaganachari", "Little Hearts"
-    ].filter((v, i, a) => a.indexOf(v) === i);
+const malayalam = ["Premam","Charlie","Ennu Ninte Moideen","Pathemari","Kammatipaadam","Action Hero Biju","Maheshinte Prathikaaram","Kali","Oppam","Pulimurugan",
+"Angamaly Diaries","Thondimuthalum Driksakshiyum","Take Off","Godha","Mayaanadhi","Sudani from Nigeria","Varathan","Ee.Ma.Yau","Koode","Njan Prakashan",
+"Kumbalangi Nights","Uyare","Virus","Ittymaani","Lucifer","Jallikattu","Driving License","Android Kunjappan","Ayyappanum Koshiyum","Anjaam Pathira",
+"Helen","Trance","Sufiyum Sujathayum","Kappela","Drishyam 2","Joji","Minnal Murali","Nayattu","The Great Indian Kitchen","Malik",
+"Home","Kurup","Aarkkariyam","Bheeshma Parvam","Puzhu","Hridayam","Jana Gana Mana","Kaduva","Thallumaala","Saudi Vellakka",
+"Romancham","2018","Neymar","Iratta","Kaathal The Core","Kannur Squad","Nanpakal Nerathu Mayakkam","Falimy","Manjummel Boys","Premalu",
+"Bramayugam","Aavesham","Aadujeevitham","Turbo","Guruvayoor Ambalanadayil","Ullozhukku","Kishkindha Kaandam","ARM","Marco","Rekhachithram",
+"Officer on Duty","Ponman","L2 Empuraan","Thudarum","Hridayapoorvam","Lokah Chapter 1 Chandra","Malaikottai Vaaliban","Vaazha","Pani","Bougainvillea",
+"Sookshmadarshini","Varshangalkku Shesham","Ajayante Randam Moshanam","Anweshippin Kandethum","Abraham Ozler","Nadikar","Jaya Jaya Jaya Jaya Hey","Palthu Janwar","Mandakini","Oru Adaar Love",
+"Parava","Ezra","Villain","Kayamkulam Kochunni","Vikruthi","Unda","Pathinettam Padi","Ishq","Varane Avashyamund","Kuruthi",
+"Meppadiyan","Brother's Day","Vellam","Jan.E.Man","Mahaveeryar","Nna Thaan Case Kodu","Paappan","Pada","Kooman","Thankam",
+"Neelavelicham","RDX","Kaapa","Sulaikha Manzil","Ayalvashi","Golam","Jacobinte Swargarajyam","Vettah","Oru Vadakkan Selfie","Sakhavu",
+"Adventures of Omanakuttan","Carbon","Aadu 2","Njandukalude Naattil Oridavela","Sherlock Toms","Kuttanpillayude Sivarathri","Pokkiri Simon","Ente Mezhuthiri Athazhangal","Sara's","Marakkar",
+"Bro Daddy","Nizhal","Anugraheethan Antony","Vaashi","Jo and Jo","Ela Veezha Poonchira","Ullasam","Veekam","Gaganachari","Little Hearts"
+].filter((v,i,a)=>a.indexOf(v)===i);
 
-    const english = ["Home Alone", "Pretty Woman", "Ghost", "Goodfellas", "Dances with Wolves", "Terminator 2", "The Silence of the Lambs", "Beauty and the Beast", "Aladdin", "Jurassic Park",
-      "Schindler's List", "Forrest Gump", "The Lion King", "Pulp Fiction", "The Shawshank Redemption", "Speed", "The Mask", "Toy Story", "Braveheart", "Se7en",
-      "Heat", "Casino", "The Usual Suspects", "Independence Day", "Twister", "Titanic", "Men in Black", "Face/Off", "The Fifth Element", "Good Will Hunting",
-      "L.A. Confidential", "The Matrix", "Fight Club", "American Beauty", "The Sixth Sense", "Gladiator", "Toy Story 2", "Saving Private Ryan", "The Truman Show", "Mrs Doubtfire",
-      "Groundhog Day", "Ace Ventura", "Dumb and Dumber", "Liar Liar", "Apollo 13", "Mission Impossible", "Rush Hour", "Bad Boys", "Cast Away", "A Beautiful Mind",
-      "Catch Me If You Can", "Bruce Almighty", "Mean Girls", "The Notebook", "Memento", "Shrek", "Harry Potter and the Sorcerer's Stone", "The Fellowship of the Ring", "Ocean's Eleven", "Spider-Man",
-      "Finding Nemo", "Kill Bill", "Pirates of the Caribbean", "The Incredibles", "The Departed", "The Prestige", "Casino Royale", "The Dark Knight", "WALL-E", "Slumdog Millionaire",
-      "Avatar", "Inception", "The Social Network", "Toy Story 3", "Black Swan", "The King's Speech", "The Avengers", "Django Unchained", "Life of Pi", "Gravity",
-      "Interstellar", "Whiplash", "Mad Max: Fury Road", "The Martian", "La La Land", "Get Out", "Black Panther", "Parasite", "Joker", "1917",
-      "Tenet", "Dune", "Top Gun: Maverick", "Oppenheimer", "Barbie", "Everything Everywhere All at Once", "Avatar: The Way of Water", "Spider-Man: No Way Home", "Avengers: Endgame", "Avengers: Infinity War",
-      "Frozen", "Up", "Coco", "Inside Out", "Zootopia", "Ratatouille", "Monsters, Inc.", "Shrek 2", "Madagascar", "Kung Fu Panda",
-      "How to Train Your Dragon", "Despicable Me", "Minions", "Superbad", "The Hangover", "Bridesmaids", "Iron Man", "Thor", "Captain America", "Guardians of the Galaxy",
-      "Deadpool", "Logan", "Wonder Woman", "Aquaman", "Fast Five", "Furious 7", "John Wick", "Skyfall", "No Time to Die", "Spectre",
-      "Godzilla", "King Kong", "Pacific Rim", "Edge of Tomorrow", "Now You See Me", "The Conjuring", "Insidious", "It", "A Quiet Place", "Hereditary",
-      "Us", "Knives Out", "Ford v Ferrari", "Bohemian Rhapsody", "Rocketman", "The Wolf of Wall Street", "Gone Girl", "Shutter Island", "Zodiac", "No Country for Old Men",
-      "There Will Be Blood", "The Revenant", "Mission: Impossible - Fallout", "Deadpool & Wolverine", "Inside Out 2", "Wicked", "Gladiator II", "The Batman", "Doctor Strange", "Shang-Chi"
-    ].filter((v, i, a) => a.indexOf(v) === i);
+const english = ["Home Alone","Pretty Woman","Ghost","Goodfellas","Dances with Wolves","Terminator 2","The Silence of the Lambs","Beauty and the Beast","Aladdin","Jurassic Park",
+"Schindler's List","Forrest Gump","The Lion King","Pulp Fiction","The Shawshank Redemption","Speed","The Mask","Toy Story","Braveheart","Se7en",
+"Heat","Casino","The Usual Suspects","Independence Day","Twister","Titanic","Men in Black","Face/Off","The Fifth Element","Good Will Hunting",
+"L.A. Confidential","The Matrix","Fight Club","American Beauty","The Sixth Sense","Gladiator","Toy Story 2","Saving Private Ryan","The Truman Show","Mrs Doubtfire",
+"Groundhog Day","Ace Ventura","Dumb and Dumber","Liar Liar","Apollo 13","Mission Impossible","Rush Hour","Bad Boys","Cast Away","A Beautiful Mind",
+"Catch Me If You Can","Bruce Almighty","Mean Girls","The Notebook","Memento","Shrek","Harry Potter and the Sorcerer's Stone","The Fellowship of the Ring","Ocean's Eleven","Spider-Man",
+"Finding Nemo","Kill Bill","Pirates of the Caribbean","The Incredibles","The Departed","The Prestige","Casino Royale","The Dark Knight","WALL-E","Slumdog Millionaire",
+"Avatar","Inception","The Social Network","Toy Story 3","Black Swan","The King's Speech","The Avengers","Django Unchained","Life of Pi","Gravity",
+"Interstellar","Whiplash","Mad Max: Fury Road","The Martian","La La Land","Get Out","Black Panther","Parasite","Joker","1917",
+"Tenet","Dune","Top Gun: Maverick","Oppenheimer","Barbie","Everything Everywhere All at Once","Avatar: The Way of Water","Spider-Man: No Way Home","Avengers: Endgame","Avengers: Infinity War",
+"Frozen","Up","Coco","Inside Out","Zootopia","Ratatouille","Monsters, Inc.","Shrek 2","Madagascar","Kung Fu Panda",
+"How to Train Your Dragon","Despicable Me","Minions","Superbad","The Hangover","Bridesmaids","Iron Man","Thor","Captain America","Guardians of the Galaxy",
+"Deadpool","Logan","Wonder Woman","Aquaman","Fast Five","Furious 7","John Wick","Skyfall","No Time to Die","Spectre",
+"Godzilla","King Kong","Pacific Rim","Edge of Tomorrow","Now You See Me","The Conjuring","Insidious","It","A Quiet Place","Hereditary",
+"Us","Knives Out","Ford v Ferrari","Bohemian Rhapsody","Rocketman","The Wolf of Wall Street","Gone Girl","Shutter Island","Zodiac","No Country for Old Men",
+"There Will Be Blood","The Revenant","Mission: Impossible - Fallout","Deadpool & Wolverine","Inside Out 2","Wicked","Gladiator II","The Batman","Doctor Strange","Shang-Chi"
+].filter((v,i,a)=>a.indexOf(v)===i);
 
-    const bible = ["Adam", "Eve", "Cain", "Abel", "Seth", "Enoch", "Noah", "Shem", "Ham", "Japheth",
-      "Abraham", "Sarah", "Hagar", "Ishmael", "Isaac", "Rebekah", "Esau", "Jacob", "Leah", "Rachel",
-      "Reuben", "Simeon", "Levi", "Judah", "Dan", "Naphtali", "Gad", "Asher", "Issachar", "Zebulun",
-      "Joseph", "Benjamin", "Lot", "Melchizedek", "Moses", "Aaron", "Miriam", "Joshua", "Caleb", "Rahab",
-      "Deborah", "Gideon", "Samson", "Delilah", "Ruth", "Naomi", "Boaz", "Eli", "Samuel", "Saul",
-      "Jonathan", "David", "Goliath", "Bathsheba", "Solomon", "Absalom", "Elijah", "Elisha", "Jezebel", "Ahab",
-      "Hezekiah", "Josiah", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Shadrach", "Meshach", "Abednego", "Esther",
-      "Mordecai", "Nehemiah", "Ezra", "Job", "Jonah", "Hosea", "Joel", "Amos", "Micah", "Nahum",
-      "Malachi", "Hannah", "Michal", "Abigail", "Uriah", "Nathan", "Zechariah", "Elizabeth", "John the Baptist", "Mary",
-      "Joseph of Nazareth", "Jesus", "Peter", "Andrew", "James", "John", "Philip", "Bartholomew", "Thomas", "Matthew",
-      "Thaddaeus", "Simon the Zealot", "Judas Iscariot", "Matthias", "Paul", "Barnabas", "Timothy", "Titus", "Silas", "Luke",
-      "Mark", "Stephen", "Lazarus", "Martha", "Mary Magdalene", "Nicodemus", "Zacchaeus", "Pontius Pilate", "Herod", "Caiaphas",
-      "Barabbas", "Lydia", "Priscilla", "Aquila", "Apollos", "Philemon", "Cornelius", "Ananias", "Sapphira", "Tabitha",
-      "Eutychus", "Gabriel", "Michael", "Jethro", "Zipporah", "Balaam", "Korah", "Nimrod", "Methuselah", "Tamar",
-      "Dinah", "Manasseh", "Ephraim", "Obed", "Jesse", "Joab", "Abner", "Rehoboam", "Jeroboam", "Nebuchadnezzar",
-      "Belshazzar", "Darius", "Cyrus", "Haman", "Vashti", "Jairus", "Bartimaeus", "Anna", "Salome", "Herodias", "Onesimus"
-    ].filter((v, i, a) => a.indexOf(v) === i);
+const bible = ["Adam","Eve","Cain","Abel","Seth","Enoch","Noah","Shem","Ham","Japheth",
+"Abraham","Sarah","Hagar","Ishmael","Isaac","Rebekah","Esau","Jacob","Leah","Rachel",
+"Reuben","Simeon","Levi","Judah","Dan","Naphtali","Gad","Asher","Issachar","Zebulun",
+"Joseph","Benjamin","Lot","Melchizedek","Moses","Aaron","Miriam","Joshua","Caleb","Rahab",
+"Deborah","Gideon","Samson","Delilah","Ruth","Naomi","Boaz","Eli","Samuel","Saul",
+"Jonathan","David","Goliath","Bathsheba","Solomon","Absalom","Elijah","Elisha","Jezebel","Ahab",
+"Hezekiah","Josiah","Isaiah","Jeremiah","Ezekiel","Daniel","Shadrach","Meshach","Abednego","Esther",
+"Mordecai","Nehemiah","Ezra","Job","Jonah","Hosea","Joel","Amos","Micah","Nahum",
+"Malachi","Hannah","Michal","Abigail","Uriah","Nathan","Zechariah","Elizabeth","John the Baptist","Mary",
+"Joseph of Nazareth","Jesus","Peter","Andrew","James","John","Philip","Bartholomew","Thomas","Matthew",
+"Thaddaeus","Simon the Zealot","Judas Iscariot","Matthias","Paul","Barnabas","Timothy","Titus","Silas","Luke",
+"Mark","Stephen","Lazarus","Martha","Mary Magdalene","Nicodemus","Zacchaeus","Pontius Pilate","Herod","Caiaphas",
+"Barabbas","Lydia","Priscilla","Aquila","Apollos","Philemon","Cornelius","Ananias","Sapphira","Tabitha",
+"Eutychus","Gabriel","Michael","Jethro","Zipporah","Balaam","Korah","Nimrod","Methuselah","Tamar",
+"Dinah","Manasseh","Ephraim","Obed","Jesse","Joab","Abner","Rehoboam","Jeroboam","Nebuchadnezzar",
+"Belshazzar","Darius","Cyrus","Haman","Vashti","Jairus","Bartimaeus","Anna","Salome","Herodias","Onesimus"
+].filter((v,i,a)=>a.indexOf(v)===i);
 
-    const anime = ["Naruto", "Naruto Shippuden", "Bleach", "One Piece", "Shin-chan", "Spy x Family", "Dragon Ball Z", "Dragon Ball Super", "Attack on Titan", "Death Note",
-      "Demon Slayer", "Jujutsu Kaisen", "My Hero Academia", "Fullmetal Alchemist: Brotherhood", "Hunter x Hunter", "One Punch Man", "Chainsaw Man", "Tokyo Ghoul", "Sword Art Online", "Fairy Tail",
-      "Black Clover", "Doraemon", "Pokemon", "Detective Conan", "Gintama", "Cowboy Bebop", "Neon Genesis Evangelion", "Steins;Gate", "Code Geass", "Haikyuu!!",
-      "Kuroko's Basketball", "Your Name", "Spirited Away", "My Neighbor Totoro", "Howl's Moving Castle", "Princess Mononoke", "Vinland Saga", "Mob Psycho 100", "Dr. Stone", "Fire Force",
-      "Blue Lock", "Solo Leveling", "Frieren: Beyond Journey's End", "Dandadan", "Kaiju No. 8", "Oshi no Ko", "Bocchi the Rock!", "Yu-Gi-Oh!", "Sailor Moon", "Digimon",
-      "Inuyasha", "Fruits Basket", "Toradora!", "Re:Zero", "Konosuba", "Overlord", "That Time I Got Reincarnated as a Slime", "Tokyo Revengers", "Assassination Classroom", "Ninja Hattori",
-      "Kiteretsu", "Perman", "Rurouni Kenshin", "The Seven Deadly Sins", "Berserk", "JoJo's Bizarre Adventure", "Monster", "Death Parade", "Clannad", "Violet Evergarden",
-      "Weathering with You", "Suzume", "Demon Slayer: Mugen Train", "Jujutsu Kaisen 0", "Dragon Ball", "Slam Dunk", "Initial D", "Hajime no Ippo", "Yu Yu Hakusho", "Lupin the Third",
-      "Yor Forger", "Loid Forger", "Anya Forger", "Bond Forger", "Franky Franklin", "Damian Desmond", "Becky Blackbell", "Yuri Briar", "Fiona Frost", "Sylvia Sherwood",
-      "Naruto Uzumaki", "Sasuke Uchiha", "Sakura Haruno", "Kakashi Hatake", "Itachi Uchiha", "Madara Uchiha", "Jiraiya", "Hinata Hyuga", "Gaara", "Minato Namikaze",
-      "Ichigo Kurosaki", "Rukia Kuchiki", "Sosuke Aizen", "Renji Abarai", "Byakuya Kuchiki", "Kenpachi Zaraki", "Monkey D. Luffy", "Roronoa Zoro", "Nami", "Usopp",
-      "Sanji", "Tony Tony Chopper", "Nico Robin", "Franky", "Brook", "Portgas D. Ace", "Shanks", "Blackbeard", "Trafalgar Law", "Goku",
-      "Vegeta", "Gohan", "Piccolo", "Frieza", "Cell", "Majin Buu", "Eren Yeager", "Mikasa Ackerman", "Armin Arlert", "Levi Ackerman",
-      "Light Yagami", "L Lawliet", "Ryuk", "Tanjiro Kamado", "Nezuko Kamado", "Zenitsu Agatsuma", "Inosuke Hashibira", "Kyojuro Rengoku", "Satoru Gojo", "Yuji Itadori",
-      "Megumi Fushiguro", "Ryomen Sukuna", "Nobara Kugisaki", "Izuku Midoriya", "Katsuki Bakugo", "All Might", "Shoto Todoroki", "Edward Elric", "Alphonse Elric", "Roy Mustang",
-      "Gon Freecss", "Killua Zoldyck", "Saitama", "Genos", "Denji", "Power", "Makima", "Pikachu", "Ash Ketchum", "Doraemon Character",
-      "Nobita Nobi", "Shizuka Minamoto", "Takeshi Gouda", "Suneo Honekawa", "Shinnosuke Nohara", "Misae Nohara", "Hiroshi Nohara", "Himawari Nohara", "Masao Kazama", "Action Kamen",
-      "Conan Edogawa", "Spike Spiegel", "Rimuru Tempest", "Asta", "Lelouch Lamperouge", "Rintaro Okabe", "Subaru Natsuki", "Kirito", "Asuna Yuuki", "Natsu Dragneel",
-      "Kaneki Ken", "Senku Ishigami", "Shoyo Hinata", "Totoro", "Chihiro", "Kenshin Himura", "Meliodas", "Sailor Moon Usagi", "Yugi Muto", "Seto Kaiba"
-    ].filter((v, i, a) => a.indexOf(v) === i);
+const anime = ["Naruto","Naruto Shippuden","Bleach","One Piece","Shin-chan","Spy x Family","Dragon Ball Z","Dragon Ball Super","Attack on Titan","Death Note",
+"Demon Slayer","Jujutsu Kaisen","My Hero Academia","Fullmetal Alchemist: Brotherhood","Hunter x Hunter","One Punch Man","Chainsaw Man","Tokyo Ghoul","Sword Art Online","Fairy Tail",
+"Black Clover","Doraemon","Pokemon","Detective Conan","Gintama","Cowboy Bebop","Neon Genesis Evangelion","Steins;Gate","Code Geass","Haikyuu!!",
+"Kuroko's Basketball","Your Name","Spirited Away","My Neighbor Totoro","Howl's Moving Castle","Princess Mononoke","Vinland Saga","Mob Psycho 100","Dr. Stone","Fire Force",
+"Blue Lock","Solo Leveling","Frieren: Beyond Journey's End","Dandadan","Kaiju No. 8","Oshi no Ko","Bocchi the Rock!","Yu-Gi-Oh!","Sailor Moon","Digimon",
+"Inuyasha","Fruits Basket","Toradora!","Re:Zero","Konosuba","Overlord","That Time I Got Reincarnated as a Slime","Tokyo Revengers","Assassination Classroom","Ninja Hattori",
+"Kiteretsu","Perman","Rurouni Kenshin","The Seven Deadly Sins","Berserk","JoJo's Bizarre Adventure","Monster","Death Parade","Clannad","Violet Evergarden",
+"Weathering with You","Suzume","Demon Slayer: Mugen Train","Jujutsu Kaisen 0","Dragon Ball","Slam Dunk","Initial D","Hajime no Ippo","Yu Yu Hakusho","Lupin the Third",
+"Yor Forger","Loid Forger","Anya Forger","Bond Forger","Franky Franklin","Damian Desmond","Becky Blackbell","Yuri Briar","Fiona Frost","Sylvia Sherwood",
+"Naruto Uzumaki","Sasuke Uchiha","Sakura Haruno","Kakashi Hatake","Itachi Uchiha","Madara Uchiha","Jiraiya","Hinata Hyuga","Gaara","Minato Namikaze",
+"Ichigo Kurosaki","Rukia Kuchiki","Sosuke Aizen","Renji Abarai","Byakuya Kuchiki","Kenpachi Zaraki","Monkey D. Luffy","Roronoa Zoro","Nami","Usopp",
+"Sanji","Tony Tony Chopper","Nico Robin","Franky","Brook","Portgas D. Ace","Shanks","Blackbeard","Trafalgar Law","Goku",
+"Vegeta","Gohan","Piccolo","Frieza","Cell","Majin Buu","Eren Yeager","Mikasa Ackerman","Armin Arlert","Levi Ackerman",
+"Light Yagami","L Lawliet","Ryuk","Tanjiro Kamado","Nezuko Kamado","Zenitsu Agatsuma","Inosuke Hashibira","Kyojuro Rengoku","Satoru Gojo","Yuji Itadori",
+"Megumi Fushiguro","Ryomen Sukuna","Nobara Kugisaki","Izuku Midoriya","Katsuki Bakugo","All Might","Shoto Todoroki","Edward Elric","Alphonse Elric","Roy Mustang",
+"Gon Freecss","Killua Zoldyck","Saitama","Genos","Denji","Power","Makima","Pikachu","Ash Ketchum","Doraemon Character",
+"Nobita Nobi","Shizuka Minamoto","Takeshi Gouda","Suneo Honekawa","Shinnosuke Nohara","Misae Nohara","Hiroshi Nohara","Himawari Nohara","Masao Kazama","Action Kamen",
+"Conan Edogawa","Spike Spiegel","Rimuru Tempest","Asta","Lelouch Lamperouge","Rintaro Okabe","Subaru Natsuki","Kirito","Asuna Yuuki","Natsu Dragneel",
+"Kaneki Ken","Senku Ishigami","Shoyo Hinata","Totoro","Chihiro","Kenshin Himura","Meliodas","Sailor Moon Usagi","Yugi Muto","Seto Kaiba"
+].filter((v,i,a)=>a.indexOf(v)===i);
 
-    const decks = { tamil: movies, malayalam, english, bible, anime };
-    words.anime = anime;
+const decks = {tamil: movies, malayalam, english, bible, anime};
+words.anime = anime;
 
-    // ---------- nav ----------
-    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-      document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      document.getElementById('screen-' + t.dataset.screen).classList.add('active');
-    }));
+// ---------- nav ----------
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById('screen-'+t.dataset.screen).classList.add('active');
+}));
 
-    // ---------- Heads Up ----------
-    let huDeck = [], huIdx = 0, huScore = 0, huLog = [], huTimer = null, huSecondsLeft = 60, huLastTilt = 0;
-    function huShuffle() { huDeck = [...decks[document.getElementById('hu-deck').value]].sort(() => Math.random() - 0.5); huIdx = 0; }
-    function huShowWord() { document.getElementById('hu-word').textContent = huDeck[huIdx % huDeck.length]; }
-    function huEndRound() {
-      clearInterval(huTimer);
-      document.getElementById('hu-play').classList.remove('on');
-      document.getElementById('hu-end').classList.add('on');
-      document.getElementById('hu-endscore').textContent = huScore + ' correct';
-      document.getElementById('hu-endlist').innerHTML = huLog.map(l => (l.ok ? '✓ ' : '✕ ') + l.w).join('<br>');
-      window.removeEventListener('deviceorientation', huTiltHandler);
+// ---------- Heads Up ----------
+let huDeck=[], huIdx=0, huScore=0, huLog=[], huTimer=null, huSecondsLeft=60, huLastTilt=0;
+function huShuffle(){ huDeck=[...decks[document.getElementById('hu-deck').value]].sort(()=>Math.random()-0.5); huIdx=0; }
+function huShowWord(){ document.getElementById('hu-word').textContent = huDeck[huIdx % huDeck.length]; }
+function huEndRound(){
+  clearInterval(huTimer);
+  document.getElementById('hu-play').classList.remove('on');
+  document.getElementById('hu-end').classList.add('on');
+  document.getElementById('hu-endscore').textContent = huScore + ' correct';
+  document.getElementById('hu-endlist').innerHTML = huLog.map(l=>(l.ok?'✓ ':'✕ ')+l.w).join('<br>');
+  window.removeEventListener('deviceorientation', huTiltHandler);
+}
+function huNext(ok){
+  huLog.push({w:huDeck[huIdx % huDeck.length], ok});
+  if(ok) huScore++;
+  huIdx++;
+  document.getElementById('hu-score').textContent = huScore+' correct';
+  huShowWord();
+}
+let huArmed=false, huGotTilt=false;
+function huTiltHandler(e){
+  const b=e.beta; if(b==null) return;
+  huGotTilt=true;
+  const down = b>125 || b<-125;   // screen facing floor
+  const up = b<55 && b>-55;       // screen facing ceiling
+  if(!huArmed){ if(!down && !up) huArmed=true; return; } // must come back to upright first
+  if(down){ huArmed=false; huNext(true); }
+  else if(up){ huArmed=false; huNext(false); }
+}
+document.getElementById('hu-start').addEventListener('click', ()=>{
+  huScore=0; huLog=[]; huShuffle(); huArmed=false; huGotTilt=false;
+  document.getElementById('hu-tiltnote').textContent='Tilt phone down = correct · up = pass';
+  setTimeout(()=>{ if(!huGotTilt) document.getElementById('hu-tiltnote').textContent='Tilt not available here — use the buttons below'; },2500);
+  huSecondsLeft = parseInt(document.getElementById('hu-time').value,10);
+  document.getElementById('hu-score').textContent='0 correct';
+  document.getElementById('hu-timer').textContent=huSecondsLeft;
+  document.getElementById('hu-play').classList.add('on');
+  huShowWord();
+  if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
+    DeviceOrientationEvent.requestPermission().then(r=>{ if(r==='granted') window.addEventListener('deviceorientation', huTiltHandler); }).catch(()=>{});
+  } else {
+    window.addEventListener('deviceorientation', huTiltHandler);
+  }
+  huTimer = setInterval(()=>{
+    huSecondsLeft--; document.getElementById('hu-timer').textContent=huSecondsLeft;
+    if(huSecondsLeft<=0) huEndRound();
+  },1000);
+});
+document.getElementById('hu-pass').addEventListener('click',()=>huNext(false));
+document.getElementById('hu-correct').addEventListener('click',()=>huNext(true));
+document.getElementById('hu-again').addEventListener('click',()=>{ document.getElementById('hu-end').classList.remove('on'); });
+
+// ---------- 20 Questions ----------
+let tqCat='movie', tqPool=[], tqCurrent='';
+function tqRefillPool(){ tqPool = [...words[tqCat]].sort(()=>Math.random()-0.5); }
+tqRefillPool();
+document.querySelectorAll('#tq-cats .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('#tq-cats .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on'); tqCat=c.dataset.cat; tqRefillPool(); tqState='idle'; tqCount=0; tqRender();
+}));
+let tqState='idle', tqCount=0;
+function tqRender(){
+  const hint=document.getElementById('tq-hint'), word=document.getElementById('tq-word'), main=document.getElementById('tq-main');
+  word.style.display='none'; hint.style.display='block';
+  document.getElementById('tq-undo').disabled=!(tqState==='asking'&&tqCount>0);
+  document.getElementById('tq-giveup').disabled=tqState!=='asking';
+  if(tqState==='idle'){ hint.textContent='Keeper: take the phone and tap Reveal. Everyone else look away!'; main.textContent='Reveal word (keeper only)'; }
+  else if(tqState==='secret'){ hint.style.display='none'; word.style.display='block'; word.textContent=tqCurrent; main.textContent='Hide word & start the questions'; }
+  else if(tqState==='asking'){
+    hint.innerHTML='<div style="font-family:Baloo 2,sans-serif;font-size:2.4rem;font-weight:800;color:var(--marigold)">Question '+(tqCount+1)+' / 20</div><div>Ask your yes/no question, then tap Done and pass the phone on.</div>';
+    main.textContent='✓ Question done — pass the phone';
+  } else { hint.textContent='The word was…'; word.style.display='block'; word.textContent=tqCurrent; main.textContent='New game'; }
+}
+document.getElementById('tq-main').addEventListener('click',()=>{
+  if(tqState==='idle'){ if(tqPool.length===0) tqRefillPool(); tqCurrent=tqPool.pop(); tqState='secret'; }
+  else if(tqState==='secret'){ tqState='asking'; tqCount=0; }
+  else if(tqState==='asking'){ tqCount++; if(tqCount>=20) tqState='revealed'; }
+  else { tqState='idle'; tqCount=0; }
+  tqRender();
+});
+document.getElementById('tq-undo').addEventListener('click',()=>{ if(tqState==='asking'&&tqCount>0){ tqCount--; tqRender(); } });
+document.getElementById('tq-giveup').addEventListener('click',()=>{ if(tqState==='asking'){ tqState='revealed'; tqRender(); } });
+tqRender();
+
+// ---------- Board Games sub-nav ----------
+document.querySelectorAll('#bg-sub .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('#bg-sub .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');
+  document.querySelectorAll('.bgsub-screen').forEach(x=>x.classList.remove('on'));
+  document.getElementById('bgsub-'+c.dataset.bg).classList.add('on');
+}));
+
+// ---------- Snakes & Ladders ----------
+const slLadders = {2:38,7:14,8:31,15:26,21:42,28:84,36:44,51:67,71:91,78:98,87:94};
+const slSnakes  = {16:6,46:25,49:11,62:19,64:60,74:53,89:68,92:88,95:75,99:80};
+const slColors  = ['#1f5cff','#e02020','#1fb83a','#ffd400','#9b30ff','#ffffff'];
+const slColorNames=['Blue','Red','Green','Yellow','Violet','White'];
+let slPlayers=[], slTurn=0, slHistory=[], slOver=false, slPro=false, slBusy=false, slGen=0, slLog=[];
+
+function slCellPos(n){ // n 1..100 -> {row,col} 0-indexed from top
+  const idx=n-1, rowFromBottom=Math.floor(idx/10), posInRow=idx%10;
+  const col = rowFromBottom%2===0 ? posInRow : 9-posInRow;
+  const row = 9-rowFromBottom;
+  return {row,col};
+}
+const slLadderColors=['#3ec9a7','#6cc24a','#2fb8c6','#6c9bff'];
+const slSnakeColors=['#ef5b6a','#c26cff','#ff8c42','#ff5ec4','#8b5cf6','#ef4444','#e85d9c','#a855f7','#f97316','#dc2626'];
+function slCenter(n){ const {row,col}=slCellPos(n); return {x:col*10+5, y:row*10+5}; }
+function slBuildBoard(){
+  const board=document.getElementById('sl-board'); board.innerHTML='';
+  for(let n=1;n<=100;n++){
+    const {row,col}=slCellPos(n);
+    const d=document.createElement('div');
+    d.className='sl-cell '+((row+col)%2===0?'cell-a':'cell-b');
+    d.style.gridRow=(row+1); d.style.gridColumn=(col+1);
+    d.id='sl-c'+n;
+    d.innerHTML='<span>'+n+'</span>';
+    board.appendChild(d);
+  }
+  let svg='';
+  Object.keys(slLadders).forEach((k,i)=>{
+    const a=slCenter(+k), b=slCenter(slLadders[k]), col=slLadderColors[i%slLadderColors.length];
+    const dx=b.x-a.x, dy=b.y-a.y, len=Math.hypot(dx,dy), nx=-dy/len, ny=dx/len, off=1.6;
+    const r1={x1:a.x+nx*off,y1:a.y+ny*off,x2:b.x+nx*off,y2:b.y+ny*off};
+    const r2={x1:a.x-nx*off,y1:a.y-ny*off,x2:b.x-nx*off,y2:b.y-ny*off};
+    svg+='<line x1="'+r1.x1+'" y1="'+r1.y1+'" x2="'+r1.x2+'" y2="'+r1.y2+'" stroke="'+col+'" stroke-width="1.1"/>';
+    svg+='<line x1="'+r2.x1+'" y1="'+r2.y1+'" x2="'+r2.x2+'" y2="'+r2.y2+'" stroke="'+col+'" stroke-width="1.1"/>';
+    for(let t=0.12;t<1;t+=0.16){
+      const rx1=r1.x1+(r1.x2-r1.x1)*t, ry1=r1.y1+(r1.y2-r1.y1)*t;
+      const rx2=r2.x1+(r2.x2-r2.x1)*t, ry2=r2.y1+(r2.y2-r2.y1)*t;
+      svg+='<line x1="'+rx1+'" y1="'+ry1+'" x2="'+rx2+'" y2="'+ry2+'" stroke="'+col+'" stroke-width="1"/>';
     }
-    function huNext(ok) {
-      huLog.push({ w: huDeck[huIdx % huDeck.length], ok });
-      if (ok) huScore++;
-      huIdx++;
-      document.getElementById('hu-score').textContent = huScore + ' correct';
-      huShowWord();
+  });
+  Object.keys(slSnakes).forEach((k,i)=>{
+    const a=slCenter(+k), b=slCenter(slSnakes[k]), col=slSnakeColors[i%slSnakeColors.length];
+    const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+    const dx=b.x-a.x, dy=b.y-a.y, len=Math.hypot(dx,dy)||1, nx=-dy/len, ny=dx/len;
+    const c1x=mx+nx*10, c1y=my+ny*10;
+    svg+='<path d="M'+a.x+' '+a.y+' Q '+c1x+' '+c1y+' '+b.x+' '+b.y+'" stroke="'+col+'" stroke-width="2.4" fill="none" stroke-linecap="round"/>';
+    svg+='<circle cx="'+a.x+'" cy="'+a.y+'" r="2.1" fill="'+col+'"/>';
+    svg+='<circle cx="'+(a.x-0.7)+'" cy="'+(a.y-0.7)+'" r="0.4" fill="#fff"/>';
+    svg+='<circle cx="'+(a.x+0.7)+'" cy="'+(a.y-0.7)+'" r="0.4" fill="#fff"/>';
+  });
+  document.getElementById('sl-overlay').innerHTML=svg;
+  const layer=document.getElementById('sl-tokens-layer'); layer.innerHTML=''; slTokenEls=[];
+  slPlayers.forEach(p=>{
+    const t=document.createElement('div'); t.className='token-cone';
+    t.innerHTML='<svg viewBox="0 0 20 22"><polygon points="10,1.5 1.8,20 18.2,20" fill="'+p.color+'" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+    layer.appendChild(t); slTokenEls.push(t);
+  });
+}
+const slPipMap={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+function slSetDieFace(el,n){
+  const active=slPipMap[n]||[];
+  let h='';
+  for(let i=0;i<9;i++) h+='<div class="die-pip'+(active.includes(i)?'':' off')+'"></div>';
+  el.innerHTML=h;
+}
+slSetDieFace(document.getElementById('sl-die'),1);
+let slTokenEls=[];
+function slTokenXY(i,pos){ const c=slCenter(pos); return {x:c.x+((i%3)-1)*2.2, y:c.y+(Math.floor(i/3)-0.5)*3}; }
+function slPlaceToken(i,pos,instant){
+  const el=slTokenEls[i]; if(!el) return;
+  if(pos<1){ el.style.opacity='0'; return; }
+  const c=slTokenXY(i,pos);
+  el.style.transition = instant ? 'none' : 'left .5s ease, top .5s ease';
+  el.style.left=c.x+'%'; el.style.top=c.y+'%'; el.style.opacity='1';
+}
+function slRenderTokens(){ slPlayers.forEach((p,i)=>slPlaceToken(i,p.pos,true)); }
+function slAnimateMove(i,landedPos,finalPos,special,cb){
+  slPlaceToken(i,landedPos,false);
+  const g=slGen;
+  setTimeout(()=>{
+    if(g!==slGen) return;
+    if(special){
+      const el=slTokenEls[i], c=slTokenXY(i,finalPos);
+      el.style.transition='left 1.3s cubic-bezier(.45,0,.4,1), top 1.3s cubic-bezier(.45,0,.4,1)';
+      el.style.left=c.x+'%'; el.style.top=c.y+'%';
+      setTimeout(cb,1350);
+    } else cb();
+  },550);
+}
+function slRenderList(){
+  const list=document.getElementById('sl-plist'); list.innerHTML='';
+  slPlayers.forEach((p,i)=>{
+    const c=document.createElement('div');
+    c.className='sl-pchip'+(i===slTurn&&!slOver?' turn':'')+(p.finished?' done':'');
+    c.innerHTML='<span class="plyr-dot" style="background:'+p.color+'"></span>'+p.name+' — '+(p.pos<1?'Home':'Sq '+p.pos)+(p.finished?' 🏆':'');
+    list.appendChild(c);
+  });
+}
+function slRenderTurn(){
+  document.getElementById('sl-turn').textContent = slOver ? 'Game over' : (slPlayers[slTurn].name+"'s turn");
+}
+function slSnapshot(){
+  slHistory.push(JSON.stringify({players:slPlayers,turn:slTurn,over:slOver,log:slLog}));
+  document.getElementById('sl-undo').disabled = false;
+}
+function slNextTurn(){
+  let tries=0;
+  do{ slTurn=(slTurn+1)%slPlayers.length; tries++; }while(slPlayers[slTurn].finished && tries<=slPlayers.length);
+}
+function slRoll(preset,info){
+  if(slOver||slBusy) return;
+  slBusy=true; const gen=slGen;
+  slSnapshot();
+  const final=preset||(1+Math.floor(Math.random()*6));
+  const dieEl=document.getElementById('sl-die');
+  document.getElementById('sl-roll').disabled=true; document.getElementById('sl-undo').disabled=true;
+  dieEl.classList.add('rolling');
+  let ticks=0;
+  const iv=setInterval(()=>{
+    if(gen!==slGen){ clearInterval(iv); dieEl.classList.remove('rolling'); return; }
+    slSetDieFace(dieEl, 1+Math.floor(Math.random()*6));
+    ticks++;
+    if(ticks>=9){
+      clearInterval(iv);
+      slSetDieFace(dieEl, final);
+      dieEl.classList.remove('rolling');
+      slApplyRoll(final,info);
     }
-    let huArmed = false, huGotTilt = false;
-    function huTiltHandler(e) {
-      const b = e.beta; if (b == null) return;
-      huGotTilt = true;
-      const down = b > 125 || b < -125;   // screen facing floor
-      const up = b < 55 && b > -55;       // screen facing ceiling
-      if (!huArmed) { if (!down && !up) huArmed = true; return; } // must come back to upright first
-      if (down) { huArmed = false; huNext(true); }
-      else if (up) { huArmed = false; huNext(false); }
+  },70);
+}
+function slApplyRoll(die,info){
+  const gen=slGen, idx=slTurn, p=slPlayers[idx], startPos=p.pos;
+  let landed=startPos, final=startPos, special=false, msg='', logText='';
+  if(startPos<1){
+    if(die===1||die===5||die===6){ landed=1; final=1; msg=p.name+' enters the board!'; logText='entered the board (Home → 1)'; }
+    else { msg=p.name+' needs a 1, 5 or 6 to enter — turn passed.'; logText='needs 1/5/6 to enter · stays Home'; }
+  } else {
+    const target=startPos+die;
+    if(target>100){ msg='Need exact roll to reach 100 — no move.'; logText='needs exact roll · stays at '+startPos; }
+    else {
+      landed=target;
+      if(slLadders[target]){ final=slLadders[target]; special=true; msg='🪜 Ladder! '+target+' → '+final; logText=startPos+' → '+target+' · 🪜 climbed to '+final; }
+      else if(slSnakes[target]){ final=slSnakes[target]; special=true; msg='🐍 Snake! '+target+' → '+final; logText=startPos+' → '+target+' · 🐍 slid down to '+final; }
+      else { final=target; msg=p.name+' moved to '+final+'.'; logText=startPos+' → '+final; }
     }
-    document.getElementById('hu-start').addEventListener('click', () => {
-      huScore = 0; huLog = []; huShuffle(); huArmed = false; huGotTilt = false;
-      document.getElementById('hu-tiltnote').textContent = 'Tilt phone down = correct · up = pass';
-      setTimeout(() => { if (!huGotTilt) document.getElementById('hu-tiltnote').textContent = 'Tilt not available here — use the buttons below'; }, 2500);
-      huSecondsLeft = parseInt(document.getElementById('hu-time').value, 10);
-      document.getElementById('hu-score').textContent = '0 correct';
-      document.getElementById('hu-timer').textContent = huSecondsLeft;
-      document.getElementById('hu-play').classList.add('on');
-      huShowWord();
-      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission().then(r => { if (r === 'granted') window.addEventListener('deviceorientation', huTiltHandler); }).catch(() => { });
-      } else {
-        window.addEventListener('deviceorientation', huTiltHandler);
-      }
-      huTimer = setInterval(() => {
-        huSecondsLeft--; document.getElementById('hu-timer').textContent = huSecondsLeft;
-        if (huSecondsLeft <= 0) huEndRound();
-      }, 1000);
+  }
+  if(final===100) logText+=' · 🏆 wins';
+  else if(die===6 && final>=1) logText+=' · 🎲 rolls again';
+  slLog=slLog.concat([{n:slLog.length+1, name:p.name, color:p.color, die:die, text:logText, hold: info?(info.level/10).toFixed(1):null}]);
+  slRenderLog();
+  document.getElementById('sl-msg').textContent=msg;
+  function finish(){
+    p.pos=final;
+    if(p.pos===100){
+      p.finished=true; slOver=true;
+      document.getElementById('sl-msg').textContent=p.name+' wins! 🏆';
+      const b=document.getElementById('sl-winbanner'); b.textContent='🏆 '+p.name+' wins the game!'; b.classList.add('on');
+    } else if(die!==6 || final<1){
+      slNextTurn();
+    } // rolled 6 and on board -> same player goes again
+    slBusy=false;
+    slRenderList(); slRenderTurn();
+    document.getElementById('sl-roll').disabled=slOver;
+    document.getElementById('sl-undo').disabled = slHistory.length===0;
+  }
+  if(landed===startPos && final===startPos){ finish(); return; }
+  slAnimateMove(idx, landed, final, special, ()=>{ if(gen!==slGen) return; finish(); });
+}
+function slRenderLog(){
+  const box=document.getElementById('sl-log'); box.innerHTML='';
+  for(let k=slLog.length-1;k>=0;k--){
+    const e=slLog[k];
+    const row=document.createElement('div'); row.className='log-row'; row.style.borderLeftColor=e.color;
+    const head=document.createElement('div'); head.className='log-head';
+    const h=document.createElement('span'); h.className='log-hash'; h.textContent='#'+e.n;
+    const dot=document.createElement('span'); dot.className='plyr-dot'; dot.style.background=e.color; dot.style.width='11px'; dot.style.height='11px';
+    const nm=document.createElement('b'); nm.textContent=e.name;
+    const d=document.createElement('span'); d.className='log-die'; d.textContent='rolled '+e.die;
+    head.append(h,dot,nm,d);
+    if(e.hold){ const hs=document.createElement('span'); hs.style.opacity='.7'; hs.textContent='held '+e.hold+'s'; head.append(hs); }
+    const body=document.createElement('div'); body.className='log-body'; body.textContent=e.text;
+    row.append(head,body); box.appendChild(row);
+  }
+  box.scrollTop=0;
+}
+function slUndo(){
+  if(slHistory.length===0||slBusy) return;
+  const snap=JSON.parse(slHistory.pop());
+  slPlayers=snap.players; slTurn=snap.turn; slOver=snap.over; slLog=snap.log||[];
+  document.getElementById('sl-winbanner').classList.toggle('on', slOver);
+  if(slOver) document.getElementById('sl-winbanner').textContent='🏆 '+slPlayers.find(p=>p.finished).name+' wins the game!';
+  document.getElementById('sl-msg').textContent='Undone.';
+  document.getElementById('sl-roll').disabled=false;
+  document.getElementById('sl-undo').disabled = slHistory.length===0;
+  slRenderTokens(); slRenderList(); slRenderTurn(); slRenderLog();
+}
+function slRenderNameInputs(){
+  const n=parseInt(document.getElementById('sl-pcount').textContent,10);
+  const wrap=document.getElementById('sl-nameinputs'); wrap.innerHTML='';
+  for(let i=0;i<n;i++){
+    const row=document.createElement('div'); row.className='plyr-row';
+    row.innerHTML='<span class="plyr-dot" style="background:'+slColors[i]+'"></span><input id="sl-name'+i+'" placeholder="Player '+(i+1)+' ('+slColorNames[i]+')" maxlength="14">';
+    wrap.appendChild(row);
+  }
+}
+document.getElementById('sl-pminus').addEventListener('click',()=>{
+  const el=document.getElementById('sl-pcount'); let v=parseInt(el.textContent,10);
+  if(v>2){ el.textContent=v-1; slRenderNameInputs(); }
+});
+document.getElementById('sl-pplus').addEventListener('click',()=>{
+  const el=document.getElementById('sl-pcount'); let v=parseInt(el.textContent,10);
+  if(v<6){ el.textContent=v+1; slRenderNameInputs(); }
+});
+slRenderNameInputs();
+document.getElementById('sl-start').addEventListener('click',()=>{
+  const n=parseInt(document.getElementById('sl-pcount').textContent,10);
+  slPlayers=[];
+  for(let i=0;i<n;i++){
+    const val=document.getElementById('sl-name'+i).value.trim();
+    slPlayers.push({name: val||('Player '+(i+1)), color: slColors[i], pos:0, finished:false});
+  }
+  slTurn=0; slHistory=[]; slOver=false; slLog=[]; slBusy=false; slGen++;
+  document.getElementById('sl-undo').disabled=true; document.getElementById('sl-roll').disabled=false;
+  document.getElementById('sl-logcard').style.display='block'; slRenderLog();
+  document.getElementById('sl-winbanner').classList.remove('on');
+  document.getElementById('sl-msg').textContent='';
+  slSetDieFace(document.getElementById('sl-die'),1);
+  document.getElementById('sl-setup').style.display='none';
+  document.getElementById('sl-play').style.display='block';
+  slBuildBoard(); slRenderTokens(); slRenderList(); slRenderTurn();
+});
+document.getElementById('sl-roll').addEventListener('click',()=>slRoll());
+document.getElementById('sl-undo').addEventListener('click',slUndo);
+document.getElementById('sl-restart').addEventListener('click',()=>{
+  slGen++; slBusy=false;
+  document.getElementById('sl-logcard').style.display='none';
+  document.getElementById('sl-play').style.display='none';
+  document.getElementById('sl-setup').style.display='block';
+});
+
+// ---------- Pro dice (tap & hold charge) ----------
+function slProTable(i){
+  let seed=9301+i*4973;
+  const rnd=()=>{ seed=(Math.imul(seed,1103515245)+12345)&0x7fffffff; return seed/0x7fffffff; };
+  const t=[];
+  for(let k=0;k<30;k++){ const a=1+Math.floor(rnd()*6); let b; do{ b=1+Math.floor(rnd()*6); }while(b===a); t.push([a,b]); }
+  if(i===0) t[0]=[1,2]; if(i===1) t[0]=[3,6]; if(i===2) t[0]=[4,1];
+  return t;
+}
+const slProTables=[0,1,2,3,4,5].map(slProTable);
+function slSetPro(on){
+  slPro=on;
+  document.querySelectorAll('.sl-pro').forEach(c=>c.checked=on);
+  document.getElementById('sl-roll').style.display=on?'none':'';
+  document.getElementById('sl-charge').style.display=on?'block':'none';
+  document.getElementById('sl-die').classList.toggle('pro',on);
+  document.getElementById('sl-hint').textContent=on?'Pro dice: tap or hold the dice (max 3.0s), release to roll.':'';
+}
+document.querySelectorAll('.sl-pro').forEach(c=>c.addEventListener('change',()=>{ if(slCharging){ c.checked=slPro; return; } slSetPro(c.checked); }));
+let slCharging=false, slChargeT0=0, slChargeRaf=0;
+function slChargeTick(){
+  if(!slCharging) return;
+  const held=Math.min(performance.now()-slChargeT0,3000);
+  const lvl=Math.min(30,Math.max(1,Math.ceil(held/100)));
+  document.getElementById('sl-chargefill').style.width=(held/30)+'%';
+  document.getElementById('sl-chargetxt').textContent='Charge '+(lvl/10).toFixed(1)+'s'+(held>=3000?' · MAX':'');
+  const dieEl=document.getElementById('sl-die');
+  dieEl.style.transform='scale('+(1+held/3000*0.3)+')';
+  dieEl.style.boxShadow='0 0 '+(8+held/3000*28)+'px rgba(244,165,30,'+(0.3+held/3000*0.6)+')';
+  slChargeRaf=requestAnimationFrame(slChargeTick);
+}
+function slChargeEnd(doRoll){
+  if(!slCharging) return;
+  slCharging=false; cancelAnimationFrame(slChargeRaf);
+  const held=Math.min(performance.now()-slChargeT0,3000);
+  const level=Math.min(30,Math.max(1,Math.ceil(held/100)));
+  const dieEl=document.getElementById('sl-die'); dieEl.style.transform=''; dieEl.style.boxShadow='';
+  document.getElementById('sl-chargefill').style.width='0';
+  document.getElementById('sl-chargetxt').textContent= doRoll ? 'Released at '+(level/10).toFixed(1)+'s' : 'Hold the dice · 0.0s / 3.0s';
+  if(!doRoll) return;
+  const pair=slProTables[slTurn][level-1];
+  slRoll(pair[Math.random()<0.5?0:1],{level:level});
+}
+(function(){
+  const dieEl=document.getElementById('sl-die');
+  dieEl.addEventListener('pointerdown',e=>{
+    if(!slPro||slBusy||slOver||slCharging||slPlayers.length===0) return;
+    e.preventDefault();
+    try{ dieEl.setPointerCapture(e.pointerId); }catch(_){}
+    slCharging=true; slChargeT0=performance.now(); slChargeTick();
+  });
+  dieEl.addEventListener('pointerup',()=>slChargeEnd(true));
+  dieEl.addEventListener('pointercancel',()=>slChargeEnd(false));
+  dieEl.addEventListener('contextmenu',e=>e.preventDefault());
+})();
+slSetPro(false);
+
+// ===== LUDO-ENGINE-START =====
+const LD_COL={Red:'#e02020',Green:'#1fb83a',Yellow:'#ffd400',Blue:'#1f5cff',Purple:'#9b30ff',Orange:'#ff8a00'};
+
+/* Topology generator. One parametric N-arm star: every arm is 3 squares wide x 6 long.
+   Per arm the clockwise shared track is: 6 squares outward on the LEFT column, 1 cap square, 6 squares inward on the RIGHT column
+   => K=13 squares per arm, T=13*N shared squares (52 / 65 / 78). The middle column is that arm's private 5-square home lane.
+   Start square = RIGHT column, 2nd from the cap (local index 8). Turn-in square = the cap square (local 6), two squares before start.
+   Hub radius R0 is solved numerically so the inner corner squares of neighbouring arms are exactly sqrt(2) apart (like the classic board). */
+function ldBuild(id,title,N,names,seatFor,notes){
+  const L=6,K=2*L+1,T=K*N,LANE0=T-1,FIN=T+4;
+  const gap=R=>2*Math.hypot(R,1)*Math.sin(Math.PI/N-Math.atan2(1,R));
+  let lo=1.2,hi=9;
+  for(let i=0;i<60;i++){const m=(lo+hi)/2; if(gap(m)<Math.SQRT2) lo=m; else hi=m;}
+  const R0=(lo+hi)/2,dir=[],lv=[],rv=[],ang=[];
+  for(let i=0;i<N;i++){const a=-Math.PI/2+i*2*Math.PI/N,d={x:Math.cos(a),y:Math.sin(a)};ang.push(a);dir.push(d);lv.push({x:d.y,y:-d.x});rv.push({x:-d.y,y:d.x});}
+  const at=(i,v,u)=>{const s=u<0?lv[i]:rv[i],w=Math.abs(u);return{x:dir[i].x*(R0+v-1)+s.x*w,y:dir[i].y*(R0+v-1)+s.y*w};};
+  const track=[],lanes=[],start=[],turnIn=[],safe=new Set();
+  for(let i=0;i<N;i++){
+    for(let v=1;v<=L;v++)track.push(at(i,v,-1));
+    track.push(at(i,L,0));
+    for(let v=L;v>=1;v--)track.push(at(i,v,1));
+    lanes.push([5,4,3,2,1].map(v=>at(i,v,0)));
+    start.push(i*K+8);turnIn.push(i*K+6);safe.add(i*K+3);safe.add(i*K+8);
+  }
+  const pts=track.concat(...lanes),yards=[];
+  for(let i=0;i<N;i++){
+    const psi=ang[i]+Math.PI/N,m={x:Math.cos(psi),y:Math.sin(psi)};
+    let rho=R0,c;
+    for(;rho<60;rho+=.05){c={x:m.x*rho,y:m.y*rho};if(Math.min(...pts.map(q=>Math.hypot(q.x-c.x,q.y-c.y)))>=2.75)break;}
+    yards.push({c,slots:[[-.55,-.55],[.55,-.55],[-.55,.55],[.55,.55]].map(o=>({x:c.x+o[0],y:c.y+o[1]}))});
+  }
+  const hub=dir.map((d,i)=>[[-.3,-.28],[.3,-.28],[-.3,.28],[.3,.28]].map(o=>({x:d.x*(R0-1.05)+lv[i].x*o[0]+d.x*o[1],y:d.y*(R0-1.05)+lv[i].y*o[0]+d.y*o[1]})));
+  const xs=[],ys=[];
+  pts.forEach(p=>{xs.push(p.x-.8,p.x+.8);ys.push(p.y-.8,p.y+.8);});
+  yards.forEach(y=>{xs.push(y.c.x-2.4,y.c.x+2.4);ys.push(y.c.y-2.4,y.c.y+2.4);});
+  const x0=Math.min(...xs),y0=Math.min(...ys);
+  return{id,title,N,K,L,T,LANE0,FIN,R0,names,seatFor,notes,dir,lv,rv,ang,track,lanes,start,turnIn,safe,yards,hub,
+    rules:{blockade:true,sixToEnter:true,exactFinish:true},bounds:{x0,y0,w:Math.max(...xs)-x0,h:Math.max(...ys)-y0}};
+}
+const BOARD_CONFIGS={
+  classic:ldBuild('classic','Classic square board (2-4 players)',4,['Red','Green','Yellow','Blue'],c=>({2:[0,2],3:[0,1,2],4:[0,1,2,3]}[c]),
+    'Traditional four-arm cross: 52 shared squares, 8 safe squares, 56 steps from start to home. 2 players sit on opposite arms; 3 players use the first three arms (every 3-of-4 layout is the same up to rotation/reflection).'),
+  five:ldBuild('five','Custom five-arm board (5 players)',5,['Red','Blue','Yellow','Green','Purple'],c=>[0,1,2,3,4],
+    'Custom variant (NOT an official ruleset): 65 shared squares (5 x 13), 10 safe squares, 69 steps from start to home. Same arm design as the classic board rotated into five equal sectors.'),
+  six:ldBuild('six','Six-arm board (6 players)',6,['Red','Blue','Yellow','Green','Orange','Purple'],c=>[0,1,2,3,4,5],
+    'Six-arm star: 78 shared squares (6 x 13), 12 safe squares, 82 steps from start to home. Layout inspired by commercial six-player boards; rules are the shared engine rules, not verified against a specific manufacturer sheet.')
+};
+const ldCfgFor=n=>n<=4?BOARD_CONFIGS.classic:n===5?BOARD_CONFIGS.five:BOARD_CONFIGS.six;
+
+function sharedAt(cfg,seat,p){return(p>=0&&p<=cfg.T-2)?(cfg.start[seat]+p)%cfg.T:-1;}
+function ldCoordAt(cfg,seat,p,k){
+  if(p<0)return cfg.yards[seat].slots[k];
+  if(p<=cfg.T-2)return cfg.track[(cfg.start[seat]+p)%cfg.T];
+  if(p<cfg.FIN)return cfg.lanes[seat][p-cfg.LANE0];
+  return cfg.hub[seat][k];
+}
+function pawnCoord(cfg,st,pl,k){return ldCoordAt(cfg,st.players[pl].seat,st.pawns[pl][k],k);}
+function ldLabel(cfg,seat,p){
+  if(p<0)return'Yard';if(p===cfg.FIN)return'Home';
+  if(p<=cfg.T-2)return'Sq '+(sharedAt(cfg,seat,p)+1)+(p===0?' (start)':'');
+  return'Lane '+(p-cfg.LANE0+1)+'/5';
+}
+
+function validateBoardConfig(c){
+  const e=[],T=c.T,d=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+  if(c.track.length!==T)e.push('track length');
+  if(new Set(c.start).size!==c.N)e.push('starts not unique');
+  for(let i=0;i<c.N;i++){
+    if(((c.start[(i+1)%c.N]-c.start[i])+T)%T!==c.K)e.push('start spacing '+i);
+    const idx=[];for(let p=0;p<=T-2;p++)idx.push((c.start[i]+p)%T);
+    if(new Set(idx).size!==T-1)e.push('route duplicates '+i);
+    if(idx[idx.length-1]!==c.turnIn[i])e.push('turn-in mismatch '+i);
+    const full=idx.map(j=>c.track[j]).concat(c.lanes[i]);
+    if(full.length!==c.FIN)e.push('route length '+i);
+    for(let p=1;p<full.length;p++)if(d(full[p-1],full[p])>1.5)e.push('route gap '+i+'@'+p);
+    for(let p=-1;p<=c.FIN;p++){const q=ldCoordAt(c,i,p,0);if(!q||!isFinite(q.x)||!isFinite(q.y))e.push('bad coord '+i+'@'+p);}
+    c.lanes[i].forEach((q,li)=>{
+      c.track.forEach(t=>{if(d(q,t)<.9)e.push('lane '+i+' touches track');});
+      c.lanes.forEach((o,j)=>{if(j!==i)o.forEach(r=>{if(d(q,r)<.9)e.push('lane '+i+' overlaps lane '+j);});});
     });
-    document.getElementById('hu-pass').addEventListener('click', () => huNext(false));
-    document.getElementById('hu-correct').addEventListener('click', () => huNext(true));
-    document.getElementById('hu-again').addEventListener('click', () => { document.getElementById('hu-end').classList.remove('on'); });
+    if(Math.abs(Math.hypot(c.yards[i].c.x,c.yards[i].c.y)-Math.hypot(c.yards[0].c.x,c.yards[0].c.y))>1e-6)e.push('yard radius '+i);
+  }
+  for(let a=0;a<T;a++)for(let b=a+1;b<T;b++)if(d(c.track[a],c.track[b])<.95)e.push('track overlap '+a+','+b);
+  if(c.safe.size!==2*c.N)e.push('safe count');
+  c.safe.forEach(s=>{if(![3,8].includes(s%c.K))e.push('safe pattern '+s);});
+  return e;
+}
 
-    // ---------- 20 Questions ----------
-    let tqCat = 'movie', tqPool = [], tqCurrent = '';
-    function tqRefillPool() { tqPool = [...words[tqCat]].sort(() => Math.random() - 0.5); }
-    tqRefillPool();
-    document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
-      document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
-      c.classList.add('on'); tqCat = c.dataset.cat; tqRefillPool();
-      document.getElementById('tq-word').style.display = 'none';
-      document.getElementById('tq-hint').style.display = 'block';
-    }));
-    document.getElementById('tq-new').addEventListener('click', () => {
-      if (tqPool.length === 0) tqRefillPool();
-      tqCurrent = tqPool.pop();
-      document.getElementById('tq-word').textContent = tqCurrent;
-      document.getElementById('tq-word').style.display = 'block';
-      document.getElementById('tq-hint').style.display = 'none';
-    });
-    document.getElementById('tq-hide').addEventListener('click', () => {
-      document.getElementById('tq-word').style.display = 'none';
-      document.getElementById('tq-hint').style.display = 'block';
-      document.getElementById('tq-hint').textContent = 'Word hidden — pass the phone.';
-    });
+/* ---------- rules engine ---------- */
+function rollDie(){const a=new Uint8Array(1);do{crypto.getRandomValues(a);}while(a[0]>=252);return a[0]%6+1;}
+function createInitialState(count,names,opts){
+  const cfg=ldCfgFor(count),seats=cfg.seatFor(count);
+  return{cfgId:cfg.id,
+    players:seats.map((s,i)=>({seat:s,name:(names&&names[i])||('Player '+(i+1)),colorName:cfg.names[s],color:LD_COL[cfg.names[s]]})),
+    pawns:seats.map(()=>[-1,-1,-1,-1]),turn:0,phase:'roll',roll:null,sixes:0,winner:null,lastRoll:null,
+    opts:Object.assign({bonusCapture:false,bonusHome:false,tripleSix:false},opts||{}),log:[]};
+}
+function pawnsAt(st,cfg,sq){const out=[];st.pawns.forEach((a,pl)=>a.forEach((p,k)=>{if(sharedAt(cfg,st.players[pl].seat,p)===sq)out.push({pl,k});}));return out;}
+function blockedSq(st,cfg,sq,pl){
+  if(!cfg.rules.blockade||cfg.safe.has(sq))return false; // blockades never form on safe squares
+  const n={};pawnsAt(st,cfg,sq).forEach(o=>{if(o.pl!==pl)n[o.pl]=(n[o.pl]||0)+1;});
+  return Object.values(n).some(x=>x>=2);
+}
+function getLegalMoves(st,roll){
+  const cfg=BOARD_CONFIGS[st.cfgId],pl=st.turn,seat=st.players[pl].seat,out=[];
+  st.pawns[pl].forEach((p,k)=>{
+    if(p===cfg.FIN)return;
+    let to;
+    if(p<0){if(roll!==6)return;to=0;}else{to=p+roll;if(to>cfg.FIN)return;}
+    for(let q=(p<0?0:p+1);q<=to;q++){const sq=sharedAt(cfg,seat,q);if(sq>=0&&blockedSq(st,cfg,sq,pl))return;}
+    const sq=sharedAt(cfg,seat,to),caps=[];
+    if(sq>=0&&!cfg.safe.has(sq))pawnsAt(st,cfg,sq).forEach(o=>{if(o.pl!==pl)caps.push(o);});
+    out.push({pawn:k,from:p,to,capture:caps});
+  });
+  return out;
+}
+function validateMove(st,k){
+  if(st.phase!=='move'||st.winner!==null||st.roll===null)return null;
+  return getLegalMoves(st,st.roll).find(m=>m.pawn===k)||null;
+}
+function resolveCapture(st,m){m.capture.forEach(o=>{st.pawns[o.pl][o.k]=-1;});return m.capture.slice();}
+function resolveStackingAndBlockades(st,m){
+  const cfg=BOARD_CONFIGS[st.cfgId],sq=sharedAt(cfg,st.players[st.turn].seat,m.to);
+  return sq>=0&&!cfg.safe.has(sq)&&pawnsAt(st,cfg,sq).filter(o=>o.pl===st.turn).length>=2;
+}
+function checkWin(st,pl){const cfg=BOARD_CONFIGS[st.cfgId];return st.pawns[pl].every(p=>p===cfg.FIN);}
+function advanceTurn(st,ev){
+  const cfg=BOARD_CONFIGS[st.cfgId];
+  if(checkWin(st,st.turn)){st.winner=st.turn;st.phase='over';st.roll=null;return'win';}
+  const extra=st.roll===6||(st.opts.bonusCapture&&ev&&ev.captured.length>0)||(st.opts.bonusHome&&ev&&ev.home);
+  st.roll=null;st.phase='roll';
+  if(extra)return'again';
+  st.turn=(st.turn+1)%st.players.length;st.sixes=0;return'next';
+}
+function applyMove(st,m){
+  const cfg=BOARD_CONFIGS[st.cfgId];
+  st.pawns[st.turn][m.pawn]=m.to;
+  const captured=resolveCapture(st,m),blockade=resolveStackingAndBlockades(st,m);
+  return{move:m,captured,blockade,home:m.to===cfg.FIN};
+}
+function doRoll(st,v){
+  if(st.phase!=='roll'||st.winner!==null)return null;
+  st.roll=v;
+  if(v===6)st.sixes++;else st.sixes=0;
+  if(v===6&&st.opts.tripleSix&&st.sixes>=3){ // third six in a row: roll forfeited, earlier moves stay valid
+    st.roll=null;st.turn=(st.turn+1)%st.players.length;st.sixes=0;st.phase='roll';return{forfeit:true,legal:[]};
+  }
+  const legal=getLegalMoves(st,v);
+  if(!legal.length)return{none:true,legal,next:advanceTurn(st,null)};
+  st.phase='move';return{legal};
+}
+function doMove(st,k){
+  const m=validateMove(st,k);if(!m)return null;
+  const ev=applyMove(st,m);ev.result=advanceTurn(st,ev);return ev;
+}
 
-    // ---------- Board Games sub-nav ----------
-    document.querySelectorAll('#bg-sub .chip').forEach(c => c.addEventListener('click', () => {
-      document.querySelectorAll('#bg-sub .chip').forEach(x => x.classList.remove('on'));
-      c.classList.add('on');
-      document.querySelectorAll('.bgsub-screen').forEach(x => x.classList.remove('on'));
-      document.getElementById('bgsub-' + c.dataset.bg).classList.add('on');
-    }));
+/* ---------- automated tests ---------- */
+function ldRunTests(){
+  const R=[],T=(n,c)=>R.push({name:n,ok:!!c});
+  Object.values(BOARD_CONFIGS).forEach(c=>{
+    const e=validateBoardConfig(c);
+    T(c.id+': topology validates (continuous routes, spacing, private lanes, no overlaps)'+(e.length?' ['+e.slice(0,3).join('; ')+']':''),e.length===0);
+    const lens=c.start.map((s,i)=>c.FIN);
+    T(c.id+': all '+c.N+' players travel '+c.FIN+' steps start-to-home',lens.every(x=>x===c.T+4));
+    T(c.id+': start squares spaced '+c.K+' apart',c.start.every((s,i)=>((c.start[(i+1)%c.N]-s)+c.T)%c.T===c.K));
+    T(c.id+': every pawn lane coordinate is the owner\'s own lane',c.start.every((s,i)=>{for(let p=c.LANE0;p<c.FIN;p++){const q=ldCoordAt(c,i,p,0);if(q!==c.lanes[i][p-c.LANE0])return false;}return true;}));
+  });
+  [2,3,4,5,6].forEach(n=>{const s=createInitialState(n);T('init '+n+' players on '+s.cfgId+' board, 4 pawns each',s.players.length===n&&s.pawns.every(a=>a.length===4&&a.every(p=>p===-1)));});
+  [[4,'classic'],[5,'five'],[6,'six']].forEach(([n,id])=>{
+    const cfg=BOARD_CONFIGS[id],pre=id+'/'+n+'p: ',mk=o=>createInitialState(n,null,o);
+    let s=mk();
+    T(pre+'no pawn leaves yard without a 6',[1,2,3,4,5].every(r=>getLegalMoves(s,r).length===0));
+    T(pre+'a 6 gives 4 entering moves onto the start square',getLegalMoves(s,6).length===4&&getLegalMoves(s,6).every(m=>m.to===0));
+    const s0=s.players[0].seat,s1=s.players[1].seat;
+    const find=(safe)=>{for(let q=1;q<cfg.T-6;q++){const sq=sharedAt(cfg,s0,q+2),qq=(sq-cfg.start[s1]+cfg.T)%cfg.T;if(cfg.safe.has(sq)===safe&&qq<=cfg.T-2)return{q,sq,qq};}return null;};
+    let f=find(false),x=mk();x.pawns[0][0]=f.q;x.pawns[1][0]=f.qq;doRoll(x,2);
+    T(pre+'landing on a lone opponent on an ordinary square captures it',getLegalMoves(x,2)[0].capture.length===1&&(doMove(x,0),x.pawns[1][0]===-1&&x.pawns[0][0]===f.q+2));
+    f=find(true);x=mk();x.pawns[0][0]=f.q;x.pawns[1][0]=f.qq;doRoll(x,2);
+    T(pre+'safe squares prevent capture (pawns coexist)',getLegalMoves(x,2)[0].capture.length===0&&(doMove(x,0),x.pawns[1][0]===f.qq));
+    f=find(false);x=mk();x.pawns[0][0]=f.q;x.pawns[1][0]=f.qq;x.pawns[1][1]=f.qq;
+    T(pre+'opponent blockade stops landing on it',getLegalMoves(x,2).length===0);
+    x=mk();x.pawns[0][0]=f.q-1;x.pawns[1][0]=f.qq;x.pawns[1][1]=f.qq;
+    T(pre+'opponent blockade stops passing over it',!getLegalMoves(x,3).some(m=>m.pawn===0));
+    f=find(true);x=mk();x.pawns[0][0]=f.q;x.pawns[1][0]=f.qq;x.pawns[1][1]=f.qq;
+    T(pre+'no blockade forms on a safe square',getLegalMoves(x,2).some(m=>m.pawn===0));
+    let ok=true;for(let pl=0;pl<n;pl++)for(let p=cfg.LANE0;p<cfg.FIN;p++){const y=mk();y.pawns[pl][0]=p;const q=pawnCoord(cfg,y,pl,0);for(let o=0;o<n;o++)if(o!==pl&&cfg.lanes[y.players[o].seat].includes(q))ok=false;}
+    T(pre+'other players can never reach a foreign home lane',ok);
+    x=mk();x.pawns[0][0]=cfg.FIN-2;
+    T(pre+'exact finish accepted, overshoot rejected',getLegalMoves(x,2).some(m=>m.to===cfg.FIN)&&getLegalMoves(x,3).length===0);
+    x=mk();x.pawns[0]=[cfg.FIN,cfg.FIN,cfg.FIN,-1];
+    T(pre+'no win with 3 of 4 pawns home',!checkWin(x,0));
+    x=mk();x.pawns[0]=[cfg.FIN,cfg.FIN,cfg.FIN,cfg.FIN-1];doRoll(x,1);doMove(x,3);
+    T(pre+'win detected only when all 4 pawns are home',x.winner===0&&x.phase==='over');
+    x=mk();x.pawns[0][0]=5;doRoll(x,3);doMove(x,0);
+    T(pre+'turn passes to next player after a non-six',x.turn===1&&x.phase==='roll');
+    x=mk();x.turn=n-1;x.pawns[n-1][0]=5;doRoll(x,3);doMove(x,0);
+    T(pre+'turn order wraps around',x.turn===0);
+    x=mk();x.pawns[0][0]=5;doRoll(x,6);doMove(x,0);
+    T(pre+'a six grants an extra roll',x.turn===0&&x.phase==='roll');
+    x=mk();let r=doRoll(x,3);
+    T(pre+'no legal move resolves automatically to next player',r.none&&x.turn===1);
+    x=mk({tripleSix:true});x.pawns[0][0]=5;doRoll(x,6);doMove(x,0);doRoll(x,6);doMove(x,0);r=doRoll(x,6);
+    T(pre+'three consecutive sixes forfeit the third roll (earlier moves stay)',r.forfeit&&x.turn===1&&x.pawns[0][0]===5+12);
+    f=find(false);x=mk({bonusCapture:true});x.pawns[0][0]=f.q;x.pawns[1][0]=f.qq;doRoll(x,2);doMove(x,0);
+    T(pre+'capture bonus roll works when enabled',x.turn===0&&x.phase==='roll');
+    x=mk();x.pawns[0][0]=5;doRoll(x,2);const a=doRoll(x,2),b1=doMove(x,0),b2=doMove(x,0);
+    T(pre+'double roll / double move rejected',a===null&&b1!==null&&b2===null);
+    const y1=mk(),y2=mk();y1.pawns[0][0]=7;
+    T(pre+'reset gives independent clean state',y2.pawns[0][0]===-1&&y2.log.length===0&&y2.winner===null);
+  });
+  const cnt=[0,0,0,0,0,0,0];for(let i=0;i<6000;i++)cnt[rollDie()]++;
+  T('rollDie: only values 1-6, each roughly 1/6',cnt[0]===0&&cnt.slice(1,7).every(c=>c>800&&c<1200));
+  return R;
+}
+// ===== LUDO-ENGINE-END =====
 
-    // ---------- Snakes & Ladders ----------
-    const slLadders = { 2: 38, 7: 14, 8: 31, 15: 26, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 78: 98, 87: 94 };
-    const slSnakes = { 16: 6, 46: 25, 49: 11, 62: 19, 64: 60, 74: 53, 89: 68, 92: 88, 95: 75, 99: 80 };
-    const slColors = ['#1f5cff', '#e02020', '#1fb83a', '#ffd400', '#9b30ff', '#ffffff'];
-    const slColorNames = ['Blue', 'Red', 'Green', 'Yellow', 'Violet', 'White'];
-    let slPlayers = [], slTurn = 0, slHistory = [], slOver = false, slPro = false, slBusy = false, slGen = 0, slLog = [];
+// ===== LUDO-UI =====
+const ldE=id=>document.getElementById(id);
+const ldEsc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let LG=null,ldBusy=false,ldPro=false,ldHist=[],ldGen=0,ldRs=0;
+const ldCfg=()=>BOARD_CONFIGS[LG.cfgId];
+const ldCount=()=>parseInt(ldE('ld-pcount').textContent,10);
+const ldDark=n=>n==='Yellow'||n==='Orange';
 
-    function slCellPos(n) { // n 1..100 -> {row,col} 0-indexed from top
-      const idx = n - 1, rowFromBottom = Math.floor(idx / 10), posInRow = idx % 10;
-      const col = rowFromBottom % 2 === 0 ? posInRow : 9 - posInRow;
-      const row = 9 - rowFromBottom;
-      return { row, col };
-    }
-    const slLadderColors = ['#3ec9a7', '#6cc24a', '#2fb8c6', '#6c9bff'];
-    const slSnakeColors = ['#ef5b6a', '#c26cff', '#ff8c42', '#ff5ec4', '#8b5cf6', '#ef4444', '#e85d9c', '#a855f7', '#f97316', '#dc2626'];
-    function slCenter(n) { const { row, col } = slCellPos(n); return { x: col * 10 + 5, y: row * 10 + 5 }; }
-    function slBuildBoard() {
-      const board = document.getElementById('sl-board'); board.innerHTML = '';
-      for (let n = 1; n <= 100; n++) {
-        const { row, col } = slCellPos(n);
-        const d = document.createElement('div');
-        d.className = 'sl-cell ' + ((row + col) % 2 === 0 ? 'cell-a' : 'cell-b');
-        d.style.gridRow = (row + 1); d.style.gridColumn = (col + 1);
-        d.id = 'sl-c' + n;
-        d.innerHTML = '<span>' + n + '</span>';
-        board.appendChild(d);
-      }
-      let svg = '';
-      Object.keys(slLadders).forEach((k, i) => {
-        const a = slCenter(+k), b = slCenter(slLadders[k]), col = slLadderColors[i % slLadderColors.length];
-        const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len, off = 1.6;
-        const r1 = { x1: a.x + nx * off, y1: a.y + ny * off, x2: b.x + nx * off, y2: b.y + ny * off };
-        const r2 = { x1: a.x - nx * off, y1: a.y - ny * off, x2: b.x - nx * off, y2: b.y - ny * off };
-        svg += '<line x1="' + r1.x1 + '" y1="' + r1.y1 + '" x2="' + r1.x2 + '" y2="' + r1.y2 + '" stroke="' + col + '" stroke-width="1.1"/>';
-        svg += '<line x1="' + r2.x1 + '" y1="' + r2.y1 + '" x2="' + r2.x2 + '" y2="' + r2.y2 + '" stroke="' + col + '" stroke-width="1.1"/>';
-        for (let t = 0.12; t < 1; t += 0.16) {
-          const rx1 = r1.x1 + (r1.x2 - r1.x1) * t, ry1 = r1.y1 + (r1.y2 - r1.y1) * t;
-          const rx2 = r2.x1 + (r2.x2 - r2.x1) * t, ry2 = r2.y1 + (r2.y2 - r2.y1) * t;
-          svg += '<line x1="' + rx1 + '" y1="' + ry1 + '" x2="' + rx2 + '" y2="' + ry2 + '" stroke="' + col + '" stroke-width="1"/>';
-        }
-      });
-      Object.keys(slSnakes).forEach((k, i) => {
-        const a = slCenter(+k), b = slCenter(slSnakes[k]), col = slSnakeColors[i % slSnakeColors.length];
-        const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-        const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1, nx = -dy / len, ny = dx / len;
-        const c1x = mx + nx * 10, c1y = my + ny * 10;
-        svg += '<path d="M' + a.x + ' ' + a.y + ' Q ' + c1x + ' ' + c1y + ' ' + b.x + ' ' + b.y + '" stroke="' + col + '" stroke-width="2.4" fill="none" stroke-linecap="round"/>';
-        svg += '<circle cx="' + a.x + '" cy="' + a.y + '" r="2.1" fill="' + col + '"/>';
-        svg += '<circle cx="' + (a.x - 0.7) + '" cy="' + (a.y - 0.7) + '" r="0.4" fill="#fff"/>';
-        svg += '<circle cx="' + (a.x + 0.7) + '" cy="' + (a.y - 0.7) + '" r="0.4" fill="#fff"/>';
-      });
-      document.getElementById('sl-overlay').innerHTML = svg;
-      const layer = document.getElementById('sl-tokens-layer'); layer.innerHTML = ''; slTokenEls = [];
-      slPlayers.forEach(p => {
-        const t = document.createElement('div'); t.className = 'token-cone';
-        t.innerHTML = '<svg viewBox="0 0 20 22"><polygon points="10,1.5 1.8,20 18.2,20" fill="' + p.color + '" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg>';
-        layer.appendChild(t); slTokenEls.push(t);
-      });
-    }
-    const slPipMap = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
-    function slSetDieFace(el, n) {
-      const active = slPipMap[n] || [];
-      let h = '';
-      for (let i = 0; i < 9; i++) h += '<div class="die-pip' + (active.includes(i) ? '' : ' off') + '"></div>';
-      el.innerHTML = h;
-    }
-    slSetDieFace(document.getElementById('sl-die'), 1);
-    let slTokenEls = [];
-    function slTokenXY(i, pos) { const c = slCenter(pos); return { x: c.x + ((i % 3) - 1) * 2.2, y: c.y + (Math.floor(i / 3) - 0.5) * 3 }; }
-    function slPlaceToken(i, pos, instant) {
-      const el = slTokenEls[i]; if (!el) return;
-      if (pos < 1) { el.style.opacity = '0'; return; }
-      const c = slTokenXY(i, pos);
-      el.style.transition = instant ? 'none' : 'left .5s ease, top .5s ease';
-      el.style.left = c.x + '%'; el.style.top = c.y + '%'; el.style.opacity = '1';
-    }
-    function slRenderTokens() { slPlayers.forEach((p, i) => slPlaceToken(i, p.pos, true)); }
-    function slAnimateMove(i, landedPos, finalPos, special, cb) {
-      slPlaceToken(i, landedPos, false);
-      const g = slGen;
-      setTimeout(() => {
-        if (g !== slGen) return;
-        if (special) {
-          const el = slTokenEls[i], c = slTokenXY(i, finalPos);
-          el.style.transition = 'left 1.3s cubic-bezier(.45,0,.4,1), top 1.3s cubic-bezier(.45,0,.4,1)';
-          el.style.left = c.x + '%'; el.style.top = c.y + '%';
-          setTimeout(cb, 1350);
-        } else cb();
-      }, 550);
-    }
-    function slRenderList() {
-      const list = document.getElementById('sl-plist'); list.innerHTML = '';
-      slPlayers.forEach((p, i) => {
-        const c = document.createElement('div');
-        c.className = 'sl-pchip' + (i === slTurn && !slOver ? ' turn' : '') + (p.finished ? ' done' : '');
-        c.innerHTML = '<span class="plyr-dot" style="background:' + p.color + '"></span>' + p.name + ' — ' + (p.pos < 1 ? 'Home' : 'Sq ' + p.pos) + (p.finished ? ' 🏆' : '');
-        list.appendChild(c);
-      });
-    }
-    function slRenderTurn() {
-      document.getElementById('sl-turn').textContent = slOver ? 'Game over' : (slPlayers[slTurn].name + "'s turn");
-    }
-    function slSnapshot() {
-      slHistory.push(JSON.stringify({ players: slPlayers, turn: slTurn, over: slOver, log: slLog }));
-      document.getElementById('sl-undo').disabled = false;
-    }
-    function slNextTurn() {
-      let tries = 0;
-      do { slTurn = (slTurn + 1) % slPlayers.length; tries++; } while (slPlayers[slTurn].finished && tries <= slPlayers.length);
-    }
-    function slRoll(preset, info) {
-      if (slOver || slBusy) return;
-      slBusy = true; const gen = slGen;
-      slSnapshot();
-      const final = preset || (1 + Math.floor(Math.random() * 6));
-      const dieEl = document.getElementById('sl-die');
-      document.getElementById('sl-roll').disabled = true; document.getElementById('sl-undo').disabled = true;
-      dieEl.classList.add('rolling');
-      let ticks = 0;
-      const iv = setInterval(() => {
-        if (gen !== slGen) { clearInterval(iv); dieEl.classList.remove('rolling'); return; }
-        slSetDieFace(dieEl, 1 + Math.floor(Math.random() * 6));
-        ticks++;
-        if (ticks >= 9) {
-          clearInterval(iv);
-          slSetDieFace(dieEl, final);
-          dieEl.classList.remove('rolling');
-          slApplyRoll(final, info);
-        }
-      }, 70);
-    }
-    function slApplyRoll(die, info) {
-      const gen = slGen, idx = slTurn, p = slPlayers[idx], startPos = p.pos;
-      let landed = startPos, final = startPos, special = false, msg = '', logText = '';
-      if (startPos < 1) {
-        if (die === 1 || die === 5 || die === 6) { landed = 1; final = 1; msg = p.name + ' enters the board!'; logText = 'entered the board (Home → 1)'; }
-        else { msg = p.name + ' needs a 1, 5 or 6 to enter — turn passed.'; logText = 'needs 1/5/6 to enter · stays Home'; }
-      } else {
-        const target = startPos + die;
-        if (target > 100) { msg = 'Need exact roll to reach 100 — no move.'; logText = 'needs exact roll · stays at ' + startPos; }
-        else {
-          landed = target;
-          if (slLadders[target]) { final = slLadders[target]; special = true; msg = '🪜 Ladder! ' + target + ' → ' + final; logText = startPos + ' → ' + target + ' · 🪜 climbed to ' + final; }
-          else if (slSnakes[target]) { final = slSnakes[target]; special = true; msg = '🐍 Snake! ' + target + ' → ' + final; logText = startPos + ' → ' + target + ' · 🐍 slid down to ' + final; }
-          else { final = target; msg = p.name + ' moved to ' + final + '.'; logText = startPos + ' → ' + final; }
-        }
-      }
-      if (final === 100) logText += ' · 🏆 wins';
-      else if (die === 6 && final >= 1) logText += ' · 🎲 rolls again';
-      slLog = slLog.concat([{ n: slLog.length + 1, name: p.name, color: p.color, die: die, text: logText, hold: info ? (info.level / 10).toFixed(1) : null }]);
-      slRenderLog();
-      document.getElementById('sl-msg').textContent = msg;
-      function finish() {
-        p.pos = final;
-        if (p.pos === 100) {
-          p.finished = true; slOver = true;
-          document.getElementById('sl-msg').textContent = p.name + ' wins! 🏆';
-          const b = document.getElementById('sl-winbanner'); b.textContent = '🏆 ' + p.name + ' wins the game!'; b.classList.add('on');
-        } else if (die !== 6 || final < 1) {
-          slNextTurn();
-        } // rolled 6 and on board -> same player goes again
-        slBusy = false;
-        slRenderList(); slRenderTurn();
-        document.getElementById('sl-roll').disabled = slOver;
-        document.getElementById('sl-undo').disabled = slHistory.length === 0;
-      }
-      if (landed === startPos && final === startPos) { finish(); return; }
-      slAnimateMove(idx, landed, final, special, () => { if (gen !== slGen) return; finish(); });
-    }
-    function slRenderLog() {
-      const box = document.getElementById('sl-log'); box.innerHTML = '';
-      for (let k = slLog.length - 1; k >= 0; k--) {
-        const e = slLog[k];
-        const row = document.createElement('div'); row.className = 'log-row'; row.style.borderLeftColor = e.color;
-        const head = document.createElement('div'); head.className = 'log-head';
-        const h = document.createElement('span'); h.className = 'log-hash'; h.textContent = '#' + e.n;
-        const dot = document.createElement('span'); dot.className = 'plyr-dot'; dot.style.background = e.color; dot.style.width = '11px'; dot.style.height = '11px';
-        const nm = document.createElement('b'); nm.textContent = e.name;
-        const d = document.createElement('span'); d.className = 'log-die'; d.textContent = 'rolled ' + e.die;
-        head.append(h, dot, nm, d);
-        if (e.hold) { const hs = document.createElement('span'); hs.style.opacity = '.7'; hs.textContent = 'held ' + e.hold + 's'; head.append(hs); }
-        const body = document.createElement('div'); body.className = 'log-body'; body.textContent = e.text;
-        row.append(head, body); box.appendChild(row);
-      }
-      box.scrollTop = 0;
-    }
-    function slUndo() {
-      if (slHistory.length === 0 || slBusy) return;
-      const snap = JSON.parse(slHistory.pop());
-      slPlayers = snap.players; slTurn = snap.turn; slOver = snap.over; slLog = snap.log || [];
-      document.getElementById('sl-winbanner').classList.toggle('on', slOver);
-      if (slOver) document.getElementById('sl-winbanner').textContent = '🏆 ' + slPlayers.find(p => p.finished).name + ' wins the game!';
-      document.getElementById('sl-msg').textContent = 'Undone.';
-      document.getElementById('sl-roll').disabled = false;
-      document.getElementById('sl-undo').disabled = slHistory.length === 0;
-      slRenderTokens(); slRenderList(); slRenderTurn(); slRenderLog();
-    }
-    function slRenderNameInputs() {
-      const n = parseInt(document.getElementById('sl-pcount').textContent, 10);
-      const wrap = document.getElementById('sl-nameinputs'); wrap.innerHTML = '';
-      for (let i = 0; i < n; i++) {
-        const row = document.createElement('div'); row.className = 'plyr-row';
-        row.innerHTML = '<span class="plyr-dot" style="background:' + slColors[i] + '"></span><input id="sl-name' + i + '" placeholder="Player ' + (i + 1) + ' (' + slColorNames[i] + ')" maxlength="14">';
-        wrap.appendChild(row);
-      }
-    }
-    document.getElementById('sl-pminus').addEventListener('click', () => {
-      const el = document.getElementById('sl-pcount'); let v = parseInt(el.textContent, 10);
-      if (v > 2) { el.textContent = v - 1; slRenderNameInputs(); }
-    });
-    document.getElementById('sl-pplus').addEventListener('click', () => {
-      const el = document.getElementById('sl-pcount'); let v = parseInt(el.textContent, 10);
-      if (v < 6) { el.textContent = v + 1; slRenderNameInputs(); }
-    });
-    slRenderNameInputs();
-    document.getElementById('sl-start').addEventListener('click', () => {
-      const n = parseInt(document.getElementById('sl-pcount').textContent, 10);
-      slPlayers = [];
-      for (let i = 0; i < n; i++) {
-        const val = document.getElementById('sl-name' + i).value.trim();
-        slPlayers.push({ name: val || ('Player ' + (i + 1)), color: slColors[i], pos: 0, finished: false });
-      }
-      slTurn = 0; slHistory = []; slOver = false; slLog = []; slBusy = false; slGen++;
-      document.getElementById('sl-undo').disabled = true; document.getElementById('sl-roll').disabled = false;
-      document.getElementById('sl-logcard').style.display = 'block'; slRenderLog();
-      document.getElementById('sl-winbanner').classList.remove('on');
-      document.getElementById('sl-msg').textContent = '';
-      slSetDieFace(document.getElementById('sl-die'), 1);
-      document.getElementById('sl-setup').style.display = 'none';
-      document.getElementById('sl-play').style.display = 'block';
-      slBuildBoard(); slRenderTokens(); slRenderList(); slRenderTurn();
-    });
-    document.getElementById('sl-roll').addEventListener('click', () => slRoll());
-    document.getElementById('sl-undo').addEventListener('click', slUndo);
-    document.getElementById('sl-restart').addEventListener('click', () => {
-      slGen++; slBusy = false;
-      document.getElementById('sl-logcard').style.display = 'none';
-      document.getElementById('sl-play').style.display = 'none';
-      document.getElementById('sl-setup').style.display = 'block';
-    });
+function ldRenderSetup(){
+  const n=ldCount(),cfg=ldCfgFor(n),wrap=ldE('ld-nameinputs');wrap.innerHTML='';
+  cfg.seatFor(n).forEach((s,i)=>{
+    const cn=cfg.names[s],row=document.createElement('div');row.className='plyr-row';
+    row.innerHTML='<span class="plyr-dot" style="background:'+LD_COL[cn]+'"></span><input id="ld-name'+i+'" placeholder="Player '+(i+1)+' ('+cn+')" maxlength="14">';
+    wrap.appendChild(row);
+  });
+  ldE('ld-boardinfo').textContent=cfg.title+' · '+cfg.T+' shared squares · '+cfg.FIN+' steps start→home · '+cfg.safe.size+' safe squares';
+}
+ldE('ld-pminus').addEventListener('click',()=>{const v=ldCount();if(v>2){ldE('ld-pcount').textContent=v-1;ldRenderSetup();}});
+ldE('ld-pplus').addEventListener('click',()=>{const v=ldCount();if(v<6){ldE('ld-pcount').textContent=v+1;ldRenderSetup();}});
+ldRenderSetup();
 
-    // ---------- Pro dice (tap & hold charge) ----------
-    function slProTable(i) {
-      let seed = 9301 + i * 4973;
-      const rnd = () => { seed = (Math.imul(seed, 1103515245) + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
-      const t = [];
-      for (let k = 0; k < 30; k++) { const a = 1 + Math.floor(rnd() * 6); let b; do { b = 1 + Math.floor(rnd() * 6); } while (b === a); t.push([a, b]); }
-      if (i === 0) t[0] = [1, 2]; if (i === 1) t[0] = [3, 6]; if (i === 2) t[0] = [4, 1];
-      return t;
-    }
-    const slProTables = [0, 1, 2, 3, 4, 5].map(slProTable);
-    function slSetPro(on) {
-      slPro = on;
-      document.querySelectorAll('.sl-pro').forEach(c => c.checked = on);
-      document.getElementById('sl-roll').style.display = on ? 'none' : '';
-      document.getElementById('sl-charge').style.display = on ? 'block' : 'none';
-      document.getElementById('sl-die').classList.toggle('pro', on);
-      document.getElementById('sl-hint').textContent = on ? 'Pro dice: tap or hold the dice (max 3.0s), release to roll.' : '';
-    }
-    document.querySelectorAll('.sl-pro').forEach(c => c.addEventListener('change', () => { if (slCharging) { c.checked = slPro; return; } slSetPro(c.checked); }));
-    let slCharging = false, slChargeT0 = 0, slChargeRaf = 0;
-    function slChargeTick() {
-      if (!slCharging) return;
-      const held = Math.min(performance.now() - slChargeT0, 3000);
-      const lvl = Math.min(30, Math.max(1, Math.ceil(held / 100)));
-      document.getElementById('sl-chargefill').style.width = (held / 30) + '%';
-      document.getElementById('sl-chargetxt').textContent = 'Charge ' + (lvl / 10).toFixed(1) + 's' + (held >= 3000 ? ' · MAX' : '');
-      const dieEl = document.getElementById('sl-die');
-      dieEl.style.transform = 'scale(' + (1 + held / 3000 * 0.3) + ')';
-      dieEl.style.boxShadow = '0 0 ' + (8 + held / 3000 * 28) + 'px rgba(244,165,30,' + (0.3 + held / 3000 * 0.6) + ')';
-      slChargeRaf = requestAnimationFrame(slChargeTick);
-    }
-    function slChargeEnd(doRoll) {
-      if (!slCharging) return;
-      slCharging = false; cancelAnimationFrame(slChargeRaf);
-      const held = Math.min(performance.now() - slChargeT0, 3000);
-      const level = Math.min(30, Math.max(1, Math.ceil(held / 100)));
-      const dieEl = document.getElementById('sl-die'); dieEl.style.transform = ''; dieEl.style.boxShadow = '';
-      document.getElementById('sl-chargefill').style.width = '0';
-      document.getElementById('sl-chargetxt').textContent = doRoll ? 'Released at ' + (level / 10).toFixed(1) + 's' : 'Hold the dice · 0.0s / 3.0s';
-      if (!doRoll) return;
-      const pair = slProTables[slTurn][level - 1];
-      slRoll(pair[Math.random() < 0.5 ? 0 : 1], { level: level });
-    }
-    (function () {
-      const dieEl = document.getElementById('sl-die');
-      dieEl.addEventListener('pointerdown', e => {
-        if (!slPro || slBusy || slOver || slCharging || slPlayers.length === 0) return;
-        e.preventDefault();
-        try { dieEl.setPointerCapture(e.pointerId); } catch (_) { }
-        slCharging = true; slChargeT0 = performance.now(); slChargeTick();
-      });
-      dieEl.addEventListener('pointerup', () => slChargeEnd(true));
-      dieEl.addEventListener('pointercancel', () => slChargeEnd(false));
-      dieEl.addEventListener('contextmenu', e => e.preventDefault());
-    })();
-    slSetPro(false);
-  </script>
+/* ---------- drawing (reads only the board config + game state) ---------- */
+function ldRenderBoard(){
+  const cfg=ldCfg(),B=cfg.bounds,f=n=>n.toFixed(3),act=new Set(LG.players.map(p=>p.seat)),op=i=>act.has(i)?1:.3;
+  const sq=(p,arm,fill,o)=>'<rect x="'+f(p.x-.5)+'" y="'+f(p.y-.5)+'" width="1" height="1" rx=".1" fill="'+fill+'" stroke="#3b2a14" stroke-width=".05" opacity="'+o+'" transform="rotate('+f(cfg.ang[arm]*180/Math.PI)+' '+f(p.x)+' '+f(p.y)+')"/>';
+  let h='<rect x="'+f(B.x0)+'" y="'+f(B.y0)+'" width="'+f(B.w)+'" height="'+f(B.h)+'" rx="1.2" fill="#2a2250"/>';
+  cfg.yards.forEach((y,i)=>{
+    const col=LD_COL[cfg.names[i]];
+    h+='<g opacity="'+op(i)+'"><circle cx="'+f(y.c.x)+'" cy="'+f(y.c.y)+'" r="2.15" fill="'+col+'" stroke="#000" stroke-width=".08"/><circle cx="'+f(y.c.x)+'" cy="'+f(y.c.y)+'" r="1.62" fill="#fff8e8"/>'+
+      y.slots.map(s=>'<circle cx="'+f(s.x)+'" cy="'+f(s.y)+'" r=".42" fill="#e8dcc0" stroke="'+col+'" stroke-width=".07"/>').join('')+'</g>';
+  });
+  const base=cfg.dir.map((d,i)=>({a:{x:d.x*(cfg.R0-.5)+cfg.lv[i].x*1.5,y:d.y*(cfg.R0-.5)+cfg.lv[i].y*1.5},b:{x:d.x*(cfg.R0-.5)+cfg.rv[i].x*1.5,y:d.y*(cfg.R0-.5)+cfg.rv[i].y*1.5}}));
+  h+='<polygon points="'+base.map(q=>f(q.a.x)+','+f(q.a.y)+' '+f(q.b.x)+','+f(q.b.y)).join(' ')+'" fill="#1b1535"/>';
+  cfg.track.forEach((p,idx)=>{const arm=Math.floor(idx/cfg.K),loc=idx%cfg.K;h+=sq(p,arm,loc===8?LD_COL[cfg.names[arm]]:'#fffaf0',loc===8?op(arm):1);});
+  cfg.lanes.forEach((ln,i)=>ln.forEach(p=>{h+=sq(p,i,LD_COL[cfg.names[i]],op(i));}));
+  cfg.track.forEach((p,idx)=>{
+    h+='<text x="'+f(p.x)+'" y="'+f(p.y-(cfg.safe.has(idx)?.3:0))+'" font-size=".27" font-weight="700" fill="rgba(30,20,10,.6)" text-anchor="middle" dominant-baseline="central">'+(idx+1)+'</text>';
+    if(cfg.safe.has(idx))h+='<text x="'+f(p.x)+'" y="'+f(p.y+.12)+'" font-size=".62" fill="#ffd400" stroke="#222" stroke-width=".03" text-anchor="middle" dominant-baseline="central">★</text>';
+  });
+  base.forEach((q,i)=>{h+='<polygon points="0,0 '+f(q.a.x)+','+f(q.a.y)+' '+f(q.b.x)+','+f(q.b.y)+'" fill="'+LD_COL[cfg.names[i]]+'" stroke="#1b1535" stroke-width=".06" opacity="'+op(i)+'"/>';});
+  const svg=ldE('ld-svg');
+  svg.setAttribute('viewBox',f(B.x0)+' '+f(B.y0)+' '+f(B.w)+' '+f(B.h));
+  svg.innerHTML=h+'<g id="ld-pawns"></g>';
+}
+function ldRenderPawns(){
+  const cfg=ldCfg(),legal=(LG.phase==='move'&&!ldBusy)?getLegalMoves(LG,LG.roll).map(m=>m.pawn):[],items=[],grp={},key=c=>c.x.toFixed(2)+','+c.y.toFixed(2);
+  LG.pawns.forEach((arr,pl)=>arr.forEach((p,k)=>{const c=pawnCoord(cfg,LG,pl,k),it={pl,k,p,c};items.push(it);(grp[key(c)]=grp[key(c)]||[]).push(it);}));
+  let h='';
+  items.forEach(it=>{
+    const g=grp[key(it.c)],n=g.length,j=g.indexOf(it),P=LG.players[it.pl],ox=(j-(n-1)/2)*.36,sc=it.p===cfg.FIN?.65:(n>1?.8:1);
+    const lg=it.pl===LG.turn&&legal.includes(it.k),dk=ldDark(P.colorName)?'#000':'#fff';
+    h+='<g class="ld-pawn'+(lg?' legal':'')+'" data-pl="'+it.pl+'" data-k="'+it.k+'" style="transform:translate('+(it.c.x+ox).toFixed(3)+'px,'+it.c.y.toFixed(3)+'px)"><title>'+ldEsc(P.name)+' pawn '+(it.k+1)+': '+ldLabel(cfg,P.seat,it.p)+'</title><g transform="scale('+sc+')">'+
+      (lg?'<circle class="ring" r=".66"/>':'')+'<polygon points="0,-.5 .34,.38 -.34,.38" fill="'+P.color+'" stroke="#000" stroke-width=".09" stroke-linejoin="round"/><text y=".22" font-size=".34" font-weight="800" fill="'+dk+'" text-anchor="middle" dominant-baseline="central">'+(it.k+1)+'</text></g></g>';
+  });
+  ldE('ld-pawns').innerHTML=h;
+}
+function ldAnimate(pl,k,path,done){
+  const gen=ldGen,el=document.querySelector('.ld-pawn[data-pl="'+pl+'"][data-k="'+k+'"]');
+  if(!el||!path.length){done();return;}
+  ldE('ld-pawns').appendChild(el);el.getBoundingClientRect();
+  let i=0;
+  (function step(){
+    if(gen!==ldGen)return;
+    if(i>=path.length){setTimeout(done,120);return;}
+    const c=path[i++];el.style.transform='translate('+c.x.toFixed(3)+'px,'+c.y.toFixed(3)+'px)';
+    setTimeout(step,150);
+  })();
+}
+
+/* ---------- UI state ---------- */
+function ldRenderLog(){
+  const box=ldE('ld-log');box.innerHTML='';
+  for(let k=LG.log.length-1;k>=0;k--){
+    const e=LG.log[k],row=document.createElement('div');row.className='log-row';row.style.borderLeftColor=e.color;
+    const head=document.createElement('div');head.className='log-head';
+    const h=document.createElement('span');h.className='log-hash';h.textContent='#'+e.n;
+    const dot=document.createElement('span');dot.className='plyr-dot';dot.style.background=e.color;dot.style.width='11px';dot.style.height='11px';
+    const nm=document.createElement('b');nm.textContent=e.name;
+    const d=document.createElement('span');d.className='log-die';d.textContent='rolled '+e.die;
+    head.append(h,dot,nm,d);
+    if(e.hold){const hs=document.createElement('span');hs.style.opacity='.7';hs.textContent='held '+e.hold+'s';head.append(hs);}
+    const body=document.createElement('div');body.className='log-body';body.textContent=e.text;
+    row.append(head,body);box.appendChild(row);
+  }
+}
+function ldLogAdd(P,die,text,hold){LG.log=LG.log.concat([{n:LG.log.length+1,name:P.name,color:P.color,die,text,hold:hold||null}]);ldRenderLog();}
+function ldUI(){
+  const cfg=ldCfg(),P=LG.players[LG.turn],over=LG.winner!==null;
+  let st;
+  if(over)st='🏆 '+LG.players[LG.winner].name+' wins!';
+  else if(ldBusy)st=P.name+' ('+P.colorName+')…';
+  else if(LG.phase==='roll')st=P.name+' ('+P.colorName+') — '+(ldPro?'tap or hold the dice':'roll the dice');
+  else st=P.name+' rolled '+LG.roll+' — tap a glowing pawn';
+  ldE('ld-status').innerHTML='<span class="plyr-dot" style="background:'+P.color+'"></span><span>'+ldEsc(st)+'</span>';
+  const wb=ldE('ld-winbanner');wb.classList.toggle('on',over);if(over)wb.textContent='🏆 '+LG.players[LG.winner].name+' ('+LG.players[LG.winner].colorName+') wins the game!';
+  ldE('ld-roll').disabled=!(LG.phase==='roll'&&!ldBusy);
+  ldE('ld-undo').disabled=ldBusy||ldHist.length===0;
+  ldE('ld-plist').innerHTML=LG.players.map((p,i)=>{
+    const home=LG.pawns[i].filter(x=>x===cfg.FIN).length;
+    return '<div class="ld-prow'+(i===LG.turn&&!over?' turn':'')+'"><span class="plyr-dot" style="background:'+p.color+'"></span><b>'+ldEsc(p.name)+'</b> <span style="opacity:.7">'+p.colorName+' · home '+home+'/4</span><div class="ld-pawnlist">'+
+      LG.pawns[i].map((x,k)=>'<span class="ld-chip" style="border-color:'+p.color+'">'+(k+1)+': '+ldLabel(cfg,p.seat,x)+'</span>').join('')+'</div></div>';
+  }).join('');
+}
+function ldRenderAll(){ldRenderBoard();ldRenderPawns();ldUI();ldRenderLog();}
+function ldPush(){ldHist.push(JSON.stringify(LG));if(ldHist.length>600)ldHist.shift();}
+
+function ldRoll(preset,info){
+  if(ldBusy||!LG||LG.phase!=='roll')return;
+  ldBusy=true;ldPush();ldUI();
+  const gen=ldGen,v=preset||rollDie(),die=ldE('ld-die');
+  die.classList.add('rolling');
+  let t=0;
+  const iv=setInterval(()=>{
+    if(gen!==ldGen){clearInterval(iv);die.classList.remove('rolling');return;}
+    slSetDieFace(die,1+Math.floor(Math.random()*6));
+    if(++t>=9){clearInterval(iv);slSetDieFace(die,v);die.classList.remove('rolling');ldAfterRoll(v,info);}
+  },70);
+}
+function ldAfterRoll(v,info){
+  const P=LG.players[LG.turn],hold=info?(info.level/10).toFixed(1):null,res=doRoll(LG,v);
+  LG.lastRoll={v,hold};
+  if(res.forfeit){const t='🚫 third six in a row — roll forfeited, turn passes';ldLogAdd(P,v,t,hold);ldE('ld-msg').textContent=t;}
+  else if(res.none){const t='no legal move'+(res.next==='again'?' · 🎲 rolls again':'');ldLogAdd(P,v,t,hold);ldE('ld-msg').textContent=P.name+': '+t;}
+  else ldE('ld-msg').textContent=P.name+' rolled '+v+' — pick a glowing pawn.';
+  ldBusy=false;ldRenderPawns();ldUI();
+}
+function ldPick(pl,k){
+  if(ldBusy||!LG||LG.phase!=='move'||pl!==LG.turn)return;
+  const m=validateMove(LG,k);
+  if(!m){ldE('ld-msg').textContent='That pawn cannot move with a '+LG.roll+'.';return;}
+  ldBusy=true;ldPush();
+  const cfg=ldCfg(),P=LG.players[pl],seat=P.seat,die=LG.roll,lr=LG.lastRoll||{},path=[];
+  for(let q=(m.from<0?0:m.from+1);q<=m.to;q++)path.push(ldCoordAt(cfg,seat,q,k));
+  const ev=doMove(LG,k);
+  let t='Pawn '+(k+1)+': '+ldLabel(cfg,seat,m.from)+' → '+ldLabel(cfg,seat,m.to);
+  if(ev.captured.length)t+=' · ⚔ captured '+ev.captured.map(c=>LG.players[c.pl].name+' pawn '+(c.k+1)).join(', ');
+  if(ev.blockade)t+=' · 🧱 blockade formed';
+  if(ev.home)t+=' · 🏁 reached home';
+  if(ev.result==='win')t+=' · 🏆 wins';else if(ev.result==='again')t+=' · 🎲 rolls again';
+  ldLogAdd(P,die,t,lr.hold);ldE('ld-msg').textContent=P.name+' — '+t;
+  const gen=ldGen;
+  ldAnimate(pl,k,path,()=>{if(gen!==ldGen)return;ldBusy=false;ldRenderPawns();ldUI();});
+}
+function ldUndo(){
+  if(ldBusy||!ldHist.length)return;
+  LG=JSON.parse(ldHist.pop());ldRenderAll();ldE('ld-msg').textContent='Undone.';
+}
+
+/* ---------- wiring ---------- */
+ldE('ld-svg').addEventListener('click',e=>{const t=e.target.closest('.ld-pawn');if(t)ldPick(+t.dataset.pl,+t.dataset.k);});
+ldE('ld-roll').addEventListener('click',()=>ldRoll());
+ldE('ld-undo').addEventListener('click',ldUndo);
+ldE('ld-start').addEventListener('click',()=>{
+  const n=ldCount(),names=[];
+  for(let i=0;i<n;i++)names.push(ldE('ld-name'+i).value.trim()||undefined);
+  LG=createInitialState(n,names,{bonusCapture:ldE('ld-opt-cap').checked,bonusHome:ldE('ld-opt-home').checked,tripleSix:ldE('ld-opt-six').checked});
+  ldHist=[];ldGen++;ldBusy=false;
+  ldE('ld-setup').style.display='none';ldE('ld-play').style.display='block';ldE('ld-logcard').style.display='block';
+  slSetDieFace(ldE('ld-die'),1);ldE('ld-msg').textContent='';ldRenderAll();
+});
+ldE('ld-restart').addEventListener('click',()=>{
+  const b=ldE('ld-restart');
+  if(ldRs){clearTimeout(ldRs);ldRs=0;b.textContent='New game';ldGen++;ldBusy=false;LG=null;ldHist=[];
+    ldE('ld-play').style.display='none';ldE('ld-logcard').style.display='none';ldE('ld-setup').style.display='block';}
+  else{b.textContent='Tap again to confirm restart';ldRs=setTimeout(()=>{ldRs=0;b.textContent='New game';},3000);}
+});
+function ldSetPro(on){
+  ldPro=on;document.querySelectorAll('.ld-pro').forEach(c=>c.checked=on);
+  ldE('ld-roll').style.display=on?'none':'';ldE('ld-charge').style.display=on?'block':'none';
+  ldE('ld-die').classList.toggle('pro',on);
+  ldE('ld-hint').textContent=on?'Pro dice: tap or hold the dice (max 3.0s), release to roll.':'';
+  if(LG)ldUI();
+}
+document.querySelectorAll('.ld-pro').forEach(c=>c.addEventListener('change',()=>{if(ldBusy){c.checked=ldPro;return;}ldSetPro(c.checked);}));
+(function(){
+  const die=ldE('ld-die');let ch=false,t0=0,raf=0;
+  const tick=()=>{
+    if(!ch)return;
+    const h=Math.min(performance.now()-t0,3000),lvl=Math.min(30,Math.max(1,Math.ceil(h/100)));
+    ldE('ld-chargefill').style.width=(h/30)+'%';
+    ldE('ld-chargetxt').textContent='Charge '+(lvl/10).toFixed(1)+'s'+(h>=3000?' · MAX':'');
+    die.style.transform='scale('+(1+h/10000)+')';die.style.boxShadow='0 0 '+(8+h/107)+'px rgba(244,165,30,.8)';
+    raf=requestAnimationFrame(tick);
+  };
+  die.addEventListener('pointerdown',e=>{
+    if(!ldPro||ldBusy||!LG||LG.phase!=='roll'||ch)return;
+    e.preventDefault();try{die.setPointerCapture(e.pointerId);}catch(_){}
+    ch=true;t0=performance.now();tick();
+  });
+  const end=go=>{
+    if(!ch)return;ch=false;cancelAnimationFrame(raf);
+    const h=Math.min(performance.now()-t0,3000),lvl=Math.min(30,Math.max(1,Math.ceil(h/100)));
+    die.style.transform='';die.style.boxShadow='';ldE('ld-chargefill').style.width='0';
+    ldE('ld-chargetxt').textContent=go?'Released at '+(lvl/10).toFixed(1)+'s':'Hold the dice · 0.0s / 3.0s';
+    if(!go)return;
+    const pair=slProTables[LG.turn][lvl-1];
+    ldRoll(pair[Math.random()<.5?0:1],{level:lvl});
+  };
+  die.addEventListener('pointerup',()=>end(true));
+  die.addEventListener('pointercancel',()=>end(false));
+  die.addEventListener('contextmenu',e=>e.preventDefault());
+})();
+slSetDieFace(ldE('ld-die'),1);ldSetPro(false);
+ldE('ld-test').addEventListener('click',()=>{
+  const r=ldRunTests(),bad=r.filter(x=>!x.ok);
+  ldE('ld-tests').textContent='Self-tests: '+(r.length-bad.length)+'/'+r.length+' passed\n'+r.map(x=>(x.ok?'✓ ':'✗ ')+x.name).join('\n');
+});
+
+</script>
 </body>
-
 </html>
