@@ -162,6 +162,59 @@ button:disabled{opacity:.35; cursor:not-allowed;}
 #ld-die.pro{cursor:pointer; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; outline:3px solid var(--marigold); outline-offset:3px;}
 #ld-hint{text-align:center; font-size:.8rem; opacity:.7; margin-bottom:6px;}
 
+/* Raja Rani Manthri Thirudan Police */
+.rr-table{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; min-height:150px; padding:16px 4px;}
+.rr-paper{background:none; border:none; padding:0; cursor:pointer; width:84px; height:108px;}
+.rr-paper:disabled{cursor:default;}
+.rr-sheet{width:100%; height:100%; border-radius:6px; background:linear-gradient(135deg,#fff7e0 0%,#efdcae 100%); border:1px solid #b79a5b; box-shadow:0 4px 10px rgba(0,0,0,.4); position:relative; display:flex; align-items:center; justify-content:center; font-size:1.9rem; color:#8a6d2f; font-weight:800; font-family:'Baloo 2'; transform:rotate(var(--r,0deg));}
+.rr-sheet:before{content:""; position:absolute; inset:0; border-radius:6px; background:linear-gradient(45deg,transparent 48%,rgba(120,90,30,.28) 50%,transparent 52%),linear-gradient(-45deg,transparent 48%,rgba(120,90,30,.2) 50%,transparent 52%);}
+#rr-pickhead{text-align:center; font-family:'Baloo 2'; font-size:1.1rem;}
+#rr-pickhead small{font-family:'Inter',sans-serif; opacity:.7; font-size:.78rem;}
+#rr-flip{perspective:900px; width:min(300px,82vw); height:410px; margin:0 auto 14px;}
+#rr-flipinner{position:relative; width:100%; height:100%; transition:transform .7s; transform-style:preserve-3d;}
+#rr-flipinner.flipped{transform:rotateY(180deg);}
+.rr-face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:18px; box-shadow:0 12px 30px rgba(0,0,0,.45);}
+.rr-back{background:linear-gradient(135deg,#fff7e0,#efdcae); border:2px solid #b79a5b; color:#8a6d2f; font-size:4rem; font-weight:800; font-family:'Baloo 2';}
+#rr-front{transform:rotateY(180deg); background:var(--bg2); border:2px solid var(--marigold);}
+#rr-front[data-role="police"]{border-color:#6c9bff;} #rr-front[data-role="thirudan"]{border-color:var(--rose);}
+.rr-big{font-size:4.2rem; line-height:1;}
+#rr-front h2{margin:6px 0 2px; font-size:1.7rem;}
+.rr-ptsline{color:var(--marigold); font-family:'Baloo 2'; font-weight:700; margin-bottom:8px;}
+#rr-front p{font-size:.84rem; opacity:.85; line-height:1.45; margin:0 0 10px;}
+.rr-whose{font-size:.74rem; opacity:.6;}
+#rr-slumber{display:none; position:fixed; inset:0; z-index:90; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:28px; color:#cfd8ff; background:radial-gradient(900px 600px at 70% 10%,#1a2150 0%,#070a1c 70%); overflow:hidden;}
+#rr-slumber.on{display:flex;}
+#rr-slumber:before{content:""; position:absolute; inset:0; background-image:radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 70% 20%,#fff,transparent),radial-gradient(2px 2px at 40% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 60%,#fff,transparent),radial-gradient(1.5px 1.5px at 10% 85%,#fff,transparent); animation:rr-twinkle 3s ease-in-out infinite alternate;}
+@keyframes rr-twinkle{from{opacity:.3;}to{opacity:1;}}
+@keyframes rr-float{0%{transform:translateY(0);}50%{transform:translateY(-10px);}100%{transform:translateY(0);}}
+.rr-moon{font-size:4rem; animation:rr-float 4s ease-in-out infinite; position:relative;}
+#rr-slumber h2{position:relative; font-size:1.9rem; margin:10px 0; color:#ffd166;}
+#rr-slumber p{position:relative; max-width:440px; line-height:1.55; font-size:.95rem; margin:6px 0;}
+#rr-slumber .rr-wink{font-size:2.4rem; position:relative; animation:rr-float 2.4s ease-in-out infinite;}
+#rr-slumber button{position:relative; margin-top:22px; max-width:300px; opacity:.85;}
+.rr-sus{display:flex; align-items:center; gap:8px; width:100%; padding:12px; border-radius:12px; border:1px solid var(--line); background:var(--bg2); color:var(--ink); font-size:.95rem; margin-top:8px; cursor:pointer; text-align:left; font-family:'Inter',sans-serif;}
+.rr-sus.on{border-color:var(--marigold); background:rgba(244,165,30,.16);}
+#rr-resulthead{text-align:center; font-family:'Baloo 2'; font-weight:700; line-height:1.4; margin-bottom:12px;}
+.rr-rgrid,#rr-resultgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px;}
+.rr-rcard{background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:10px; text-align:center; animation:rr-pop .5s both;}
+@keyframes rr-pop{from{opacity:0; transform:rotateY(90deg) scale(.8);}to{opacity:1; transform:none;}}
+.rr-rname{display:flex; align-items:center; justify-content:center; gap:6px; font-weight:700; font-size:.85rem;}
+.rr-remoji{font-size:2.2rem;}
+.pos{color:var(--mint); font-weight:700;} .neg{color:var(--rose); font-weight:700;}
+.rr-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px;}
+.rr-pcard{background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:10px;}
+.rr-ptop{display:flex; align-items:center; gap:6px;}
+.rr-total{font-family:'Baloo 2'; font-size:1.7rem; font-weight:800; color:var(--marigold); margin:2px 0 6px;}
+.rr-ent{display:flex; justify-content:space-between; gap:6px; font-size:.76rem; padding:3px 0; border-top:1px solid var(--line);}
+#rr-winbanner{display:none; text-align:center; padding:14px; background:rgba(244,165,30,.15); border:1px solid var(--marigold); border-radius:14px; margin-bottom:10px; font-family:'Baloo 2'; font-weight:700;}
+#rr-winbanner.on{display:block;}
+#rr-logcard{margin-top:16px;}
+#rr-logcard h3{margin:0 0 8px; color:var(--mint);}
+#rr-log{max-height:340px; overflow-y:auto; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.76rem;}
+#rr-log .log-body{white-space:pre-line;}
+@media(min-width:1100px){#rr-logcard{position:fixed; right:24px; top:24px; bottom:24px; width:300px; margin:0; overflow:hidden; z-index:5;} #rr-log{max-height:none; height:calc(100% - 34px);}}
+@media (prefers-reduced-motion: reduce){.rr-moon,#rr-slumber .rr-wink,#rr-slumber:before{animation:none;}}
+
 footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
 @media (prefers-reduced-motion: reduce){ .tab{transition:none;} }
 </style>
@@ -182,9 +235,8 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
   </div>
 
   <div class="screen active" id="screen-home">
-    <div class="card">
-      <h2>Two games, one screen, one phone</h2>
-      <p class="lead">Pass one phone around. <b>Heads Up</b> is the forehead-guessing game with Tamil movies (2015–now). <b>20 Questions</b> hands a secret word to a "keeper" who answers yes/no while everyone else grills them.</p>
+    <div class="card"><h2>Pick a game, pass the phone</h2>
+      <p class="lead"><b>Heads Up</b> (forehead guessing, 5 decks) · <b>20 Questions</b> · and under <b>Board Games</b>: <b>Snakes &amp; Ladders</b>, <b>Ludo</b> (2–6 players) and <b>Raja Rani Manthri Thirudan Police</b> (3–6 players). Business is coming next.</p>
     </div>
   </div>
 
@@ -326,7 +378,58 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
       </div>
     </div>
     <div class="bgsub-screen" id="bgsub-biz"><div class="card soon"><h3>Business (BankRoll-style)</h3><p class="lead">Coming next — up to 6 players, property sets, buying/upgrading, rent.</p></div></div>
-    <div class="bgsub-screen" id="bgsub-rrmtp"><div class="card soon"><h3>Raja Rani Manthri Thirudan Police</h3><p class="lead">Coming next — 4 to 6 players, secret pass-and-hide role cards, scoring built in.</p></div></div>
+    <div class="bgsub-screen" id="bgsub-rrmtp">
+      <div class="card" id="rr-setup">
+        <h2>Raja Rani Manthri Thirudan Police</h2>
+        <p class="lead">3–6 players, one shared phone, endless rounds. Papers are shuffled and picked in secret, the Thirudan winks, the Police hunts — and every round lands on the scoreboard.</p>
+        <div class="stepper"><button id="rr-pminus">−</button><span id="rr-pcount">5</span><button id="rr-pplus">+</button></div>
+        <div id="rr-roleset" class="lead" style="text-align:center;font-size:.82rem;margin:0 0 8px;"></div>
+        <div id="rr-nameinputs"></div>
+        <button class="big" id="rr-start">Start session</button>
+        <details style="margin-top:12px;"><summary><b>Characters &amp; scoring</b></summary>
+          <p class="lead">👑 Raja +1000 · 👸 Rani +900 · 🎩 Manthri +800 · 🃏 Joker +600 (6 players). 3 players: Raja, Police, Thirudan. 4: + Manthri. 5: + Rani. 6: + Joker.</p>
+          <p class="lead"><b>Police</b> (announced publicly when the hunt starts): names the Thirudan before everyone is winked out → +1100, otherwise −200.</p>
+          <p class="lead"><b>Thirudan</b> winks at players other than the Police; each winked player announces “I’ve been winked!”. Every wink is worth 1100 ÷ (players − 2) of his escape total. Escapes (wrong accusation, or everyone winked out): +1100. Caught: −200 plus the wink points already earned.</p>
+          <p class="lead">These point values are this game’s house rules, not a traditional ruleset.</p>
+        </details>
+      </div>
+      <div class="card" id="rr-idle" style="display:none;">
+        <div id="rr-idletxt" style="text-align:center;font-family:'Baloo 2';font-size:1.1rem;"></div>
+        <button class="big" id="rr-begin">🔀 Shuffle &amp; deal the papers</button>
+      </div>
+      <div class="card" id="rr-pick" style="display:none;">
+        <div id="rr-pickhead"></div>
+        <div class="rr-table" id="rr-table"></div>
+        <button class="big ghost" id="rr-reshuffle">🔀 Reshuffle the papers</button>
+      </div>
+      <div class="card" id="rr-cardview" style="display:none;">
+        <div id="rr-flip"><div id="rr-flipinner"><div class="rr-face rr-back">?</div><div class="rr-face" id="rr-front"></div></div></div>
+        <button class="big" id="rr-hide">Hide my card &amp; pass the phone</button>
+      </div>
+      <div class="card" id="rr-accuse" style="display:none;"></div>
+      <div class="card" id="rr-result" style="display:none;">
+        <div id="rr-resulthead"></div>
+        <div id="rr-resultgrid"></div>
+        <button class="big" id="rr-next">Next round</button>
+      </div>
+      <div class="card" id="rr-score" style="display:none;">
+        <h3 style="margin:0 0 8px;color:var(--mint);">Scoreboard</h3>
+        <div id="rr-winbanner"></div>
+        <div id="rr-board"></div>
+        <div class="rowbtns"><button class="big undo" id="rr-undo" disabled>↶ Undo last round</button><button class="big ghost" id="rr-crown">🏁 Crown the winner</button></div>
+        <button class="big ghost" id="rr-newsession">New session (reset all scores)</button>
+      </div>
+      <div class="card" id="rr-logcard" style="display:none;"><h3>Round log</h3><div id="rr-log"></div></div>
+      <div id="rr-slumber">
+        <div class="rr-moon">🌙</div>
+        <h2>Let the hunt begin…</h2>
+        <p>Let the <b>Thirudan</b> start his looting — smiting the others with his only weapon: his <b>eyes</b>. <span class="rr-wink">😉</span></p>
+        <p><i>Think before you wink!</i> A winked player says “I’ve been winked!” — everyone except the Police can be winked.</p>
+        <p>👮 <b id="rr-police"></b> is the <b>Police</b> and must find the Thirudan / winker / looter before he winks all <b id="rr-targets"></b> players out.</p>
+        <p style="opacity:.6;font-size:.8rem;">Put the phone down and play it out. 💤</p>
+        <button class="big ghost" id="rr-over">🔔 The hunt is over</button>
+      </div>
+    </div>
   </div>
 
   <footer>Works fully offline once loaded · built for one shared phone</footer>
@@ -1309,6 +1412,247 @@ ldE('ld-test').addEventListener('click',()=>{
   const r=ldRunTests(),bad=r.filter(x=>!x.ok);
   ldE('ld-tests').textContent='Self-tests: '+(r.length-bad.length)+'/'+r.length+' passed\n'+r.map(x=>(x.ok?'✓ ':'✗ ')+x.name).join('\n');
 });
+
+
+// ===== RR-ENGINE-START =====
+const RR_ROLES={
+  raja:{n:'Raja',e:'👑',pts:1000},
+  rani:{n:'Rani',e:'👸',pts:900},
+  manthri:{n:'Manthri',e:'🎩',pts:800},
+  joker:{n:'Joker',e:'🃏',pts:600},
+  police:{n:'Police',e:'👮',pts:null},
+  thirudan:{n:'Thirudan',e:'🦹',pts:null}
+};
+// Characters dealt per player count (3-6). Thirudan and Police are always in.
+const RR_SETS={
+  3:['raja','police','thirudan'],
+  4:['raja','manthri','police','thirudan'],
+  5:['raja','rani','manthri','police','thirudan'],
+  6:['raja','rani','manthri','joker','police','thirudan']
+};
+const RR_FIND=1100,RR_MISS=-200,RR_ESCAPE=1100,RR_CAUGHT=-200;
+function rrRand(n){const a=new Uint32Array(1),lim=Math.floor(4294967296/n)*n;do{crypto.getRandomValues(a);}while(a[0]>=lim);return a[0]%n;}
+function rrShuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=rrRand(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* roles: role key per player. accused: index the Police named, or null when the Thirudan winked out everybody.
+   winks: how many players (never the Police) the Thirudan winked out before the hunt ended.
+   Targets T = N-2 (everyone except Police and Thirudan); each wink is worth 1100/T of the Thirudan's escape total.
+   - Police names the Thirudan before everyone is winked: Police +1100; Thirudan -200 plus the wink points already earned.
+   - Otherwise (wrong accusation, or everyone winked out): Thirudan escapes +1100; Police -200.
+   Raja/Rani/Manthri/Joker always keep their fixed points. */
+function rrScore(roles,accused,winks){
+  const N=roles.length,T=N-2,ip=roles.indexOf('police'),it=roles.indexOf('thirudan');
+  const w=Math.max(0,Math.min(T,winks|0)),comp=Math.round(RR_ESCAPE*w/T);
+  const caught=accused!==null&&accused===it&&w<T;
+  const pts=roles.map(r=>RR_ROLES[r].pts||0);
+  if(caught){pts[ip]=RR_FIND;pts[it]=RR_CAUGHT+comp;}else{pts[ip]=RR_MISS;pts[it]=RR_ESCAPE;}
+  return{pts,caught,comp,T,w,ip,it};
+}
+function rrSummary(names,e){
+  const P=names[e.police],Th=names[e.thirudan];
+  if(e.caught)return P+' (Police) caught '+Th+' (Thirudan)! Police +1100 · Thirudan -200 +'+e.comp+' for '+e.winks+'/'+e.T+' winks = '+e.pts[e.thirudan];
+  if(e.accused===null)return Th+' (Thirudan) winked out everyone and escaped! Thirudan +1100 · Police -200';
+  if(e.accused===e.thirudan)return P+' found '+Th+' but too late — everyone was already winked out. Thirudan +1100 · Police -200';
+  return P+' accused '+names[e.accused]+' — wrong! '+Th+' (Thirudan) escapes: Thirudan +1100 · Police -200';
+}
+// ===== RR-ENGINE-END =====
+
+// ===== RR-UI =====
+const RR_KEY='kondattam_rr_v1';
+function rrSave(R){try{localStorage.setItem(RR_KEY,JSON.stringify(R));}catch(_){}}
+function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');return(s&&Array.isArray(s.names)&&Array.isArray(s.rounds)&&s.names.length>=3&&s.names.length<=6)?s:null;}catch(_){return null;}}
+(function(){
+  const E=id=>document.getElementById(id);
+  let RR=rrLoad(),RS=null,RA=null,busy=false,inRound=false,wake=null,newArm=0;
+  const panels=['rr-setup','rr-idle','rr-pick','rr-cardview','rr-accuse','rr-result'];
+  const show=id=>panels.forEach(p=>E(p).style.display=p===id?'block':'none');
+  const cnt=()=>parseInt(E('rr-pcount').textContent,10);
+  const sgn=n=>(n>0?'+':'')+n;
+
+  /* ---------- setup ---------- */
+  function renderSetup(){
+    const n=cnt(),wrap=E('rr-nameinputs'),old=[...wrap.querySelectorAll('input')].map(i=>i.value);wrap.innerHTML='';
+    for(let i=0;i<n;i++){
+      const row=document.createElement('div');row.className='plyr-row';
+      row.innerHTML='<span class="plyr-dot" style="background:'+slColors[i]+'"></span><input id="rr-name'+i+'" placeholder="Player '+(i+1)+'" maxlength="14">';
+      wrap.appendChild(row);if(old[i])E('rr-name'+i).value=old[i];
+    }
+    E('rr-roleset').textContent='Characters dealt: '+RR_SETS[n].map(k=>RR_ROLES[k].e+' '+RR_ROLES[k].n).join(' · ');
+  }
+  E('rr-pminus').addEventListener('click',()=>{const v=cnt();if(v>3){E('rr-pcount').textContent=v-1;renderSetup();}});
+  E('rr-pplus').addEventListener('click',()=>{const v=cnt();if(v<6){E('rr-pcount').textContent=v+1;renderSetup();}});
+  E('rr-start').addEventListener('click',()=>{
+    const n=cnt(),names=[];
+    for(let i=0;i<n;i++)names.push(E('rr-name'+i).value.trim()||('Player '+(i+1)));
+    RR={names,N:n,rounds:[]};rrSave(RR);showSession();
+  });
+  function showSession(){
+    E('rr-score').style.display='block';E('rr-logcard').style.display='block';
+    renderScore();renderLog();renderIdle();show('rr-idle');
+  }
+  function renderIdle(){
+    const off=RR.rounds.length%RR.names.length;
+    E('rr-idletxt').innerHTML='<b>Round '+(RR.rounds.length+1)+'</b> — '+ldEsc(RR.names[off])+' picks first.<br><small>Characters this round: '+RR_SETS[RR.names.length].map(k=>RR_ROLES[k].e+' '+RR_ROLES[k].n).join(' · ')+'</small>';
+  }
+
+  /* ---------- shuffle & pick ---------- */
+  function renderPick(){
+    const pl=RS.order[RS.pi],left=RS.papers.length;
+    E('rr-pickhead').innerHTML='<b>Round '+RS.round+'</b> · '+ldEsc(RR.names[pl])+', pick a paper<br><small>'+left+' paper'+(left>1?'s':'')+' left — no peeking, other players look away!</small>';
+    const t=E('rr-table');t.innerHTML='';
+    RS.papers.forEach((_,i)=>{
+      const b=document.createElement('button');b.className='rr-paper';b.dataset.i=i;b.setAttribute('aria-label','Paper '+(i+1));
+      b.innerHTML='<div class="rr-sheet" style="--r:'+(Math.random()*14-7).toFixed(1)+'deg">?</div>';t.appendChild(b);
+    });
+  }
+  function shuffleAnim(){
+    const els=[...document.querySelectorAll('#rr-table .rr-paper')],box=E('rr-table').getBoundingClientRect();
+    busy=true;E('rr-reshuffle').disabled=true;
+    const cx=box.left+box.width/2,cy=box.top+box.height/2;
+    const anims=els.map((el,i)=>{
+      if(!el.animate)return Promise.resolve();
+      const r=el.getBoundingClientRect(),dx=cx-(r.left+r.width/2),dy=cy-(r.top+r.height/2);
+      const j=()=>'translate('+(dx+Math.random()*44-22)+'px,'+(dy+Math.random()*34-17)+'px) rotate('+(Math.random()*70-35)+'deg)';
+      const f=[{transform:'none'}];
+      [.2,.3,.4,.5,.6,.7,.8].forEach(o=>f.push({transform:j(),offset:o}));
+      f.push({transform:'none'});
+      return el.animate(f,{duration:2000,easing:'ease-in-out',delay:i*35}).finished;
+    });
+    return Promise.all(anims).catch(()=>{}).then(()=>{busy=false;E('rr-reshuffle').disabled=false;});
+  }
+  function beginRound(){
+    const N=RR.names.length,off=RR.rounds.length%N;
+    RS={round:RR.rounds.length+1,order:Array.from({length:N},(_,k)=>(k+off)%N),pi:0,assigned:Array(N).fill(null),papers:rrShuffle(RR_SETS[N])};
+    inRound=true;E('rr-winbanner').classList.remove('on');
+    renderPick();show('rr-pick');renderScore();shuffleAnim();
+  }
+  E('rr-begin').addEventListener('click',beginRound);
+  E('rr-reshuffle').addEventListener('click',()=>{if(busy||!RS)return;RS.papers=rrShuffle(RS.papers);shuffleAnim();});
+  E('rr-table').addEventListener('click',e=>{
+    const b=e.target.closest('.rr-paper');if(!b||busy||!RS)return;
+    const role=RS.papers.splice(+b.dataset.i,1)[0],pl=RS.order[RS.pi];
+    RS.assigned[pl]=role;showCard(pl,role);
+  });
+
+  /* ---------- private card reveal ---------- */
+  function tip(role){
+    const N=RR.names.length,T=N-2,per=Math.round(RR_ESCAPE/T);
+    return{
+      raja:'Sit tight and look royal. If the Thirudan winks at you, announce “I’ve been winked!”',
+      rani:'Stay graceful. If the Thirudan winks at you, announce “I’ve been winked!”',
+      manthri:'Advise wisely, say nothing. If winked at, announce “I’ve been winked!”',
+      joker:'The wildcard of the court. You can still be winked — announce it if you are.',
+      police:'Your identity will be announced when the hunt begins. Find the Thirudan before he winks everyone out: find +1100, miss −200.',
+      thirudan:'Secretly wink at the others, one by one (never at the Police). Each wink earns '+per+' of your 1100. Escape: +1100. Caught: −200 plus your wink points. Think before you wink 😉'
+    }[role];
+  }
+  function showCard(pl,role){
+    const r=RR_ROLES[role],pts=r.pts!==null?sgn(r.pts)+' points':(role==='police'?'+1100 if you catch · −200 if you miss':'+1100 if you escape · −200 if caught');
+    E('rr-front').innerHTML='<div class="rr-big">'+r.e+'</div><h2>'+r.n+'</h2><div class="rr-ptsline">'+pts+'</div><p>'+tip(role)+'</p><div class="rr-whose">'+ldEsc(RR.names[pl])+'’s card — only you look!</div>';
+    E('rr-front').dataset.role=role;
+    E('rr-flipinner').classList.remove('flipped');show('rr-cardview');
+    setTimeout(()=>E('rr-flipinner').classList.add('flipped'),80);
+  }
+  E('rr-hide').addEventListener('click',()=>{
+    if(!RS)return;
+    E('rr-flipinner').classList.remove('flipped');E('rr-front').innerHTML='';
+    RS.pi++;
+    if(RS.pi<RS.order.length){renderPick();show('rr-pick');shuffleAnim();}
+    else slumber();
+  });
+
+  /* ---------- slumber ---------- */
+  function slumber(){
+    E('rr-police').textContent=RR.names[RS.assigned.indexOf('police')];
+    E('rr-targets').textContent=RR.names.length-2;
+    E('rr-slumber').classList.add('on');
+    try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(l=>{wake=l;}).catch(()=>{});}catch(_){}
+  }
+  E('rr-over').addEventListener('click',()=>{
+    E('rr-slumber').classList.remove('on');
+    try{if(wake){wake.release();wake=null;}}catch(_){}
+    RA={mode:null,accused:null,winks:0};renderAccuse();show('rr-accuse');
+  });
+
+  /* ---------- accusation + wink submission ---------- */
+  function renderAccuse(){
+    const ip=RS.assigned.indexOf('police'),T=RR.names.length-2;
+    let h='<h2>The hunt is over</h2><p class="lead">How did it end?</p>';
+    RR.names.forEach((n,i)=>{if(i!==ip)h+='<button class="rr-sus'+(RA.mode==='accuse'&&RA.accused===i?' on':'')+'" data-act="sus" data-i="'+i+'"><span class="plyr-dot" style="background:'+slColors[i]+'"></span>👮 Police accuses '+ldEsc(n)+'</button>';});
+    h+='<button class="rr-sus'+(RA.mode==='all'?' on':'')+'" data-act="all">😏 Thirudan winked out everyone — Police ran out of time</button>';
+    if(RA.mode==='accuse')h+='<p class="lead" style="margin-top:14px;">How many players had the Thirudan winked out <b>before</b> the accusation? (Thirudan declares, everyone agrees)</p><div class="stepper"><button data-act="wminus">−</button><span>'+RA.winks+' / '+T+'</span><button data-act="wplus">+</button></div>';
+    else if(RA.mode==='all')h+='<p class="lead" style="margin-top:14px;">Winks recorded: <b>'+T+' / '+T+'</b> (everyone).</p>';
+    h+='<button class="big" data-act="reveal"'+(RA.mode===null||(RA.mode==='accuse'&&RA.accused===null)?' disabled':'')+'>Reveal characters &amp; score</button>';
+    E('rr-accuse').innerHTML=h;
+  }
+  E('rr-accuse').addEventListener('click',e=>{
+    const b=e.target.closest('[data-act]');if(!b||!RS||!RA)return;
+    const T=RR.names.length-2,a=b.dataset.act;
+    if(a==='sus'){RA.mode='accuse';RA.accused=+b.dataset.i;}
+    else if(a==='all'){RA.mode='all';RA.accused=null;RA.winks=T;}
+    else if(a==='wminus'){RA.winks=Math.max(0,RA.winks-1);}
+    else if(a==='wplus'){RA.winks=Math.min(T,RA.winks+1);}
+    else if(a==='reveal'){finishRound();return;}
+    renderAccuse();
+  });
+
+  /* ---------- result + scoreboard ---------- */
+  function finishRound(){
+    const T=RR.names.length-2,roles=RS.assigned.slice();
+    const sc=rrScore(roles,RA.mode==='all'?null:RA.accused,RA.mode==='all'?T:RA.winks);
+    const entry={n:RR.rounds.length+1,roles,accused:RA.mode==='all'?null:RA.accused,winks:sc.w,T,caught:sc.caught,comp:sc.comp,pts:sc.pts,police:sc.ip,thirudan:sc.it};
+    RR.rounds.push(entry);rrSave(RR);inRound=false;
+    E('rr-resulthead').innerHTML=(entry.caught?'🎯 ':'😏 ')+ldEsc(rrSummary(RR.names,entry));
+    E('rr-resultgrid').innerHTML=RR.names.map((n,i)=>{
+      const r=RR_ROLES[roles[i]],p=entry.pts[i];
+      return '<div class="rr-rcard" style="animation-delay:'+(i*140)+'ms"><div class="rr-rname"><span class="plyr-dot" style="background:'+slColors[i]+'"></span>'+ldEsc(n)+'</div><div class="rr-remoji">'+r.e+'</div><div>'+r.n+'</div><div class="'+(p<0?'neg':'pos')+'">'+sgn(p)+'</div></div>';
+    }).join('');
+    renderScore();renderLog();show('rr-result');
+  }
+  E('rr-next').addEventListener('click',beginRound);
+  function totals(){const t=RR.names.map(()=>0);RR.rounds.forEach(r=>r.pts.forEach((p,i)=>{t[i]+=p;}));return t;}
+  function renderScore(){
+    const t=totals(),ord=t.map((_,i)=>i).sort((a,b)=>t[b]-t[a]),medal=['🥇','🥈','🥉'];
+    E('rr-board').innerHTML='<div class="rr-grid">'+RR.names.map((n,i)=>{
+      const rank=ord.indexOf(i);
+      return '<div class="rr-pcard"><div class="rr-ptop"><span class="plyr-dot" style="background:'+slColors[i]+'"></span><b>'+ldEsc(n)+'</b></div><div class="rr-total">'+(RR.rounds.length?(medal[rank]||'')+' ':'')+t[i]+'</div>'+
+        (RR.rounds.length?RR.rounds.map(r=>'<div class="rr-ent"><span>R'+r.n+' '+RR_ROLES[r.roles[i]].e+' '+RR_ROLES[r.roles[i]].n+'</span><span class="'+(r.pts[i]<0?'neg':'pos')+'">'+sgn(r.pts[i])+'</span></div>').join(''):'<div class="rr-ent" style="opacity:.6">No rounds yet</div>')+'</div>';
+    }).join('')+'</div>';
+    E('rr-undo').disabled=inRound||RR.rounds.length===0;
+  }
+  function renderLog(){
+    const box=E('rr-log');box.innerHTML='';
+    for(let k=RR.rounds.length-1;k>=0;k--){
+      const e=RR.rounds[k],row=document.createElement('div');row.className='log-row';row.style.borderLeftColor=e.caught?'#3ec9a7':'#ef5b6a';
+      const head=document.createElement('div');head.className='log-head';
+      const h=document.createElement('span');h.className='log-hash';h.textContent='#'+e.n;
+      const d=document.createElement('span');d.className='log-die';d.textContent=e.caught?'caught':'escaped';
+      const w=document.createElement('span');w.style.opacity='.7';w.textContent='winks '+e.winks+'/'+e.T;
+      head.append(h,d,w);
+      const body=document.createElement('div');body.className='log-body';
+      body.textContent=rrSummary(RR.names,e)+'\n'+RR.names.map((n,i)=>n+' '+RR_ROLES[e.roles[i]].e+' '+sgn(e.pts[i])).join(' · ');
+      row.append(head,body);box.appendChild(row);
+    }
+  }
+  E('rr-undo').addEventListener('click',()=>{
+    if(inRound||!RR.rounds.length)return;
+    RR.rounds.pop();rrSave(RR);E('rr-winbanner').classList.remove('on');
+    renderScore();renderLog();renderIdle();show('rr-idle');
+  });
+  E('rr-crown').addEventListener('click',()=>{
+    if(!RR.rounds.length)return;
+    const t=totals(),top=Math.max(...t),win=RR.names.filter((_,i)=>t[i]===top),b=E('rr-winbanner');
+    b.textContent='🏆 '+win.join(' & ')+' '+(win.length>1?'win':'wins')+' with '+top+' points after '+RR.rounds.length+' round'+(RR.rounds.length>1?'s':'')+'!';
+    b.classList.add('on');
+  });
+  E('rr-newsession').addEventListener('click',()=>{
+    const b=E('rr-newsession');
+    if(newArm){clearTimeout(newArm);newArm=0;b.textContent='New session (reset all scores)';RR=null;RS=null;inRound=false;rrSave(null);try{localStorage.removeItem(RR_KEY);}catch(_){}
+      E('rr-score').style.display='none';E('rr-logcard').style.display='none';E('rr-winbanner').classList.remove('on');show('rr-setup');}
+    else{b.textContent='Tap again to erase all scores';newArm=setTimeout(()=>{newArm=0;b.textContent='New session (reset all scores)';},3000);}
+  });
+  renderSetup();
+  if(RR){E('rr-pcount').textContent=RR.names.length;renderSetup();showSession();}else show('rr-setup');
+})();
 
 </script>
 </body>
