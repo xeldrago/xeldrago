@@ -1665,6 +1665,267 @@
       margin-bottom: 6px;
     }
 
+    /* Imposter */
+    .im-pass {
+      text-align: center;
+      font-size: 1.05rem;
+      opacity: .85;
+      margin-top: 6px;
+    }
+
+    .im-name {
+      text-align: center;
+      font-family: 'Baloo 2';
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin: 4px 0 8px;
+    }
+
+    .im-role {
+      border: 2px solid var(--marigold);
+      border-radius: 18px;
+      background: var(--bg2);
+      padding: 20px 16px;
+      text-align: center;
+      margin-bottom: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .4);
+    }
+
+    .im-role.imp {
+      border-color: var(--rose);
+    }
+
+    .im-big {
+      font-size: 3.4rem;
+      line-height: 1;
+    }
+
+    .im-role h2 {
+      margin: 6px 0;
+      font-size: 1.5rem;
+    }
+
+    .im-cat {
+      color: var(--mint);
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: .95rem;
+    }
+
+    .im-hintlbl {
+      font-size: .74rem;
+      opacity: .7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .im-word {
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: var(--marigold);
+      margin: 4px 0 8px;
+      word-break: break-word;
+    }
+
+    .im-role p {
+      font-size: .84rem;
+      opacity: .85;
+      line-height: 1.45;
+      margin: 0 0 8px;
+    }
+
+    .im-who {
+      font-size: .74rem;
+      opacity: .6;
+    }
+
+    .im-clock {
+      font-family: 'Baloo 2';
+      font-size: 3.6rem;
+      font-weight: 800;
+      color: var(--marigold);
+      text-align: center;
+      margin: 8px 0;
+    }
+
+    .im-clock.low {
+      color: var(--rose);
+    }
+
+    .im-order {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+      columns: 2;
+      column-gap: 12px;
+    }
+
+    .im-order li {
+      padding: 4px 0;
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .im-wordbig {
+      color: var(--marigold);
+    }
+
+    .im-votes {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 4px 10px;
+      margin-bottom: 8px;
+    }
+
+    .im-vrow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .86rem;
+    }
+
+    .im-vrow:last-child {
+      border-bottom: none;
+    }
+
+    .im-vcount {
+      margin-left: auto;
+      opacity: .8;
+      font-size: .78rem;
+    }
+
+    .im-verdict {
+      text-align: center;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin: 10px 0;
+    }
+
+    #im-float {
+      display: none;
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      z-index: 70;
+      max-width: 230px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      border: 2px solid var(--marigold);
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: .95rem;
+      text-align: left;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+      animation: rr-float 3s ease-in-out infinite;
+    }
+
+    #im-float small {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      opacity: .75;
+      font-size: .72rem;
+    }
+
+    #im-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: rgba(5, 6, 20, .9);
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow: auto;
+    }
+
+    #im-modal.on {
+      display: flex;
+    }
+
+    #im-modalbody {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      width: min(420px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+    }
+
+    #im-cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 6px 0 10px;
+    }
+
+    #im-winbanner {
+      display: none;
+      text-align: center;
+      padding: 14px;
+      background: rgba(244, 165, 30, .15);
+      border: 1px solid var(--marigold);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      font-family: 'Baloo 2';
+      font-weight: 700;
+    }
+
+    #im-winbanner.on {
+      display: block;
+    }
+
+    #im-logcard {
+      margin-top: 16px;
+    }
+
+    #im-logcard h3 {
+      margin: 0 0 8px;
+      color: var(--mint);
+    }
+
+    #im-log {
+      max-height: 340px;
+      overflow-y: auto;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: .76rem;
+    }
+
+    #im-log .log-body {
+      white-space: pre-line;
+    }
+
+    @media(min-width:1100px) {
+      #im-logcard {
+        position: fixed;
+        right: 24px;
+        top: 24px;
+        bottom: 24px;
+        width: 300px;
+        margin: 0;
+        overflow: hidden;
+        z-index: 5;
+      }
+
+      #im-log {
+        max-height: none;
+        height: calc(100% - 34px);
+      }
+    }
+
     footer {
       text-align: center;
       font-size: .78rem;
@@ -1700,7 +1961,8 @@
         <h2>Pick a game, pass the phone</h2>
         <p class="lead"><b>Heads Up</b> (forehead guessing, 5 decks) · <b>20 Questions</b> · and under <b>Board
             Games</b>: <b>Snakes &amp; Ladders</b>, <b>Ludo</b> (2–6 players) and <b>Raja Rani Manthri Thirudan
-            Police</b> (3–8 players). <b>Business</b> (2–8 players, 3 maps, Bankroll or full Monopoly).</p>
+            Police</b> (3–8 players). <b>Business</b> (2–8 players, 3 maps, Bankroll or full Monopoly) and
+          <b>Imposter</b> (3–12 players, 400+ words with hints).</p>
       </div>
     </div>
 
@@ -1791,6 +2053,7 @@
         <div class="chip" data-bg="ludo">Ludo</div>
         <div class="chip" data-bg="biz">Business</div>
         <div class="chip" data-bg="rrmtp">Raja Rani Manthri Thirudan</div>
+        <div class="chip" data-bg="imp">Imposter</div>
       </div>
 
       <!-- Snakes & Ladders -->
@@ -2086,6 +2349,77 @@
           <p style="opacity:.6;font-size:.8rem;position:relative;">Put the phone down and play it out. When the clock
             hits zero the hunt ends. 💤</p>
           <button class="big ghost" id="rr-over">🔔 The hunt is over</button>
+        </div>
+      </div>
+      <div class="bgsub-screen" id="bgsub-imp">
+        <div class="card" id="im-setup">
+          <h2>Imposter 🕵️</h2>
+          <p class="lead">3–12 players, one shared phone. Everyone sees the secret word — except the imposter, who only
+            gets a hint. Give clues, bluff, vote in secret, and score points over as many rounds as you like.</p>
+          <div class="stepper"><button id="im-pminus">−</button><span id="im-pcount">5</span><button
+              id="im-pplus">+</button></div>
+          <div id="im-nameinputs"></div>
+          <label class="bz-l">Imposters</label><select id="im-imps">
+            <option value="1" selected>1 imposter</option>
+            <option value="2">2 imposters (6+ players)</option>
+          </select>
+          <div id="im-impnote" class="lead" style="font-size:.78rem;margin:4px 0 0;"></div>
+          <label class="bz-l">Discussion timer</label><select id="im-timer">
+            <option value="1">1 minute</option>
+            <option value="2">2 minutes</option>
+            <option value="3" selected>3 minutes</option>
+            <option value="5">5 minutes</option>
+          </select>
+          <label class="chk"><input type="checkbox" id="im-opt-hint" checked> Imposter gets a one-word hint</label>
+          <label class="chk"><input type="checkbox" id="im-opt-cat" checked> Imposter also sees the category</label>
+          <label class="bz-l">Categories <button class="ghost" id="im-catall"
+              style="margin-left:8px;padding:2px 10px;border-radius:8px;font-size:.75rem;">all / none</button></label>
+          <div id="im-cats"></div>
+          <button class="big" id="im-start">Start session</button>
+          <details style="margin-top:12px;">
+            <summary><b>How it plays &amp; scoring</b></summary>
+            <p class="lead">1) Each player privately taps to see their card and hides it again. Crew see the <b>category
+                and the secret word</b>; the imposter sees <b>IMPOSTER</b> plus a <b>hint</b> (a different clue about
+              the word — never the category itself, e.g. word Camel · category Animals · hint Sand). 2) A starter is
+              picked; go round giving one-word clues while the timer runs. 3) Everyone votes in secret by passing the
+              phone. 4) Reveal and score.</p>
+            <p class="lead"><b>Points:</b> +100 for each crew member who votes for a real imposter · +300 for an
+              imposter who is not voted out (a tie votes out nobody) · +150 for a caught imposter who then guesses the
+              word. Forgot your role? A floating button during the timer and voting lets you check your own card
+              privately.</p>
+            <p class="lead">413 words across 16 categories, written for this game (including Tamil Nadu, Kerala and
+              Indian food sets). The scoring is a house rule, not an official one.</p>
+          </details>
+        </div>
+        <div class="card" id="im-idle" style="display:none;">
+          <div id="im-idletxt" style="text-align:center;font-family:'Baloo 2';font-size:1.1rem;"></div><button
+            class="big" id="im-begin">🎲 Pick a word &amp; deal roles</button>
+        </div>
+        <div class="card" id="im-reveal" style="display:none;">
+          <div id="im-revealbody"></div>
+        </div>
+        <div class="card" id="im-play" style="display:none;"></div>
+        <div class="card" id="im-vote" style="display:none;">
+          <div id="im-votebody"></div>
+        </div>
+        <div class="card" id="im-result" style="display:none;">
+          <div id="im-resultbody"></div>
+        </div>
+        <div class="card" id="im-score" style="display:none;">
+          <h3 style="margin:0 0 8px;color:var(--mint);">Scoreboard</h3>
+          <div id="im-winbanner"></div>
+          <div id="im-board"></div>
+          <div class="rowbtns"><button class="big undo" id="im-undo" disabled>↶ Undo last round</button><button
+              class="big ghost" id="im-crown">🏁 Crown the winner</button></div>
+          <button class="big ghost" id="im-newsession">New session (reset all scores)</button>
+        </div>
+        <div class="card" id="im-logcard" style="display:none;">
+          <h3>Round log</h3>
+          <div id="im-log"></div>
+        </div>
+        <button id="im-float">😅 Forgot your role?<small>Gee, you had one job… click here</small></button>
+        <div id="im-modal">
+          <div id="im-modalbody"></div>
         </div>
       </div>
     </div>
@@ -3875,6 +4209,297 @@
         die.addEventListener('contextmenu', e => e.preventDefault());
       })();
       slSetDieFace(E('bz-die'), 1); setPro(false); renderSetup();
+    })();
+
+
+    // ===== IMP-ENGINE-START =====
+    /* Each entry is WORD>HINT. The category is the group the word belongs to (shown to players);
+       the hint is a separate one-word nudge only the imposter sees (Camel > hint "Sand", category "Animals"). */
+    const IMP_RAW = [
+      ['Animals', '🐪', 'Camel>Sand;Penguin>Ice;Owl>Night;Elephant>Trunk;Giraffe>Neck;Kangaroo>Pouch;Peacock>Feathers;Dolphin>Ocean;Bat>Cave;Cheetah>Speed;Monkey>Banana;Lion>Mane;Tiger>Stripes;Crocodile>River;Frog>Pond;Bee>Honey;Spider>Web;Snake>Venom;Panda>Bamboo;Parrot>Mimic;Crow>Caw;Cow>Milk;Bull>Horns;Zebra>Savanna;Hedgehog>Spikes;Octopus>Tentacles;Squirrel>Acorn;Rabbit>Carrot;Horse>Gallop;Whale>Spout'],
+      ['Food & Snacks', '🍔', 'Pizza>Cheese;Burger>Bun;Ice Cream>Cone;Popcorn>Cinema;Chocolate>Cocoa;Noodles>Chopsticks;Sandwich>Bread;Pasta>Italy;Sushi>Raw;Cake>Birthday;Donut>Hole;Fries>Salt;Pancake>Syrup;Chips>Crunch;Egg>Shell;Soup>Spoon;Salad>Dressing;Taco>Mexico;Hot Dog>Mustard;Biscuit>Tea;Jam>Toast;Cookie>Crumbs;Pickle>Jar;Butter>Melt;Waffle>Grid;Cheese>Mouse'],
+      ['Indian Dishes', '🍛', 'Biryani>Rice;Dosa>Crispy;Idli>Steamed;Sambar>Lentils;Samosa>Triangle;Paneer>Cottage;Pani Puri>Tangy;Vada>Fried;Pongal>Harvest;Parotta>Layers;Chicken 65>Spicy;Filter Coffee>Tumbler;Masala Chai>Ginger;Gulab Jamun>Syrup;Jalebi>Spiral;Payasam>Festival;Upma>Semolina;Poori>Puffed;Butter Chicken>Creamy;Rasam>Pepper;Curd Rice>Cooling;Appam>Coconut;Puttu>Cylinder;Kulfi>Frozen;Lassi>Yogurt;Pav Bhaji>Mumbai;Chole Bhature>Punjab'],
+      ['Famous Places', '🌍', 'Eiffel Tower>Paris;Taj Mahal>Marble;Pyramids>Pharaoh;Great Wall>China;Statue of Liberty>Torch;Big Ben>Clock;Colosseum>Gladiators;Burj Khalifa>Tallest;Niagara Falls>Waterfall;Sahara>Dunes;Amazon>Rainforest;Mount Everest>Summit;Hollywood>Stars;Disneyland>Mouse;Machu Picchu>Incas;Sydney Opera House>Harbour;Leaning Tower>Tilt;Red Fort>Delhi;Gateway of India>Mumbai;Golden Temple>Amritsar;Hawa Mahal>Windows;Charminar>Hyderabad;Venice>Gondola;Antarctica>Blizzard;Las Vegas>Casino;Maldives>Resort'],
+      ['Tamil Nadu & Kerala', '🌴', 'Marina Beach>Chennai;Meenakshi Temple>Madurai;Ooty>Mist;Kodaikanal>Lake;Rameswaram>Pamban;Kanyakumari>Sunrise;Mahabalipuram>Shore;Thanjavur>Brihadeeswara;Munnar>Tea;Alleppey>Houseboat;Kovalam>Lighthouse;Wayanad>Trek;Kochi>Fishing Nets;Thekkady>Periyar;Jallikattu>Bull;Bharatanatyam>Dance;Kathakali>Mask;Sadya>Banana Leaf;Kolam>Rice Flour;Kanchipuram Silk>Saree;Chettinad>Spicy;Backwaters>Canoe;Vallam Kali>Oars;Athirappilly>Cascade;Pongal Festival>Sugarcane;Nilgiris>Toy Train'],
+      ['Jobs', '💼', 'Doctor>Stethoscope;Teacher>Chalk;Pilot>Cockpit;Chef>Kitchen;Farmer>Harvest;Police Officer>Siren;Firefighter>Hose;Judge>Gavel;Barber>Scissors;Tailor>Needle;Mechanic>Wrench;Driver>Steering;Photographer>Lens;Singer>Stage;Dentist>Cavity;Engineer>Blueprint;Lawyer>Court;Nurse>Injection;Postman>Letters;Carpenter>Hammer;Plumber>Pipes;Astronaut>Orbit;Magician>Wand;Clown>Circus;Shopkeeper>Counter;Waiter>Tray'],
+      ['Sports & Games', '⚽', 'Cricket>Wicket;Football>Goal;Tennis>Racket;Badminton>Shuttle;Kabaddi>Raid;Chess>Checkmate;Carrom>Striker;Hockey>Stick;Swimming>Lap;Boxing>Gloves;Golf>Hole;Basketball>Hoop;Volleyball>Net;Cycling>Pedal;Archery>Arrow;Wrestling>Mat;Skating>Rink;Snooker>Cue;Table Tennis>Paddle;Rugby>Scrum;Marathon>Finish Line;Ludo>Dice;Kho Kho>Chase;Bowling>Pins;Surfing>Wave;Snakes and Ladders>Board'],
+      ['Movies & Characters', '🎬', 'Batman>Cape;Spider-Man>Web;Iron Man>Suit;Harry Potter>Wand;Titanic>Iceberg;Avatar>Blue;Jurassic Park>Dinosaurs;Frozen>Snow;Lion King>Simba;Toy Story>Cowboy;Shrek>Ogre;Joker>Laugh;Superman>Krypton;Pikachu>Yellow;Doraemon>Pocket;Chhota Bheem>Laddoo;Mr Bean>Teddy;Sholay>Gabbar;Baahubali>Kattappa;Enthiran>Robot;Kaithi>Lorry;Minnal Murali>Lightning;Premam>Malar;Manjummel Boys>Guna Caves;Thor>Hammer;Hulk>Rage;Vikram>Kamal'],
+      ['Everyday Objects', '🔑', 'Umbrella>Rain;Mirror>Reflection;Key>Lock;Scissors>Cut;Candle>Wax;Pillow>Sleep;Toothbrush>Paste;Clock>Tick;Backpack>Straps;Spoon>Soup;Bucket>Handle;Broom>Sweep;Torch>Battery;Wallet>Cash;Spectacles>Frames;Comb>Hair;Soap>Bubbles;Towel>Dry;Fan>Breeze;Lamp>Bulb;Bottle>Cap;Calendar>Dates;Remote>Buttons;Charger>Plug;Sunglasses>Shade;Helmet>Safety'],
+      ['Transport', '🚗', 'Bicycle>Pedals;Auto Rickshaw>Meter;Metro>Tunnel;Bus>Conductor;Train>Tracks;Aeroplane>Runway;Helicopter>Blades;Ship>Anchor;Boat>Oar;Scooter>Kick;Bullock Cart>Hay;Truck>Cargo;Ambulance>Emergency;Taxi>Fare;Tractor>Fields;Rocket>Launch;Submarine>Periscope;Cable Car>Hilltop;Ferry>Crossing;Tram>Rails;Motorbike>Throttle;Hot Air Balloon>Basket;Bullet Train>Japan;Jeep>Off-road;Cycle Rickshaw>Pedalling'],
+      ['Nature & Weather', '🌦️', 'Rainbow>Colours;Volcano>Lava;Thunder>Lightning;Waterfall>Cliff;Desert>Cactus;Glacier>Frozen;Island>Surrounded;Forest>Trees;Monsoon>Clouds;Cyclone>Eye;Earthquake>Tremor;Sunrise>Dawn;Moon>Craters;River>Flow;Cave>Echo;Beach>Shells;Mountain>Peak;Snowman>Coal;Fog>Visibility;Tsunami>Coast;Sunflower>Seeds;Lotus>Mud;Coconut Tree>Palm;Banyan>Roots'],
+      ['Festivals & Traditions', '🎉', 'Diwali>Lamps;Holi>Powder;Lohri>Bonfire;Onam>Pookalam;Christmas>Tree;Eid>Crescent;Navratri>Garba;Ganesh Chaturthi>Idol;Raksha Bandhan>Thread;Karthigai Deepam>Wicks;Wedding>Garland;Mehendi>Henna;Rangoli>Doorstep;Birthday>Candles;New Year>Countdown;Easter>Eggs;Halloween>Costume;Thaipusam>Kavadi;Vishu>Kani;Ayudha Puja>Tools;Sankranti>Kites;Dussehra>Ravana;Thanksgiving>Turkey;Valentine\'s Day>Roses;Carnival>Parade'],
+      ['School & Office', '📚', 'Blackboard>Duster;Notebook>Pages;Pencil>Eraser;Ruler>Inches;Calculator>Digits;Stapler>Staples;Printer>Ink;Meeting>Agenda;Cubicle>Partition;Whiteboard>Marker;Assignment>Deadline;Exam>Hall;Library>Silence;Canteen>Lunch;Uniform>Badge;School Bell>Period;Projector>Screen;Resume>Interview;Attendance>Register;Playground>Recess;Desk>Drawer;Marksheet>Grades;Sticky Notes>Reminders;Photocopy>Xerox'],
+      ['Fruits & Vegetables', '🍎', 'Mango>King;Banana>Peel;Apple>Orchard;Orange>Segments;Watermelon>Seeds;Grapes>Vine;Pineapple>Crown;Coconut>Husk;Papaya>Tropical;Guava>Pink;Jackfruit>Thorny;Tomato>Ketchup;Potato>Spud;Onion>Tears;Carrot>Eyesight;Brinjal>Purple;Drumstick>Long;Cabbage>Layers;Cauliflower>Florets;Pumpkin>Pie;Chilli>Burn;Ginger>Root;Garlic>Cloves;Lemon>Sour;Strawberry>Cream;Pomegranate>Jewels;Cucumber>Cool;Beetroot>Red'],
+      ['Tech & Gadgets', '📱', 'Smartphone>Screen;Laptop>Battery;Headphones>Music;WiFi>Router;Selfie Stick>Pose;Drone>Propellers;Smartwatch>Steps;Camera>Flash;Bluetooth>Pairing;Power Bank>Backup;Keyboard>Keys;Computer Mouse>Click;Microwave>Beep;Television>Channels;Air Conditioner>Cooling;Washing Machine>Spin;Robot>Circuits;Gaming Console>Controller;VR Headset>Virtual;Alexa>Voice;QR Code>Scan;Tablet>Stylus;Satellite>Dish;Pen Drive>Storage'],
+      ['Music & Instruments', '🎵', 'Guitar>Strings;Veena>Saraswati;Tabla>Hands;Flute>Krishna;Violin>Bow;Piano>Black and White;Drums>Sticks;Harmonium>Bellows;Nadaswaram>Procession;Mridangam>Carnatic;Sitar>Ravi Shankar;Trumpet>Brass;Saxophone>Jazz;Microphone>Karaoke;Ukulele>Hawaii;Dhol>Bhangra;Bagpipes>Scotland;Accordion>Squeeze;Harp>Angel;Xylophone>Mallet;Cymbals>Crash;DJ>Turntable;Choir>Hymn']
+    ];
+    const IMP_DB = IMP_RAW.map(r => ({ c: r[0], e: r[1], w: r[2].split(';').map(x => { const p = x.split('>'); return { w: p[0], h: p[1] }; }) }));
+    const IMP_PTS = { vote: 100, survive: 300, guess: 150 };
+    const impKey = (ci, wi) => ci + '|' + wi;
+    /* deal one round: cats = selected category indexes, used = array of "cat|word" keys already played */
+    function impDeal(N, cats, imps, used) {
+      let pool = [];
+      cats.forEach(ci => IMP_DB[ci].w.forEach((x, wi) => { if (!used.includes(impKey(ci, wi))) pool.push([ci, wi]); }));
+      let reset = false;
+      if (!pool.length) { reset = true; cats.forEach(ci => IMP_DB[ci].w.forEach((x, wi) => pool.push([ci, wi]))); }
+      const [ci, wi] = pool[rrRand(pool.length)], e = IMP_DB[ci].w[wi];
+      const impsIdx = rrShuffle([...Array(N).keys()]).slice(0, Math.min(imps, N - 2));
+      return { ci, wi, cat: IMP_DB[ci].c, emoji: IMP_DB[ci].e, word: e.w, hint: e.h, imps: impsIdx.sort((a, b) => a - b), starter: rrRand(N), reset };
+    }
+    /* votes[i] = index player i voted for. A suspect is "voted out" only with a single strict plurality. */
+    function impTally(N, votes) {
+      const c = Array(N).fill(0); votes.forEach(v => { if (v !== null && v >= 0 && v < N) c[v]++; });
+      const max = Math.max(...c), leaders = c.map((x, i) => i).filter(i => c[i] === max && max > 0);
+      return { counts: c, out: leaders.length === 1 ? leaders[0] : null };
+    }
+    /* +100 for every non-imposter who voted for a real imposter; +300 for every imposter who is not voted out;
+       +150 for a caught imposter who then guesses the word. */
+    function impScore(N, imps, votes, guessed) {
+      const t = impTally(N, votes), pts = Array(N).fill(0);
+      votes.forEach((v, i) => { if (!imps.includes(i) && v !== null && imps.includes(v)) pts[i] += IMP_PTS.vote; });
+      imps.forEach(m => { if (t.out !== m) pts[m] += IMP_PTS.survive; else if (guessed) pts[m] += IMP_PTS.guess; });
+      return { pts, counts: t.counts, out: t.out, caught: imps.filter(m => t.out === m) };
+    }
+    function impRunTests() {
+      const R = [], T = (n, c) => R.push({ name: n, ok: !!c });
+      T('16 categories', IMP_DB.length === 16);
+      T('every category has 20+ words', IMP_DB.every(c => c.w.length >= 20));
+      T('total words > 400', IMP_DB.reduce((a, c) => a + c.w.length, 0) > 400);
+      T('every word has a non-empty hint', IMP_DB.every(c => c.w.every(x => x.w && x.h && x.h.trim().length > 0)));
+      T('hint is never the word itself', IMP_DB.every(c => c.w.every(x => x.h.toLowerCase() !== x.w.toLowerCase())));
+      T('hint is never the category name', IMP_DB.every(c => c.w.every(x => x.h.toLowerCase() !== c.c.toLowerCase())));
+      T('hint does not contain the word', IMP_DB.every(c => c.w.every(x => !x.h.toLowerCase().includes(x.w.toLowerCase()) && !x.w.toLowerCase().includes(x.h.toLowerCase()))));
+      T('no duplicate words inside a category', IMP_DB.every(c => new Set(c.w.map(x => x.w)).size === c.w.length));
+      const all = []; IMP_DB.forEach(c => c.w.forEach(x => all.push(x.w.toLowerCase())));
+      const dups = all.filter((w, i) => all.indexOf(w) !== i); T('no word repeated across categories' + (dups.length ? ' (' + dups.join(',') + ')' : ''), dups.length === 0);
+      const cats = IMP_DB.map((_, i) => i);
+      for (const N of [3, 6, 12]) {
+        let ok = true; for (let k = 0; k < 200; k++) { const d = impDeal(N, cats, 1, []); if (d.imps.length !== 1 || d.imps[0] < 0 || d.imps[0] >= N || d.starter < 0 || d.starter >= N || !d.word || !d.hint || !d.cat) ok = false; }
+        T('deal works for ' + N + ' players', ok);
+      }
+      T('two imposters are distinct', (() => { for (let k = 0; k < 200; k++) { const d = impDeal(8, cats, 2, []); if (d.imps.length !== 2 || d.imps[0] === d.imps[1]) return false; } return true; })());
+      T('imposters never exceed N-2', impDeal(3, cats, 2, []).imps.length === 1);
+      const used = []; IMP_DB[0].w.forEach((x, wi) => used.push(impKey(0, wi)));
+      T('used words are skipped while others remain', (() => { for (let k = 0; k < 100; k++) { const d = impDeal(5, [0, 1], 1, used); if (d.ci !== 1) return false; } return true; })());
+      T('pool resets when everything was used', impDeal(5, [0], 1, used).reset === true);
+      // tally & score
+      let t = impTally(4, [1, 1, 0, 1]); T('plurality picks the top-voted suspect', t.out === 1 && t.counts[1] === 3);
+      t = impTally(4, [1, 0, 3, 2]); T('a tie voted out nobody', t.out === null);
+      let s = impScore(4, [1], [1, 1, 0, 1], false);
+      T('crew who voted the imposter get +100, caught imposter 0', s.pts[0] === 100 && s.pts[2] === 0 && s.pts[3] === 100 && s.pts[1] === 0 && s.caught.join() === '1');
+      s = impScore(4, [1], [1, 1, 0, 1], true); T('caught imposter who guesses the word gets +150', s.pts[1] === 150);
+      s = impScore(4, [1], [2, 0, 3, 1], false); T('tie => imposter survives (+300); only correct voters score', s.pts[1] === 300 && s.pts[0] === 0 && s.pts[2] === 0 && s.pts[3] === 100 && s.caught.length === 0);
+      s = impScore(6, [1, 4], [1, 0, 1, 1, 0, 1], false);
+      T('two imposters: only the voted-out one is caught, other survives', s.caught.join() === '1' && s.pts[4] === 300 && s.pts[1] === 0);
+      s = impScore(5, [1], [1, 2, 1, 1, 1], false); T('imposter\'s own vote scores nobody; 4 crew voters get +100', s.pts[1] === 0 && s.pts.filter(x => x === 100).length === 4);
+      return R;
+    }
+    // ===== IMP-ENGINE-END =====
+
+    // ===== IMP-UI =====
+    (function () {
+      const E = id => document.getElementById(id);
+      const IM_COL = slColors.concat(['#ff8a00', '#00bcd4', '#ff5ec4', '#8bc34a', '#795548', '#9e9e9e']);
+      const KEY = 'kondattam_imp_v1';
+      const save = () => { try { localStorage.setItem(KEY, JSON.stringify(IM)); } catch (_) { } };
+      const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); return (s && Array.isArray(s.names) && Array.isArray(s.rounds) && Array.isArray(s.cats) && s.names.length >= 3 && s.names.length <= 12) ? s : null; } catch (_) { return null; } };
+      let IM = load(), RS = null, inRound = false, clockT = 0, clockEnd = 0, newArm = 0, mStage = null;
+      const panels = ['im-setup', 'im-idle', 'im-reveal', 'im-play', 'im-vote', 'im-result'];
+      const show = id => panels.forEach(p => E(p).style.display = p === id ? 'block' : 'none');
+      const sgn = n => (n > 0 ? '+' : '') + n;
+      const cnt = () => parseInt(E('im-pcount').textContent, 10);
+      const nm = i => ldEsc(IM.names[i]);
+      const dot = i => '<span class="plyr-dot" style="background:' + IM_COL[i] + '"></span>';
+
+      /* ---------- setup ---------- */
+      function renderSetup() {
+        const n = cnt(), wrap = E('im-nameinputs'), old = [...wrap.querySelectorAll('input')].map(i => i.value); wrap.innerHTML = '';
+        for (let i = 0; i < n; i++) {
+          const row = document.createElement('div'); row.className = 'plyr-row';
+          row.innerHTML = '<span class="plyr-dot" style="background:' + IM_COL[i] + '"></span><input id="im-name' + i + '" placeholder="Player ' + (i + 1) + '" maxlength="14">';
+          wrap.appendChild(row); if (old[i]) E('im-name' + i).value = old[i];
+        }
+        E('im-impnote').textContent = n < 6 ? '2 imposters need 6+ players' : '';
+      }
+      E('im-cats').innerHTML = IMP_DB.map((c, i) => '<div class="chip on" data-ci="' + i + '">' + c.e + ' ' + c.c + ' <small style="opacity:.6">' + c.w.length + '</small></div>').join('');
+      E('im-cats').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c) c.classList.toggle('on'); });
+      E('im-catall').addEventListener('click', () => { const chips = [...E('im-cats').children], all = chips.every(c => c.classList.contains('on')); chips.forEach(c => c.classList.toggle('on', !all)); });
+      E('im-pminus').addEventListener('click', () => { const v = cnt(); if (v > 3) { E('im-pcount').textContent = v - 1; renderSetup(); } });
+      E('im-pplus').addEventListener('click', () => { const v = cnt(); if (v < 12) { E('im-pcount').textContent = v + 1; renderSetup(); } });
+      E('im-start').addEventListener('click', () => {
+        const n = cnt(), names = []; for (let i = 0; i < n; i++)names.push(E('im-name' + i).value.trim() || ('Player ' + (i + 1)));
+        let cats = [...E('im-cats').children].filter(c => c.classList.contains('on')).map(c => +c.dataset.ci); if (!cats.length) cats = IMP_DB.map((_, i) => i);
+        IM = { names, cats, imps: n >= 6 ? parseInt(E('im-imps').value, 10) : 1, timer: parseInt(E('im-timer').value, 10), hint: E('im-opt-hint').checked, showCat: E('im-opt-cat').checked, rounds: [], used: [] };
+        save(); showSession();
+      });
+      function showSession() { E('im-score').style.display = 'block'; E('im-logcard').style.display = 'block'; renderScore(); renderLog(); renderIdle(); show('im-idle'); setFloat(false); }
+      function renderIdle() {
+        E('im-idletxt').innerHTML = '<b>Round ' + (IM.rounds.length + 1) + '</b> · ' + IM.names.length + ' players · ' + IM.imps + ' imposter' + (IM.imps > 1 ? 's' : '') + '<br><small>' + IM.cats.length + ' categories · ' + IM.timer + ' min discussion · imposter ' + (IM.hint ? 'gets a hint' : 'gets no hint') + '</small>';
+      }
+
+      /* ---------- round start & private role reveal ---------- */
+      function cardHTML(i) {
+        const imp = RS.imps.includes(i), cat = RS.emoji + ' ' + RS.cat;
+        if (!imp) return '<div class="im-role crew"><div class="im-big">🙂</div><h2>You are CREW</h2><div class="im-cat">Category: ' + cat + '</div><div class="im-word">' + ldEsc(RS.word) + '</div><p>Give a clue that proves you know the word — without making it too obvious for the imposter.</p><div class="im-who">' + nm(i) + '’s card — only you look!</div></div>';
+        return '<div class="im-role imp"><div class="im-big">🕵️</div><h2>You are the IMPOSTER</h2>' + (IM.showCat ? '<div class="im-cat">Category: ' + cat + '</div>' : '') + (IM.hint ? '<div class="im-hintlbl">Your hint</div><div class="im-word">' + ldEsc(RS.hint) + '</div><p>The hint is a clue about the secret word — blend in and work out what it is.</p>' : '<div class="im-word" style="font-size:1.4rem">No word for you</div><p>Listen closely, blend in, and work out the word.</p>') + '<div class="im-who">' + nm(i) + '’s card — only you look!</div></div>';
+      }
+      function beginRound() {
+        const N = IM.names.length, d = impDeal(N, IM.cats, IM.imps, IM.used);
+        if (d.reset) IM.used = []; IM.used.push(impKey(d.ci, d.wi)); save();
+        RS = Object.assign(d, { n: IM.rounds.length + 1, order: Array.from({ length: N }, (_, k) => (k + (IM.rounds.length % N)) % N), pi: 0, stage: 'prompt', votes: Array(N).fill(null), vi: 0, vstage: 'prompt', vpick: null, phase: 'reveal', saved: false, timeUp: false });
+        inRound = true; E('im-winbanner').classList.remove('on'); renderScore(); renderReveal(); show('im-reveal'); setFloat(false);
+      }
+      E('im-begin').addEventListener('click', beginRound);
+      function renderReveal() {
+        const N = IM.names.length, pl = RS.order[RS.pi], last = RS.pi === N - 1;
+        E('im-revealbody').innerHTML = RS.stage === 'prompt'
+          ? '<div class="im-pass">📱 Pass the phone to</div><div class="im-name" style="color:' + IM_COL[pl] + '">' + nm(pl) + '</div><p class="lead" style="text-align:center">Round ' + RS.n + ' · player ' + (RS.pi + 1) + ' of ' + N + '<br>Make sure nobody else is looking.</p><button class="big" data-im="show">👀 Tap to see my role</button>'
+          : cardHTML(pl) + '<button class="big" data-im="hide">' + (last ? 'Hide my card &amp; start the round' : 'Hide my card &amp; pass the phone') + '</button>';
+      }
+      E('im-reveal').addEventListener('click', e => {
+        const b = e.target.closest('[data-im]'); if (!b || !RS) return;
+        if (b.dataset.im === 'show') { RS.stage = 'card'; renderReveal(); }
+        else if (b.dataset.im === 'hide') {
+          RS.stage = 'prompt'; RS.pi++;
+          if (RS.pi < IM.names.length) renderReveal(); else startPlay();
+        }
+      });
+
+      /* ---------- discussion timer ---------- */
+      const fmt = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+      function startPlay() {
+        const N = IM.names.length; RS.phase = 'play'; RS.timeUp = false;
+        let h = '<h2 style="margin:0 0 4px">Round ' + RS.n + ' — talk it out</h2>' + (IM.showCat ? '<p class="lead" style="margin:0">Category: <b>' + RS.emoji + ' ' + RS.cat + '</b></p>' : '') +
+          '<div id="im-clock" class="im-clock">' + IM.timer + ':00</div>' +
+          '<p class="lead" style="text-align:center;margin:0 0 8px">👉 <b>' + nm(RS.starter) + '</b> gives the first one-word clue, then go around the circle. Argue, accuse, bluff.</p><ol class="im-order">';
+        for (let k = 0; k < N; k++) { const p = (RS.starter + k) % N; h += '<li>' + dot(p) + nm(p) + '</li>'; }
+        h += '</ol><div class="rowbtns"><button class="big ghost" id="im-plus">+1 min</button><button class="big" id="im-govote">🗳️ Go to voting</button></div>';
+        E('im-play').innerHTML = h; show('im-play'); setFloat(true);
+        clearInterval(clockT); clockEnd = Date.now() + IM.timer * 60000;
+        E('im-plus').addEventListener('click', () => { clockEnd += 60000; RS.timeUp = false; E('im-clock').classList.remove('low'); E('im-clock').textContent = fmt(clockEnd - Date.now()); });
+        E('im-govote').addEventListener('click', startVote);
+        clockT = setInterval(() => {
+          const c = E('im-clock'); if (!c) { clearInterval(clockT); return; }
+          const left = clockEnd - Date.now();
+          if (left <= 0) { if (!RS.timeUp) { RS.timeUp = true; try { if (navigator.vibrate) navigator.vibrate([300, 150, 300]); } catch (_) { } } c.textContent = '⏰ Time’s up — vote!'; c.classList.add('low'); }
+          else { c.textContent = fmt(left); c.classList.toggle('low', left <= 15000); }
+        }, 250);
+      }
+
+      /* ---------- secret voting ---------- */
+      function startVote() { clearInterval(clockT); clockT = 0; RS.phase = 'vote'; RS.vi = 0; RS.vstage = 'prompt'; RS.vpick = null; renderVote(); show('im-vote'); setFloat(true); }
+      function renderVote() {
+        const N = IM.names.length, v = RS.order[RS.vi];
+        if (RS.vstage === 'prompt') {
+          E('im-votebody').innerHTML = '<div class="im-pass">🗳️ Secret vote — pass the phone to</div><div class="im-name" style="color:' + IM_COL[v] + '">' + nm(v) + '</div><p class="lead" style="text-align:center">Voter ' + (RS.vi + 1) + ' of ' + N + '</p><button class="big" data-iv="open">Show my ballot</button>';
+        } else {
+          let h = '<h2 style="margin:0 0 4px">' + nm(v) + ', who is the imposter?</h2><p class="lead" style="margin:0 0 6px">Tap a suspect, then lock your vote.</p>';
+          for (let i = 0; i < N; i++)if (i !== v) h += '<button class="rr-sus' + (RS.vpick === i ? ' on' : '') + '" data-iv="pick" data-i="' + i + '">' + dot(i) + nm(i) + '</button>';
+          h += '<button class="big" data-iv="lock"' + (RS.vpick === null ? ' disabled' : '') + '>🔒 Lock my vote &amp; pass on</button>';
+          E('im-votebody').innerHTML = h;
+        }
+      }
+      E('im-vote').addEventListener('click', e => {
+        const b = e.target.closest('[data-iv]'); if (!b || !RS || RS.phase !== 'vote') return;
+        const a = b.dataset.iv, v = RS.order[RS.vi];
+        if (a === 'open') { RS.vstage = 'choose'; RS.vpick = null; renderVote(); }
+        else if (a === 'pick') { RS.vpick = +b.dataset.i; renderVote(); }
+        else if (a === 'lock' && RS.vpick !== null) {
+          RS.votes[v] = RS.vpick; RS.vi++; RS.vstage = 'prompt'; RS.vpick = null;
+          if (RS.vi >= IM.names.length) showResult(); else renderVote();
+        }
+      });
+
+      /* ---------- result & scoring ---------- */
+      function showResult() { RS.phase = 'result'; setFloat(false); renderResult(); show('im-result'); }
+      function renderResult() {
+        const N = IM.names.length, t = impTally(N, RS.votes), caught = RS.imps.filter(m => t.out === m);
+        let h = '<h2 style="margin:0 0 4px">The word was <span class="im-wordbig">' + ldEsc(RS.word) + '</span></h2><p class="lead" style="margin:0 0 8px">' + RS.emoji + ' ' + RS.cat + ' · imposter’s hint: <b>' + ldEsc(RS.hint) + '</b></p>';
+        h += '<p style="margin:0 0 8px">🕵️ Imposter' + (RS.imps.length > 1 ? 's' : '') + ': <b>' + RS.imps.map(nm).join(', ') + '</b></p>';
+        h += '<div class="im-votes">' + IM.names.map((_, i) => '<div class="im-vrow">' + dot(i) + '<span>' + nm(i) + ' → <b>' + (RS.votes[i] === null ? '—' : nm(RS.votes[i])) + '</b></span><span class="im-vcount">' + t.counts[i] + ' vote' + (t.counts[i] === 1 ? '' : 's') + '</span></div>').join('') + '</div>';
+        const verdict = t.out === null ? '🤝 Tie — nobody is voted out, so the imposter walks free.' : caught.length ? '🎯 ' + nm(t.out) + ' was voted out — and IS an imposter!' : '❌ ' + nm(t.out) + ' was voted out — but is innocent. The imposter wins!';
+        h += '<p class="im-verdict">' + verdict + '</p>';
+        if (!RS.saved) {
+          if (caught.length) h += '<p class="lead" style="text-align:center">' + caught.map(nm).join(' & ') + ' may now guess the secret word. Did they get it right?</p><div class="rowbtns"><button class="big" data-ir="yes">✅ Guessed it (+' + IMP_PTS.guess + ')</button><button class="big ghost" data-ir="no">❌ Wrong / no guess</button></div>';
+          else h += '<button class="big" data-ir="no">Save round &amp; show points</button>';
+        } else {
+          h += '<div class="rr-grid" style="margin-top:8px">' + IM.names.map((_, i) => { const p = RS.sc.pts[i]; return '<div class="rr-rcard"><div class="rr-rname">' + dot(i) + nm(i) + '</div><div class="rr-remoji">' + (RS.imps.includes(i) ? '🕵️' : '🙂') + '</div><div class="' + (p > 0 ? 'pos' : '') + '">' + sgn(p) + '</div></div>'; }).join('') + '</div><button class="big" data-ir="next">Next round</button>';
+        }
+        E('im-resultbody').innerHTML = h;
+      }
+      E('im-result').addEventListener('click', e => {
+        const b = e.target.closest('[data-ir]'); if (!b || !RS) return;
+        if (b.dataset.ir === 'next') { beginRound(); return; }
+        if (RS.saved) return;
+        const guessed = b.dataset.ir === 'yes', N = IM.names.length, sc = impScore(N, RS.imps, RS.votes, guessed);
+        IM.rounds.push({ n: RS.n, ci: RS.ci, wi: RS.wi, cat: RS.cat, emoji: RS.emoji, word: RS.word, hint: RS.hint, imps: RS.imps.slice(), votes: RS.votes.slice(), out: sc.out, guessed, pts: sc.pts, counts: sc.counts });
+        save(); inRound = false; RS.saved = true; RS.sc = sc; renderResult(); renderScore(); renderLog();
+      });
+
+      /* ---------- forgot-your-role float ---------- */
+      function setFloat(on) { E('im-float').style.display = on ? 'flex' : 'none'; }
+      function renderModal() {
+        const N = IM.names.length, body = E('im-modalbody');
+        if (mStage === null) { body.innerHTML = ''; return; }
+        if (mStage === 'names') {
+          let h = '<h3 style="margin:0 0 4px;color:var(--marigold)">😅 Forgot your role?</h3><p class="lead" style="margin:0 0 6px">Gee, you had one job. Fine — tap your own name (nobody peek!).</p>';
+          for (let i = 0; i < N; i++)h += '<button class="rr-sus" data-im2="who" data-i="' + i + '">' + dot(i) + nm(i) + '</button>';
+          h += '<button class="big ghost" data-im2="close">Never mind</button>'; body.innerHTML = h;
+        } else body.innerHTML = cardHTML(mStage) + '<button class="big" data-im2="close">Hide my card</button>';
+      }
+      E('im-float').addEventListener('click', () => { if (!RS) return; mStage = 'names'; renderModal(); E('im-modal').classList.add('on'); });
+      E('im-modal').addEventListener('click', e => {
+        const b = e.target.closest('[data-im2]'); if (!b) return;
+        if (b.dataset.im2 === 'who') { mStage = +b.dataset.i; renderModal(); }
+        else { mStage = null; E('im-modalbody').innerHTML = ''; E('im-modal').classList.remove('on'); }
+      });
+
+      /* ---------- scoreboard & log ---------- */
+      function totals() { const t = IM.names.map(() => 0); IM.rounds.forEach(r => r.pts.forEach((p, i) => { t[i] += p; })); return t; }
+      function renderScore() {
+        const t = totals(), ord = t.map((_, i) => i).sort((a, b) => t[b] - t[a]), medal = ['🥇', '🥈', '🥉'];
+        E('im-board').innerHTML = '<div class="rr-grid">' + IM.names.map((n, i) => {
+          const rank = ord.indexOf(i);
+          return '<div class="rr-pcard"><div class="rr-ptop">' + dot(i) + '<b>' + ldEsc(n) + '</b></div><div class="rr-total">' + (IM.rounds.length ? (medal[rank] || '') + ' ' : '') + t[i] + '</div>' +
+            (IM.rounds.length ? IM.rounds.map(r => '<div class="rr-ent"><span>R' + r.n + ' ' + (r.imps.includes(i) ? '🕵️ Imposter' : '🙂 Crew') + '</span><span class="' + (r.pts[i] > 0 ? 'pos' : '') + '">' + sgn(r.pts[i]) + '</span></div>').join('') : '<div class="rr-ent" style="opacity:.6">No rounds yet</div>') + '</div>';
+        }).join('') + '</div>';
+        E('im-undo').disabled = inRound || IM.rounds.length === 0;
+      }
+      function renderLog() {
+        const box = E('im-log'); box.innerHTML = '';
+        for (let k = IM.rounds.length - 1; k >= 0; k--) {
+          const e = IM.rounds[k], row = document.createElement('div'); row.className = 'log-row';
+          const caught = e.imps.some(m => e.out === m); row.style.borderLeftColor = caught ? '#3ec9a7' : '#ef5b6a';
+          const head = document.createElement('div'); head.className = 'log-head';
+          const h = document.createElement('span'); h.className = 'log-hash'; h.textContent = '#' + e.n;
+          const d = document.createElement('span'); d.className = 'log-die'; d.textContent = caught ? 'caught' : 'escaped';
+          const w = document.createElement('span'); w.style.opacity = '.7'; w.textContent = e.emoji + ' ' + e.cat;
+          head.append(h, d, w);
+          const body = document.createElement('div'); body.className = 'log-body';
+          body.textContent = 'Word: ' + e.word + ' (hint: ' + e.hint + ')\nImposter: ' + e.imps.map(m => IM.names[m]).join(', ') + ' · voted out: ' + (e.out === null ? 'nobody' : IM.names[e.out]) + (e.guessed ? ' · guessed the word' : '') + '\n' + IM.names.map((n, i) => n + ' ' + sgn(e.pts[i])).join(' · ');
+          row.append(head, body); box.appendChild(row);
+        }
+      }
+      E('im-undo').addEventListener('click', () => {
+        if (inRound || !IM.rounds.length) return;
+        const r = IM.rounds.pop(); IM.used = IM.used.filter(k => k !== impKey(r.ci, r.wi)); save(); E('im-winbanner').classList.remove('on');
+        renderScore(); renderLog(); renderIdle(); show('im-idle');
+      });
+      E('im-crown').addEventListener('click', () => {
+        if (!IM.rounds.length) return;
+        const t = totals(), top = Math.max(...t), win = IM.names.filter((_, i) => t[i] === top), b = E('im-winbanner');
+        b.textContent = '🏆 ' + win.join(' & ') + ' ' + (win.length > 1 ? 'win' : 'wins') + ' with ' + top + ' points after ' + IM.rounds.length + ' round' + (IM.rounds.length > 1 ? 's' : '') + '!'; b.classList.add('on');
+      });
+      E('im-newsession').addEventListener('click', () => {
+        const b = E('im-newsession');
+        if (newArm) {
+          clearTimeout(newArm); newArm = 0; b.textContent = 'New session (reset all scores)'; clearInterval(clockT); IM = null; RS = null; inRound = false; try { localStorage.removeItem(KEY); } catch (_) { }
+          E('im-score').style.display = 'none'; E('im-logcard').style.display = 'none'; E('im-winbanner').classList.remove('on'); setFloat(false); show('im-setup');
+        }
+        else { b.textContent = 'Tap again to erase all scores'; newArm = setTimeout(() => { newArm = 0; b.textContent = 'New session (reset all scores)'; }, 3000); }
+      });
+      renderSetup();
+      if (IM) { E('im-pcount').textContent = IM.names.length; renderSetup(); showSession(); } else show('im-setup');
     })();
 
   </script>
