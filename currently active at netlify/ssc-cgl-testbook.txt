@@ -1,0 +1,780 @@
+# pack: ssc-cgl-testbook | SSC CGL - General Awareness, English & Computer | built around the topic list at testbook.com/ssc-cgl-exam/study-material (facts written in original wording)
+# format: Subject|Topic|Answer|Hint|Clue 1|Clue 2
+History|Indus Valley|Harappa|Ravi|First Indus Valley site to be excavated, in 1921|Dayaram Sahni led the dig on the Ravi river
+History|Indus Valley|Mohenjo-daro|Mound of the Dead|Site of the Great Bath in Sindh|Discovered by R D Banerji in 1922
+History|Indus Valley|Dholavira|Reservoirs|Gujarat site famed for its stepped water reservoirs|Inscribed as a UNESCO World Heritage Site in 2021
+History|Indus Valley|Lothal|Dockyard|Harappan port city with an artificial dock|Stands near the Sabarmati in Gujarat
+History|Indus Valley|Kalibangan|Fire Altars|Rajasthan site with a ploughed field and fire altars|Its name means black bangles; on the Ghaggar
+History|Indus Valley|Rakhigarhi|Hisar|Largest Harappan site found in India|Located in Haryana
+History|Indus Valley|Chanhudaro|Beads|Harappan craft centre that had no citadel|Sindh site known for bead making
+History|Indus Valley|Great Bath|Ritual|Brick-lined tank at Mohenjo-daro|Probably used for ritual bathing
+History|Indus Valley|Pashupati Seal|Yogic Posture|Seal showing a horned figure among animals|Linked with a proto-Shiva figure
+History|Vedic Age|Rigveda|Mandalas|Oldest of the four Vedas|Has ten mandalas and 1028 hymns
+History|Vedic Age|Gayatri Mantra|Savitr|Famous hymn found in the Rigveda|Addressed to the solar deity Savitr
+History|Vedic Age|Sabha and Samiti|Assemblies|Two tribal assemblies of the Vedic age|Mentioned as daughters of Prajapati in the Atharvaveda
+History|Vedic Age|Upanishads|Vedanta|Philosophical texts that close the Vedic corpus|Teach the oneness of Atman and Brahman
+History|Ancient India|Mahavira|Tirthankara|Twenty-fourth and last Tirthankara of Jainism|Attained Kevala Jnana after years of austerity
+History|Ancient India|Gautama Buddha|Lumbini|Founder of Buddhism|Gave his first sermon at Sarnath
+History|Ancient India|Magadha|Rajagriha|Most powerful of the sixteen mahajanapadas|Capital later moved from Rajagriha to Pataliputra
+History|Ancient India|Chandragupta Maurya|Chanakya|Founder of an empire that Ashoka later ruled|Overthrew the Nandas with a minister's help
+History|Ancient India|Arthashastra|Statecraft|Ancient Sanskrit treatise on politics and economy|Attributed to Kautilya
+History|Ancient India|Ashoka|Dhamma|Mauryan emperor who adopted Buddhism|His rock edicts are in the Brahmi script
+History|Ancient India|Kalinga War|261 BCE|Conflict that turned Ashoka towards non-violence|Fought on the Odisha coast near Dhauli
+History|Ancient India|Sarnath|Lion Capital|Site where Ashoka's four-lion pillar was found|The national emblem is adapted from it
+History|Ancient India|Megasthenes|Indica|Greek ambassador at the court of Chandragupta Maurya|Author of the account Indica
+History|Ancient India|Gupta Empire|Golden Age|Dynasty remembered for a classical golden age|Reached its peak under a king titled Vikramaditya
+History|Ancient India|Samudragupta|Allahabad Pillar|Gupta king called the Napoleon of India|His conquests are listed on a pillar inscription at Prayag
+History|Ancient India|Chandragupta II|Vikramaditya|Gupta ruler who took the title Vikramaditya|His court was adorned by the Navaratnas
+History|Ancient India|Kalidasa|Shakuntala|Sanskrit poet and dramatist of the Gupta age|Wrote Meghaduta and Abhijnanashakuntalam
+History|Ancient India|Aryabhata|Pi|Mathematician who wrote the Aryabhatiya|India's first satellite was named after him
+History|Ancient India|Fa-Hien|Pilgrim|Chinese Buddhist monk who visited Gupta India|Travelled in the time of Chandragupta II
+History|Ancient India|Hiuen Tsang|Nalanda|Chinese traveller who studied at Nalanda|Wrote Si-Yu-Ki about Harsha's India
+History|Ancient India|Harshavardhana|Kannauj|Last great Hindu emperor of north India|His court poet Banabhatta wrote the Harshacharita
+History|Ancient India|Nalanda|University|Ancient Buddhist centre of learning in Bihar|Destroyed by Bakhtiyar Khilji's forces
+History|Ancient India|Pulakeshin II|Aihole|Chalukya king who defeated Harsha on the Narmada|The Aihole inscription records his victories
+History|South India|Cholas|Thanjavur|Dynasty that built the Big Temple at Thanjavur|Had a navy that reached Southeast Asia
+History|South India|Rajaraja Chola|Thanjavur|South Indian emperor whose Thanjavur temple has a tall vimana|Ruled from 985 CE
+History|South India|Rajendra Chola|Ganga Campaign|Emperor who founded a new capital to mark his Ganga campaign|Sent a naval expedition against Srivijaya
+History|South India|Pallavas|Kanchipuram|Dynasty that carved the rock monuments at Mamallapuram|Their capital was Kanchi
+History|South India|Mahabalipuram|Shore Temple|Pallava port with rock-cut rathas on the Coromandel coast|A UNESCO World Heritage Site near Chennai
+History|South India|Sangam Age|Tamilakam|Early Tamil literary era of three crowned kingdoms|Associated with the Cheras, Cholas and Pandyas
+History|South India|Tolkappiyam|Grammar|Oldest surviving Tamil grammar work|Attributed to a sage named Tolkappiyar
+History|South India|Thiruvalluvar|Couplets|Tamil poet who composed 1330 couplets|His work is divided into aram, porul and inbam
+History|South India|Vijayanagara|Hampi|Empire founded by Harihara and Bukka|Capital stood on the Tungabhadra
+History|South India|Krishnadevaraya|Ashtadiggajas|Greatest ruler of Vijayanagara|Wrote the Telugu work Amuktamalyada
+History|South India|Battle of Talikota|1565|Defeat that destroyed the Vijayanagara empire|Deccan sultanates joined forces against Rama Raya
+History|Medieval India|Qutb-ud-din Aibak|Slave Dynasty|Founder of the Delhi Sultanate in 1206|Began building the Qutub Minar
+History|Medieval India|Qutub Minar|Tower|Tall tower in Delhi begun by Aibak|Completed by Iltutmish; a UNESCO site
+History|Medieval India|Iltutmish|Tanka|Sultan who introduced the silver tanka|Organised the iqta system
+History|Medieval India|Razia Sultana|First Woman|Only woman to sit on the throne of Delhi in the 13th century|Daughter of Iltutmish
+History|Medieval India|Balban|Sijda|Sultan who enforced strict court etiquette like sijda and paibos|Set up the military department Diwan-i-Arz
+History|Medieval India|Alauddin Khalji|Market Control|Sultan who fixed market prices for goods|Sent Malik Kafur on southern campaigns
+History|Medieval India|Muhammad bin Tughlaq|Token Currency|Sultan who shifted the capital to Daulatabad|Issued copper token coins
+History|Medieval India|Ibn Battuta|Rihla|Moroccan traveller who served as a qazi in Delhi|Wrote a famous travel account
+History|Medieval India|Firoz Shah Tughlaq|Canals|Sultan known for building canals and a new city on the Yamuna|Introduced the Diwan-i-Khairat
+History|Medieval India|Timur|1398|Central Asian conqueror who sacked Delhi|Invaded India in 1398
+History|Medieval India|Lodi Dynasty|Last|Last dynasty of the Delhi Sultanate|Ended at the First Battle of Panipat
+History|Mughal Empire|Babur|Memoirs|Founder of Mughal rule in India|Defeated Ibrahim Lodi at Panipat in 1526
+History|Mughal Empire|Humayun|Chausa|Mughal ruler who lost his throne to an Afghan rival|His tomb in Delhi is a UNESCO site
+History|Mughal Empire|Sher Shah Suri|Grand Trunk Road|Afghan ruler who revived the Grand Trunk Road|Introduced the silver rupee
+History|Mughal Empire|Akbar|Din-i-Ilahi|Mughal emperor who started the mansabdari system|Won the Second Battle of Panipat in 1556
+History|Mughal Empire|Fatehpur Sikri|Buland Darwaza|Capital city Akbar built near Agra|Its great gateway celebrates the Gujarat victory
+History|Mughal Empire|Tansen|Dhrupad|Legendary musician at Akbar's court|One of the Navaratnas of Akbar
+History|Mughal Empire|Todar Mal|Revenue|Akbar's finance minister|Devised the Zabt land revenue system
+History|Mughal Empire|Jahangir|Chain of Justice|Mughal emperor who hung a golden chain for petitions|Married Nur Jahan
+History|Mughal Empire|Shah Jahan|Mumtaz Mahal|Mughal emperor who built the Red Fort and the Peacock Throne|Raised a famed white mausoleum for his wife
+History|Mughal Empire|Taj Mahal|Yamuna|White marble mausoleum built in memory of Mumtaz|Stands on the Yamuna bank at Agra
+History|Mughal Empire|Aurangzeb|Jizya|Last great Mughal emperor who reimposed jizya|Spent his last decades in the Deccan
+History|Mughal Empire|Mansabdari|Zat and Sawar|Mughal ranking system for officers|Introduced by Akbar
+History|Mughal Empire|Shivaji|Raigad|Founder of the Maratha kingdom|Crowned at Raigad in 1674
+History|Mughal Empire|Peshwa|Pune|Hereditary prime minister of the Maratha state|Balaji Vishwanath began their dominance
+History|Bhakti Movement|Guru Nanak|Talwandi|First Guru of the Sikhs|Born at Nankana Sahib
+History|Bhakti Movement|Kabir|Dohas|Bhakti saint who composed dohas|Disciple of Ramananda
+History|Bhakti Movement|Mirabai|Mewar|Rajput princess devoted to Krishna|A prominent Bhakti saint-poet
+History|Bhakti Movement|Chaitanya|Kirtan|Bengal saint who spread Krishna devotion through kirtan|Founder of the Gaudiya Vaishnava tradition
+History|Modern India|Battle of Plassey|1757|Battle that began Company rule in Bengal|Robert Clive defeated Siraj-ud-Daulah
+History|Modern India|Battle of Buxar|1764|Battle that confirmed British power in eastern India|Mir Qasim, Shuja-ud-Daula and Shah Alam II lost
+History|Modern India|Treaty of Allahabad|Diwani|1765 treaty that gave the Company revenue rights over Bengal|Signed between Clive and Shah Alam II
+History|Modern India|Tipu Sultan|Mysore Rockets|Ruler of Mysore called the Tiger of Mysore|Killed at Seringapatam in 1799
+History|Modern India|Doctrine of Lapse|Dalhousie|Policy of annexing states without natural heirs|Satara, Jhansi and Nagpur were taken under it
+History|Modern India|Revolt of 1857|Meerut|First major uprising against Company rule|Began at Meerut in May 1857
+History|Modern India|Rani Lakshmibai|Jhansi|Queen who led the rebels at a central Indian fort|Died fighting near Gwalior in 1858
+History|Modern India|Lord Dalhousie|Railways|Governor-General who started railways and the telegraph|Author of the Doctrine of Lapse
+History|Modern India|Lord Cornwallis|Permanent Settlement|Governor-General who fixed land revenue in 1793|Called the father of the civil services
+History|Modern India|Lord William Bentinck|Sati|Governor-General who abolished sati in 1829|Supported English education
+History|Modern India|Lord Ripon|Local Self-Government|Viceroy who promoted local self-government|Repealed the Vernacular Press Act
+History|Modern India|Ilbert Bill|1883|Bill that let Indian judges try Europeans|Triggered the white mutiny
+History|Modern India|Wood's Despatch|Education|1854 plan called the Magna Carta of English education in India|Led to universities in three presidency cities
+History|Social Reform|Raja Ram Mohan Roy|Brahmo Samaj|Reformer who campaigned against sati|Founded the Brahmo Sabha in 1828
+History|Social Reform|Swami Dayananda|Arya Samaj|Founder of the Arya Samaj in 1875|Gave the call Back to the Vedas
+History|Social Reform|Swami Vivekananda|Chicago|Disciple of Ramakrishna who addressed the 1893 World Parliament of Religions|Founded the Ramakrishna Mission
+History|Social Reform|Jyotiba Phule|Satyashodhak Samaj|Reformer who founded a society for truth-seeking|Wrote Gulamgiri
+History|Social Reform|Sir Syed Ahmad Khan|Aligarh|Founder of the Aligarh movement|Started the Mohammedan Anglo-Oriental College
+History|Freedom Struggle|Indian National Congress|1885|Party founded in December 1885 in Bombay|A O Hume helped in its formation
+History|Freedom Struggle|W C Bonnerjee|First President|Presided over the first Congress session|Barrister from Calcutta
+History|Freedom Struggle|Dadabhai Naoroji|Drain Theory|Grand Old Man of India|Explained the drain of wealth
+History|Freedom Struggle|Bal Gangadhar Tilak|Kesari|Leader who said Swaraj is my birthright|Edited the newspaper Kesari
+History|Freedom Struggle|Lala Lajpat Rai|Punjab Kesari|Lion of Punjab|Injured in a lathi charge against the Simon Commission
+History|Freedom Struggle|Gopal Krishna Gokhale|Servants of India|Political guru of Mahatma Gandhi|Founded the Servants of India Society
+History|Freedom Struggle|Partition of Bengal|1905|Division of a province carried out by Lord Curzon|Sparked the Swadeshi movement
+History|Freedom Struggle|Swadeshi Movement|Boycott|Movement to boycott foreign goods after 1905|Rabindranath Tagore composed songs for it
+History|Freedom Struggle|Muslim League|Dhaka|Party founded in 1906|Formed under the lead of Nawab Salimullah
+History|Freedom Struggle|Lucknow Pact|1916|Agreement between Congress and the League|Tilak and Jinnah played key roles
+History|Freedom Struggle|Home Rule League|Annie Besant|League launched in 1916 demanding self-government|Started by Tilak and Annie Besant
+History|Freedom Struggle|Champaran Satyagraha|Indigo|Gandhi's first civil resistance campaign in India in 1917|Held in Bihar for the cause of farmers
+History|Freedom Struggle|Rowlatt Act|1919|Law that allowed detention without trial|Opposed by a nationwide hartal
+History|Freedom Struggle|Jallianwala Bagh|Dyer|Massacre at Amritsar on 13 April 1919|General Reginald Dyer ordered the firing
+History|Freedom Struggle|Non-Cooperation Movement|1920|Mass movement launched by Gandhi in 1920|Withdrawn after an incident in Uttar Pradesh
+History|Freedom Struggle|Chauri Chaura|1922|Incident where a mob burnt a police station|Led Gandhi to suspend a mass movement
+History|Freedom Struggle|Simon Commission|Go Back|All-white commission of 1927 that Indians boycotted|Met with the slogan Go Back
+History|Freedom Struggle|Nehru Report|1928|Draft constitution prepared by a committee headed by Motilal|Demanded dominion status
+History|Freedom Struggle|Dandi March|Salt|Gandhi's 1930 march against the salt law|Began at Sabarmati and ended on the Gujarat coast
+History|Freedom Struggle|Civil Disobedience Movement|1930|Mass movement that began with a salt march|Paused after the Gandhi-Irwin Pact
+History|Freedom Struggle|Round Table Conference|London|Series of conferences held in London from 1930 to 1932|Gandhi attended the second one
+History|Freedom Struggle|Poona Pact|1932|Agreement between Gandhi and Ambedkar|Settled reserved seats for the depressed classes
+History|Freedom Struggle|Quit India Movement|1942|Movement with the slogan Do or Die|Launched at Gowalia Tank in Bombay
+History|Freedom Struggle|Cripps Mission|1942|Mission that offered dominion status after the war|Led by a British cabinet minister named Stafford
+History|Freedom Struggle|Indian National Army|Azad Hind|Force raised in Southeast Asia to fight the British|Headed by Subhas Chandra Bose
+History|Freedom Struggle|Cabinet Mission|1946|Mission of three British ministers sent in 1946|Proposed a federal union for India
+History|Freedom Struggle|Lord Mountbatten|Last Viceroy|Last Viceroy of India|First Governor-General of independent India
+History|Freedom Struggle|Mahatma Gandhi|Satyagraha|Father of the Nation|Began his Satyagraha experiments in South Africa
+History|Freedom Struggle|Sardar Vallabhbhai Patel|Iron Man|Iron Man of India|Integrated the princely states
+History|Freedom Struggle|Jawaharlal Nehru|Tryst with Destiny|First Prime Minister of independent India|Delivered a famous midnight speech in 1947
+History|Freedom Struggle|Bhagat Singh|Inquilab Zindabad|Revolutionary hanged in 1931|Threw a bomb in the Central Legislative Assembly
+History|Freedom Struggle|Chandra Shekhar Azad|Alfred Park|Revolutionary who died in a park in Allahabad|Led the Hindustan Socialist Republican Association
+History|Freedom Struggle|Subhas Chandra Bose|Netaji|Leader known as Netaji|Founded the Forward Bloc in 1939
+History|Freedom Struggle|Sarojini Naidu|Nightingale|Poet called the Nightingale of India|First woman Governor of an Indian state
+History|Freedom Struggle|Annie Besant|Theosophy|First woman President of the Indian National Congress|Presided over the 1917 Calcutta session
+History|Freedom Struggle|Badruddin Tyabji|First Muslim|First Muslim President of the Congress|Presided at the Madras session of 1887
+History|Freedom Struggle|George Yule|English|First English President of the Congress|Presided over the 1888 session at Allahabad
+History|Freedom Struggle|Lahore Session|Purna Swaraj|1929 Congress session that demanded complete independence|Jawaharlal Nehru presided on the Ravi's bank
+History|Freedom Struggle|Karachi Session|Fundamental Rights|1931 Congress session that adopted a resolution on rights|Presided by Vallabhbhai Patel
+History|Freedom Struggle|Haripura Session|1938|1938 Congress session presided by Subhas Chandra Bose|Held in present-day Gujarat
+History|Freedom Struggle|Tripuri Session|1939|1939 session where Bose won the presidency again|Contest against Pattabhi Sitaramayya
+History|Freedom Struggle|Dr B R Ambedkar|Drafting Committee|Chairman of the Constituent Assembly's Drafting Committee|Chief architect of the Constitution
+History|Freedom Struggle|Rabindranath Tagore|Gitanjali|First Asian to win the Nobel Prize in Literature|Wrote the national anthem
+Polity|Constitution|Preamble|Sovereign Socialist|Introductory statement of the Constitution|Declares India a sovereign, socialist, secular, democratic republic
+Polity|Constitution|Constituent Assembly|Rajendra Prasad|Body that drafted the Constitution|First met on 9 December 1946
+Polity|Constitution|Drafting Committee|Seven Members|Committee headed by Dr Ambedkar|Constituted on 29 August 1947
+Polity|Constitution|Republic Day|26 January|Day the Constitution came into force in 1950|Marks the Purna Swaraj pledge of 1930
+Polity|Fundamental Rights|Fundamental Rights|Part III|Rights guaranteed in Part III of the Constitution|Covered by Articles 12 to 35
+Polity|Fundamental Rights|Right to Equality|Articles 14-18|Right that abolishes untouchability and titles|Says every person stands on the same footing before the law
+Polity|Fundamental Rights|Right to Freedom|Article 19|Right covering speech, assembly and movement|Articles 19 to 22 fall under it
+Polity|Fundamental Rights|Right to Life|Article 21|Right interpreted to include privacy and dignity|Cannot be taken except by procedure established by law
+Polity|Fundamental Rights|Right to Education|Article 21A|Free schooling for children aged 6 to 14|Added by the 86th Amendment in 2002
+Polity|Fundamental Rights|Right against Exploitation|Articles 23-24|Right that bans forced labour and child labour in hazardous work|Traffic in human beings is forbidden
+Polity|Fundamental Rights|Constitutional Remedies|Article 32|Right Ambedkar called the heart and soul of the Constitution|Lets a citizen move the Supreme Court directly
+Polity|Fundamental Rights|Untouchability|Article 17|Practice abolished by the Constitution|Its enforcement is a punishable offence
+Polity|Fundamental Rights|Directive Principles|Part IV|Non-justiciable guidelines for the State|Idea borrowed from the Irish Constitution
+Polity|Fundamental Rights|Fundamental Duties|Article 51A|Duties added by the 42nd Amendment|Eleven in number after the 86th Amendment
+Polity|Writs|Habeas Corpus|Produce the Body|Writ used against illegal detention|Latin phrase meaning have the body
+Polity|Writs|Mandamus|We Command|Writ commanding a public official to do a duty|Cannot be issued against the President
+Polity|Writs|Certiorari|Quash|Writ that quashes an order of a lower court|Latin for to be certified
+Polity|Writs|Prohibition|Jurisdiction|Writ that stops a lower court from exceeding its limits|Issued while proceedings are still going on
+Polity|Writs|Quo Warranto|By What Authority|Writ that questions a person's right to hold public office|Latin for by what warrant
+Polity|Judiciary|Judicial Review|Constitutionality|Power of courts to test laws against the Constitution|Idea borrowed from the USA
+Polity|Judiciary|Basic Structure|Kesavananda|Doctrine that Parliament cannot alter the Constitution's core|Laid down in a landmark 1973 case
+Polity|Judiciary|Supreme Court|Article 124|Highest court of India|Its first Chief Justice was H J Kania
+Polity|Judiciary|High Court|Article 214|Highest court of a state|Its judges retire at 62
+Polity|Judiciary|Lok Adalat|Settlement|Forum for amicable settlement of disputes|Its award is treated as a civil court decree
+Polity|Judiciary|Public Interest Litigation|PIL|Legal action for the welfare of a group rather than one person|Developed by Justice P N Bhagwati and Justice V R Krishna Iyer
+Polity|Parliament|Lok Sabha|House of the People|Lower house of Parliament|Currently has 543 elected seats
+Polity|Parliament|Rajya Sabha|Council of States|Upper house of Parliament|One-third of its members retire every two years
+Polity|Parliament|Speaker|Presiding Officer|Presiding officer of the Lok Sabha|Elected by its members
+Polity|Parliament|Vice President|Ex Officio|Chairman of the Rajya Sabha by virtue of office|Elected by members of both Houses
+Polity|Parliament|Money Bill|Article 110|Bill that can be introduced only in the Lok Sabha|Rajya Sabha can only recommend changes
+Polity|Parliament|Joint Sitting|Article 108|Meeting of both Houses to settle a deadlock|Presided over by the Speaker
+Polity|Parliament|Zero Hour|Urgent Matters|Slot after Question Hour for urgent issues|An Indian innovation not found in the rules
+Polity|Parliament|Question Hour|First Hour|First hour of a sitting devoted to queries put to ministers|Queries may be starred or unstarred
+Polity|Parliament|Adjournment Motion|Urgent Public Importance|Motion to draw attention to a serious and urgent matter|Needs the support of fifty members
+Polity|Parliament|No-Confidence Motion|Council of Ministers|Motion that tests whether the ministry has majority support|Can be moved only in the Lok Sabha
+Polity|Parliament|Quorum|One-Tenth|Minimum members needed to hold a sitting|One-tenth of the total strength of a House
+Polity|Parliament|Whip|Party Discipline|Officer who makes sure legislators follow the party line|Term borrowed from the British Parliament
+Polity|Parliament|Anti-Defection Law|Tenth Schedule|Law added by the 52nd Amendment against floor-crossing|Disqualifies members who switch parties
+Polity|Executive|President of India|Article 52|Constitutional head of the Union|Elected indirectly through an electoral college
+Polity|Executive|Rashtrapati Bhavan|Lutyens|Official residence of the President|Designed by Edwin Lutyens
+Polity|Executive|Prime Minister|Article 75|Head of the central government's cabinet|Appointed by the President
+Polity|Executive|Council of Ministers|Collective Responsibility|Body that aids and advises the President|Collectively responsible to the Lok Sabha
+Polity|Executive|Attorney General|Article 76|Chief legal adviser to the Government of India|Appointed by the President
+Polity|Executive|Governor|Article 153|Constitutional head of a state|Appointed by the President
+Polity|Executive|Chief Minister|Article 164|Head of the government in a state|Appointed by the Governor
+Polity|Bodies|Election Commission|Article 324|Body that conducts polls to Parliament and State Legislatures|Set up on 25 January 1950
+Polity|Bodies|Finance Commission|Article 280|Body that recommends the sharing of taxes between Centre and states|Appointed every five years
+Polity|Bodies|UPSC|Article 315|Body that conducts civil services examinations|Called the central recruiting agency
+Polity|Bodies|CAG|Article 148|Auditor of Union and state accounts|Guardian of the public purse
+Polity|Bodies|NITI Aayog|Planning Commission|Think tank that replaced the Planning Commission in 2015|Its chairperson is the Prime Minister
+Polity|Bodies|NHRC|Human Rights|Statutory body set up in 1993 to protect rights|Established under the Protection of Human Rights Act
+Polity|Bodies|CBI|Investigation|Premier investigating agency of the Centre|Traces its origin to the Delhi Special Police Establishment of 1941
+Polity|Bodies|CVC|Vigilance|Apex body for vigilance in central government|Set up on the Santhanam Committee's advice
+Polity|Bodies|Lokpal|Ombudsman|Anti-corruption ombudsman for central officials|Created by an Act of 2013
+Polity|Regulators|SEBI|Stock Market|Regulator of India's securities market|Became statutory in 1992 and is based in Mumbai
+Polity|Regulators|IRDAI|Insurance|Regulator of the insurance sector|Headquartered in Hyderabad
+Polity|Regulators|TRAI|Telecom|Regulator of telecom tariffs|Set up in 1997
+Polity|Regulators|PFRDA|Pension|Regulator of the National Pension System|Works under the Ministry of Finance
+Polity|Regulators|FSSAI|Food Safety|Authority that sets standards for food|Set up under a 2006 Act
+Polity|Regulators|CCI|Competition|Body that checks anti-competitive practices|Established under an Act of 2002
+Polity|Local Government|Panchayati Raj|73rd Amendment|System of rural local self-government|Nagaur in Rajasthan adopted it first in 1959
+Polity|Local Government|Gram Sabha|Village|Body of all registered voters in a village|Forms the base of the panchayat system
+Polity|Local Government|Municipality|74th Amendment|Urban local body given constitutional status in 1992|Governed by Part IXA
+Polity|Emergency|National Emergency|Article 352|Proclaimed for war, external aggression or armed rebellion|Imposed in 1975 on the ground of internal disturbance
+Polity|Emergency|President's Rule|Article 356|Takeover of a state's administration by the Centre|Imposed on failure of constitutional machinery
+Polity|Emergency|Financial Emergency|Article 360|Proclamation made if the nation's credit is under threat|Never proclaimed so far
+Polity|Amendments|42nd Amendment|Mini Constitution|Amendment of 1976 nicknamed the Mini-Constitution|Added socialist, secular and integrity to the Preamble
+Polity|Amendments|44th Amendment|Property|Amendment that removed a right from the Fundamental Rights list|Made it only a legal right under Article 300A
+Polity|Amendments|101st Amendment|GST|Amendment that enabled the Goods and Services Tax|Passed in 2016
+Polity|Schedules|Seventh Schedule|Concurrent List|Schedule with the Union, State and Concurrent lists|Divides legislative powers
+Polity|Schedules|Eighth Schedule|Languages|Schedule listing recognised languages|Currently has 22 entries
+Polity|Schedules|Ninth Schedule|Land Reforms|Schedule added by the First Amendment|Meant to protect land reform laws
+Polity|Union Territories|Delhi|NCT|Union Territory with its own legislature under Article 239AA|Added by the 69th Amendment
+Geography|Latitudes and Longitudes|Tropic of Cancer|23.5 North|Latitude that passes through eight Indian states|Runs through Gujarat, Rajasthan and Tripura among others
+Geography|Latitudes and Longitudes|Equator|0 Degrees|Line that divides the Earth into two hemispheres|Longest parallel of latitude
+Geography|Latitudes and Longitudes|Prime Meridian|Greenwich|Line of 0 degrees longitude|Passes through an observatory near London
+Geography|Latitudes and Longitudes|International Date Line|180 Degrees|Line where the calendar date changes|Roughly follows the 180th meridian
+Geography|Latitudes and Longitudes|Indian Standard Time|82.5 East|Time zone based on a meridian near Mirzapur|Runs 5 hours 30 minutes ahead of GMT
+Geography|India|Kanyakumari|Southern Tip|Southernmost tip of mainland India|Meeting point of three water bodies
+Geography|India|Indira Point|Great Nicobar|Southernmost point of India|Partly submerged by the 2004 tsunami
+Geography|India|Siachen Glacier|Karakoram|World's highest battlefield|Lies in the Karakoram range
+Geography|Mountains|Mount Everest|Sagarmatha|Highest peak in the world|Stands on the Nepal-China border
+Geography|Mountains|K2|Godwin-Austen|Second highest peak in the world|Rises in the Karakoram
+Geography|Mountains|Kangchenjunga|Sikkim|Highest peak in India|Third highest mountain in the world
+Geography|Mountains|Anamudi|Western Ghats|Highest peak of peninsular India|Rises in the Anamalai hills of Kerala
+Geography|Mountains|Doddabetta|Ooty|Highest peak of the Nilgiri hills|Seen near Ooty in Tamil Nadu
+Geography|Mountains|Western Ghats|Sahyadri|Hill range along India's west coast|A biodiversity hotspot also called Sahyadri
+Geography|Mountains|Eastern Ghats|Mahendragiri|Broken hill range along the east coast|Cut through by the Godavari and Krishna
+Geography|India|Thar Desert|Rajasthan|Great Indian Desert|Mostly spread across Rajasthan
+Geography|India|Deccan Plateau|Peninsular|Triangular plateau of southern India|Lies between the Western and Eastern Ghats
+Geography|Rivers|Ganga|Gangotri|Longest river in India|Starts as the Bhagirathi
+Geography|Rivers|Brahmaputra|Tsangpo|River called Tsangpo in Tibet|Forms Majuli, the largest river island
+Geography|Rivers|Godavari|Dakshin Ganga|Longest peninsular river|Also known as Vriddha Ganga
+Geography|Rivers|Krishna|Mahabaleshwar|Peninsular river that rises near Mahabaleshwar|Drains into the Bay of Bengal
+Geography|Rivers|Kaveri|Sivasamudram|River that rises in Kodagu in Karnataka|Forms the Srirangam island and the Hogenakkal falls
+Geography|Rivers|Narmada|Amarkantak|West-flowing river that rises at Amarkantak|Flows through a rift valley to the Arabian Sea
+Geography|Rivers|Tapti|Betul|Twin of the Narmada among west-flowing rivers|Rises in Madhya Pradesh
+Geography|Rivers|Sutlej|Shipki La|Tributary of the Indus that enters India at Shipki La|Bhakra Dam is built on it
+Geography|Rivers|Yamuna|Yamunotri|Largest tributary of the Ganga|Flows past Delhi and Agra
+Geography|Lakes and Dams|Chilika Lake|Lagoon|Largest coastal lagoon in India|Ramsar site on the Odisha coast
+Geography|Lakes and Dams|Wular Lake|Kashmir|Largest freshwater lake in India|Located in Jammu and Kashmir
+Geography|Lakes and Dams|Sambhar Lake|Salt|Largest inland saltwater lake in India|Located in Rajasthan
+Geography|Lakes and Dams|Pulicat Lake|Sriharikota|Second largest brackish lagoon in India|Lies on the Tamil Nadu-Andhra border
+Geography|Lakes and Dams|Vembanad Lake|Backwaters|Longest lake in India|Largest lake of Kerala
+Geography|Lakes and Dams|Loktak Lake|Phumdis|Lake with floating islands in Manipur|Home of the Keibul Lamjao park
+Geography|Lakes and Dams|Hirakud Dam|Mahanadi|Longest earthen dam in India|Located in Odisha
+Geography|Lakes and Dams|Tehri Dam|Bhagirathi|Tallest dam in India|Stands in Uttarakhand
+Geography|Lakes and Dams|Mettur Dam|Salem|Tamil Nadu dam on the Kaveri|Once called the Stanley Reservoir
+Geography|Ports|Kandla|Tidal Port|Gujarat port renamed after Deendayal Upadhyaya|Handles heavy cargo on the west coast
+Geography|Ports|Jawaharlal Nehru Port|Nhava Sheva|Largest container port of India|Located at Navi Mumbai
+Geography|Ports|Mormugao|Goa|Major port of Goa|Exports iron ore
+Geography|Ports|New Mangalore|Karnataka|Karnataka's major port|Exports iron ore and coffee
+Geography|Ports|Kochi Port|Vallarpadam|Natural harbour on the Malabar coast|Has an international container transhipment terminal
+Geography|Ports|Tuticorin Port|Pearl City|Southern Tamil Nadu port|Also called Thoothukudi
+Geography|Ports|Chennai Port|Artificial Harbour|Oldest major port on the Coromandel coast|An artificial harbour handling vehicle exports
+Geography|Ports|Ennore Port|Kamarajar|First corporatised major port of India|Renamed after K Kamaraj
+Geography|Ports|Visakhapatnam Port|Deepest|Deepest landlocked and protected port of India|Located in Andhra Pradesh
+Geography|Ports|Paradip Port|Odisha|Deep-water port in Odisha|Exports iron ore and coal
+Geography|Ports|Haldia|Dock Complex|Dock complex built to ease congestion at Kolkata|Located on the Hooghly
+Geography|Airports|Indira Gandhi International Airport|Delhi|India's busiest airport|Named after a former Prime Minister
+Geography|Airports|Chhatrapati Shivaji International Airport|Mumbai|Airport serving India's financial capital|Named after a Maratha king
+Geography|Airports|Kempegowda International Airport|Bengaluru|Airport serving Karnataka's capital|Named after the founder of Bengaluru
+Geography|Airports|Rajiv Gandhi International Airport|Shamshabad|Airport serving Hyderabad|Located at Shamshabad
+Geography|Airports|Cochin International Airport|Solar|First Indian airport built with public participation|First fully solar-powered airport
+Geography|Physical Geography|Igneous Rock|Magma|Rock formed by the cooling of molten material|Basalt and granite are examples
+Geography|Physical Geography|Sedimentary Rock|Fossils|Rock formed by deposition and compaction in layers|Likely to contain fossils
+Geography|Physical Geography|Metamorphic Rock|Heat and Pressure|Rock transformed by heat and pressure|Marble forms from limestone this way
+Geography|Physical Geography|Epicentre|Earthquake|Point on the surface directly above the focus of a quake|Where shaking is usually strongest
+Geography|Physical Geography|Richter Scale|Magnitude|Scale used to measure the magnitude of earthquakes|Devised in 1935 by an American seismologist named Charles
+Geography|Physical Geography|Seismograph|Tremors|Instrument that records earthquake waves|Gives a graph called a seismogram
+Geography|Physical Geography|Tsunami|Harbour Wave|Giant sea waves caused by undersea earthquakes|Japanese for harbour wave
+Geography|Physical Geography|Ring of Fire|Pacific|Belt of volcanoes and earthquakes around an ocean|Surrounds the Pacific basin
+Geography|Physical Geography|Stromboli|Lighthouse|Italian volcano called the Lighthouse of the Mediterranean|Erupts almost continuously
+Geography|Physical Geography|Monsoon|Mausam|Seasonal reversal of wind direction|Name comes from the Arabic word for season
+Geography|Physical Geography|Loo|Hot Wind|Hot dry wind of the northern plains in summer|Blows in May and June
+Geography|Physical Geography|Western Disturbance|Winter Rain|Winter rain-bringer in north-west India|Originates in the Mediterranean region
+Geography|Atmosphere|Troposphere|Weather|Lowest layer of the atmosphere|Where clouds and storms form
+Geography|Atmosphere|Stratosphere|Ozone|Layer that holds the ozone layer|Jet aircraft fly near its lower edge
+Geography|Atmosphere|Ionosphere|Radio Waves|Layer that reflects radio waves|Rich in charged particles
+Geography|Atmosphere|Ozone Layer|Ultraviolet|Shield that absorbs harmful ultraviolet rays|Thinned by CFCs
+Geography|Atmosphere|Greenhouse Effect|Global Warming|Warming caused by gases trapping heat|Carbon dioxide is a main contributor
+Geography|World|Sundarbans|Mangroves|World's largest mangrove forest|Home of the Royal Bengal tiger
+Geography|World|Great Barrier Reef|Queensland|World's largest coral reef system|Lies off the coast of Australia
+Geography|World|Dead Sea|Lowest Point|Salt lake that is the lowest point on land|Lies between Jordan and Israel
+Geography|World|Nile|Egypt|Longest river in the world|Flows north into the Mediterranean
+Geography|World|Amazon|Rainforest|Largest river in the world by volume|Flows across Brazil
+Geography|World|Sahara|Dunes|Largest hot desert in the world|Spans northern Africa
+Geography|World|Mariana Trench|Challenger Deep|Deepest known part of the oceans|Lies in the western Pacific
+Geography|World|Panama Canal|Isthmus|Canal linking the Atlantic and Pacific oceans|Cuts through a narrow strip of Central America
+Geography|World|Suez Canal|Red Sea|Canal joining the Mediterranean to the Red Sea|Shortens the sea route between Europe and Asia
+Geography|World|Palk Strait|Sri Lanka|Strait separating Tamil Nadu from Sri Lanka|Connects the Bay of Bengal with the Palk Bay
+Geography|World|Gulf of Mannar|Pearls|Gulf with pearl fisheries between India and Sri Lanka|Has a marine biosphere reserve
+Geography|India|Lakshadweep|Coral|Smallest Union Territory by area|Coral islands in the Arabian Sea
+Geography|India|Rann of Kutch|Salt Marsh|Large salt marsh in Gujarat|Stage of a famed white desert festival
+Economy|Banking|RBI|Central Bank|India's central bank|Founded on 1 April 1935
+Economy|Banking|Repo Rate|Borrowing|Rate at which the central bank lends to commercial banks|A hike makes loans costlier
+Economy|Banking|Reverse Repo Rate|Parking Funds|Rate at which the central bank borrows from banks|Lower than the repo rate
+Economy|Banking|CRR|Cash Reserve|Share of deposits banks keep with the RBI in cash|Earns the banks no interest
+Economy|Banking|SLR|Liquid Assets|Share of deposits banks keep in gold, cash or approved securities|Kept with the bank itself
+Economy|Banking|NABARD|Rural Credit|Apex development bank for agriculture and rural areas|Set up in 1982
+Economy|Banking|SIDBI|Small Industries|Apex bank for small-scale industries|Set up in 1990
+Economy|Banking|NPCI|RuPay|Body that runs UPI and RuPay|Umbrella organisation for retail payments
+Economy|Banking|UPI|Instant Transfer|System for instant bank-to-bank payments by phone|Developed by NPCI
+Economy|Banking|Jan Dhan Yojana|Inclusion|Financial inclusion scheme launched in 2014|Aimed at a bank account for every household
+Economy|Concepts|Inflation|Prices|General rise in prices over time|Tracked through CPI and WPI
+Economy|Concepts|Deflation|Falling Prices|Persistent fall in the general price level|Opposite of inflation
+Economy|Concepts|Stagflation|Slowdown|Mix of high prices and high unemployment|Stagnant growth with rising costs
+Economy|Concepts|GDP|Output|Value of goods and services produced within a country|Measured every year
+Economy|Concepts|GST|Indirect Tax|Indirect tax that replaced many central and state levies|Rolled out on 1 July 2017
+Economy|Concepts|Budget|Financial Statement|Annual statement of the government's receipts and spending|Presented to Parliament under Article 112
+Economy|Concepts|Fiscal Deficit|Borrowing Need|Gap between spending and total receipts excluding loans|Met by government borrowing
+Economy|Concepts|Barter|Exchange|Swapping goods without using money|Oldest trade system
+Economy|Concepts|Demat Account|Electronic Shares|Account that holds shares in electronic form|Opened through a depository participant
+Economy|Concepts|Per Capita Income|Average|National income divided by the population|Rough measure of average earnings
+Economy|Concepts|Human Development Index|UNDP|Index of health, education and income published by the UNDP|Ranks countries by well-being
+Economy|Concepts|Bull Market|Rising|Phase where share prices keep rising|Opposite of the bear phase
+Economy|Concepts|Bear Market|Falling|Phase where share prices keep falling|Opposite of the bull phase
+Economy|Concepts|Tertiary Sector|Services|Part of the economy covering banking, transport and tourism|Largest contributor to India's GDP
+Economy|Markets|Sensex|BSE|Benchmark index of the Bombay Stock Exchange|Tracks thirty large companies
+Economy|Markets|Nifty|NSE|Benchmark index of the National Stock Exchange|Tracks fifty large companies
+Economy|Organisations|IMF|Washington|Body that lends to countries facing payment crises|Born at the Bretton Woods conference
+Economy|Organisations|World Bank|Reconstruction|Institution first called the Bank for Reconstruction and Development|Also headquartered in Washington
+Economy|Organisations|WTO|Geneva|Body that sets global trade rules|Succeeded GATT in 1995
+Economy|Organisations|Navratna|Nine Jewels|Special status granted to select public sector firms from 1997|Gives more financial autonomy than ordinary PSUs
+Economy|Revolutions|Green Revolution|Wheat|Farm output boom of the 1960s|Linked with M S Swaminathan and Norman Borlaug
+Economy|Revolutions|White Revolution|Milk|Dairy revolution led by Verghese Kurien|Powered by the programme called Operation Flood
+Economy|Revolutions|Yellow Revolution|Oilseeds|Drive to raise oilseed production|Targets mustard and other oilseeds
+Economy|Revolutions|Blue Revolution|Fisheries|Drive to raise fish production|Targets aquaculture and the sea catch
+Economy|Schemes|MGNREGA|Rural Jobs|Scheme guaranteeing 100 days of wage work in villages|Passed in 2005
+Economy|Thinkers|Adam Smith|Invisible Hand|Scottish thinker called the Father of Economics|Wrote The Wealth of Nations
+Economy|Thinkers|Amartya Sen|Welfare|Indian winner of the 1998 Nobel in economics|Wrote Poverty and Famines
+Economy|Thinkers|Abhijit Banerjee|Nobel 2019|Indian-origin winner of the 2019 Nobel in economics|Shared it with Esther Duflo and Michael Kremer
+Science|Physics Scientists|Isaac Newton|Apple|Scientist who formulated the laws of motion|Published the Principia in 1687
+Science|Physics Scientists|Albert Einstein|Relativity|Physicist who proposed the theory of relativity|Won the 1921 Nobel for the photoelectric effect
+Science|Physics Scientists|Galileo Galilei|Telescope|Italian astronomer who studied Jupiter's moons|Improved the telescope in 1609
+Science|Physics Scientists|C V Raman|Light Scattering|Indian physicist who won the 1930 Nobel in physics|National Science Day on 28 February marks his discovery
+Science|Physics Scientists|Homi J Bhabha|Atomic Energy|Father of the Indian nuclear programme|Founded TIFR in 1945
+Science|Physics Scientists|Vikram Sarabhai|ISRO|Father of the Indian space programme|Founded the Physical Research Laboratory
+Science|Physics Scientists|A P J Abdul Kalam|Missile Man|Scientist known as the Missile Man of India|Became the eleventh President of India
+Science|Physics Scientists|Satyendra Nath Bose|Boson|Indian physicist whose name is given to a class of particles|Worked with Einstein on quantum statistics
+Science|Physics Scientists|J C Bose|Crescograph|Scientist who invented the crescograph|Showed that plants respond to stimuli
+Science|Physics Scientists|Srinivasa Ramanujan|1729|Self-taught mathematician from Erode|Famous for the taxicab number story
+Science|Physics Scientists|Subrahmanyan Chandrasekhar|White Dwarfs|Astrophysicist who shared the 1983 Nobel in physics|Worked out the mass limit of white dwarfs
+Science|SI Units|Newton|Force|SI unit of force|Named after a famed English physicist
+Science|SI Units|Joule|Work|SI unit of energy and work|One newton-metre
+Science|SI Units|Watt|Power|SI unit of power|One joule per second
+Science|SI Units|Pascal|Pressure|SI unit of pressure|One newton per square metre
+Science|SI Units|Hertz|Frequency|SI unit of frequency|Cycles per second
+Science|SI Units|Ohm|Resistance|SI unit of electrical resistance|Linked with a law relating voltage and current
+Science|SI Units|Ampere|Current|SI unit of electric current|Measured with an ammeter
+Science|SI Units|Volt|Potential|SI unit of electric potential difference|Named after the Italian inventor of the first electric battery
+Science|SI Units|Coulomb|Charge|SI unit of electric charge|Equal to one ampere-second
+Science|SI Units|Kelvin|Absolute Zero|SI unit of temperature|Zero on this scale is absolute zero
+Science|SI Units|Decibel|Loudness|Unit for the intensity level of sound|One tenth of a bel
+Science|SI Units|Tesla|Magnetic Flux|SI unit of magnetic flux density|Named after a Serbian-American inventor
+Science|SI Units|Candela|Luminous Intensity|SI unit of luminous intensity|Based on the brightness of a candle
+Science|SI Units|Mole|Avogadro|SI unit for the amount of substance|Contains 6.022 x 10^23 particles
+Science|Physics Concepts|Inertia|First Law|Tendency of a body to resist change in its state of motion|Larger for heavier objects
+Science|Physics Concepts|Velocity|Direction|Speed in a given direction|A vector quantity
+Science|Physics Concepts|Acceleration|Rate of Change|Rate of change of velocity|Measured in metres per second squared
+Science|Physics Concepts|Momentum|Mass and Speed|Product of mass and velocity|Conserved in collisions
+Science|Physics Concepts|Gravity|Free Fall|Force that pulls objects towards the Earth|About 9.8 metres per second squared at the surface
+Science|Physics Concepts|Refraction|Bending|Bending of light when it enters another medium|Makes a straw look bent in water
+Science|Physics Concepts|Reflection|Mirror|Bouncing back of light from a surface|Follows the law of equal angles
+Science|Physics Concepts|Total Internal Reflection|Optical Fibre|Complete bouncing of light inside a denser medium|Principle behind optical fibres and mirages
+Science|Physics Concepts|Rainbow|Dispersion|Colour band formed when sunlight splits in raindrops|Shows the seven colours of VIBGYOR
+Science|Physics Concepts|Concave Mirror|Dentist|Curved inward surface used by dentists and in torches|Can form real and virtual images
+Science|Physics Concepts|Convex Mirror|Rear View|Curved outward surface used on vehicles|Always forms a smaller virtual image
+Science|Physics Concepts|Myopia|Short Sight|Eye defect corrected with a concave lens|Distant objects look blurred
+Science|Physics Concepts|Hypermetropia|Far Sight|Eye defect corrected with a convex lens|Nearby objects look blurred
+Science|Physics Concepts|Echo|Reflected Sound|Reflected sound heard after the original|Needs a minimum distance of about 17 metres
+Science|Physics Concepts|Doppler Effect|Siren|Change in pitch due to relative motion of source and listener|Heard as an ambulance passes by
+Science|Physics Concepts|Transformer|Mutual Induction|Device that raises or lowers AC voltage|Works on mutual induction
+Science|Physics Concepts|Dynamo|Generator|Device that converts mechanical energy into electricity|Works on electromagnetic induction
+Science|Physics Concepts|Fuse|Safety|Wire that melts when the current is too high|Protects household circuits
+Science|Physics Concepts|Superconductor|Zero Resistance|Material with no resistance at very low temperatures|Used in powerful magnets
+Science|Physics Concepts|Laser|Coherent Beam|Device that produces a narrow, coherent beam|Used in surgery and barcode scanners
+Science|Physics Concepts|Radar|Radio Waves|System that detects objects using radio waves|Used for aircraft and weather tracking
+Science|Physics Concepts|Nuclear Fission|Atom Bomb|Splitting of a heavy nucleus|Principle of the atomic bomb
+Science|Physics Concepts|Nuclear Fusion|Hydrogen Bomb|Joining of light nuclei releasing energy|Powers the Sun
+Science|Physics Concepts|Radioactivity|Becquerel|Spontaneous emission of radiation from nuclei|Discovered by Henri Becquerel in 1896
+Science|Physics Concepts|Black Hole|Event Horizon|Region where gravity lets nothing escape|Formed by the collapse of massive stars
+Science|Chemistry|Hydrogen|Lightest|Lightest element|Has atomic number 1
+Science|Chemistry|Oxygen|Respiration|Gas essential for breathing|Makes up about a fifth of air
+Science|Chemistry|Nitrogen|78 Percent|Most abundant gas in the atmosphere|Used to make fertilisers
+Science|Chemistry|Helium|Balloons|Inert gas used in party balloons|Second element of the periodic table
+Science|Chemistry|Carbon Dioxide|Dry Ice|Gas whose solid form is called dry ice|Used in fire extinguishers
+Science|Chemistry|Sodium|Kerosene|Soft metal stored under kerosene|Symbol Na
+Science|Chemistry|Potassium|Violent|Soft metal that reacts violently with water|Symbol K
+Science|Chemistry|Gold|Carat|Precious metal with the symbol Au|Its purity is measured in carats
+Science|Chemistry|Silver|Conductor|Best conductor of electricity among metals|Symbol Ag
+Science|Chemistry|Iron|Rust|Metal that rusts in moist air|Symbol Fe
+Science|Chemistry|Mercury|Quicksilver|Only metal that is liquid at room temperature|Symbol Hg
+Science|Chemistry|Bromine|Reddish Liquid|Only non-metal that is liquid at room temperature|A reddish-brown halogen
+Science|Chemistry|Diamond|Hardest|Hardest natural substance|A form of pure carbon
+Science|Chemistry|Graphite|Pencil|Form of carbon used in pencil leads|Conducts electricity
+Science|Chemistry|Brass|Copper and Zinc|Alloy of copper and zinc|Used in musical instruments
+Science|Chemistry|Bronze|Copper and Tin|Alloy of copper and tin|Gave its name to an ancient age
+Science|Chemistry|Steel|Iron and Carbon|Alloy of iron with a little carbon|Used in construction
+Science|Chemistry|Solder|Tin and Lead|Alloy used to join metal parts|Melts at a low temperature
+Science|Chemistry|Mendeleev|Periodic Table|Russian chemist who arranged the elements by atomic mass|Left gaps for undiscovered elements
+Science|Chemistry|John Dalton|Atomic Theory|Scientist who proposed an atomic theory in 1808|Pictured atoms as indivisible
+Science|Chemistry|Rutherford|Gold Foil|Physicist who discovered the atomic nucleus|Famous for a gold foil experiment
+Science|Chemistry|Niels Bohr|Orbits|Danish physicist who proposed electron orbits|Won the 1922 Nobel in physics
+Science|Chemistry|Electron|Negative|Negatively charged particle of an atom|Discovered by J J Thomson
+Science|Chemistry|Proton|Positive|Positively charged particle in the nucleus|Its count gives the atomic number
+Science|Chemistry|Neutron|Chadwick|Neutral particle in the nucleus|Discovered in 1932
+Science|Chemistry|Isotopes|Mass Number|Atoms with the same atomic number but different masses|Carbon-12 and carbon-14 are examples
+Science|Chemistry|pH Scale|Acidity|Scale of acidity running from 0 to 14|Seven is neutral
+Science|Chemistry|Litmus|Lichens|Dye from lichens used as an indicator|Turns red in acid
+Science|Chemistry|Vinegar|Acetic Acid|Sour kitchen liquid containing acetic acid|Used in pickles
+Science|Chemistry|Baking Soda|Bicarbonate|Compound that makes cakes rise|Chemical name is sodium bicarbonate
+Science|Chemistry|Washing Soda|Carbonate|Cleaning compound with the formula Na2CO3|Used to soften hard water
+Science|Chemistry|Plaster of Paris|Gypsum|Material used for fracture casts|Made by heating gypsum
+Science|Chemistry|Quicklime|Calcium Oxide|Chemical used in making cement|Reacts with water to give slaked lime
+Science|Chemistry|Rusting|Oxidation|Slow corrosion of iron in damp air|Needs both oxygen and moisture
+Science|Chemistry|Combustion|Burning|Reaction of a substance with oxygen producing heat|Needs fuel, oxygen and heat
+Science|Chemistry|Catalyst|Speeds Up|Substance that speeds a reaction but is not used up|Enzymes act as biological ones
+Science|Chemistry|LPG|Cooking Gas|Fuel made of propane and butane|Cooking gas supplied in cylinders
+Science|Chemistry|Methane|Marsh Gas|Main component of natural gas and gobar gas|A greenhouse gas
+Science|Chemistry|Chlorine|Disinfectant|Gas used to disinfect drinking water|Also used in bleaching powder
+Science|Chemistry|Teflon|Non-stick|Polymer used to coat frying pans|Chemically called polytetrafluoroethylene
+Science|Chemistry|Nylon|Synthetic Fibre|First fully synthetic fibre|Used in stockings and ropes
+Science|Chemistry|Bakelite|Thermosetting|First synthetic plastic|Used in electrical switches
+Science|Chemistry|Rayon|Artificial Silk|Fibre made from wood pulp|Called artificial silk
+Science|Chemistry|Hard Water|Lather|Liquid that forms little lather with soap|Contains calcium and magnesium salts
+Science|Chemistry|Brownian Motion|Pollen|Random zig-zag motion of particles in a fluid|Observed by Robert Brown
+Science|Biology|Mitochondria|Powerhouse|Organelle called the powerhouse of the cell|Site of aerobic respiration
+Science|Biology|Nucleus|Control Centre|Cell organelle that holds the DNA|Discovered by Robert Brown
+Science|Biology|Ribosome|Protein Factory|Organelle that makes proteins|Found free or on the rough ER
+Science|Biology|Chloroplast|Photosynthesis|Plant organelle where food is made|Contains chlorophyll
+Science|Biology|Chlorophyll|Green Pigment|Green pigment that traps sunlight in plants|Needs magnesium
+Science|Biology|DNA|Double Helix|Molecule that carries genetic information|Structure proposed by Watson and Crick
+Science|Biology|Gregor Mendel|Pea Plants|Father of Genetics|Experimented on garden peas
+Science|Biology|Charles Darwin|Natural Selection|Proposed evolution by natural selection|Wrote On the Origin of Species
+Science|Biology|Robert Hooke|Cork|Scientist who first observed cells in a slice of cork|Wrote Micrographia
+Science|Biology|Louis Pasteur|Rabies|French scientist who developed a rabies vaccine|Disproved spontaneous generation
+Science|Biology|Edward Jenner|Smallpox|Developed the first smallpox vaccine|Used cowpox material
+Science|Biology|Alexander Fleming|Penicillin|Discoverer of the first antibiotic|Noticed mould killing bacteria in 1928
+Science|Biology|Ronald Ross|Mosquito|British doctor who showed mosquitoes spread malaria|Won the 1902 Nobel Prize
+Science|Biology|Robert Koch|Bacteria|German physician who found the germs causing TB and cholera|Founder of modern bacteriology
+Science|Biology|William Harvey|Circulation|English physician who described blood circulation|Published his work in 1628
+Science|Biology|Haemoglobin|Iron|Iron-containing pigment of red blood cells|Carries oxygen
+Science|Biology|Red Blood Cells|Oxygen Carriers|Cells that carry oxygen around the body|Formed in the bone marrow
+Science|Biology|White Blood Cells|Immunity|Cells that fight infection|Also called leucocytes
+Science|Biology|Platelets|Clotting|Cell fragments that help blood to clot|Also called thrombocytes
+Science|Biology|Heart|Four Chambers|Organ with four chambers in humans|Pumps blood through the body
+Science|Biology|Pacemaker|SA Node|Group of cells that starts the heartbeat|Located in the right atrium
+Science|Biology|Kidney|Nephron|Organ that filters blood to make urine|Its working unit is the nephron
+Science|Biology|Liver|Bile|Largest gland of the human body|Produces bile
+Science|Biology|Pancreas|Insulin|Gland that makes insulin|Works as both exocrine and endocrine gland
+Science|Biology|Pituitary|Master Gland|Master gland of the body|Sits at the base of the brain
+Science|Biology|Thyroid|Thyroxine|Gland that produces thyroxine|Needs iodine to work
+Science|Biology|Insulin|Blood Sugar|Hormone that lowers blood sugar|Its lack causes diabetes
+Science|Biology|Adrenaline|Fight or Flight|Hormone released in emergencies|Made by the adrenal glands
+Science|Biology|Femur|Thigh|Longest bone in the human body|Found in the thigh
+Science|Biology|Stapes|Smallest Bone|Smallest bone in the human body|Found in the ear
+Science|Biology|Skin|Largest Organ|Largest organ of the human body|Protects against germs
+Science|Biology|Vitamin A|Night Blindness|Vitamin whose lack causes night blindness|Found in carrots and papaya
+Science|Biology|Vitamin C|Scurvy|Vitamin whose lack causes scurvy|Found in citrus fruits
+Science|Biology|Vitamin D|Rickets|Vitamin whose lack causes rickets|Made in the skin by sunlight
+Science|Biology|Vitamin K|Clotting|Vitamin needed for blood clotting|Made by gut bacteria
+Science|Biology|Goitre|Iodine|Swelling of the neck caused by lack of iodine|Affects the thyroid
+Science|Biology|Anaemia|Haemoglobin|Condition caused by lack of iron|Lowers haemoglobin in the blood
+Science|Biology|Kwashiorkor|Protein|Disease of children caused by protein deficiency|Causes swelling of the belly
+Science|Biology|Malaria|Plasmodium|Disease caused by a Plasmodium parasite|Spread by the female Anopheles mosquito
+Science|Biology|Dengue|Aedes|Viral fever spread by the Aedes mosquito|Causes a drop in platelets
+Science|Biology|Tuberculosis|BCG|Lung disease prevented by the BCG vaccine|Caused by a bacterium
+Science|Biology|Polio|Drops|Disease prevented by oral drops|India was declared free of it in 2014
+Science|Biology|AIDS|HIV|Syndrome caused by the HIV virus|Weakens the immune system
+Science|Biology|Cholera|ORS|Waterborne disease treated with ORS|Causes severe diarrhoea
+Science|Biology|Rabies|Dog Bite|Viral disease spread through a dog bite|Prevented by a vaccine from Pasteur's work
+Science|Biology|Leprosy|Hansen|Disease also known as Hansen's disease|Caused by a bacterium
+Science|Biology|Transpiration|Stomata|Loss of water vapour from leaves|Occurs mainly through stomata
+Science|Biology|Stomata|Pores|Tiny pores on leaves for gas exchange|Guarded by two guard cells
+Science|Biology|Xylem|Water|Tissue that carries water in plants|Runs from roots to leaves
+Science|Biology|Phloem|Food|Tissue that carries prepared food in plants|Moves sugars to storage parts
+Science|Biology|Pollination|Pollen|Transfer of pollen to the stigma|Done by insects, wind and water
+Science|Biology|Auxin|Growth Hormone|Plant hormone that promotes growth|Causes plants to bend towards light
+Science|Biology|Blue Whale|Largest Animal|Largest animal ever known|A marine mammal
+Science|Biology|Cheetah|Fastest|Fastest land animal|Spotted big cat
+Science|Biology|Ostrich|Largest Bird|Largest living bird|Cannot fly
+Science|Biology|Hummingbird|Smallest Bird|Tiny bird that can fly backwards|Beats its wings extremely fast
+Science|Biology|Platypus|Egg-laying|Egg-laying mammal of Australia|Has a duck-like bill
+Science|Biology|Bat|Flying Mammal|Only mammal capable of true flight|Uses echolocation
+Static GK|National Symbols|Bengal Tiger|National Animal|National animal of India|Protected under a conservation project launched in 1973
+Static GK|National Symbols|Peacock|National Bird|National bird of India|Its dance is a sign of the monsoon
+Static GK|National Symbols|Lotus|National Flower|National flower of India|Grows in still water
+Static GK|National Symbols|Banyan|National Tree|National tree of India|Known for its aerial roots
+Static GK|National Symbols|Mango|National Fruit|National fruit of India|Called the king of fruits
+Static GK|National Symbols|Ganges Dolphin|National Aquatic Animal|National aquatic animal of India|Nearly blind freshwater mammal
+Static GK|National Symbols|Jana Gana Mana|National Anthem|National anthem of India|Written by Rabindranath Tagore
+Static GK|National Symbols|Vande Mataram|National Song|National song of India|Taken from the novel Anandamath
+Static GK|National Symbols|Pingali Venkayya|Flag Designer|Designer of the Indian national flag|From Andhra Pradesh
+Static GK|National Symbols|Ashoka Chakra|24 Spokes|Wheel at the centre of the national flag|Has twenty-four spokes
+Static GK|National Symbols|Satyameva Jayate|Mundaka Upanishad|National motto of India|Means truth alone triumphs
+Static GK|National Symbols|D Udaya Kumar|Rupee Symbol|Designer of the Indian rupee symbol|Adopted in 2010
+Static GK|Currencies|Yen|Japan|Currency of Japan|Written with the symbol of a Y crossed by lines
+Static GK|Currencies|Yuan|China|Currency of China|Also called the renminbi
+Static GK|Currencies|Pound Sterling|United Kingdom|Currency of the United Kingdom|One of the oldest currencies still in use
+Static GK|Currencies|Euro|ECB|Common currency of many countries of a Brussels-led union|Introduced as notes in 2002
+Static GK|Currencies|Rouble|Russia|Currency of Russia|Divided into 100 kopeks
+Static GK|Currencies|Won|South Korea|Currency of South Korea|A short three-letter word
+Static GK|Currencies|Baht|Thailand|Currency of Thailand|Divided into 100 satang
+Static GK|Currencies|Rupiah|Indonesia|Currency of Indonesia|Used across Java and Bali
+Static GK|Currencies|Ringgit|Malaysia|Currency of Malaysia|Introduced in 1967 as the dollar
+Static GK|Currencies|Taka|Bangladesh|Currency of Bangladesh|Also means money in Bengali
+Static GK|Currencies|Riyal|Saudi Arabia|Currency of Saudi Arabia|Also used in Qatar and Oman with variations
+Static GK|Currencies|Dirham|UAE|Currency of the United Arab Emirates|Divided into 100 fils
+Static GK|Currencies|Rand|South Africa|Currency of South Africa|Named after a gold-rich ridge
+Static GK|Currencies|Franc|Switzerland|Currency of Switzerland|Also the former money of Paris and Brussels
+Static GK|Currencies|Real|Brazil|Currency of Brazil|Replaced the cruzeiro in 1994
+Static GK|Currencies|Lira|Turkey|Currency of Turkey|Also used by Italy before the euro
+Static GK|Currencies|Kuwaiti Dinar|Highest Value|Currency unit with the highest value|Used in a Gulf nation
+Static GK|Currencies|Kyat|Myanmar|Currency of Myanmar|Replaced the old British rupee
+Static GK|Currencies|Ngultrum|Bhutan|Currency of Bhutan|Pegged to the Indian rupee
+Static GK|Capitals|Canberra|Australia|Capital of Australia|A planned city
+Static GK|Capitals|Ottawa|Canada|Capital of Canada|Lies on a river that marks the Ontario-Quebec border
+Static GK|Capitals|Washington DC|United States|Capital of the United States|Named after the first President
+Static GK|Capitals|Beijing|China|Capital of China|Home to the Forbidden City
+Static GK|Capitals|Tokyo|Japan|Capital of Japan|Formerly called Edo
+Static GK|Capitals|Moscow|Russia|Capital of Russia|Home to the Kremlin
+Static GK|Capitals|Cairo|Egypt|Capital of Egypt|Stands on the Nile
+Static GK|Capitals|Nairobi|Kenya|Capital of Kenya|Lies close to a famous national park
+Static GK|Capitals|Kathmandu|Nepal|Capital of Nepal|Lies in a valley of the Himalayas
+Static GK|Capitals|Thimphu|Bhutan|Capital of Bhutan|One of the few capitals without traffic lights
+Static GK|Capitals|Dhaka|Bangladesh|Capital of Bangladesh|Called the city of mosques
+Static GK|Capitals|Islamabad|Pakistan|Capital of Pakistan|A planned city at the Margalla Hills
+Static GK|Capitals|Kabul|Afghanistan|Capital of Afghanistan|Surrounded by the Hindu Kush mountains
+Static GK|Capitals|Brasilia|Brazil|Capital of Brazil|A planned city opened in 1960
+Static GK|Capitals|Buenos Aires|Argentina|Capital of Argentina|Birthplace of the tango
+Static GK|Capitals|Wellington|New Zealand|Capital of New Zealand|Named after a famed duke
+Static GK|Capitals|Ankara|Turkey|Capital of Turkey|Not Istanbul
+Static GK|Capitals|Tehran|Iran|Capital of Iran|Lies at the foot of the Alborz
+Static GK|Capitals|Riyadh|Saudi Arabia|Capital of Saudi Arabia|Lies in the Najd region
+Static GK|Capitals|Bangkok|Thailand|Capital of Thailand|Known locally as Krung Thep
+Static GK|Capitals|Seoul|South Korea|Capital of South Korea|Lies on the Han River
+Static GK|Capitals|Lisbon|Portugal|Capital of Portugal|Built on seven hills
+Static GK|Capitals|Vienna|Austria|Capital of Austria|Known as the city of music
+Static GK|Capitals|Gandhinagar|Gujarat|Capital of Gujarat|A planned city named after the Mahatma
+Static GK|Capitals|Shimla|Himachal Pradesh|Capital of Himachal Pradesh|Summer capital of British India
+Static GK|Capitals|Bhubaneswar|Odisha|Capital of Odisha|Called the temple city
+Static GK|Capitals|Thiruvananthapuram|Kerala|Capital of Kerala|Home to the Padmanabhaswamy temple
+Static GK|Capitals|Dispur|Assam|Capital of Assam|Part of Guwahati
+Static GK|Capitals|Gangtok|Sikkim|Capital of Sikkim|Lies in the eastern Himalayas
+Static GK|Capitals|Imphal|Manipur|Capital of Manipur|Lies in a valley
+Static GK|Capitals|Aizawl|Mizoram|Capital of Mizoram|Perched on a ridge
+Static GK|Capitals|Kohima|Nagaland|Capital of Nagaland|Site of a famed World War II battle
+Static GK|Capitals|Itanagar|Arunachal Pradesh|Capital of Arunachal Pradesh|Named after a fort
+Static GK|Capitals|Agartala|Tripura|Capital of Tripura|Lies near the Bangladesh border
+Static GK|Capitals|Raipur|Chhattisgarh|Capital of Chhattisgarh|Lies in the rice bowl region
+Static GK|Capitals|Ranchi|Jharkhand|Capital of Jharkhand|Called the city of waterfalls
+Static GK|Capitals|Panaji|Goa|Capital of Goa|Lies on the Mandovi
+Static GK|Books and Authors|Discovery of India|Ahmednagar|Book written by Nehru in prison|Surveys India's history and culture
+Static GK|Books and Authors|Wings of Fire|Autobiography|Autobiography of A P J Abdul Kalam|Tells the story of a rocket scientist
+Static GK|Books and Authors|Godan|Premchand|Famous Hindi novel about a poor farmer|Written by Premchand
+Static GK|Books and Authors|Malgudi Days|R K Narayan|Stories set in a fictional south Indian town|Written by R K Narayan
+Static GK|Books and Authors|Ramayana|Valmiki|Epic composed by Valmiki|Tells the story of Rama
+Static GK|Books and Authors|Mahabharata|Vyasa|Longest epic poem in the world|Attributed to Vyasa
+Static GK|Books and Authors|Meghaduta|Cloud Messenger|Lyric poem in which a cloud carries a message|Composed by Kalidasa
+Static GK|Books and Authors|Anandamath|Bankim Chandra|Novel that contains the national song|Set during the Sannyasi rebellion
+Static GK|Books and Authors|Hind Swaraj|1909|Book by Gandhi written in 1909|Presents his vision of self-rule
+Static GK|Books and Authors|The God of Small Things|Arundhati Roy|Booker Prize-winning novel of 1997|Set in Kerala
+Static GK|Books and Authors|The White Tiger|Aravind Adiga|Booker Prize-winning novel of 2008|Narrated by a driver named Balram
+Static GK|Books and Authors|Midnights Children|Salman Rushdie|Booker winning novel about those born at independence|Won the Booker of Bookers
+Static GK|Books and Authors|Ponniyin Selvan|Kalki|Tamil historical novel by Kalki Krishnamurthy|Set in the Chola period
+Static GK|Books and Authors|Silappathikaram|Kannagi|Tamil epic of Kovalan and Kannagi|Written by Ilango Adigal
+Static GK|Awards|Bharat Ratna|Highest Civilian|Highest civilian award of India|Instituted in 1954
+Static GK|Awards|Padma Vibhushan|Second Highest|Second highest civilian award of India|Instituted in 1954
+Static GK|Awards|Param Vir Chakra|Gallantry|Highest wartime gallantry award|Instituted in 1950
+Static GK|Awards|Arjuna Award|Sportspersons|National award for outstanding sportspersons|Instituted in 1961
+Static GK|Awards|Dronacharya Award|Coaches|National award for sports coaches|Named after the teacher of the Pandavas
+Static GK|Awards|Jnanpith Award|Literature|Highest literary award in India|Given for work in Indian languages
+Static GK|Awards|Dadasaheb Phalke Award|Cinema|Highest award in Indian cinema|Named after the father of Indian cinema
+Static GK|Awards|Nobel Prize|Stockholm|Awards created from the will of the Swedish inventor of dynamite|First presented in 1901
+Static GK|Awards|Booker Prize|Fiction|British literary prize for fiction|Open to books in English
+Static GK|Awards|Pulitzer Prize|Journalism|American award for journalism and letters|Administered by Columbia University
+Static GK|Awards|Mother Teresa|Peace|Nobel Peace Prize winner of 1979|Founded the Missionaries of Charity
+Static GK|Awards|Kailash Satyarthi|Child Rights|Indian winner of the 2014 Nobel Peace Prize|Shared it with Malala Yousafzai
+Static GK|Firsts|Rakesh Sharma|Soyuz|First Indian in space|Flew in 1984
+Static GK|Firsts|Kalpana Chawla|Columbia|First Indian-born woman in space|Died in the 2003 shuttle disaster
+Static GK|Firsts|Tenzing Norgay|Sherpa|Climbed Everest first with Edmund Hillary in 1953|A Sherpa mountaineer
+Static GK|Firsts|Bachendri Pal|Everest|First Indian woman to climb Everest|Reached the summit in 1984
+Static GK|Firsts|Indira Gandhi|First Woman|First woman Prime Minister of India|Daughter of Jawaharlal Nehru
+Static GK|Firsts|Pratibha Patil|First Woman President|First woman President of India|Took office in 2007
+Static GK|Firsts|Rajendra Prasad|First President|First President of India|Served two terms
+Static GK|Firsts|Sarvepalli Radhakrishnan|Teachers Day|Second President of India|His birthday is celebrated as Teachers' Day
+Static GK|Days|National Science Day|28 February|Day marking an Indian discovery in light scattering|Celebrated on 28 February
+Static GK|Days|National Youth Day|12 January|Day marking the birth of Swami Vivekananda|Celebrated on 12 January
+Static GK|Days|Children's Day|14 November|Day marking Jawaharlal Nehru's birthday|Celebrated on 14 November
+Static GK|Days|Gandhi Jayanti|2 October|Birthday of the Father of the Nation|Also the International Day of Non-Violence
+Static GK|Days|World Environment Day|5 June|Day observed every year on 5 June|Observed since 1973 and led by a UN programme
+Static GK|Days|Human Rights Day|10 December|Day marking the adoption of a Universal Declaration in 1948|Observed on 10 December
+Static GK|Days|National Sports Day|29 August|Day marking the birth of Major Dhyan Chand|Celebrated on 29 August
+Static GK|Organisations|United Nations|1945|Global organisation founded in 1945|Headquartered in New York
+Static GK|Organisations|UNESCO|Paris|UN agency for education, science and culture|Headquartered in Paris
+Static GK|Organisations|WHO|Geneva|UN agency for global health|Headquartered in Geneva
+Static GK|Organisations|UNICEF|Children|UN fund that works for children|Won the Nobel Peace Prize in 1965
+Static GK|Organisations|NATO|North Atlantic|Military alliance formed in 1949|Headquartered in Brussels
+Static GK|Organisations|SAARC|Kathmandu|South Asian regional grouping with a secretariat in Kathmandu|Founded in 1985
+Static GK|Organisations|BRICS|Five Economies|Grouping of Brazil, Russia, India, China and South Africa|Began as BRIC
+Static GK|Organisations|ISRO|Bengaluru|Indian space agency|Headquartered in Bengaluru
+Static GK|Space|Chandrayaan-3|South Pole|Mission that landed near the Moon's south pole in 2023|Its lander was named Vikram
+Static GK|Space|Mangalyaan|Mars Orbiter|India's first mission to Mars|Launched in November 2013
+Static GK|Space|Aditya-L1|Sun|India's first dedicated solar mission|Launched in 2023
+Static GK|Arts|Bharatanatyam|Tamil Nadu|Classical dance of Tamil Nadu|Traditionally performed in temples
+Static GK|Arts|Kathakali|Kerala|Classical dance-drama of Kerala|Known for elaborate face painting
+Static GK|Arts|Kuchipudi|Andhra Pradesh|Classical dance of Andhra Pradesh|Named after a village near Vijayawada
+Static GK|Arts|Kathak|Storytellers|North Indian classical dance|Evolved from wandering storytellers
+Static GK|Arts|Odissi|Odisha|Classical dance of Odisha|Traced to the temples of Konark and Puri
+Static GK|Arts|Manipuri|Manipur|Classical dance of Manipur|Linked with the Ras Lila
+Static GK|Arts|Mohiniyattam|Enchantress|Classical dance of Kerala meaning dance of the enchantress|Performed by women
+Static GK|Arts|Sattriya|Assam|Classical dance of Assam|Recognised as classical in 2000
+Static GK|Arts|Bhangra|Punjab|Energetic folk dance of Punjab|Performed at harvest time
+Static GK|Arts|Garba|Navratri|Folk dance of Gujarat|Performed during Navratri
+Static GK|Arts|Yakshagana|Coastal Karnataka|Traditional theatre of coastal Karnataka|Combines dance, music and dialogue
+Static GK|Sports|Neeraj Chopra|Javelin|Indian athlete who won Olympic gold in 2021|Competes in javelin throw
+Static GK|Sports|Abhinav Bindra|Shooting|First Indian to win an individual Olympic gold|Won at Beijing in 2008
+Static GK|Sports|P V Sindhu|Badminton|Indian shuttler with Olympic silver and bronze medals|Won silver at Rio in 2016
+Static GK|Sports|Sachin Tendulkar|Master Blaster|Cricketer with one hundred international centuries|Bharat Ratna winner
+Static GK|Sports|Kapil Dev|1983|Captain of India's 1983 World Cup-winning team|All-rounder who lifted the trophy at Lord's
+Static GK|Sports|Major Dhyan Chand|Hockey Wizard|Hockey legend with three Olympic golds|His birthday is National Sports Day
+Static GK|Sports|Wimbledon|Grass Court|Oldest tennis Grand Slam played on grass|Held in London
+English|One Word Substitution|Philanthropist|Charity|Person who loves mankind and helps others|Often donates money to good causes
+English|One Word Substitution|Misanthrope|Hater|One who dislikes people in general|Opposite of a lover of mankind
+English|One Word Substitution|Bibliophile|Books|Lover of books|Often has a large library
+English|One Word Substitution|Philatelist|Stamps|Collector of postage stamps|The hobby is called philately
+English|One Word Substitution|Numismatist|Coins|Collector of coins|Studies old money
+English|One Word Substitution|Ambidextrous|Both Hands|Able to use both hands equally well|Rare among writers
+English|One Word Substitution|Omnipotent|Almighty|Having unlimited power|Applied to God in many faiths
+English|One Word Substitution|Omniscient|All-knowing|Knowing everything|Said of a narrator who knows all
+English|One Word Substitution|Omnipresent|Everywhere|Present everywhere at the same time|Said of God or of ads
+English|One Word Substitution|Pedestrian|Walker|Person who travels on foot|Uses the footpath
+English|One Word Substitution|Epitaph|Tombstone|Inscription on a tomb|Written in memory of the dead
+English|One Word Substitution|Anonymous|Nameless|Of unknown name or authorship|Letters may be signed like this
+English|One Word Substitution|Infallible|Never Wrong|Incapable of making mistakes|A word used for the Pope in doctrine
+English|One Word Substitution|Invincible|Unbeatable|Too strong to be defeated|Cannot be conquered
+English|One Word Substitution|Insolvent|Bankrupt|Unable to pay one's debts|A company in this state may close
+English|One Word Substitution|Fastidious|Fussy|Hard to please in matters of detail|Wants everything just right
+English|One Word Substitution|Nostalgia|Past|Sentimental longing for the past|Old songs bring it back
+English|One Word Substitution|Plagiarism|Copying|Passing off another's writing as one's own|Considered a serious academic offence
+English|One Word Substitution|Unanimous|United|Agreed upon by everyone|A vote with no dissent
+English|One Word Substitution|Posthumous|After Death|Happening after a person's death|An award given to a late hero
+English|One Word Substitution|Herbivorous|Plants|Feeding only on plants|Cows and deer are such animals
+English|One Word Substitution|Carnivorous|Meat|Feeding on flesh|Lions are such animals
+English|One Word Substitution|Omnivorous|Everything|Feeding on both plants and animals|Humans and bears are such eaters
+English|One Word Substitution|Panacea|Cure-all|Remedy for all diseases or troubles|Not found in real medicine
+English|One Word Substitution|Ephemeral|Short-lived|Lasting for a very short time|Like a mayfly's life
+English|One Word Substitution|Obsolete|Outdated|No longer in use|Like a floppy disk today
+English|One Word Substitution|Zenith|Peak|The highest point|Opposite of nadir
+English|One Word Substitution|Nadir|Lowest|The lowest point|Opposite of zenith
+English|One Word Substitution|Altruist|Selfless|Person who works for the welfare of others|Opposite of an egoist
+English|One Word Substitution|Egoist|Self-centred|Person who thinks only of himself|Opposite of an altruist
+English|One Word Substitution|Atheist|No God|Person who does not believe in God|Opposite of a theist
+English|One Word Substitution|Agnostic|Unknowable|Person who says the existence of God cannot be known|Neither believes nor denies
+English|One Word Substitution|Pessimist|Gloomy|Person who always expects the worst|Sees the glass as half empty
+English|One Word Substitution|Optimist|Hopeful|Person who looks on the bright side|Sees the glass as half full
+English|One Word Substitution|Cosmopolitan|Worldwide|Belonging to all parts of the world|Describes a city with people from everywhere
+English|One Word Substitution|Contemporary|Same Time|Belonging to the same period|Used for people living in one era
+English|One Word Substitution|Amateur|Hobbyist|Person who does something for pleasure, not pay|Opposite of a professional
+English|One Word Substitution|Connoisseur|Expert Judge|Expert judge of art or taste|Often applied to wine or music
+English|One Word Substitution|Polyglot|Languages|Person who knows many languages|Can speak a dozen tongues
+English|One Word Substitution|Mercenary|Hired|Soldier who fights only for money|A professional fighter for hire
+English|One Word Substitution|Sinecure|Easy Job|Job that pays well but needs little work|A comfortable post
+English|One Word Substitution|Hypocrite|Pretender|Person who pretends to be more virtuous than he is|Says one thing and does another
+English|One Word Substitution|Nepotism|Favouritism|Favour shown to one's relatives|Jobs given to family members
+English|One Word Substitution|Pandemic|Worldwide Outbreak|Disease spread over a whole country or the world|Larger than an epidemic
+English|One Word Substitution|Epidemic|Outbreak|Disease that spreads quickly in a community|Smaller than a pandemic
+English|One Word Substitution|Eloquent|Fluent|Able to speak fluently and persuasively|Good orators are this
+English|Idioms|Piece of cake|Easy|Something very easy to do|Needs no effort
+English|Idioms|Break the ice|Start Talking|To begin a conversation in an awkward setting|Used at first meetings
+English|Idioms|Once in a blue moon|Rarely|Something that happens very rarely|Not often at all
+English|Idioms|Spill the beans|Reveal|To reveal a secret|Often by accident
+English|Idioms|Hit the nail on the head|Exactly Right|To say something exactly right|Describes a perfect remark
+English|Idioms|Under the weather|Unwell|Feeling slightly ill|Not quite fit
+English|Idioms|Cost an arm and a leg|Expensive|Very expensive|Costs too much
+English|Idioms|Bite the bullet|Endure|To face an unpleasant task bravely|Accept pain without complaint
+English|Idioms|Let the cat out of the bag|Secret|To reveal a secret by mistake|Spoils a surprise
+English|Idioms|Burn the midnight oil|Work Late|To work or study late into the night|Common before exams
+English|Idioms|Cry over spilt milk|Regret|To waste time regretting what cannot be undone|Pointless sorrow
+English|Idioms|Beat around the bush|Avoid|To avoid coming to the point|Speak indirectly
+English|Idioms|A blessing in disguise|Hidden Good|Something good that first seemed bad|Luck in an unlikely form
+English|Idioms|Add insult to injury|Make Worse|To make a bad situation worse|Piles on more trouble
+English|Idioms|Cut corners|Shortcuts|To do something the cheapest or easiest way|Sacrifices quality
+English|Idioms|Barking up the wrong tree|Mistaken|Pursuing a mistaken course of action|Searching in an unlikely spot
+English|Idioms|Call it a day|Stop Work|To stop working for the day|Time to go home
+English|Idioms|Face the music|Consequences|To accept punishment for what one has done|No escape any more
+English|Idioms|Pull someone's leg|Tease|To tease a friend playfully|Not meant seriously
+English|Idioms|The last straw|Final Trouble|The final problem that makes things unbearable|Breaks the camel's back
+English|Idioms|Red-letter day|Memorable|A day of joy to be remembered|Marked in red on calendars
+English|Idioms|Apple of one's eye|Favourite|A person one loves dearly|Treasured above others
+English|Idioms|Bolt from the blue|Surprise|A sudden unexpected event|Arrives without warning
+English|Idioms|Hit the sack|Go to Bed|To go to bed|Time to sleep
+English|Idioms|A storm in a teacup|Fuss|Much excitement about a trivial matter|Big noise over little
+English|Idioms|In hot water|Trouble|In serious trouble|Likely to be scolded
+English|Idioms|Out of the blue|Unexpectedly|Without any warning|Comes as a surprise
+English|Idioms|Turn a blind eye|Ignore|To pretend not to see|Deliberately overlook
+English|Idioms|Jump the gun|Too Early|To act too soon|Starts before the signal
+English|Idioms|Back to square one|Start Again|Return to the starting point|All progress lost
+English|Idioms|Tooth and nail|Fiercely|With all one's strength|Fighting hard
+English|Idioms|Cold shoulder|Ignore|To treat someone in an unfriendly way|Deliberate coolness
+English|Idioms|By leaps and bounds|Rapidly|Very quickly|Progress is fast
+English|Vocabulary|Abandon|Forsake|To leave completely|Opposite of retain
+English|Vocabulary|Benevolent|Kind|Well-meaning and generous|Opposite of malevolent
+English|Vocabulary|Diligent|Hardworking|Showing careful and steady effort|Opposite of lazy
+English|Vocabulary|Eminent|Distinguished|Famous and respected|Opposite of obscure
+English|Vocabulary|Frugal|Thrifty|Careful with money|Opposite of extravagant
+English|Vocabulary|Gregarious|Sociable|Fond of company|Opposite of solitary
+English|Vocabulary|Hostile|Unfriendly|Showing opposition or enmity|Opposite of friendly
+English|Vocabulary|Intrepid|Fearless|Brave and adventurous|Opposite of timid
+English|Vocabulary|Jubilant|Joyful|Feeling great happiness|Opposite of dejected
+English|Vocabulary|Lucid|Clear|Easy to understand|Opposite of vague
+English|Vocabulary|Meticulous|Careful|Very attentive to detail|Opposite of careless
+English|Vocabulary|Notorious|Infamous|Famous for something bad|Opposite of renowned
+English|Vocabulary|Opulent|Luxurious|Rich and lavish|Opposite of austere
+English|Vocabulary|Prudent|Wise|Careful about the future|Opposite of reckless
+English|Vocabulary|Quell|Suppress|To put an end to something by force|Opposite of incite
+English|Vocabulary|Reticent|Reserved|Unwilling to speak freely|Opposite of talkative
+English|Vocabulary|Serene|Calm|Peaceful and untroubled|Opposite of agitated
+English|Vocabulary|Tenacious|Persistent|Holding firmly to a purpose|Opposite of weak-willed
+English|Vocabulary|Urbane|Polished|Smooth and refined in manner|Opposite of rude
+English|Vocabulary|Verbose|Wordy|Using more words than needed|Opposite of concise
+English|Vocabulary|Wary|Cautious|Watchful against danger|Opposite of careless
+English|Vocabulary|Zealous|Enthusiastic|Full of eager devotion|Opposite of apathetic
+English|Vocabulary|Ambiguous|Unclear|Open to more than one meaning|Opposite of clear
+English|Vocabulary|Brevity|Shortness|Quality of being brief|Opposite of length
+English|Vocabulary|Conceal|Hide|To keep out of sight|Opposite of reveal
+English|Vocabulary|Dwindle|Shrink|To grow smaller gradually|Opposite of expand
+English|Vocabulary|Elated|Overjoyed|Very happy and proud|Opposite of depressed
+English|Vocabulary|Feeble|Weak|Lacking strength|Opposite of robust
+English|Vocabulary|Haughty|Arrogant|Proud in a scornful way|Opposite of humble
+English|Vocabulary|Lethargic|Sluggish|Lacking energy|Opposite of energetic
+English|Vocabulary|Mundane|Ordinary|Dull and everyday|Opposite of extraordinary
+English|Vocabulary|Novice|Beginner|Person new to a field|Opposite of expert
+English|Vocabulary|Obstinate|Stubborn|Refusing to change one's mind|Opposite of flexible
+English|Vocabulary|Prosperity|Success|State of thriving and wealth|Opposite of poverty
+English|Vocabulary|Rebuke|Scold|To express sharp disapproval|Opposite of praise
+English|Vocabulary|Scarce|Rare|Not enough in supply|Opposite of plentiful
+English|Vocabulary|Trivial|Petty|Of little importance|Opposite of significant
+English|Vocabulary|Vivid|Bright|Strong and clear to the senses|Opposite of dull
+English|Vocabulary|Wrath|Anger|Intense fury|Opposite of calm
+Computer|History|Charles Babbage|Analytical Engine|Father of the computer|Designed the Analytical Engine
+Computer|History|Ada Lovelace|First Programmer|Regarded as the first computer programmer|Wrote notes on Babbage's engine
+Computer|History|ENIAC|Electronic|One of the first general-purpose electronic computers|Built in the 1940s in the USA
+Computer|History|Tim Berners-Lee|WWW|Inventor of the World Wide Web|Proposed it at CERN in 1989
+Computer|Hardware|CPU|Brain|Brain of the computer|Executes instructions
+Computer|Hardware|RAM|Volatile|Temporary memory that loses data when power is off|Holds running programs
+Computer|Hardware|ROM|Permanent|Memory whose contents stay when power is off|Stores startup instructions
+Computer|Hardware|BIOS|Boot|Firmware that starts the computer|Runs before the operating system loads
+Computer|Hardware|Hard Disk|Storage|Magnetic device that stores data permanently|Spinning platters inside
+Computer|Hardware|Cache|Fast Memory|Small very fast memory close to the processor|Speeds up repeated access
+Computer|Hardware|USB|Port|Standard connector for peripherals|Short for universal serial bus
+Computer|Hardware|Mouse|Pointer|Pointing device invented by Douglas Engelbart|Moves a cursor on screen
+Computer|Hardware|Keyboard|QWERTY|Main text input device|Named after its top row of letters
+Computer|Hardware|Scanner|Input|Device that turns paper into digital images|An input device
+Computer|Hardware|Printer|Output|Device that produces hard copies|An output device
+Computer|Hardware|Pixel|Picture Element|Smallest element of a digital image|Tiny dot on a screen
+Computer|Basics|Bit|Binary Digit|Smallest unit of data|Either zero or one
+Computer|Basics|Byte|Eight Bits|Group of eight bits|Stores one character
+Computer|Basics|Kilobyte|1024|Unit equal to 1024 bytes|Smaller than a megabyte
+Computer|Basics|Operating System|Windows|Software that manages hardware and programs|Linux and Android are examples
+Computer|Basics|Linux|Penguin|Open-source kernel created by Linus Torvalds|Its mascot is Tux
+Computer|Basics|Compiler|Source Code|Program that translates source code into machine code|Used with languages like C
+Computer|Basics|Algorithm|Steps|Step-by-step procedure to solve a problem|Written before coding
+Computer|Basics|Python|Monty|Programming language named after a British comedy troupe|Popular for data and AI
+Computer|Basics|Spreadsheet|Rows and Columns|Program that arranges data in rows and columns|Excel is a well-known one
+Computer|Internet|HTML|Markup|Language used to create web pages|Uses tags
+Computer|Internet|HTTP|Protocol|Protocol used to transfer web pages|Its secure version adds an S
+Computer|Internet|URL|Web Address|Address of a resource on the web|Typed into a browser bar
+Computer|Internet|IP Address|Identifier|Unique number identifying a device on a network|Comes in versions four and six
+Computer|Internet|LAN|Office Network|Network that covers a small area like an office|Opposite of a wide area network
+Computer|Internet|Wi-Fi|Wireless|Technology for wireless local networking|Uses radio waves
+Computer|Internet|Bluetooth|Danish King|Short-range wireless technology|Named after a Danish king
+Computer|Internet|Email|Ray Tomlinson|Electronic mail sent over networks|First sent by Ray Tomlinson in 1971
+Computer|Internet|Google|Search Engine|Search engine founded by Larry Page and Sergey Brin|Started in 1998
+Computer|Internet|Cloud Computing|Remote Servers|Delivery of IT services over the internet|Data lives on remote servers
+Computer|Security|Firewall|Gatekeeper|System that blocks unauthorised network access|Filters incoming traffic
+Computer|Security|Malware|Malicious|Software designed to harm a computer|Includes worms and trojans
+Computer|Security|Virus|Replicates|Malware that attaches itself to files and spreads|Needs a host to travel
+Computer|Security|Phishing|Fake Emails|Trick of using fake messages to steal information|Sounds like fishing
+Computer|Security|Antivirus|Protection|Software that detects and removes malware|Needs regular updates
+Computer|Modern Tech|Artificial Intelligence|Machines|Machines that imitate human thinking|Abbreviated as AI
+Computer|Modern Tech|Blockchain|Ledger|Chain of linked blocks recording transactions|Base technology of cryptocurrency
+Computer|India|PARAM|Supercomputer|Indian supercomputer series built by C-DAC|First one launched in 1991
+Computer|India|Digital India|2015|Government programme launched in 2015 to bring services online|Pushes online services and broadband

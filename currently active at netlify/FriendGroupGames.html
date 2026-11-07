@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kondattam — Friend Group Games</title>
-<link rel="icon" href="media/images/logo.jpg" type="image/x-icon">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -269,6 +266,11 @@ button:disabled{opacity:.35; cursor:not-allowed;}
 .im-vrow{display:flex; align-items:center; gap:6px; padding:6px 0; border-bottom:1px solid var(--line); font-size:.86rem;}
 .im-vrow:last-child{border-bottom:none;}
 .im-vcount{margin-left:auto; opacity:.8; font-size:.78rem;}
+.im-recvlbl{font-size:.74rem; opacity:.7; text-transform:uppercase; letter-spacing:1px; margin:6px 0 4px;}
+.im-recv{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; font-size:.8rem;}
+.im-rchip{display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:999px; background:var(--bg2); border:1px solid var(--line);}
+.im-rchip.out{border-color:var(--rose);}
+.im-why{font-size:.68rem; opacity:.75; line-height:1.25; margin-top:2px;}
 .im-verdict{text-align:center; font-family:'Baloo 2'; font-weight:700; font-size:1.05rem; margin:10px 0;}
 #im-float{display:none; position:fixed; right:12px; bottom:12px; z-index:70; max-width:230px; flex-direction:column; align-items:flex-start; gap:2px; padding:10px 14px; border-radius:16px; border:2px solid var(--marigold); background:var(--card); color:var(--ink); cursor:pointer; font-family:'Baloo 2'; font-weight:800; font-size:.95rem; text-align:left; box-shadow:0 8px 24px rgba(0,0,0,.5); animation:rr-float 3s ease-in-out infinite;}
 #im-float small{font-family:'Inter',sans-serif; font-weight:500; opacity:.75; font-size:.72rem;}
@@ -2623,24 +2625,30 @@ function impRunTests(){
     const N=IM.names.length,t=impTally(N,RS.votes),caught=RS.imps.filter(m=>t.out===m);
     let h='<h2 style="margin:0 0 4px">The word was <span class="im-wordbig">'+ldEsc(RS.word)+'</span></h2><p class="lead" style="margin:0 0 8px">'+RS.emoji+' '+RS.cat+' · imposter’s hint: <b>'+ldEsc(RS.hint||'(none)')+'</b></p>';
     h+='<p style="margin:0 0 8px">🕵️ Imposter'+(RS.imps.length>1?'s':'')+': <b>'+RS.imps.map(nm).join(', ')+'</b></p>';
-    h+='<div class="im-votes">'+IM.names.map((_,i)=>'<div class="im-vrow">'+dot(i)+'<span>'+nm(i)+' → <b>'+(RS.votes[i]===null?'—':nm(RS.votes[i]))+'</b></span><span class="im-vcount">'+t.counts[i]+' vote'+(t.counts[i]===1?'':'s')+'</span></div>').join('')+'</div>';
+    h+='<div class="im-votes">'+IM.names.map((_,i)=>'<div class="im-vrow">'+dot(i)+'<span>'+nm(i)+' voted for <b>'+(RS.votes[i]===null?'—':nm(RS.votes[i]))+'</b></span></div>').join('')+'</div>';
+    h+='<div class="im-recvlbl">Votes received</div><div class="im-recv">'+IM.names.map((_,i)=>'<span class="im-rchip'+(t.out===i?' out':'')+'">'+dot(i)+nm(i)+': <b>'+t.counts[i]+'</b></span>').join('')+'</div>';
     const verdict=t.out===null?'🤝 Tie — nobody is voted out, so the imposter walks free.':caught.length?'🎯 '+nm(t.out)+' was voted out — and IS an imposter!':'❌ '+nm(t.out)+' was voted out — but is innocent. The imposter wins!';
     h+='<p class="im-verdict">'+verdict+'</p>';
     if(!RS.saved){
-      if(caught.length)h+='<p class="lead" style="text-align:center">'+caught.map(nm).join(' & ')+' may now guess the secret word. Did they get it right?</p><div class="rowbtns"><button class="big" data-ir="yes">✅ Guessed it (+'+IMP_PTS.guess+')</button><button class="big ghost" data-ir="no">❌ Wrong / no guess</button></div>';
+      if(caught.length)h+='<p class="lead" style="text-align:center">'+caught.map(nm).join(' & ')+' may now guess the secret word. Did they get it right?</p><div class="rowbtns"><button class="big ghost" data-ir="yes" style="border-color:var(--mint)">✅ Yes, guessed the word (+'+IMP_PTS.guess+')</button><button class="big ghost" data-ir="no" style="border-color:var(--rose)">❌ No / wrong (+0)</button></div>';
       else h+='<button class="big" data-ir="no">Save round &amp; show points</button>';
     }else{
-      h+='<div class="rr-grid" style="margin-top:8px">'+IM.names.map((_,i)=>{const p=RS.sc.pts[i];return'<div class="rr-rcard"><div class="rr-rname">'+dot(i)+nm(i)+'</div><div class="rr-remoji">'+(RS.imps.includes(i)?'🕵️':'🙂')+'</div><div class="'+(p>0?'pos':'')+'">'+sgn(p)+'</div></div>';}).join('')+'</div><button class="big" data-ir="next">Next round</button>';
+      h+='<div class="rr-grid" style="margin-top:8px">'+IM.names.map((_,i)=>{const p=RS.sc.pts[i],why=RS.imps.includes(i)?(RS.sc.caught.includes(i)?(RS.guessed?'caught, but guessed the word':'caught — no points'):'survived the vote'):(RS.imps.includes(RS.votes[i])?'found the imposter':'voted wrong');return'<div class="rr-rcard"><div class="rr-rname">'+dot(i)+nm(i)+'</div><div class="rr-remoji">'+(RS.imps.includes(i)?'🕵️':'🙂')+'</div><div class="'+(p>0?'pos':'')+'">'+sgn(p)+'</div><div class="im-why">'+why+'</div></div>';}).join('')+'</div>'+(caught.length?'<button class="big ghost" data-ir="flip" style="margin-top:8px">'+(RS.guessed?'↩ Actually they did NOT guess the word':'↩ Actually they DID guess the word')+'</button>':'')+'<button class="big" data-ir="next">Next round</button>';
     }
     E('im-resultbody').innerHTML=h;
   }
   E('im-result').addEventListener('click',e=>{
     const b=e.target.closest('[data-ir]');if(!b||!RS)return;
     if(b.dataset.ir==='next'){beginRound();return;}
+    if(b.dataset.ir==='flip'){
+      const r=IM.rounds[IM.rounds.length-1];if(!RS.saved||!r||r.n!==RS.n)return;
+      const g=!r.guessed,sc2=impScore(IM.names.length,RS.imps,RS.votes,g);
+      r.guessed=g;r.pts=sc2.pts;r.counts=sc2.counts;RS.sc=sc2;RS.guessed=g;save();renderResult();renderScore();renderLog();return;
+    }
     if(RS.saved)return;
     const guessed=b.dataset.ir==='yes',N=IM.names.length,sc=impScore(N,RS.imps,RS.votes,guessed);
     IM.rounds.push({n:RS.n,ci:RS.ci,wi:RS.wi,cat:RS.cat,emoji:RS.emoji,word:RS.word,hint:RS.hint,imps:RS.imps.slice(),votes:RS.votes.slice(),out:sc.out,guessed,pts:sc.pts,counts:sc.counts});
-    save();inRound=false;RS.saved=true;RS.sc=sc;renderResult();renderScore();renderLog();
+    save();inRound=false;RS.saved=true;RS.sc=sc;RS.guessed=guessed;renderResult();renderScore();renderLog();
   });
 
   /* ---------- forgot-your-role float ---------- */
