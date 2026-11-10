@@ -65,6 +65,11 @@ select{width:100%; padding:12px; border-radius:10px; background:var(--bg2); colo
 .chip.on{background:var(--mint); color:#0d1a17; border-color:transparent;}
 #tq-card{background:var(--bg2); border-radius:18px; padding:40px 20px; text-align:center; margin-top:10px; min-height:120px; display:flex; align-items:center; justify-content:center;}
 #tq-word{font-family:'Baloo 2'; font-weight:800; font-size:1.8rem; display:none;}
+#tq-word .tq-cat{font-family:'Inter',sans-serif; font-size:.82rem; font-weight:600; color:var(--mint); margin-top:6px;}
+#tq-word .tq-facts{font-family:'Inter',sans-serif; font-size:.78rem; font-weight:500; text-align:left; line-height:1.5; background:rgba(62,201,167,.12); border:1px solid rgba(62,201,167,.35); border-radius:10px; padding:8px 10px; margin-top:10px;}
+.tq-cat{font-size:.85rem; font-weight:600; color:var(--mint);}
+.tq-clue{font-size:.85rem; margin-top:4px; opacity:.9;}
+#tq-card{flex-direction:column; gap:6px;}
 #tq-hint{opacity:.65; font-size:.9rem;}
 
 /* suggestions */
@@ -355,14 +360,16 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
   <div class="screen" id="screen-twentyq">
     <div class="card">
       <h2>20 Questions</h2>
-      <p class="lead">Pick a category, hand the phone to the "keeper." They read the word secretly, then everyone else asks yes/no questions to figure it out.</p>
+      <p class="lead">Pick a category, hand the phone to the "keeper." They read the word secretly, then everyone else asks yes/no questions to figure it out. Pick <b>📚 Study</b> to quiz yourselves on exam facts — the keeper sees the answer and the facts to answer yes/no correctly, and hints unlock for the guessers after questions 10 and 15.</p>
       <div id="tq-cats">
         <div class="chip on" data-cat="movie">Tamil Movie</div>
         <div class="chip" data-cat="person">Famous Person</div>
         <div class="chip" data-cat="object">Object</div>
         <div class="chip" data-cat="animal">Animal</div>
         <div class="chip" data-cat="anime">Anime</div>
+        <div class="chip" data-cat="study">📚 Study</div>
       </div>
+      <div id="tq-study" class="im-studybox" style="display:none;"></div>
       <div id="tq-card">
         <div id="tq-hint">Tap "Reveal" — only the keeper looks, then pass it face-down.</div>
         <div id="tq-word"></div>
@@ -844,27 +851,48 @@ document.getElementById('hu-again').addEventListener('click',()=>{ document.getE
 
 // ---------- 20 Questions ----------
 let tqCat='movie', tqPool=[], tqCurrent='';
-function tqRefillPool(){ tqPool = [...words[tqCat]].sort(()=>Math.random()-0.5); }
+function tqRefillPool(){ tqPool = tqCat==='study' ? [] : [...words[tqCat]].sort(()=>Math.random()-0.5); }
 tqRefillPool();
 document.querySelectorAll('#tq-cats .chip').forEach(c=>c.addEventListener('click',()=>{
   document.querySelectorAll('#tq-cats .chip').forEach(x=>x.classList.remove('on'));
-  c.classList.add('on'); tqCat=c.dataset.cat; tqRefillPool(); tqState='idle'; tqCount=0; tqRender();
+  c.classList.add('on'); tqCat=c.dataset.cat; tqRefillPool(); tqState='idle'; tqCount=0; tqItem=null;
+  document.getElementById('tq-study').style.display=tqCat==='study'?'block':'none';
+  if(tqCat==='study'&&!tqStudyPick)tqStudyPick=kdPicker('tq-study','tqs',null);
+  tqRender();
 }));
-let tqState='idle', tqCount=0;
+let tqState='idle', tqCount=0, tqStudyPick=null, tqItem=null;
+const TQ_HINT_AT=10, TQ_CLUE_AT=15;
+const tqE=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function tqRender(){
   const hint=document.getElementById('tq-hint'), word=document.getElementById('tq-word'), main=document.getElementById('tq-main');
   word.style.display='none'; hint.style.display='block';
   document.getElementById('tq-undo').disabled=!(tqState==='asking'&&tqCount>0);
   document.getElementById('tq-giveup').disabled=tqState!=='asking';
   if(tqState==='idle'){ hint.textContent='Keeper: take the phone and tap Reveal. Everyone else look away!'; main.textContent='Reveal word (keeper only)'; }
-  else if(tqState==='secret'){ hint.style.display='none'; word.style.display='block'; word.textContent=tqCurrent; main.textContent='Hide word & start the questions'; }
+  else if(tqState==='secret'){
+    hint.style.display='none'; word.style.display='block';
+    if(tqItem) word.innerHTML=tqE(tqCurrent)+'<div class="tq-cat">📚 '+tqE(tqItem[0])+' · '+tqE(tqItem[1])+'</div><div class="tq-facts"><b>Keeper only</b> — answer YES / NO using these facts:<br>📌 '+tqE(tqItem[4])+'<br>📌 '+tqE(tqItem[5])+'<br>💡 Hint to give after question '+TQ_HINT_AT+': '+tqE(tqItem[3])+'</div>';
+    else word.textContent=tqCurrent;
+    main.textContent='Hide word & start the questions';
+  }
   else if(tqState==='asking'){
-    hint.innerHTML='<div style="font-family:Baloo 2,sans-serif;font-size:2.4rem;font-weight:800;color:var(--marigold)">Question '+(tqCount+1)+' / 20</div><div>Ask your yes/no question, then tap Done and pass the phone on.</div>';
+    hint.innerHTML='<div style="font-family:Baloo 2,sans-serif;font-size:2.4rem;font-weight:800;color:var(--marigold)">Question '+(tqCount+1)+' / 20</div><div>Ask your yes/no question, then tap Done and pass the phone on.</div>'+(tqItem?'<div class="tq-cat" style="margin-top:8px">📚 '+tqE(tqItem[0])+' · '+tqE(tqItem[1])+'</div><div class="tq-clue">'+(tqCount+1>TQ_HINT_AT?'💡 Hint: <b>'+tqE(tqItem[3])+'</b>':'💡 Hint unlocks at question '+(TQ_HINT_AT+1))+'</div><div class="tq-clue">'+(tqCount+1>TQ_CLUE_AT?'📌 Clue: <b>'+tqE(tqItem[4])+'</b>':'📌 Clue unlocks at question '+(TQ_CLUE_AT+1))+'</div>':'');
     main.textContent='✓ Question done — pass the phone';
-  } else { hint.textContent='The word was…'; word.style.display='block'; word.textContent=tqCurrent; main.textContent='New game'; }
+  } else {
+    hint.textContent='The word was…'; word.style.display='block';
+    if(tqItem) word.innerHTML=tqE(tqCurrent)+'<div class="tq-cat">📚 '+tqE(tqItem[0])+' · '+tqE(tqItem[1])+'</div><div class="im-learn" style="text-align:left;margin:10px 0 0;font-size:.82rem;font-weight:500;font-family:Inter,sans-serif">📖 '+tqE(tqItem[4])+'. '+tqE(tqItem[5])+'.</div>';
+    else word.textContent=tqCurrent;
+    main.textContent='New game';
+  }
 }
 document.getElementById('tq-main').addEventListener('click',()=>{
-  if(tqState==='idle'){ if(tqPool.length===0) tqRefillPool(); tqCurrent=tqPool.pop(); tqState='secret'; }
+  if(tqState==='idle'){
+    if(tqCat==='study'){
+      const pk=kdPickStudy('tq',tqStudyPick?tqStudyPick.pool():[]);
+      if(!pk){ document.getElementById('tq-hint').textContent='No study questions match — tick at least one subject.'; return; }
+      tqItem=pk.entry.item; tqCurrent=tqItem[2]; tqState='secret';
+    } else { tqItem=null; if(tqPool.length===0) tqRefillPool(); tqCurrent=tqPool.pop(); tqState='secret'; }
+  }
   else if(tqState==='secret'){ tqState='asking'; tqCount=0; }
   else if(tqState==='asking'){ tqCount++; if(tqCount>=20) tqState='revealed'; }
   else { tqState='idle'; tqCount=0; }
@@ -2412,7 +2440,43 @@ function kdStudyPool(packId,subjects){
   kdAllPacks().forEach(p=>{if(packId&&p.id!==packId)return;p.items.forEach(i=>{if(subjects&&subjects.length&&!subjects.includes(i[0]))return;out.push({key:p.id+'|'+i[2].toLowerCase(),item:i});});});
   return out;
 }
+/* "played already" memory per game, so a study question is not repeated until the pool is used up */
+function kdSeenGet(kind){try{const v=JSON.parse(localStorage.getItem('kondattam_seen_'+kind)||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
+function kdSeenAdd(kind,key){try{const a=kdSeenGet(kind);if(!a.includes(key)){a.push(key);localStorage.setItem('kondattam_seen_'+kind,JSON.stringify(a.slice(-4000)));}}catch(_){}}
+function kdSeenClear(kind,keys){try{localStorage.setItem('kondattam_seen_'+kind,JSON.stringify(kdSeenGet(kind).filter(k=>!keys.has(k))));}catch(_){}}
+function kdPickStudy(kind,pool){
+  if(!pool.length)return null;
+  const seen=new Set(kdSeenGet(kind));let fresh=pool.filter(x=>!seen.has(x.key)),reset=false;
+  if(!fresh.length){kdSeenClear(kind,new Set(pool.map(x=>x.key)));fresh=pool;reset=true;}
+  const entry=fresh[rrRand(fresh.length)];kdSeenAdd(kind,entry.key);
+  return{entry,reset,left:fresh.length-1};
+}
 // ===== KD-STUDY-END =====
+// ===== KD-PICKER-START =====
+/* Reusable "pack + subjects" chooser for any game's Study mode. Returns {read(), pool()}. */
+function kdPicker(id,p,onChange){
+  const E=x=>document.getElementById(x);
+  E(id).innerHTML='<label class="bz-l">Study pack</label><select id="'+p+'-pack"></select>'+
+    '<label class="bz-l">Subjects <button type="button" class="ghost" id="'+p+'-all" style="margin-left:8px;padding:2px 10px;border-radius:8px;font-size:.75rem;">all / none</button></label>'+
+    '<div id="'+p+'-subs" class="im-chips"></div><div id="'+p+'-count" class="lead" style="font-size:.78rem;margin:4px 0 0;"></div>';
+  const on=()=>[...E(p+'-subs').children].filter(c=>c.classList.contains('on')).map(c=>c.dataset.sub);
+  const read=()=>{const all=E(p+'-subs').children.length,sel=on();return{pack:E(p+'-pack').value,subs:sel.length===0?['__none__']:(sel.length===all?[]:sel)};};
+  const count=()=>{const r=read();E(p+'-count').textContent=kdStudyPool(r.pack,r.subs).length+' study questions match';};
+  function fill(keep){
+    const ps=E(p+'-pack'),prev=ps.value,prevOn=keep?on():null;
+    ps.innerHTML='<option value="">All packs</option>'+kdAllPacks().map(k=>'<option value="'+ldEsc(k.id)+'">'+ldEsc(k.title)+' ('+k.items.length+')</option>').join('');
+    if([...ps.options].some(o=>o.value===prev))ps.value=prev;
+    E(p+'-subs').innerHTML=kdSubjects(ps.value).map(sj=>'<div class="chip'+(!prevOn||prevOn.includes(sj)?' on':'')+'" data-sub="'+ldEsc(sj)+'">'+ldEsc(sj)+'</div>').join('');
+    count();
+  }
+  E(p+'-pack').addEventListener('change',()=>{fill(false);if(onChange)onChange();});
+  E(p+'-subs').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;c.classList.toggle('on');count();if(onChange)onChange();});
+  E(p+'-all').addEventListener('click',()=>{const ch=[...E(p+'-subs').children],all=ch.every(c=>c.classList.contains('on'));ch.forEach(c=>c.classList.toggle('on',!all));count();if(onChange)onChange();});
+  document.addEventListener('kd-packs-changed',()=>fill(true));
+  fill(false);
+  return{read,pool:()=>{const r=read();return kdStudyPool(r.pack,r.subs);}};
+}
+// ===== KD-PICKER-END =====
 // ===== IMP-ENGINE-START =====
 /* Each entry is WORD>HINT. The category is the group the word belongs to (shown to players);
    the hint is a separate one-word nudge only the imposter sees (Camel > hint "Sand", category "Animals"). */
@@ -2539,6 +2603,13 @@ function impRunTests(){
   T('party words carry no study facts',impDeal(4,[0],1,[]).facts===null);
   T('study pool helpers: parse, subjects and filtering',(()=>{const items=kdParsePack('# c\nCurrent Affairs|Sports|Neeraj Chopra|Javelin|Indian star|Olympic gold\nbad line\nCurrent Affairs|Space|Aditya L1|Sun|Solar mission|Launched 2023\nCurrent Affairs|Sports|neeraj chopra|x|y|z');return items.length===2&&items[0][2]==='Neeraj Chopra';})());
   T('study pool is built from the SSC pack and filters by subject',(()=>{const all=kdStudyPool('',[]),h=kdStudyPool('',['History']);return all.length>=700&&h.length>100&&h.every(x=>x.item[0]==='History')&&kdSubjects('').includes('Polity');})());
+  T('kdPickStudy never repeats until the pool is used up, then resets',(()=>{
+    const pool=[1,2,3].map(n=>({key:'selftest|'+n,item:['S','T','A'+n,'h','c1','c2']})),got=new Set();
+    kdSeenClear('selftest',new Set(pool.map(x=>x.key)));
+    for(let i=0;i<3;i++){const r=kdPickStudy('selftest',pool);if(r.reset||got.has(r.entry.key))return false;got.add(r.entry.key);}
+    const again=kdPickStudy('selftest',pool);kdSeenClear('selftest',new Set(pool.map(x=>x.key)));
+    return got.size===3&&again.reset===true;})());
+  T('kdPickStudy on an empty pool returns null',kdPickStudy('selftest',[])===null);
   // tally & score
   let t=impTally(4,[1,1,0,1]);T('plurality picks the top-voted suspect',t.out===1&&t.counts[1]===3);
   t=impTally(4,[1,0,3,2]);T('a tie voted out nobody',t.out===null);
@@ -2790,7 +2861,7 @@ function impRunTests(){
   const stSel=p=>[...E(p+'-subs').children].filter(c=>c.classList.contains('on')).map(c=>c.dataset.sub);
   function readStudy(p){
     const all=[...E(p+'-subs').children],on=stSel(p);
-    return{pool:E(p+'-pool').value,pack:E(p+'-pack').value,subs:on.length===all.length?[]:on,facts:E(p+'-facts').checked};
+    return{pool:E(p+'-pool').value,pack:E(p+'-pack').value,subs:on.length===0?['__none__']:(on.length===all.length?[]:on),facts:E(p+'-facts').checked};
   }
   function fillStudy(p,keepSubs){
     const packSel=E(p+'-pack'),prevPack=packSel.value,prevOn=keepSubs?stSel(p):null;
@@ -2818,6 +2889,7 @@ function impRunTests(){
   }
   function idleStudyChanged(){
     if(!IM)return;const r=readStudy('imi');
+    if(r.subs.includes('__none__')){studyCount('imi');return;}
     if(r.pool!=='party'&&!kdStudyPool(r.pack,r.subs).length){r.pool='party';E('imi-pool').value='party';studyBox('imi');}
     IM.pool=r.pool;IM.stPack=r.pack;IM.stSubs=r.subs;IM.facts=r.facts;save();studyCount('imi');
     renderIdle();
