@@ -49,6 +49,11 @@ select{width:100%; padding:12px; border-radius:10px; background:var(--bg2); colo
 #hu-score{font-size:1rem; opacity:.8;}
 .hu-word-zone{flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;}
 #hu-word{font-family:'Baloo 2'; font-weight:800; font-size:clamp(2rem,9vw,3.4rem); line-height:1.15; width:100%; max-width:560px; background:var(--bg2); border:1px solid var(--line); border-radius:24px; padding:44px 22px; box-shadow:0 12px 40px rgba(0,0,0,.35);}
+#hu-word.study{padding:30px 20px; display:flex; flex-direction:column; align-items:center; gap:10px;}
+.hu-term{font-size:clamp(1.8rem,8vw,3rem); line-height:1.15; word-break:break-word;}
+.hu-cat{font-family:'Inter',sans-serif; font-size:.9rem; font-weight:600; color:var(--mint);}
+.hu-line{font-family:'Inter',sans-serif; font-size:.95rem; font-weight:500; opacity:.9; line-height:1.4;}
+#hu-end.study .hu-list{max-height:44vh; opacity:.9;}
 .hu-actions{display:flex; height:22vh;}
 .hu-actions button{flex:1; border:none; font-family:'Baloo 2'; font-weight:800; font-size:1.3rem; color:#1a1230;}
 #hu-pass{background:var(--rose);}
@@ -341,7 +346,7 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
   <div class="screen" id="screen-headsup">
     <div class="card" id="hu-setup">
       <h2>Forehead Edition</h2>
-      <p class="lead">One person holds the phone facing outward on their forehead. Everyone else describes the word (without saying it) until they guess it. Tilt the phone down for correct, up to pass — or use the on-screen buttons.</p>
+      <p class="lead">One person holds the phone facing outward on their forehead. Everyone else describes the word (without saying it) until they guess it. Tilt the phone down for correct, up to pass — or use the on-screen buttons. Pick <b>📚 Study</b> to play with exam facts: friends see the term (plus optional category, hint and fact) and describe it; passed terms are listed with their facts at the end for revision.</p>
       <label>Word deck</label>
       <select id="hu-deck">
         <option value="tamil" selected>Tamil Movies (2015–now)</option>
@@ -349,9 +354,17 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <option value="english">English Movies (1990–now)</option>
         <option value="bible">Christian Biblical Names</option>
         <option value="anime">Anime (Titles &amp; Characters)</option>
+        <option value="study">📚 Study (exam facts)</option>
       </select>
       <label>Round length</label>
       <select id="hu-time"><option value="45">45 sec</option><option value="60" selected>60 sec</option><option value="90">90 sec</option></select>
+      <div id="hu-study" class="im-studybox" style="display:none;">
+        <div id="hu-study-pick"></div>
+        <label class="chk"><input type="checkbox" id="hu-opt-cat" checked> Show the category on the card</label>
+        <label class="chk"><input type="checkbox" id="hu-opt-hint" checked> Show a one-word hint on the card</label>
+        <label class="chk"><input type="checkbox" id="hu-opt-fact" checked> Show a fact line to help describe it</label>
+      </div>
+      <div id="hu-studymsg" class="lead" style="margin:6px 0;font-size:.82rem;"></div>
       <button class="big" id="hu-start">Start round</button>
     </div>
   </div>
@@ -799,18 +812,46 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
 
 // ---------- Heads Up ----------
 let huDeck=[], huIdx=0, huScore=0, huLog=[], huTimer=null, huSecondsLeft=60, huLastTilt=0;
-function huShuffle(){ huDeck=[...decks[document.getElementById('hu-deck').value]].sort(()=>Math.random()-0.5); huIdx=0; }
-function huShowWord(){ document.getElementById('hu-word').textContent = huDeck[huIdx % huDeck.length]; }
+let huStudyPick=null, huStudyOpts={cat:true,hint:true,fact:true};
+const huWordOf=x=>typeof x==='string'?x:x.item[2];
+function huShuffle(){
+  const deck=document.getElementById('hu-deck').value;
+  if(deck==='study'){
+    const pool=huStudyPick?huStudyPick.pool():[];
+    if(!pool.length) return false;
+    huStudyOpts={cat:document.getElementById('hu-opt-cat').checked,hint:document.getElementById('hu-opt-hint').checked,fact:document.getElementById('hu-opt-fact').checked};
+    const seen=new Set(kdSeenGet('hu'));
+    // questions not shown before come first; already-seen ones follow
+    huDeck=rrShuffle(pool.filter(x=>!seen.has(x.key))).concat(rrShuffle(pool.filter(x=>seen.has(x.key)))).map(x=>({study:true,key:x.key,item:x.item}));
+    huIdx=0; return true;
+  }
+  huDeck=[...decks[deck]].sort(()=>Math.random()-0.5); huIdx=0; return true;
+}
+function huShowWord(){
+  const x=huDeck[huIdx % huDeck.length], el=document.getElementById('hu-word');
+  if(typeof x==='string'){ el.classList.remove('study'); el.textContent=x; return; }
+  const it=x.item, o=huStudyOpts, n=it[2].length;
+  el.classList.add('study');
+  el.innerHTML='<div class="hu-term" style="font-size:'+(n>26?'1.5rem':n>16?'2rem':'')+'">'+ldEsc(it[2])+'</div>'+
+    (o.cat?'<div class="hu-cat">📚 '+ldEsc(it[0])+' · '+ldEsc(it[1])+'</div>':'')+
+    (o.hint?'<div class="hu-line">💡 '+ldEsc(it[3])+'</div>':'')+
+    (o.fact?'<div class="hu-line">📌 '+ldEsc(it[4])+'</div>':'');
+  kdSeenAdd('hu',x.key);
+}
 function huEndRound(){
   clearInterval(huTimer);
   document.getElementById('hu-play').classList.remove('on');
   document.getElementById('hu-end').classList.add('on');
   document.getElementById('hu-endscore').textContent = huScore + ' correct';
-  document.getElementById('hu-endlist').innerHTML = huLog.map(l=>(l.ok?'✓ ':'✕ ')+l.w).join('<br>');
+  let listHtml = huLog.map(l=>(l.ok?'✓ ':'✕ ')+ldEsc(l.w)).join('<br>');
+  const rev = huLog.filter(l=>l.it && !l.ok);
+  if(rev.length) listHtml += '<br><br><b>📖 To revise</b><br>' + rev.map(l=>ldEsc(l.it[2])+' — '+ldEsc(l.it[4])+'. '+ldEsc(l.it[5])+'.').join('<br>');
+  document.getElementById('hu-endlist').innerHTML = listHtml;
+  document.getElementById('hu-end').classList.toggle('study', huLog.some(l=>l.it));
   window.removeEventListener('deviceorientation', huTiltHandler);
 }
 function huNext(ok){
-  huLog.push({w:huDeck[huIdx % huDeck.length], ok});
+  { const x=huDeck[huIdx % huDeck.length]; huLog.push({w:huWordOf(x), ok, it:typeof x==='string'?null:x.item}); }
   if(ok) huScore++;
   huIdx++;
   document.getElementById('hu-score').textContent = huScore+' correct';
@@ -827,7 +868,10 @@ function huTiltHandler(e){
   else if(up){ huArmed=false; huNext(false); }
 }
 document.getElementById('hu-start').addEventListener('click', ()=>{
-  huScore=0; huLog=[]; huShuffle(); huArmed=false; huGotTilt=false;
+  huScore=0; huLog=[];
+  if(huShuffle()===false){ document.getElementById('hu-studymsg').textContent='No study questions match — tick at least one subject first.'; return; }
+  document.getElementById('hu-studymsg').textContent='';
+  huArmed=false; huGotTilt=false;
   document.getElementById('hu-tiltnote').textContent='Tilt phone down = correct · up = pass';
   setTimeout(()=>{ if(!huGotTilt) document.getElementById('hu-tiltnote').textContent='Tilt not available here — use the buttons below'; },2500);
   huSecondsLeft = parseInt(document.getElementById('hu-time').value,10);
@@ -844,6 +888,12 @@ document.getElementById('hu-start').addEventListener('click', ()=>{
     huSecondsLeft--; document.getElementById('hu-timer').textContent=huSecondsLeft;
     if(huSecondsLeft<=0) huEndRound();
   },1000);
+});
+document.getElementById('hu-deck').addEventListener('change',()=>{
+  const st=document.getElementById('hu-deck').value==='study';
+  document.getElementById('hu-study').style.display=st?'block':'none';
+  if(st&&!huStudyPick) huStudyPick=kdPicker('hu-study-pick','hus',null);
+  document.getElementById('hu-studymsg').textContent='';
 });
 document.getElementById('hu-pass').addEventListener('click',()=>huNext(false));
 document.getElementById('hu-correct').addEventListener('click',()=>huNext(true));
