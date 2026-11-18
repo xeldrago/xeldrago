@@ -205,6 +205,11 @@ button:disabled{opacity:.35; cursor:not-allowed;}
 #rr-slumber button{position:relative; margin-top:22px; max-width:300px; opacity:.85;}
 .rr-sus{display:flex; align-items:center; gap:8px; width:100%; padding:12px; border-radius:12px; border:1px solid var(--line); background:var(--bg2); color:var(--ink); font-size:.95rem; margin-top:8px; cursor:pointer; text-align:left; font-family:'Inter',sans-serif;}
 .rr-sus.on{border-color:var(--marigold); background:rgba(244,165,30,.16);}
+#rr-quizbody .rr-qtext{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:12px; font-size:.95rem; line-height:1.5; margin:6px 0 10px;}
+#rr-quizbody .rr-qans{text-align:center; font-family:'Baloo 2'; font-size:1.2rem; margin:8px 0; color:var(--marigold);}
+.rr-sus.good{border-color:var(--mint); background:rgba(62,201,167,.2);}
+.rr-sus.bad{border-color:var(--rose); background:rgba(239,91,106,.2);}
+.rr-q{font-size:.72rem; margin-top:2px;}
 #rr-resulthead{text-align:center; font-family:'Baloo 2'; font-weight:700; line-height:1.4; margin-bottom:12px;}
 .rr-rgrid,#rr-resultgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px;}
 .rr-rcard{background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:10px; text-align:center; animation:rr-pop .5s both;}
@@ -536,17 +541,20 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <div id="rr-nameinputs"></div>
         <label style="display:block;margin:12px 0 4px;font-weight:600;font-size:.9rem;opacity:.85;">Hunt timer</label>
         <select id="rr-hunt"><option value="2">2 minutes</option><option value="4" selected>4 minutes</option><option value="5">5 minutes</option></select>
+        <div id="rr-qcfg-setup"></div>
         <button class="big" id="rr-start">Start session</button>
         <details style="margin-top:12px;"><summary><b>Characters &amp; scoring</b></summary>
           <p class="lead">👑 Raja +1000 · 👸 Rani +900 · 🎩 Manthri +800 · 🃏 Joker +600 (6 players). 🥛 Milk Man +500 · 📰 Paper Man +400. 3 players: Raja, Police, Thirudan. 4: + Manthri. 5: + Rani. 6: + Joker. 7: + Milk Man. 8: + Paper Man.</p>
           <p class="lead"><b>Police</b> (announced publicly when the hunt starts): names the Thirudan before everyone is winked out → +1100, otherwise −200.</p>
           <p class="lead"><b>Thirudan</b> winks at players other than the Police; each winked player announces “I’ve been winked!”. Every wink is worth 1100 ÷ (players − 2) of his escape total. Escapes (wrong accusation, or everyone winked out): +1100. Caught: −200 plus the wink points already earned.</p>
+          <p class="lead"><b>🕵️ Interrogation mode (optional):</b> after the hunt and before the reveal, the Police ask every other player one study question (a fact from the Study packs). A wrong answer takes the chosen penalty (50, 100 or 200) off that player’s points for the round — so the card they earned can end up lower, even negative. Off by default; switch it on in setup or between rounds.</p>
           <p class="lead">These point values are this game’s house rules, not a traditional ruleset.</p>
         </details>
       </div>
       <div class="card" id="rr-idle" style="display:none;">
         <div id="rr-idletxt" style="text-align:center;font-family:'Baloo 2';font-size:1.1rem;"></div>
         <button class="big" id="rr-begin">🔀 Shuffle &amp; deal the papers</button>
+        <details style="margin-top:12px;"><summary><b>🕵️ Interrogation mode (study quiz)</b></summary><div id="rr-qcfg-idle" style="margin-top:6px;"></div></details>
       </div>
       <div class="card" id="rr-pick" style="display:none;">
         <div id="rr-pickhead"></div>
@@ -558,6 +566,7 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <button class="big" id="rr-hide">Hide my card &amp; pass the phone</button>
       </div>
       <div class="card" id="rr-accuse" style="display:none;"></div>
+      <div class="card" id="rr-quiz" style="display:none;"><div id="rr-quizbody"></div></div>
       <div class="card" id="rr-result" style="display:none;">
         <div id="rr-resulthead"></div>
         <div id="rr-resultgrid"></div>
@@ -1722,7 +1731,7 @@ function rrScore(roles,accused,winks){
 }
 function rrSummary(names,e){
   const P=names[e.police],Th=names[e.thirudan];
-  if(e.caught)return P+' (Police) caught '+Th+' (Thirudan)! Police +1100 · Thirudan -200 +'+e.comp+' for '+e.winks+'/'+e.T+' winks = '+e.pts[e.thirudan];
+  if(e.caught)return P+' (Police) caught '+Th+' (Thirudan)! Police +1100 · Thirudan -200 +'+e.comp+' for '+e.winks+'/'+e.T+' winks = '+(e.base||e.pts)[e.thirudan];
   if(e.accused===null)return e.winks>=e.T?Th+' (Thirudan) winked out everyone and escaped! Thirudan +1100 · Police -200':'Time ran out before the Police accused anyone — '+Th+' (Thirudan) escapes with '+e.winks+'/'+e.T+' winks! Thirudan +1100 · Police -200';
   if(e.accused===e.thirudan)return P+' found '+Th+' but too late — everyone was already winked out. Thirudan +1100 · Police -200';
   return P+' accused '+names[e.accused]+' — wrong! '+Th+' (Thirudan) escapes: Thirudan +1100 · Police -200';
@@ -1737,7 +1746,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   const E=id=>document.getElementById(id);
   const RR_COL=slColors.concat(['#ff8a00','#00bcd4']);
   let RR=rrLoad(),RS=null,RA=null,busy=false,inRound=false,wake=null,newArm=0;
-  const panels=['rr-setup','rr-idle','rr-pick','rr-cardview','rr-accuse','rr-result'];
+  const panels=['rr-setup','rr-idle','rr-pick','rr-cardview','rr-accuse','rr-quiz','rr-result'];
   const show=id=>panels.forEach(p=>E(p).style.display=p===id?'block':'none');
   const cnt=()=>parseInt(E('rr-pcount').textContent,10);
   const sgn=n=>(n>0?'+':'')+n;
@@ -1757,7 +1766,8 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   E('rr-start').addEventListener('click',()=>{
     const n=cnt(),names=[];
     for(let i=0;i<n;i++)names.push(E('rr-name'+i).value.trim()||('Player '+(i+1)));
-    RR={names,N:n,rounds:[],huntMin:parseInt(E('rr-hunt').value,10)||4};rrSave(RR);showSession();
+    const quiz=qRead('rrs');if(quiz.on&&!kdStudyPool(quiz.pack,quiz.subs).length)quiz.on=false;
+    RR={names,N:n,rounds:[],huntMin:parseInt(E('rr-hunt').value,10)||4,quiz};rrSave(RR);showSession();
   });
   function showSession(){
     E('rr-score').style.display='block';E('rr-logcard').style.display='block';
@@ -1765,7 +1775,8 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   }
   function renderIdle(){
     const off=RR.rounds.length%RR.names.length;
-    E('rr-idletxt').innerHTML='<b>Round '+(RR.rounds.length+1)+'</b> — '+ldEsc(RR.names[off])+' picks first.<br><small>Characters this round: '+RR_SETS[RR.names.length].map(k=>RR_ROLES[k].e+' '+RR_ROLES[k].n).join(' · ')+'</small>';
+    renderIdleLine();
+    qSync('rri');
   }
 
   /* ---------- shuffle & pick ---------- */
@@ -1883,20 +1894,23 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     else if(a==='timeout'){RA.mode='timeout';RA.accused=null;RA.winks=Math.min(RA.winks,T-1);}
     else if(a==='wminus'){RA.winks=Math.max(0,RA.winks-1);}
     else if(a==='wplus'){RA.winks=Math.min(RA.mode==='timeout'?T-1:T,RA.winks+1);}
-    else if(a==='reveal'){finishRound();return;}
+    else if(a==='reveal'){if(RR.quiz&&RR.quiz.on&&startQuiz())return;finishRound();return;}
     renderAccuse();
   });
 
   /* ---------- result + scoreboard ---------- */
-  function finishRound(){
+  function finishRound(quiz){
     const T=RR.names.length-2,roles=RS.assigned.slice();
     const sc=rrScore(roles,RA.mode==='accuse'?RA.accused:null,RA.mode==='all'?T:RA.winks);
-    const entry={n:RR.rounds.length+1,roles,accused:RA.mode==='accuse'?RA.accused:null,winks:sc.w,T,caught:sc.caught,comp:sc.comp,pts:sc.pts,police:sc.ip,thirudan:sc.it};
+    let fin=sc.pts,pen=null,qres=null;
+    if(quiz&&quiz.length){const ap=rrqApply(sc.pts,quiz,RR.quiz.pen);fin=ap.pts;pen=ap.pen;qres=quiz.map(r=>({pl:r.pl,ok:r.correct,a:r.answer,s:r.subject}));}
+    const entry={n:RR.rounds.length+1,roles,accused:RA.mode==='accuse'?RA.accused:null,winks:sc.w,T,caught:sc.caught,comp:sc.comp,pts:fin,police:sc.ip,thirudan:sc.it};
+    if(qres){entry.base=sc.pts.slice();entry.quiz=qres;entry.pen=pen;entry.penalty=RR.quiz.pen;}
     RR.rounds.push(entry);rrSave(RR);inRound=false;
-    E('rr-resulthead').innerHTML=(entry.caught?'🎯 ':'😏 ')+ldEsc(rrSummary(RR.names,entry));
+    E('rr-resulthead').innerHTML=(entry.caught?'🎯 ':'😏 ')+ldEsc(rrSummary(RR.names,entry))+(entry.quiz?'<div style="font-size:.82rem;margin-top:6px;opacity:.9">🕵️ Interrogation: '+entry.quiz.map(r=>ldEsc(RR.names[r.pl])+(r.ok===null?' —':r.ok?' ✔':' ✘')).join(' · ')+' (wrong = −'+entry.penalty+')</div>':'');
     E('rr-resultgrid').innerHTML=RR.names.map((n,i)=>{
       const r=RR_ROLES[roles[i]],p=entry.pts[i];
-      return '<div class="rr-rcard" style="animation-delay:'+(i*140)+'ms"><div class="rr-rname"><span class="plyr-dot" style="background:'+RR_COL[i]+'"></span>'+ldEsc(n)+'</div><div class="rr-remoji">'+r.e+'</div><div>'+r.n+'</div><div class="'+(p<0?'neg':'pos')+'">'+sgn(p)+'</div></div>';
+      return '<div class="rr-rcard" style="animation-delay:'+(i*140)+'ms"><div class="rr-rname"><span class="plyr-dot" style="background:'+RR_COL[i]+'"></span>'+ldEsc(n)+'</div><div class="rr-remoji">'+r.e+'</div><div>'+r.n+'</div><div class="'+(p<0?'neg':'pos')+'">'+sgn(p)+'</div>'+(entry.pen&&entry.pen[i]?'<div class="rr-q neg">quiz '+entry.pen[i]+'</div>':(entry.quiz&&entry.quiz.some(x=>x.pl===i&&x.ok)?'<div class="rr-q pos">quiz ✔</div>':''))+'</div>';
     }).join('');
     renderScore();renderLog();show('rr-result');
   }
@@ -1907,7 +1921,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     E('rr-board').innerHTML='<div class="rr-grid">'+RR.names.map((n,i)=>{
       const rank=ord.indexOf(i);
       return '<div class="rr-pcard"><div class="rr-ptop"><span class="plyr-dot" style="background:'+RR_COL[i]+'"></span><b>'+ldEsc(n)+'</b></div><div class="rr-total">'+(RR.rounds.length?(medal[rank]||'')+' ':'')+t[i]+'</div>'+
-        (RR.rounds.length?RR.rounds.map(r=>'<div class="rr-ent"><span>R'+r.n+' '+RR_ROLES[r.roles[i]].e+' '+RR_ROLES[r.roles[i]].n+'</span><span class="'+(r.pts[i]<0?'neg':'pos')+'">'+sgn(r.pts[i])+'</span></div>').join(''):'<div class="rr-ent" style="opacity:.6">No rounds yet</div>')+'</div>';
+        (RR.rounds.length?RR.rounds.map(r=>'<div class="rr-ent"><span>R'+r.n+' '+RR_ROLES[r.roles[i]].e+' '+RR_ROLES[r.roles[i]].n+'</span><span class="'+(r.pts[i]<0?'neg':'pos')+'">'+sgn(r.pts[i])+(r.pen&&r.pen[i]?' <small>('+r.pen[i]+' quiz)</small>':'')+'</span></div>').join(''):'<div class="rr-ent" style="opacity:.6">No rounds yet</div>')+'</div>';
     }).join('')+'</div>';
     E('rr-undo').disabled=inRound||RR.rounds.length===0;
   }
@@ -1921,7 +1935,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
       const w=document.createElement('span');w.style.opacity='.7';w.textContent='winks '+e.winks+'/'+e.T;
       head.append(h,d,w);
       const body=document.createElement('div');body.className='log-body';
-      body.textContent=rrSummary(RR.names,e)+'\n'+RR.names.map((n,i)=>n+' '+RR_ROLES[e.roles[i]].e+' '+sgn(e.pts[i])).join(' · ');
+      body.textContent=rrSummary(RR.names,e)+'\n'+RR.names.map((n,i)=>n+' '+RR_ROLES[e.roles[i]].e+' '+sgn(e.pts[i])).join(' · ')+(e.quiz?'\nInterrogation: '+e.quiz.map(r=>RR.names[r.pl]+(r.ok===null?' skipped':r.ok?' ✔':' ✘ −'+e.penalty)+' ('+r.a+')').join(' · '):'');
       row.append(head,body);box.appendChild(row);
     }
   }
@@ -1941,6 +1955,85 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     if(newArm){clearTimeout(newArm);newArm=0;b.textContent='New session (reset all scores)';RR=null;RS=null;inRound=false;rrSave(null);try{localStorage.removeItem(RR_KEY);}catch(_){}
       E('rr-score').style.display='none';E('rr-logcard').style.display='none';E('rr-winbanner').classList.remove('on');show('rr-setup');}
     else{b.textContent='Tap again to erase all scores';newArm=setTimeout(()=>{newArm=0;b.textContent='New session (reset all scores)';},3000);}
+  });
+
+  /* ---------- Interrogation mode: config (setup + between rounds) and the quiz itself ---------- */
+  const qpick={};
+  function qcfgHTML(p){
+    return '<label class="chk"><input type="checkbox" id="'+p+'-on"> 🕵️ Interrogation mode (study quiz)</label>'+
+      '<div id="'+p+'-box" class="im-studybox" style="display:none"><p class="lead" style="font-size:.8rem;margin:0 0 6px">After the hunt, the Police ask every other player a study question. A wrong answer takes points off that player’s card.</p>'+
+      '<div id="'+p+'-pick"></div><label class="bz-l">Penalty for a wrong answer</label><select id="'+p+'-pen"><option value="50">−50</option><option value="100" selected>−100</option><option value="200">−200</option></select>'+
+      '<label class="chk"><input type="checkbox" id="'+p+'-mc" checked> Multiple choice (Police tap the answer given)</label></div>';
+  }
+  function qMount(p,onChange){if(!qpick[p])qpick[p]=kdPicker(p+'-pick',p+'p',onChange);return qpick[p];}
+  function qRead(p){
+    const on=E(p+'-on').checked,pk=qpick[p]?qpick[p].read():{pack:'',subs:[]};
+    return{on,pack:pk.pack,subs:pk.subs,pen:parseInt(E(p+'-pen').value,10),mc:E(p+'-mc').checked};
+  }
+  function qSync(p){
+    if(!E(p+'-on'))return;
+    const q=RR&&RR.quiz?RR.quiz:{on:false,pack:'',subs:[],pen:100,mc:true};
+    E(p+'-on').checked=!!q.on;E(p+'-pen').value=String(q.pen||100);E(p+'-mc').checked=q.mc!==false;E(p+'-box').style.display=q.on?'block':'none';
+    if(q.on)qMount(p,p==='rri'?qIdleChanged:null).set(q.pack,q.subs);
+  }
+  function qWire(p,onChange){
+    E(p+'-on').addEventListener('change',()=>{const on=E(p+'-on').checked;E(p+'-box').style.display=on?'block':'none';if(on)qMount(p,onChange);if(onChange)onChange();});
+    E(p+'-pen').addEventListener('change',()=>{if(onChange)onChange();});
+    E(p+'-mc').addEventListener('change',()=>{if(onChange)onChange();});
+  }
+  function qIdleChanged(){
+    if(!RR)return;const q=qRead('rri');
+    if(q.on&&q.subs.includes('__none__'))return;
+    if(q.on&&!kdStudyPool(q.pack,q.subs).length)q.on=false;
+    RR.quiz=q;rrSave(RR);renderIdleLine();
+  }
+  function renderIdleLine(){
+    const off=RR.rounds.length%RR.names.length,qz=RR.quiz&&RR.quiz.on?'<br><small>🕵️ Interrogation ON · wrong answer −'+RR.quiz.pen+' · '+(RR.quiz.mc?'multiple choice':'open questions')+'</small>':'';
+    E('rr-idletxt').innerHTML='<b>Round '+(RR.rounds.length+1)+'</b> — '+ldEsc(RR.names[off])+' picks first.<br><small>Characters this round: '+RR_SETS[RR.names.length].map(k=>RR_ROLES[k].e+' '+RR_ROLES[k].n).join(' · ')+'</small>'+qz;
+  }
+  E('rr-qcfg-setup').innerHTML=qcfgHTML('rrs');E('rr-qcfg-idle').innerHTML=qcfgHTML('rri');
+  qWire('rrs',null);qWire('rri',qIdleChanged);
+
+  let QZ=null;
+  function startQuiz(){
+    const q=RR.quiz,ip=RS.assigned.indexOf('police'),pool=kdStudyPool(q.pack,q.subs),full=kdStudyPool('',[]);
+    if(!pool.length)return false;
+    const targets=RR.names.map((_,i)=>i).filter(i=>i!==ip),items=[],used=new Set();
+    targets.forEach(()=>{const pk=kdPickStudy('rr',pool.filter(x=>!used.has(x.key)))||kdPickStudy('rr',pool);used.add(pk.entry.key);items.push(pk.entry);});
+    QZ={qs:targets.map((pl,k)=>Object.assign({pl},rrqBuild(items[k].item,full,q.mc))),i:0,stage:'ask',results:[],pick:null};
+    renderQuiz();show('rr-quiz');return true;
+  }
+  function renderQuiz(){
+    const q=QZ.qs[QZ.i],ip=RS.assigned.indexOf('police'),N=QZ.qs.length,pen=RR.quiz.pen;
+    let h='<div class="im-pass">🕵️ Interrogation · '+(QZ.i+1)+' / '+N+'</div><h2 style="margin:4px 0;text-align:center">👮 '+ldEsc(RR.names[ip])+', ask <span style="color:'+RR_COL[q.pl]+'">'+ldEsc(RR.names[q.pl])+'</span></h2>'+
+      '<p class="lead" style="margin:0;text-align:center;font-size:.82rem">📚 '+ldEsc(q.subject)+' · '+ldEsc(q.topic)+' · wrong answer −'+pen+'</p><div class="rr-qtext">'+ldEsc(q.text)+'</div>';
+    if(q.options){
+      q.options.forEach((o,i)=>{const cls=QZ.stage==='done'?(i===q.correct?' good':(i===QZ.pick?' bad':'')):'';h+='<button class="rr-sus'+cls+'" data-qa="opt" data-i="'+i+'"'+(QZ.stage==='done'?' disabled':'')+'><b>'+'ABCD'[i]+'.</b> '+ldEsc(o)+'</button>';});
+      if(QZ.stage==='ask')h+='<p class="lead" style="text-align:center;font-size:.8rem;margin:8px 0 0">Police: tap the option the player says.</p><button class="big ghost" data-qa="skip">Skip this player (no penalty)</button>';
+    }else if(QZ.stage==='ask'){
+      h+='<button class="big" data-qa="show">Show the answer</button><button class="big ghost" data-qa="skip">Skip this player (no penalty)</button>';
+    }else if(QZ.stage==='judge'){
+      h+='<div class="rr-qans">Answer: '+ldEsc(q.answer)+'</div><p class="lead" style="text-align:center;font-size:.8rem;margin:0">Did '+ldEsc(RR.names[q.pl])+' get it right?</p><div class="rowbtns"><button class="big" data-qa="ok">✔ Correct</button><button class="big ghost" data-qa="no" style="border-color:var(--rose)">✘ Wrong (−'+pen+')</button></div>';
+    }
+    if(QZ.stage==='done'){
+      const r=QZ.results[QZ.results.length-1];
+      h+='<div class="rr-qans">'+(r.correct===null?'Skipped':r.correct?'✔ Correct!':'✘ Wrong — '+ldEsc(q.answer)+' (−'+pen+')')+'</div><button class="big" data-qa="next">'+(QZ.i+1>=N?'Finish interrogation ➜ reveal result':'Next player ➜')+'</button>';
+    }
+    E('rr-quizbody').innerHTML=h;
+  }
+  E('rr-quiz').addEventListener('click',e=>{
+    const b=e.target.closest('[data-qa]');if(!b||!QZ||!RS)return;
+    const q=QZ.qs[QZ.i],a=b.dataset.qa;
+    const rec=c=>{QZ.results.push({pl:q.pl,correct:c,answer:q.answer,subject:q.subject});QZ.stage='done';renderQuiz();};
+    if(a==='opt'&&QZ.stage==='ask'){QZ.pick=+b.dataset.i;rec(QZ.pick===q.correct);}
+    else if(a==='show'&&QZ.stage==='ask'){QZ.stage='judge';renderQuiz();}
+    else if(a==='ok'&&QZ.stage==='judge')rec(true);
+    else if(a==='no'&&QZ.stage==='judge')rec(false);
+    else if(a==='skip'&&(QZ.stage==='ask'||QZ.stage==='judge'))rec(null);
+    else if(a==='next'&&QZ.stage==='done'){
+      if(QZ.i+1>=QZ.qs.length){const res=QZ.results;QZ=null;finishRound(res);}
+      else{QZ.i++;QZ.stage='ask';QZ.pick=null;renderQuiz();}
+    }
   });
   renderSetup();
   if(RR){E('rr-pcount').textContent=RR.names.length;renderSetup();showSession();}else show('rr-setup');
@@ -2502,6 +2595,46 @@ function kdPickStudy(kind,pool){
   return{entry,reset,left:fresh.length-1};
 }
 // ===== KD-STUDY-END =====
+// ===== RRQ-START =====
+/* Interrogation mode for Raja Rani: the Police quiz every other player on a study question.
+   A wrong answer takes `penalty` points off that player's card for the round. */
+function rrqBuild(item,pool,mc){
+  const subject=item[0],topic=item[1],answer=item[2];
+  const q={subject,topic,answer,hint:item[3],text:item[4]+'. '+item[5]+'.',options:null,correct:-1};
+  if(mc){
+    const ans=answer.toLowerCase();
+    const bad=x=>{const a=x.item[2].toLowerCase();return a===ans||a.includes(ans)||ans.includes(a);};
+    const uniq=arr=>{const seen=new Set();return arr.filter(x=>{const k=x.item[2].toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});};
+    const same=uniq(pool.filter(x=>x.item[0]===subject&&!bad(x))),other=uniq(pool.filter(x=>x.item[0]!==subject&&!bad(x)));
+    let d=rrShuffle(same).slice(0,3);
+    if(d.length<3){const have=new Set(d.map(x=>x.item[2].toLowerCase()));d=d.concat(rrShuffle(other).filter(x=>!have.has(x.item[2].toLowerCase())).slice(0,3-d.length));}
+    if(d.length===3){const opts=rrShuffle([answer].concat(d.map(x=>x.item[2])));q.options=opts;q.correct=opts.indexOf(answer);}
+  }
+  return q;
+}
+/* results: [{pl,correct}] ; correct===null means skipped (no penalty) */
+function rrqApply(base,results,penalty){
+  const pts=base.slice(),pen=base.map(()=>0);
+  results.forEach(r=>{if(r.correct===false){pts[r.pl]-=penalty;pen[r.pl]-=penalty;}});
+  return{pts,pen};
+}
+function rrqRunTests(){
+  const R=[],T=(n,c)=>R.push({name:n,ok:!!c});
+  const pool=kdStudyPool('',[]);
+  T('study pool is available for questions',pool.length>=700);
+  T('multiple choice: 4 unique options, the answer appears once and correct index is right',(()=>{for(let k=0;k<400;k++){const it=pool[rrRand(pool.length)].item,q=rrqBuild(it,pool,true);if(!q.options||q.options.length!==4||new Set(q.options.map(x=>x.toLowerCase())).size!==4||q.options.filter(o=>o===it[2]).length!==1||q.options[q.correct]!==it[2])return false;}return true;})());
+  T('distractors never contain or equal the answer',(()=>{for(let k=0;k<400;k++){const it=pool[rrRand(pool.length)].item,q=rrqBuild(it,pool,true),a=it[2].toLowerCase();for(const o of q.options){if(o===it[2])continue;const l=o.toLowerCase();if(l.includes(a)||a.includes(l))return false;}}return true;})());
+  T('distractors come from the same subject when it has enough entries',(()=>{const h=pool.filter(x=>x.item[0]==='History');const subj=new Set(h.map(x=>x.item[2]));for(let k=0;k<100;k++){const it=h[rrRand(h.length)].item,q=rrqBuild(it,pool,true);if(!q.options.every(o=>subj.has(o)))return false;}return true;})());
+  T('the question text is the two clues and never contains the answer',(()=>{for(let k=0;k<400;k++){const it=pool[rrRand(pool.length)].item,q=rrqBuild(it,pool,false);if(!q.text.includes(it[4])||!q.text.includes(it[5]))return false;}return true;})());
+  T('open mode has no options',rrqBuild(pool[0].item,pool,false).options===null);
+  T('tiny pool falls back to open mode instead of repeating options',rrqBuild(pool[0].item,pool.slice(0,2),true).options===null);
+  let r=rrqApply([1000,-200,900,800],[{pl:0,correct:false},{pl:1,correct:true},{pl:2,correct:false},{pl:3,correct:null}],100);
+  T('wrong answers lose points, correct and skipped lose nothing',r.pts.join()==='900,-200,800,800'&&r.pen.join()==='-100,0,-100,0');
+  r=rrqApply([100,100],[{pl:0,correct:false}],200);T('a card can go negative',r.pts[0]===-100);
+  const base=[1,2,3];rrqApply(base,[{pl:0,correct:false}],50);T('the base points array is not mutated',base.join()==='1,2,3');
+  return R;
+}
+// ===== RRQ-END =====
 // ===== KD-PICKER-START =====
 /* Reusable "pack + subjects" chooser for any game's Study mode. Returns {read(), pool()}. */
 function kdPicker(id,p,onChange){
@@ -2524,7 +2657,12 @@ function kdPicker(id,p,onChange){
   E(p+'-all').addEventListener('click',()=>{const ch=[...E(p+'-subs').children],all=ch.every(c=>c.classList.contains('on'));ch.forEach(c=>c.classList.toggle('on',!all));count();if(onChange)onChange();});
   document.addEventListener('kd-packs-changed',()=>fill(true));
   fill(false);
-  return{read,pool:()=>{const r=read();return kdStudyPool(r.pack,r.subs);}};
+  function set(pack,subs){
+    E(p+'-pack').value=pack||'';fill(false);
+    if(subs&&subs.length)[...E(p+'-subs').children].forEach(c=>c.classList.toggle('on',subs.includes(c.dataset.sub)));
+    count();
+  }
+  return{read,set,pool:()=>{const r=read();return kdStudyPool(r.pack,r.subs);}};
 }
 // ===== KD-PICKER-END =====
 // ===== IMP-ENGINE-START =====
