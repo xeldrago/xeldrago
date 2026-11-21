@@ -205,11 +205,36 @@ button:disabled{opacity:.35; cursor:not-allowed;}
 #rr-slumber button{position:relative; margin-top:22px; max-width:300px; opacity:.85;}
 .rr-sus{display:flex; align-items:center; gap:8px; width:100%; padding:12px; border-radius:12px; border:1px solid var(--line); background:var(--bg2); color:var(--ink); font-size:.95rem; margin-top:8px; cursor:pointer; text-align:left; font-family:'Inter',sans-serif;}
 .rr-sus.on{border-color:var(--marigold); background:rgba(244,165,30,.16);}
-#rr-quizbody .rr-qtext{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:12px; font-size:.95rem; line-height:1.5; margin:6px 0 10px;}
-#rr-quizbody .rr-qans{text-align:center; font-family:'Baloo 2'; font-size:1.2rem; margin:8px 0; color:var(--marigold);}
-.rr-sus.good{border-color:var(--mint); background:rgba(62,201,167,.2);}
-.rr-sus.bad{border-color:var(--rose); background:rgba(239,91,106,.2);}
+#rr-quizov{display:none; position:fixed; inset:0; z-index:95; background:radial-gradient(900px 600px at 70% 10%,#1d2250 0%,#080b20 75%); color:var(--ink); overflow-y:auto; padding:18px 16px 40px;}
+#rr-quizov.on{display:block;}
+#rr-qz-clock{font-family:'Baloo 2'; font-size:2.4rem; font-weight:800; color:#ffd166; text-align:center;}
+#rr-qz-clock.low{color:#ff6b6b;}
+.rr-qcard{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px; margin:10px 0;}
+.rr-qcard.answered{border-color:var(--mint);}
+.rr-qh{display:flex; justify-content:space-between; align-items:center; gap:8px; font-family:'Baloo 2'; font-weight:700; flex-wrap:wrap;}
+.rr-qtext{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:10px; font-size:.92rem; line-height:1.5; margin:8px 0;}
+.rr-qopt{display:block; padding:7px 10px; margin:5px 0; border-radius:10px; border:1px solid var(--line); background:var(--bg2); font-size:.88rem;}
+.rr-qopt.good{border-color:var(--mint); background:rgba(62,201,167,.22); font-weight:700;}
+.rr-qans{text-align:center; font-family:'Baloo 2'; font-size:1.05rem; color:var(--marigold); margin:6px 0;}
+.rr-qchips{display:flex; gap:6px; margin-top:8px;}
+.rr-qchip{flex:1; padding:10px 4px; border-radius:10px; border:1px solid var(--line); background:var(--bg2); color:var(--ink); cursor:pointer; font-weight:700; font-family:'Inter',sans-serif;}
+.rr-qchip.sel-ok{background:rgba(62,201,167,.3); border-color:var(--mint);}
+.rr-qchip.sel-no{background:rgba(239,91,106,.3); border-color:var(--rose);}
+.rr-qchip.sel-skip{background:rgba(255,255,255,.14); border-color:#aaa;}
+.rr-qsum{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 12px;}
+.rr-qsum span{padding:4px 10px; border-radius:999px; background:var(--bg2); border:1px solid var(--line); font-size:.8rem;}
 .rr-q{font-size:.72rem; margin-top:2px;}
+#rr-flip.wide{height:min(570px,88vh);}
+#rr-flip.wide .rr-face{padding:12px; overflow-y:auto; justify-content:flex-start;}
+#rr-flip.wide .rr-big{font-size:3rem;}
+.rw-box{width:100%; background:rgba(62,201,167,.1); border:1px solid rgba(62,201,167,.4); border-radius:12px; padding:8px 10px; margin:6px 0 8px; text-align:center;}
+.rw-box.imp{background:rgba(239,91,106,.1); border-color:rgba(239,91,106,.45);}
+.rw-cat{font-size:.78rem; font-weight:700; color:var(--mint);}
+.rw-lbl{font-size:.66rem; opacity:.7; text-transform:uppercase; letter-spacing:1px; margin-top:4px;}
+.rw-word{font-family:'Baloo 2'; font-weight:800; font-size:1.5rem; color:var(--marigold); word-break:break-word; line-height:1.15;}
+.rw-note{font-size:.72rem; opacity:.85; line-height:1.4; margin-top:4px;}
+.rw-facts{text-align:left; font-size:.72rem; line-height:1.4; margin-top:6px;}
+#rr-wordnote{position:relative; max-width:440px; line-height:1.5; font-size:.9rem; margin:6px 0; color:#a8f0dc;}
 #rr-resulthead{text-align:center; font-family:'Baloo 2'; font-weight:700; line-height:1.4; margin-bottom:12px;}
 .rr-rgrid,#rr-resultgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px;}
 .rr-rcard{background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:10px; text-align:center; animation:rr-pop .5s both;}
@@ -401,10 +426,10 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
   <div class="screen" id="screen-more">
     <div class="sugg">
       <div class="card"><h3>Wavelength</h3><p class="lead">One team sees a hidden target on a slider between two opposites ("cold ↔ hot"); they give a one-word clue and the rest guess where the dial lands.</p></div>
-      <div class="card"><h3>Taboo</h3><p class="lead">Guess the word from a teammate's clues — without them using five forbidden related words. Great with the same phone-timer format as Heads Up.</p></div>
+      <div class="card"><h3>Taboo</h3><p class="lead">Guess the word from a teammate's clues > without them using five forbidden related words. Great with the same phone-timer format as Heads Up.</p></div>
       <div class="card"><h3>Fishbowl</h3><p class="lead">Same word set, three rounds: describe it, act it out (charades), then say one word only — memory carries it home.</p></div>
-      <div class="card"><h3>Most Likely To</h3><p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full 6-person circle, no setup needed.</p></div>
-      <div class="card"><h3>Category Blurt</h3><p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating — last one standing wins the round.</p></div>
+      <div class="card"><h3>Most Likely To</h3><p class="lead">Read a prompt ("most likely to become famous"), everyone points at once and the funniest for a full 6-person circle, no setup needed.</p></div>
+      <div class="card"><h3>Category Blurt</h3><p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating : last one standing wins the round.</p></div>
     </div>
   </div>
 
@@ -428,7 +453,7 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
           <button id="sl-pminus">−</button><span id="sl-pcount">4</span><button id="sl-pplus">+</button>
         </div>
         <div id="sl-nameinputs"></div>
-        <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time favours different numbers — learn yours.</small></div></div>
+        <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time favours different numbers > learn yours.</small></div></div>
         <button class="big" id="sl-start">Start game</button>
       </div>
 
@@ -541,20 +566,23 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <div id="rr-nameinputs"></div>
         <label style="display:block;margin:12px 0 4px;font-weight:600;font-size:.9rem;opacity:.85;">Hunt timer</label>
         <select id="rr-hunt"><option value="2">2 minutes</option><option value="4" selected>4 minutes</option><option value="5">5 minutes</option></select>
+        <div id="rr-wcfg-setup"></div>
         <div id="rr-qcfg-setup"></div>
         <button class="big" id="rr-start">Start session</button>
         <details style="margin-top:12px;"><summary><b>Characters &amp; scoring</b></summary>
           <p class="lead">👑 Raja +1000 · 👸 Rani +900 · 🎩 Manthri +800 · 🃏 Joker +600 (6 players). 🥛 Milk Man +500 · 📰 Paper Man +400. 3 players: Raja, Police, Thirudan. 4: + Manthri. 5: + Rani. 6: + Joker. 7: + Milk Man. 8: + Paper Man.</p>
           <p class="lead"><b>Police</b> (announced publicly when the hunt starts): names the Thirudan before everyone is winked out → +1100, otherwise −200.</p>
           <p class="lead"><b>Thirudan</b> winks at players other than the Police; each winked player announces “I’ve been winked!”. Every wink is worth 1100 ÷ (players − 2) of his escape total. Escapes (wrong accusation, or everyone winked out): +1100. Caught: −200 plus the wink points already earned.</p>
-          <p class="lead"><b>🕵️ Interrogation mode (optional):</b> after the hunt and before the reveal, the Police ask every other player one study question (a fact from the Study packs). A wrong answer takes the chosen penalty (50, 100 or 200) off that player’s points for the round — so the card they earned can end up lower, even negative. Off by default; switch it on in setup or between rounds.</p>
+          <p class="lead"><b>💬 Word mode (optional, Imposter twist):</b> every round has one secret word with a category. All civilians (Raja, Rani, Manthri, Joker, Milk Man, Paper Man) see the <b>same word</b> on their card, the <b>Thirudan only gets a one-word clue</b>, and the <b>Police get nothing but the category</b>. During the hunt the Police question the players side by side; civilians prove they know the word without saying it. The word is revealed with the result. Words come from the party categories, the study packs, or both.</p>
+          <p class="lead"><b>🕵️ Interrogation mode (optional):</b> in the <b>first minute of the hunt</b> the Police get the phone with a set of study questions (with options), each assigned to a randomly chosen other player. The Police ask them out loud and tap ✔ correct, ✘ wrong or Skip under that question — results are listed under each player. When the round is scored, every wrong answer takes the chosen penalty (50, 100 or 200) off that player’s points, so a card can end lower or even negative. Off by default; switch it on in setup or between rounds.</p>
           <p class="lead">These point values are this game’s house rules, not a traditional ruleset.</p>
         </details>
       </div>
       <div class="card" id="rr-idle" style="display:none;">
         <div id="rr-idletxt" style="text-align:center;font-family:'Baloo 2';font-size:1.1rem;"></div>
         <button class="big" id="rr-begin">🔀 Shuffle &amp; deal the papers</button>
-        <details style="margin-top:12px;"><summary><b>🕵️ Interrogation mode (study quiz)</b></summary><div id="rr-qcfg-idle" style="margin-top:6px;"></div></details>
+        <details style="margin-top:12px;"><summary><b>💬 Word mode (Imposter twist)</b></summary><div id="rr-wcfg-idle" style="margin-top:6px;"></div></details>
+        <details style="margin-top:8px;"><summary><b>🕵️ Interrogation mode (study quiz)</b></summary><div id="rr-qcfg-idle" style="margin-top:6px;"></div></details>
       </div>
       <div class="card" id="rr-pick" style="display:none;">
         <div id="rr-pickhead"></div>
@@ -566,7 +594,6 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <button class="big" id="rr-hide">Hide my card &amp; pass the phone</button>
       </div>
       <div class="card" id="rr-accuse" style="display:none;"></div>
-      <div class="card" id="rr-quiz" style="display:none;"><div id="rr-quizbody"></div></div>
       <div class="card" id="rr-result" style="display:none;">
         <div id="rr-resulthead"></div>
         <div id="rr-resultgrid"></div>
@@ -586,10 +613,12 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <p>Let the <b>Thirudan</b> start his looting — smiting the others with his only weapon: his <b>eyes</b>. <span class="rr-wink">😉</span></p>
         <p><i>Think before you wink!</i> A winked player says “I’ve been winked!” — everyone except the Police can be winked.</p>
         <p>👮 <b id="rr-police"></b> is the <b>Police</b> and must find the Thirudan / winker / looter before he winks all <b id="rr-targets"></b> players out.</p>
+        <p id="rr-wordnote" style="display:none;"></p>
         <div id="rr-clock" style="position:relative;font-family:'Baloo 2';font-size:3rem;font-weight:800;color:#ffd166;margin:6px 0;">4:00</div>
         <p style="opacity:.6;font-size:.8rem;position:relative;">Put the phone down and play it out. When the clock hits zero the hunt ends. 💤</p>
         <button class="big ghost" id="rr-over">🔔 The hunt is over</button>
       </div>
+      <div id="rr-quizov"><div id="rr-quizov-body"></div></div>
     </div>
     <div class="bgsub-screen" id="bgsub-imp">
       <div class="card" id="im-setup">
@@ -1746,7 +1775,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   const E=id=>document.getElementById(id);
   const RR_COL=slColors.concat(['#ff8a00','#00bcd4']);
   let RR=rrLoad(),RS=null,RA=null,busy=false,inRound=false,wake=null,newArm=0;
-  const panels=['rr-setup','rr-idle','rr-pick','rr-cardview','rr-accuse','rr-quiz','rr-result'];
+  const panels=['rr-setup','rr-idle','rr-pick','rr-cardview','rr-accuse','rr-result'];
   const show=id=>panels.forEach(p=>E(p).style.display=p===id?'block':'none');
   const cnt=()=>parseInt(E('rr-pcount').textContent,10);
   const sgn=n=>(n>0?'+':'')+n;
@@ -1767,7 +1796,8 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     const n=cnt(),names=[];
     for(let i=0;i<n;i++)names.push(E('rr-name'+i).value.trim()||('Player '+(i+1)));
     const quiz=qRead('rrs');if(quiz.on&&!kdStudyPool(quiz.pack,quiz.subs).length)quiz.on=false;
-    RR={names,N:n,rounds:[],huntMin:parseInt(E('rr-hunt').value,10)||4,quiz};rrSave(RR);showSession();
+    const word=wRead('rws');if(word.src!=='party'&&!kdStudyPool(word.pack,word.subs).length)word.src='party';
+    RR={names,N:n,rounds:[],huntMin:parseInt(E('rr-hunt').value,10)||4,quiz,word,wused:[]};rrSave(RR);showSession();
   });
   function showSession(){
     E('rr-score').style.display='block';E('rr-logcard').style.display='block';
@@ -1776,7 +1806,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   function renderIdle(){
     const off=RR.rounds.length%RR.names.length;
     renderIdleLine();
-    qSync('rri');
+    qSync('rri');wSync('rwi');
   }
 
   /* ---------- shuffle & pick ---------- */
@@ -1807,6 +1837,8 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   function beginRound(){
     const N=RR.names.length,off=RR.rounds.length%N;
     RS={round:RR.rounds.length+1,order:Array.from({length:N},(_,k)=>(k+off)%N),pi:0,assigned:Array(N).fill(null),papers:rrShuffle(RR_SETS[N])};
+    RS.word=null;
+    if(RR.word&&RR.word.on){RS.word=rrwPick(RR.word,RR.wused||[],N);if(RS.word.reset)RR.wused=[];if(RS.word.key)RR.wused=(RR.wused||[]).concat([RS.word.key]).slice(-3000);rrSave(RR);}
     inRound=true;E('rr-winbanner').classList.remove('on');
     renderPick();show('rr-pick');renderScore();shuffleAnim();
   }
@@ -1834,8 +1866,8 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   }
   function showCard(pl,role){
     const r=RR_ROLES[role],pts=r.pts!==null?sgn(r.pts)+' points':(role==='police'?'+1100 if you catch · −200 if you miss':'+1100 if you escape · −200 if caught');
-    E('rr-front').innerHTML='<div class="rr-big">'+r.e+'</div><h2>'+r.n+'</h2><div class="rr-ptsline">'+pts+'</div><p>'+tip(role)+'</p><div class="rr-whose">'+ldEsc(RR.names[pl])+'’s card — only you look!</div>';
-    E('rr-front').dataset.role=role;
+    E('rr-front').innerHTML='<div class="rr-big">'+r.e+'</div><h2>'+r.n+'</h2><div class="rr-ptsline">'+pts+'</div><p>'+tip(role)+'</p>'+wordBlock(role)+'<div class="rr-whose">'+ldEsc(RR.names[pl])+'’s card — only you look!</div>';
+    E('rr-front').dataset.role=role;E('rr-flip').classList.toggle('wide',!!RS.word);
     E('rr-flipinner').classList.remove('flipped');show('rr-cardview');
     setTimeout(()=>E('rr-flipinner').classList.add('flipped'),80);
   }
@@ -1851,8 +1883,11 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   function slumber(){
     E('rr-police').textContent=RR.names[RS.assigned.indexOf('police')];
     E('rr-targets').textContent=RR.names.length-2;
+    const wn=E('rr-wordnote');
+    if(RS.word){wn.style.display='block';wn.innerHTML='💬 <b>Word mode:</b> everyone except the Thirudan knows a secret word in the category <b>'+ldEsc(RS.word.emoji+' '+RS.word.cat)+'</b>. Police: question the players side by side. Civilians: prove you know it — without saying it!';}else wn.style.display='none';
     E('rr-slumber').classList.add('on');
     startClock();
+    startHuntQuiz();
     try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(l=>{wake=l;}).catch(()=>{});}catch(_){}
   }
   let clockT=0,clockEnd=0;
@@ -1866,6 +1901,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     },250);
   }
   function endHunt(timeUp){
+    closeHuntQuiz();
     clearInterval(clockT);clockT=0;
     E('rr-slumber').classList.remove('on');
     try{if(wake){wake.release();wake=null;}}catch(_){}
@@ -1894,7 +1930,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     else if(a==='timeout'){RA.mode='timeout';RA.accused=null;RA.winks=Math.min(RA.winks,T-1);}
     else if(a==='wminus'){RA.winks=Math.max(0,RA.winks-1);}
     else if(a==='wplus'){RA.winks=Math.min(RA.mode==='timeout'?T-1:T,RA.winks+1);}
-    else if(a==='reveal'){if(RR.quiz&&RR.quiz.on&&startQuiz())return;finishRound();return;}
+    else if(a==='reveal'){finishRound(qzResults());return;}
     renderAccuse();
   });
 
@@ -1903,11 +1939,12 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     const T=RR.names.length-2,roles=RS.assigned.slice();
     const sc=rrScore(roles,RA.mode==='accuse'?RA.accused:null,RA.mode==='all'?T:RA.winks);
     let fin=sc.pts,pen=null,qres=null;
-    if(quiz&&quiz.length){const ap=rrqApply(sc.pts,quiz,RR.quiz.pen);fin=ap.pts;pen=ap.pen;qres=quiz.map(r=>({pl:r.pl,ok:r.correct,a:r.answer,s:r.subject}));}
+    if(quiz&&quiz.length&&RR.quiz){const ap=rrqApply(sc.pts,quiz,RR.quiz.pen);fin=ap.pts;pen=ap.pen;qres=quiz.map(r=>({pl:r.pl,ok:r.correct,a:r.answer,s:r.subject}));}
     const entry={n:RR.rounds.length+1,roles,accused:RA.mode==='accuse'?RA.accused:null,winks:sc.w,T,caught:sc.caught,comp:sc.comp,pts:fin,police:sc.ip,thirudan:sc.it};
     if(qres){entry.base=sc.pts.slice();entry.quiz=qres;entry.pen=pen;entry.penalty=RR.quiz.pen;}
+    if(RS.word)entry.word={w:RS.word.word,h:RS.word.hint,c:RS.word.cat,e:RS.word.emoji,k:RS.word.key};
     RR.rounds.push(entry);rrSave(RR);inRound=false;
-    E('rr-resulthead').innerHTML=(entry.caught?'🎯 ':'😏 ')+ldEsc(rrSummary(RR.names,entry))+(entry.quiz?'<div style="font-size:.82rem;margin-top:6px;opacity:.9">🕵️ Interrogation: '+entry.quiz.map(r=>ldEsc(RR.names[r.pl])+(r.ok===null?' —':r.ok?' ✔':' ✘')).join(' · ')+' (wrong = −'+entry.penalty+')</div>':'');
+    E('rr-resulthead').innerHTML=(entry.caught?'🎯 ':'😏 ')+ldEsc(rrSummary(RR.names,entry))+(entry.quiz?'<div style="font-size:.82rem;margin-top:6px;opacity:.9">🕵️ Interrogation: '+entry.quiz.map(r=>ldEsc(RR.names[r.pl])+(r.ok===null?' —':r.ok?' ✔':' ✘')).join(' · ')+' (wrong = −'+entry.penalty+')</div>':'')+(entry.word?'<div style="font-size:.85rem;margin-top:8px">💬 The secret word was <b style="color:var(--marigold)">'+ldEsc(entry.word.w)+'</b> ('+ldEsc(entry.word.e+' '+entry.word.c)+') · the Thirudan’s clue: <b>'+ldEsc(entry.word.h||'none')+'</b></div>':'');
     E('rr-resultgrid').innerHTML=RR.names.map((n,i)=>{
       const r=RR_ROLES[roles[i]],p=entry.pts[i];
       return '<div class="rr-rcard" style="animation-delay:'+(i*140)+'ms"><div class="rr-rname"><span class="plyr-dot" style="background:'+RR_COL[i]+'"></span>'+ldEsc(n)+'</div><div class="rr-remoji">'+r.e+'</div><div>'+r.n+'</div><div class="'+(p<0?'neg':'pos')+'">'+sgn(p)+'</div>'+(entry.pen&&entry.pen[i]?'<div class="rr-q neg">quiz '+entry.pen[i]+'</div>':(entry.quiz&&entry.quiz.some(x=>x.pl===i&&x.ok)?'<div class="rr-q pos">quiz ✔</div>':''))+'</div>';
@@ -1935,13 +1972,13 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
       const w=document.createElement('span');w.style.opacity='.7';w.textContent='winks '+e.winks+'/'+e.T;
       head.append(h,d,w);
       const body=document.createElement('div');body.className='log-body';
-      body.textContent=rrSummary(RR.names,e)+'\n'+RR.names.map((n,i)=>n+' '+RR_ROLES[e.roles[i]].e+' '+sgn(e.pts[i])).join(' · ')+(e.quiz?'\nInterrogation: '+e.quiz.map(r=>RR.names[r.pl]+(r.ok===null?' skipped':r.ok?' ✔':' ✘ −'+e.penalty)+' ('+r.a+')').join(' · '):'');
+      body.textContent=rrSummary(RR.names,e)+'\n'+RR.names.map((n,i)=>n+' '+RR_ROLES[e.roles[i]].e+' '+sgn(e.pts[i])).join(' · ')+(e.quiz?'\nInterrogation: '+e.quiz.map(r=>RR.names[r.pl]+(r.ok===null?' skipped':r.ok?' ✔':' ✘ −'+e.penalty)+' ('+r.a+')').join(' · '):'')+(e.word?'\nWord: '+e.word.w+' (clue: '+(e.word.h||'none')+')':'');
       row.append(head,body);box.appendChild(row);
     }
   }
   E('rr-undo').addEventListener('click',()=>{
     if(inRound||!RR.rounds.length)return;
-    RR.rounds.pop();rrSave(RR);E('rr-winbanner').classList.remove('on');
+    const rr0=RR.rounds.pop();if(rr0&&rr0.word&&rr0.word.k)RR.wused=(RR.wused||[]).filter(k=>k!==rr0.word.k);rrSave(RR);E('rr-winbanner').classList.remove('on');
     renderScore();renderLog();renderIdle();show('rr-idle');
   });
   E('rr-crown').addEventListener('click',()=>{
@@ -1957,29 +1994,71 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     else{b.textContent='Tap again to erase all scores';newArm=setTimeout(()=>{newArm=0;b.textContent='New session (reset all scores)';},3000);}
   });
 
-  /* ---------- Interrogation mode: config (setup + between rounds) and the quiz itself ---------- */
+  /* ---------- Word mode (Imposter twist): card block + config ---------- */
+  function wordBlock(role){
+    const w=RS.word;if(!w)return'';
+    const v=rrwView(role,w,!RR.word||RR.word.facts!==false),cat='<div class="rw-cat">'+ldEsc(w.emoji+' '+w.cat)+'</div>';
+    if(v.kind==='none')return'<div class="rw-box">'+cat+'<div class="rw-note">You don’t know the word. Question the players side by side — everyone except the Thirudan knows it. Who is bluffing?</div></div>';
+    if(v.kind==='clue')return'<div class="rw-box imp">'+cat+'<div class="rw-lbl">Your only clue</div><div class="rw-word">'+ldEsc(v.clue||'— no clue —')+'</div><div class="rw-note">You don’t know the word. Blend in with the civilians!</div></div>';
+    return'<div class="rw-box">'+cat+'<div class="rw-lbl">The secret word</div><div class="rw-word">'+ldEsc(v.word)+'</div>'+(v.facts?'<div class="rw-facts">📌 '+ldEsc(v.facts[0])+'<br>📌 '+ldEsc(v.facts[1])+'</div>':'')+'<div class="rw-note">Don’t say it to the Police — prove you know it with clues.</div></div>';
+  }
+  const wpick={};
+  function wcfgHTML(p){
+    return'<label class="chk"><input type="checkbox" id="'+p+'-on"> 💬 Word mode (Imposter twist)</label>'+
+      '<div id="'+p+'-box" class="im-studybox" style="display:none"><p class="lead" style="font-size:.8rem;margin:0 0 6px">Every round has one secret word. Civilians see it, the Thirudan only gets a one-word clue, the Police get nothing but the category — they question the players side by side.</p>'+
+      '<label class="bz-l">Word source</label><select id="'+p+'-src"><option value="party">Party words (all categories)</option><option value="study">📚 Study words (exam facts)</option><option value="mix">Party + study words mixed</option></select>'+
+      '<div id="'+p+'-pickbox" style="display:none"><div id="'+p+'-pick"></div><label class="chk"><input type="checkbox" id="'+p+'-facts" checked> Civilians also see two study facts</label></div></div>';
+  }
+  function wMount(p,onChange){if(!wpick[p])wpick[p]=kdPicker(p+'-pick',p+'p',onChange);return wpick[p];}
+  function wRead(p){
+    const on=E(p+'-on').checked,pk=wpick[p]?wpick[p].read():{pack:'',subs:[]};
+    return{on,src:E(p+'-src').value,pack:pk.pack,subs:pk.subs,facts:E(p+'-facts').checked};
+  }
+  function wPickBox(p){const src=E(p+'-src').value;E(p+'-pickbox').style.display=src==='party'?'none':'block';}
+  function wSync(p){
+    if(!E(p+'-on'))return;
+    const w=RR&&RR.word?RR.word:{on:false,src:'party',pack:'',subs:[],facts:true};
+    E(p+'-on').checked=!!w.on;E(p+'-src').value=w.src||'party';E(p+'-facts').checked=w.facts!==false;E(p+'-box').style.display=w.on?'block':'none';wPickBox(p);
+    if(w.on&&w.src!=='party')wMount(p,p==='rwi'?wIdleChanged:null).set(w.pack,w.subs);
+  }
+  function wWire(p,onChange){
+    E(p+'-on').addEventListener('change',()=>{const on=E(p+'-on').checked;E(p+'-box').style.display=on?'block':'none';if(onChange)onChange();});
+    E(p+'-src').addEventListener('change',()=>{wPickBox(p);if(E(p+'-src').value!=='party')wMount(p,onChange);if(onChange)onChange();});
+    E(p+'-facts').addEventListener('change',()=>{if(onChange)onChange();});
+  }
+  function wIdleChanged(){
+    if(!RR)return;const w=wRead('rwi');
+    if(w.subs.includes('__none__'))return;
+    if(w.src!=='party'&&!kdStudyPool(w.pack,w.subs).length)w.src='party';
+    RR.word=w;rrSave(RR);renderIdleLine();
+  }
+  E('rr-wcfg-setup').innerHTML=wcfgHTML('rws');E('rr-wcfg-idle').innerHTML=wcfgHTML('rwi');
+  wWire('rws',null);wWire('rwi',wIdleChanged);
+
+  /* ---------- Interrogation mode: config (setup + between rounds) ---------- */
   const qpick={};
   function qcfgHTML(p){
     return '<label class="chk"><input type="checkbox" id="'+p+'-on"> 🕵️ Interrogation mode (study quiz)</label>'+
-      '<div id="'+p+'-box" class="im-studybox" style="display:none"><p class="lead" style="font-size:.8rem;margin:0 0 6px">After the hunt, the Police ask every other player a study question. A wrong answer takes points off that player’s card.</p>'+
-      '<div id="'+p+'-pick"></div><label class="bz-l">Penalty for a wrong answer</label><select id="'+p+'-pen"><option value="50">−50</option><option value="100" selected>−100</option><option value="200">−200</option></select>'+
-      '<label class="chk"><input type="checkbox" id="'+p+'-mc" checked> Multiple choice (Police tap the answer given)</label></div>';
+      '<div id="'+p+'-box" class="im-studybox" style="display:none"><p class="lead" style="font-size:.8rem;margin:0 0 6px">In the first minute of the hunt the Police get study questions to ask random players. A wrong answer takes points off that player’s card.</p>'+
+      '<div id="'+p+'-pick"></div>'+
+      '<label class="bz-l">Questions for the Police</label><select id="'+p+'-n"><option value="all">One per player</option><option value="3">3 questions</option><option value="5">5 questions</option><option value="8">8 questions</option></select>'+
+      '<label class="bz-l">Penalty for a wrong answer</label><select id="'+p+'-pen"><option value="50">−50</option><option value="100" selected>−100</option><option value="200">−200</option></select>'+
+      '<label class="chk"><input type="checkbox" id="'+p+'-mc" checked> Show multiple-choice options</label></div>';
   }
   function qMount(p,onChange){if(!qpick[p])qpick[p]=kdPicker(p+'-pick',p+'p',onChange);return qpick[p];}
   function qRead(p){
     const on=E(p+'-on').checked,pk=qpick[p]?qpick[p].read():{pack:'',subs:[]};
-    return{on,pack:pk.pack,subs:pk.subs,pen:parseInt(E(p+'-pen').value,10),mc:E(p+'-mc').checked};
+    return{on,pack:pk.pack,subs:pk.subs,n:E(p+'-n').value,pen:parseInt(E(p+'-pen').value,10),mc:E(p+'-mc').checked};
   }
   function qSync(p){
     if(!E(p+'-on'))return;
-    const q=RR&&RR.quiz?RR.quiz:{on:false,pack:'',subs:[],pen:100,mc:true};
-    E(p+'-on').checked=!!q.on;E(p+'-pen').value=String(q.pen||100);E(p+'-mc').checked=q.mc!==false;E(p+'-box').style.display=q.on?'block':'none';
+    const q=RR&&RR.quiz?RR.quiz:{on:false,pack:'',subs:[],n:'all',pen:100,mc:true};
+    E(p+'-on').checked=!!q.on;E(p+'-n').value=String(q.n||'all');E(p+'-pen').value=String(q.pen||100);E(p+'-mc').checked=q.mc!==false;E(p+'-box').style.display=q.on?'block':'none';
     if(q.on)qMount(p,p==='rri'?qIdleChanged:null).set(q.pack,q.subs);
   }
   function qWire(p,onChange){
     E(p+'-on').addEventListener('change',()=>{const on=E(p+'-on').checked;E(p+'-box').style.display=on?'block':'none';if(on)qMount(p,onChange);if(onChange)onChange();});
-    E(p+'-pen').addEventListener('change',()=>{if(onChange)onChange();});
-    E(p+'-mc').addEventListener('change',()=>{if(onChange)onChange();});
+    ['-n','-pen','-mc'].forEach(x=>E(p+x).addEventListener('change',()=>{if(onChange)onChange();}));
   }
   function qIdleChanged(){
     if(!RR)return;const q=qRead('rri');
@@ -1988,52 +2067,73 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
     RR.quiz=q;rrSave(RR);renderIdleLine();
   }
   function renderIdleLine(){
-    const off=RR.rounds.length%RR.names.length,qz=RR.quiz&&RR.quiz.on?'<br><small>🕵️ Interrogation ON · wrong answer −'+RR.quiz.pen+' · '+(RR.quiz.mc?'multiple choice':'open questions')+'</small>':'';
-    E('rr-idletxt').innerHTML='<b>Round '+(RR.rounds.length+1)+'</b> — '+ldEsc(RR.names[off])+' picks first.<br><small>Characters this round: '+RR_SETS[RR.names.length].map(k=>RR_ROLES[k].e+' '+RR_ROLES[k].n).join(' · ')+'</small>'+qz;
+    const off=RR.rounds.length%RR.names.length,q=RR.quiz,w=RR.word,wz=w&&w.on?'<br><small>💬 Word mode ON · '+(w.src==='party'?'party words':w.src==='study'?'study words':'party + study words')+'</small>':'',
+      qz=q&&q.on?'<br><small>🕵️ Interrogation ON · '+(q.n==='all'||!q.n?'one question per player':q.n+' questions')+' in the first minute · wrong answer −'+q.pen+(q.mc?' · with options':'')+'</small>':'';
+    E('rr-idletxt').innerHTML='<b>Round '+(RR.rounds.length+1)+'</b> — '+ldEsc(RR.names[off])+' picks first.<br><small>Characters this round: '+RR_SETS[RR.names.length].map(k=>RR_ROLES[k].e+' '+RR_ROLES[k].n).join(' · ')+'</small>'+wz+qz;
   }
   E('rr-qcfg-setup').innerHTML=qcfgHTML('rrs');E('rr-qcfg-idle').innerHTML=qcfgHTML('rri');
   qWire('rrs',null);qWire('rri',qIdleChanged);
 
-  let QZ=null;
-  function startQuiz(){
-    const q=RR.quiz,ip=RS.assigned.indexOf('police'),pool=kdStudyPool(q.pack,q.subs),full=kdStudyPool('',[]);
-    if(!pool.length)return false;
-    const targets=RR.names.map((_,i)=>i).filter(i=>i!==ip),items=[],used=new Set();
-    targets.forEach(()=>{const pk=kdPickStudy('rr',pool.filter(x=>!used.has(x.key)))||kdPickStudy('rr',pool);used.add(pk.entry.key);items.push(pk.entry);});
-    QZ={qs:targets.map((pl,k)=>Object.assign({pl},rrqBuild(items[k].item,full,q.mc))),i:0,stage:'ask',results:[],pick:null};
-    renderQuiz();show('rr-quiz');return true;
+  /* ---------- the interrogation itself: first minute of the hunt, phone with the Police ---------- */
+  let qzT=0;
+  const QZ_SECONDS=60;
+  function startHuntQuiz(){
+    closeHuntQuiz();
+    const q=RR&&RR.quiz;if(!q||!q.on||!RS)return;
+    const ip=RS.assigned.indexOf('police'),pool=kdStudyPool(q.pack,q.subs),full=kdStudyPool('',[]);
+    if(!pool.length)return;
+    const targets=RR.names.map((_,i)=>i).filter(i=>i!==ip),want=(q.n==='all'||!q.n)?targets.length:parseInt(q.n,10),entries=[],used=new Set();
+    for(let k=0;k<want;k++){const rest=pool.filter(x=>!used.has(x.key));const pk=rest.length?kdPickStudy('rr',rest):null;if(!pk)break;used.add(pk.entry.key);entries.push(pk.entry);}
+    if(!entries.length)return;
+    RS.qz={plan:rrqPlan(targets,entries.length,entries,full,q.mc),end:Date.now()+QZ_SECONDS*1000,closed:false};
+    renderHuntQuiz();E('rr-quizov').classList.add('on');
+    qzT=setInterval(()=>{
+      const left=RS.qz?Math.max(0,Math.ceil((RS.qz.end-Date.now())/1000)):0,c=E('rr-qz-clock');
+      if(c){c.textContent=fmt(left*1000);c.classList.toggle('low',left<=10);}
+      if(left<=0)closeHuntQuiz();
+    },250);
   }
-  function renderQuiz(){
-    const q=QZ.qs[QZ.i],ip=RS.assigned.indexOf('police'),N=QZ.qs.length,pen=RR.quiz.pen;
-    let h='<div class="im-pass">🕵️ Interrogation · '+(QZ.i+1)+' / '+N+'</div><h2 style="margin:4px 0;text-align:center">👮 '+ldEsc(RR.names[ip])+', ask <span style="color:'+RR_COL[q.pl]+'">'+ldEsc(RR.names[q.pl])+'</span></h2>'+
-      '<p class="lead" style="margin:0;text-align:center;font-size:.82rem">📚 '+ldEsc(q.subject)+' · '+ldEsc(q.topic)+' · wrong answer −'+pen+'</p><div class="rr-qtext">'+ldEsc(q.text)+'</div>';
-    if(q.options){
-      q.options.forEach((o,i)=>{const cls=QZ.stage==='done'?(i===q.correct?' good':(i===QZ.pick?' bad':'')):'';h+='<button class="rr-sus'+cls+'" data-qa="opt" data-i="'+i+'"'+(QZ.stage==='done'?' disabled':'')+'><b>'+'ABCD'[i]+'.</b> '+ldEsc(o)+'</button>';});
-      if(QZ.stage==='ask')h+='<p class="lead" style="text-align:center;font-size:.8rem;margin:8px 0 0">Police: tap the option the player says.</p><button class="big ghost" data-qa="skip">Skip this player (no penalty)</button>';
-    }else if(QZ.stage==='ask'){
-      h+='<button class="big" data-qa="show">Show the answer</button><button class="big ghost" data-qa="skip">Skip this player (no penalty)</button>';
-    }else if(QZ.stage==='judge'){
-      h+='<div class="rr-qans">Answer: '+ldEsc(q.answer)+'</div><p class="lead" style="text-align:center;font-size:.8rem;margin:0">Did '+ldEsc(RR.names[q.pl])+' get it right?</p><div class="rowbtns"><button class="big" data-qa="ok">✔ Correct</button><button class="big ghost" data-qa="no" style="border-color:var(--rose)">✘ Wrong (−'+pen+')</button></div>';
-    }
-    if(QZ.stage==='done'){
-      const r=QZ.results[QZ.results.length-1];
-      h+='<div class="rr-qans">'+(r.correct===null?'Skipped':r.correct?'✔ Correct!':'✘ Wrong — '+ldEsc(q.answer)+' (−'+pen+')')+'</div><button class="big" data-qa="next">'+(QZ.i+1>=N?'Finish interrogation ➜ reveal result':'Next player ➜')+'</button>';
-    }
-    E('rr-quizbody').innerHTML=h;
+  function closeHuntQuiz(){
+    clearInterval(qzT);qzT=0;
+    const ov=E('rr-quizov');if(ov)ov.classList.remove('on');
+    if(RS&&RS.qz)RS.qz.closed=true;
   }
-  E('rr-quiz').addEventListener('click',e=>{
-    const b=e.target.closest('[data-qa]');if(!b||!QZ||!RS)return;
-    const q=QZ.qs[QZ.i],a=b.dataset.qa;
-    const rec=c=>{QZ.results.push({pl:q.pl,correct:c,answer:q.answer,subject:q.subject});QZ.stage='done';renderQuiz();};
-    if(a==='opt'&&QZ.stage==='ask'){QZ.pick=+b.dataset.i;rec(QZ.pick===q.correct);}
-    else if(a==='show'&&QZ.stage==='ask'){QZ.stage='judge';renderQuiz();}
-    else if(a==='ok'&&QZ.stage==='judge')rec(true);
-    else if(a==='no'&&QZ.stage==='judge')rec(false);
-    else if(a==='skip'&&(QZ.stage==='ask'||QZ.stage==='judge'))rec(null);
-    else if(a==='next'&&QZ.stage==='done'){
-      if(QZ.i+1>=QZ.qs.length){const res=QZ.results;QZ=null;finishRound(res);}
-      else{QZ.i++;QZ.stage='ask';QZ.pick=null;renderQuiz();}
+  function qzResults(){
+    if(!RS||!RS.qz)return null;
+    const r=RS.qz.plan.filter(x=>x.res!==undefined).map(x=>({pl:x.pl,correct:x.res,answer:x.answer,subject:x.subject}));
+    return r.length?r:null;
+  }
+  function renderHuntQuiz(){
+    const z=RS.qz,ip=RS.assigned.indexOf('police'),pen=RR.quiz.pen,left=Math.max(0,Math.ceil((z.end-Date.now())/1000));
+    const nm=i=>'<span style="color:'+RR_COL[i]+'">'+ldEsc(RR.names[i])+'</span>';
+    let h='<div style="max-width:560px;margin:0 auto"><div class="im-pass">🕵️ Interrogation — first minute of the hunt</div><h2 style="text-align:center;margin:4px 0">👮 '+ldEsc(RR.names[ip])+', the phone is yours</h2>'+
+      '<div id="rr-qz-clock">'+fmt(left*1000)+'</div><p class="lead" style="text-align:center;font-size:.82rem;margin:0 0 4px">Ask each player their question out loud, then tap ✔ Correct, ✘ Wrong or Skip. A wrong answer costs that player −'+pen+' at scoring. Skipped or unasked questions cost nothing.</p>';
+    z.plan.forEach((q,k)=>{
+      h+='<div class="rr-qcard'+(q.res!==undefined?' answered':'')+'"><div class="rr-qh"><span>Q'+(k+1)+' → ask '+nm(q.pl)+'</span>'+(q.res===undefined?'<button class="ghost" data-qz="repick" data-k="'+k+'" style="padding:3px 10px;border-radius:8px;font-size:.75rem;">🎲 other player</button>':'')+'</div>'+
+        '<div class="im-pass" style="text-align:left;font-size:.75rem;margin:4px 0 0">📚 '+ldEsc(q.subject)+' · '+ldEsc(q.topic)+'</div><div class="rr-qtext">'+ldEsc(q.text)+'</div>';
+      if(q.options)q.options.forEach((o,i)=>{h+='<div class="rr-qopt'+(q.shown&&i===q.correct?' good':'')+'"><b>'+'ABCD'[i]+'.</b> '+ldEsc(o)+'</div>';});
+      h+=q.shown?'<div class="rr-qans">Answer: '+ldEsc(q.answer)+'</div>':'<button class="big ghost" data-qz="show" data-k="'+k+'" style="margin:6px 0 0">Show the answer</button>';
+      h+='<div class="rr-qchips"><button class="rr-qchip'+(q.res===true?' sel-ok':'')+'" data-qz="ok" data-k="'+k+'">✔ Correct</button><button class="rr-qchip'+(q.res===false?' sel-no':'')+'" data-qz="no" data-k="'+k+'">✘ Wrong</button><button class="rr-qchip'+(q.res===null?' sel-skip':'')+'" data-qz="skip" data-k="'+k+'">Skip</button></div></div>';
+    });
+    const byPl={};z.plan.forEach(q=>{(byPl[q.pl]=byPl[q.pl]||[]).push(q.res===undefined?'·':q.res===null?'—':q.res?'✔':'✘');});
+    h+='<div class="im-recvlbl" style="margin-top:12px">Results under each player</div><div class="rr-qsum">'+Object.keys(byPl).map(pl=>'<span>'+nm(+pl)+': <b>'+byPl[pl].join(' ')+'</b></span>').join('')+'</div>'+
+      '<button class="big" data-qz="done">Done — back to the hunt</button></div>';
+    E('rr-quizov-body').innerHTML=h;
+  }
+  E('rr-quizov').addEventListener('click',e=>{
+    const b=e.target.closest('[data-qz]');if(!b||!RS||!RS.qz)return;
+    const a=b.dataset.qz,k=+b.dataset.k,q=RS.qz.plan[k],keep=E('rr-quizov').scrollTop;
+    if(a==='done'){closeHuntQuiz();return;}
+    if(!q)return;
+    if(a==='show')q.shown=true;
+    else if(a==='ok')q.res=q.res===true?undefined:true;
+    else if(a==='no')q.res=q.res===false?undefined:false;
+    else if(a==='skip')q.res=q.res===null?undefined:null;
+    else if(a==='repick'&&q.res===undefined){
+      const ip=RS.assigned.indexOf('police'),others=RR.names.map((_,i)=>i).filter(i=>i!==ip&&i!==q.pl);
+      if(others.length)q.pl=others[rrRand(others.length)];
     }
+    renderHuntQuiz();E('rr-quizov').scrollTop=keep;
   });
   renderSetup();
   if(RR){E('rr-pcount').textContent=RR.names.length;renderSetup();showSession();}else show('rr-setup');
@@ -2596,8 +2696,8 @@ function kdPickStudy(kind,pool){
 }
 // ===== KD-STUDY-END =====
 // ===== RRQ-START =====
-/* Interrogation mode for Raja Rani: the Police quiz every other player on a study question.
-   A wrong answer takes `penalty` points off that player's card for the round. */
+/* Interrogation mode for Raja Rani. In the first minute of the hunt the Police get several study questions,
+   each assigned to a random other player. A wrong answer takes `penalty` points off that player's card for the round. */
 function rrqBuild(item,pool,mc){
   const subject=item[0],topic=item[1],answer=item[2];
   const q={subject,topic,answer,hint:item[3],text:item[4]+'. '+item[5]+'.',options:null,correct:-1};
@@ -2612,7 +2712,13 @@ function rrqBuild(item,pool,mc){
   }
   return q;
 }
-/* results: [{pl,correct}] ; correct===null means skipped (no penalty) */
+/* one question per entry; players are dealt out in random order, cycling if there are more questions than players */
+function rrqPlan(targets,count,entries,full,mc){
+  const order=rrShuffle(targets),n=Math.min(count,entries.length),plan=[];
+  for(let k=0;k<n;k++)plan.push(Object.assign({pl:order[k%order.length],res:undefined,shown:false},rrqBuild(entries[k].item,full,mc)));
+  return plan;
+}
+/* results: [{pl,correct}] ; correct===null means skipped (no penalty) ; every wrong answer costs `penalty` */
 function rrqApply(base,results,penalty){
   const pts=base.slice(),pen=base.map(()=>0);
   results.forEach(r=>{if(r.correct===false){pts[r.pl]-=penalty;pen[r.pl]-=penalty;}});
@@ -2628,13 +2734,48 @@ function rrqRunTests(){
   T('the question text is the two clues and never contains the answer',(()=>{for(let k=0;k<400;k++){const it=pool[rrRand(pool.length)].item,q=rrqBuild(it,pool,false);if(!q.text.includes(it[4])||!q.text.includes(it[5]))return false;}return true;})());
   T('open mode has no options',rrqBuild(pool[0].item,pool,false).options===null);
   T('tiny pool falls back to open mode instead of repeating options',rrqBuild(pool[0].item,pool.slice(0,2),true).options===null);
+  const ents=pool.slice(0,10);
+  T('plan: questions go to random other players, each player once before anyone repeats',(()=>{for(let k=0;k<200;k++){const plan=rrqPlan([0,2,3,4],4,ents,pool,true);if(plan.length!==4||new Set(plan.map(x=>x.pl)).size!==4||plan.some(x=>x.pl===1||x.res!==undefined))return false;}return true;})());
+  T('plan: more questions than players cycles through the players evenly',(()=>{const plan=rrqPlan([0,2,3],7,ents,pool,false),c={};plan.forEach(x=>{c[x.pl]=(c[x.pl]||0)+1;});return plan.length===7&&Math.max(...Object.values(c))-Math.min(...Object.values(c))<=1;})());
+  T('plan: never more questions than entries, every question has text',(()=>{const plan=rrqPlan([0,1],9,ents.slice(0,3),pool,false);return plan.length===3&&plan.every(x=>x.text&&x.answer);})());
+  T('plan: the player order is random (not always the same)',(()=>{const seen=new Set();for(let k=0;k<60;k++)seen.add(rrqPlan([0,1,2,3],4,ents,pool,false).map(x=>x.pl).join());return seen.size>5;})());
   let r=rrqApply([1000,-200,900,800],[{pl:0,correct:false},{pl:1,correct:true},{pl:2,correct:false},{pl:3,correct:null}],100);
   T('wrong answers lose points, correct and skipped lose nothing',r.pts.join()==='900,-200,800,800'&&r.pen.join()==='-100,0,-100,0');
+  r=rrqApply([100,100],[{pl:0,correct:false},{pl:0,correct:false}],50);T('every wrong answer counts, and a card can go negative',r.pts[0]===0&&r.pen[0]===-100);
   r=rrqApply([100,100],[{pl:0,correct:false}],200);T('a card can go negative',r.pts[0]===-100);
   const base=[1,2,3];rrqApply(base,[{pl:0,correct:false}],50);T('the base points array is not mutated',base.join()==='1,2,3');
   return R;
 }
 // ===== RRQ-END =====
+// ===== RRW-START =====
+/* Raja Rani "Word mode" (Imposter twist): one common word per round.
+   Civilians see the word, the Thirudan only a one-word clue, the Police nothing but the category. */
+function rrwPick(cfg,used,N){
+  const study=cfg.src==='party'?[]:kdStudyPool(cfg.pack,cfg.subs);
+  const d=impDeal(N,IMP_DB.map((_,i)=>i),1,used,{study,studyOnly:cfg.src==='study'});
+  return{word:d.word,hint:d.hint||'',cat:d.cat,emoji:d.emoji,facts:d.facts,key:d.key,reset:d.reset};
+}
+function rrwView(role,w,showFacts){
+  if(role==='police')return{kind:'none'};
+  if(role==='thirudan')return{kind:'clue',clue:w.hint};
+  return{kind:'word',word:w.word,facts:showFacts?w.facts:null};
+}
+function rrwRunTests(){
+  const R=[],T=(n,c)=>R.push({name:n,ok:!!c});
+  const w={word:'Camel',hint:'Sand',cat:'Animals',emoji:'🐪',facts:['f1','f2']};
+  T('police see no word and no clue',(()=>{const v=rrwView('police',w,true);return v.kind==='none'&&!JSON.stringify(v).includes('Camel')&&!JSON.stringify(v).includes('Sand');})());
+  T('thirudan sees only the clue, never the word or facts',(()=>{const v=rrwView('thirudan',w,true),j=JSON.stringify(v);return v.kind==='clue'&&v.clue==='Sand'&&!j.includes('Camel')&&!j.includes('f1');})());
+  T('every civilian role sees the same word',['raja','rani','manthri','joker','milkman','paperman'].every(r=>{const v=rrwView(r,w,false);return v.kind==='word'&&v.word==='Camel'&&v.facts===null;}));
+  T('civilians get facts only when the option is on',rrwView('raja',w,true).facts.length===2&&rrwView('raja',w,false).facts===null);
+  T('party source: a party word with category and hint, no facts',(()=>{for(let k=0;k<100;k++){const x=rrwPick({src:'party'},[],5);if(!x.word||!x.hint||!x.cat||x.facts!==null)return false;}return true;})());
+  T('study source: a study word with Subject · Topic, hint and two facts',(()=>{for(let k=0;k<100;k++){const x=rrwPick({src:'study',pack:'',subs:[]},[],5);if(!x.word||!x.hint||!/ · /.test(x.cat)||!x.facts||x.facts.length!==2||!x.key.startsWith('S|'))return false;}return true;})());
+  T('study subjects filter is respected',(()=>{for(let k=0;k<100;k++){if(!rrwPick({src:'study',pack:'',subs:['Polity']},[],5).cat.startsWith('Polity'))return false;}return true;})());
+  T('mixed source gives both kinds',(()=>{let a=0,b=0;for(let k=0;k<300;k++){if(rrwPick({src:'mix',pack:'',subs:[]},[],5).facts)a++;else b++;}return a>0&&b>0;})());
+  T('words already used are skipped',(()=>{const first=rrwPick({src:'study',pack:'',subs:['Computer']},[],5);const used=[first.key];for(let k=0;k<60;k++){if(rrwPick({src:'study',pack:'',subs:['Computer']},used,5).key===first.key)return false;}return true;})());
+  T('the clue is never the word itself',(()=>{for(let k=0;k<300;k++){const x=rrwPick({src:'mix',pack:'',subs:[]},[],5);if(x.hint.toLowerCase()===x.word.toLowerCase())return false;}return true;})());
+  return R;
+}
+// ===== RRW-END =====
 // ===== KD-PICKER-START =====
 /* Reusable "pack + subjects" chooser for any game's Study mode. Returns {read(), pool()}. */
 function kdPicker(id,p,onChange){
