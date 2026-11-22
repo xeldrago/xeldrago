@@ -611,12 +611,12 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <div class="rr-moon">🌙</div>
         <h2>Let the hunt begin…</h2>
         <p>Let the <b>Thirudan</b> start his looting — smiting the others with his only weapon: his <b>eyes</b>. <span class="rr-wink">😉</span></p>
-        <p><i>Think before you wink!</i> A winked player says “I’ve been winked!” — everyone except the Police can be winked.</p>
+        <p><i>Think before you wink!</i> A winked player says “I’ve been winked!” at the end of the game not right away - cos duh ur dead... — everyone except the Police can be winked.</p>
         <p>👮 <b id="rr-police"></b> is the <b>Police</b> and must find the Thirudan / winker / looter before he winks all <b id="rr-targets"></b> players out.</p>
         <p id="rr-wordnote" style="display:none;"></p>
         <div id="rr-clock" style="position:relative;font-family:'Baloo 2';font-size:3rem;font-weight:800;color:#ffd166;margin:6px 0;">4:00</div>
         <p style="opacity:.6;font-size:.8rem;position:relative;">Put the phone down and play it out. When the clock hits zero the hunt ends. 💤</p>
-        <button class="big ghost" id="rr-over">🔔 The hunt is over</button>
+        <button class="big ghost" id="rr-over">🔔 The hunt is over </button>
       </div>
       <div id="rr-quizov"><div id="rr-quizov-body"></div></div>
     </div>
@@ -1854,12 +1854,12 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   function tip(role){
     const N=RR.names.length,T=N-2,per=Math.round(RR_ESCAPE/T);
     return{
-      raja:'Sit tight and look royal. If the Thirudan winks at you, announce “I’ve been winked!”',
-      rani:'Stay graceful. If the Thirudan winks at you, announce “I’ve been winked!”',
-      manthri:'Advise wisely, say nothing. If winked at, announce “I’ve been winked!”',
-      milkman:'Deliver the milk, keep a straight face. If winked at, announce “I’ve been winked!”',
-      paperman:'Deliver the news, miss nothing. If winked at, announce “I’ve been winked!”',
-      joker:'The wildcard of the court. You can still be winked — announce it if you are.',
+      raja:'Sit tight and look royal. If the Thirudan winks at you, announce “I’ve been winked!” at the end of the hunt',
+      rani:'Stay graceful. If the Thirudan winks at you, announce “I’ve been winked!” at the end of the hunt',
+      manthri:'Advise wisely, say nothing. If winked at, announce “I’ve been winked!” at the end of the hunt',
+      milkman:'Deliver the milk, keep a straight face. If winked at, announce “I’ve been winked!” at the end of the hunt',
+      paperman:'Deliver the news, miss nothing. If winked at, announce “I’ve been winked!” at the end of the hunt',
+      joker:'The wildcard of the court. You can still be winked — announce it if you are at the end of the hunt.',
       police:'Your identity will be announced when the hunt begins. Find the Thirudan before he winks everyone out: find +1100, miss −200.',
       thirudan:'Secretly wink at the others, one by one (never at the Police). Each wink earns '+per+' of your 1100. Escape: +1100. Caught: −200 plus your wink points. Think before you wink 😉'
     }[role];
@@ -1913,7 +1913,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   /* ---------- accusation + wink submission ---------- */
   function renderAccuse(){
     const ip=RS.assigned.indexOf('police'),T=RR.names.length-2;
-    let h='<h2>'+(RA.timeUp?'⏰ Time’s up!':'The hunt is over')+'</h2><p class="lead">'+(RA.timeUp?'Police: make your final accusation — or the Thirudan escapes.':'How did it end?')+'</p>';
+    let h='<h2>'+(RA.timeUp?'⏰ Time’s up!':'The hunt is over - civilians say if ur dead')+'</h2><p class="lead">'+(RA.timeUp?'Police: make your final accusation — or the Thirudan escapes.':'How did it end?')+'</p>';
     RR.names.forEach((n,i)=>{if(i!==ip)h+='<button class="rr-sus'+(RA.mode==='accuse'&&RA.accused===i?' on':'')+'" data-act="sus" data-i="'+i+'"><span class="plyr-dot" style="background:'+RR_COL[i]+'"></span>👮 Police accuses '+ldEsc(n)+'</button>';});
     h+='<button class="rr-sus'+(RA.mode==='all'?' on':'')+'" data-act="all">😏 Thirudan winked out everyone</button>';
     h+='<button class="rr-sus'+(RA.mode==='timeout'?' on':'')+'" data-act="timeout">⏰ Time ran out — the Police made no accusation</button>';
