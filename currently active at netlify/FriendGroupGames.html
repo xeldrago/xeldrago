@@ -335,6 +335,39 @@ button:disabled{opacity:.35; cursor:not-allowed;}
 #im-log .log-body{white-space:pre-line;}
 @media(min-width:1100px){#im-logcard{position:fixed; right:24px; top:24px; bottom:24px; width:300px; margin:0; overflow:hidden; z-index:5;} #im-log{max-height:none; height:calc(100% - 34px);}}
 
+/* Werewolf */
+.ww-role{border:2px solid var(--mint); border-radius:16px; background:var(--bg2); padding:14px 12px; text-align:center; margin-bottom:10px;}
+.ww-role.evil{border-color:var(--rose);}
+.ww-big{font-size:3rem; line-height:1;}
+.ww-role h2{margin:4px 0 2px; font-size:1.4rem;}
+.ww-team{font-size:.8rem; font-weight:700; opacity:.85; margin-bottom:6px;}
+.ww-role p{font-size:.82rem; line-height:1.45; opacity:.9; margin:0 0 6px;}
+.ww-boost{font-size:.76rem; line-height:1.4; background:rgba(62,201,167,.12); border:1px solid rgba(62,201,167,.4); border-radius:10px; padding:7px 9px; margin:6px 0; text-align:left;}
+.ww-mates{font-size:.8rem; margin-top:6px; text-align:left; line-height:1.45;}
+.ww-news{background:rgba(244,165,30,.1); border-left:4px solid var(--marigold); border-radius:10px; padding:10px 12px; margin:8px 0; font-size:.9rem; line-height:1.5;}
+.ww-alive{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0;}
+.ww-pill{display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:999px; background:var(--bg2); border:1px solid var(--line); font-size:.82rem;}
+.ww-clock{font-family:'Baloo 2'; font-size:3rem; font-weight:800; color:var(--marigold); text-align:center; margin:4px 0;}
+.ww-clock.low{color:var(--rose);}
+.ww-kills{text-align:center; font-family:'Baloo 2'; font-size:1.2rem; margin:6px 0;}
+.ww-blink{animation:ww-blink .9s ease-in-out infinite;}
+@keyframes ww-blink{0%,100%{opacity:1; transform:scale(1);}50%{opacity:.55; transform:scale(1.04);}}
+.ww-kill{background:var(--rose); color:#1a1230;}
+.ww-q{margin-top:10px; padding-top:8px; border-top:1px dashed var(--line);}
+.ww-q .rr-qtext{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:10px; font-size:.9rem; line-height:1.5; margin:6px 0;}
+.ww-fb{font-size:.85rem; padding:8px 10px; border-radius:10px; margin:6px 0; line-height:1.4;}
+.ww-fb.ok{background:rgba(62,201,167,.18); border:1px solid var(--mint);}
+.ww-fb.no{background:rgba(239,91,106,.16); border:1px solid var(--rose);}
+.ww-table{margin:10px 0;}
+.ww-trow{display:flex; align-items:center; gap:8px; padding:7px 4px; border-bottom:1px solid var(--line); font-size:.86rem; flex-wrap:wrap;}
+.ww-trow span{opacity:.85;}
+.ww-trow.won{background:rgba(244,165,30,.08);}
+#ww-logcard{margin-top:16px;}
+#ww-logcard h3{margin:0 0 8px; color:var(--mint);}
+#ww-log{max-height:340px; overflow-y:auto; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.76rem;}
+@media(min-width:1100px){#ww-logcard{position:fixed; right:24px; top:24px; bottom:24px; width:300px; margin:0; overflow:hidden; z-index:5;} #ww-log{max-height:none; height:calc(100% - 34px);}}
+@media (prefers-reduced-motion: reduce){.ww-blink{animation:none;}}
+
 footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
 @media (prefers-reduced-motion: reduce){ .tab{transition:none;} }
 </style>
@@ -356,7 +389,7 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
 
   <div class="screen active" id="screen-home">
     <div class="card"><h2>Pick a game, pass the phone</h2>
-      <p class="lead"><b>Heads Up</b> (forehead guessing, 5 decks) · <b>20 Questions</b> · and under <b>Board Games</b>: <b>Snakes &amp; Ladders</b>, <b>Ludo</b> (2–6 players) and <b>Raja Rani Manthri Thirudan Police</b> (3–8 players). <b>Business</b> (2–8 players, 3 maps, Bankroll or full Monopoly) and <b>Imposter</b> (3–12 players, 400+ words with hints).</p>
+      <p class="lead"><b>Heads Up</b> (forehead guessing, 5 decks) · <b>20 Questions</b> · and under <b>Board Games</b>: <b>Snakes &amp; Ladders</b>, <b>Ludo</b> (2–6 players) and <b>Raja Rani Manthri Thirudan Police</b> (3–8 players). <b>Business</b> (2–8 players, 3 maps, Bankroll or full Monopoly) and <b>Imposter</b> (3–12 players, 400+ words with hints) and <b>Werewolf</b> (5–12 players, with a study mode that boosts powers).</p>
     </div>
     <div class="card" id="kd-packs">
       <h2>📚 Study packs</h2>
@@ -426,10 +459,10 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
   <div class="screen" id="screen-more">
     <div class="sugg">
       <div class="card"><h3>Wavelength</h3><p class="lead">One team sees a hidden target on a slider between two opposites ("cold ↔ hot"); they give a one-word clue and the rest guess where the dial lands.</p></div>
-      <div class="card"><h3>Taboo</h3><p class="lead">Guess the word from a teammate's clues > without them using five forbidden related words. Great with the same phone-timer format as Heads Up.</p></div>
+      <div class="card"><h3>Taboo</h3><p class="lead">Guess the word from a teammate's clues — without them using five forbidden related words. Great with the same phone-timer format as Heads Up.</p></div>
       <div class="card"><h3>Fishbowl</h3><p class="lead">Same word set, three rounds: describe it, act it out (charades), then say one word only — memory carries it home.</p></div>
-      <div class="card"><h3>Most Likely To</h3><p class="lead">Read a prompt ("most likely to become famous"), everyone points at once and the funniest for a full 6-person circle, no setup needed.</p></div>
-      <div class="card"><h3>Category Blurt</h3><p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating : last one standing wins the round.</p></div>
+      <div class="card"><h3>Most Likely To</h3><p class="lead">Read a prompt ("most likely to become famous"), everyone points at once — funniest for a full 6-person circle, no setup needed.</p></div>
+      <div class="card"><h3>Category Blurt</h3><p class="lead">Shout out items in a category ("Rajinikanth movies") in 30 seconds without repeating — last one standing wins the round.</p></div>
     </div>
   </div>
 
@@ -441,6 +474,7 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
       <div class="chip" data-bg="biz">Business</div>
       <div class="chip" data-bg="rrmtp">Raja Rani Manthri Thirudan</div>
       <div class="chip" data-bg="imp">Imposter</div>
+      <div class="chip" data-bg="ww">Werewolf</div>
     </div>
 
     <!-- Snakes & Ladders -->
@@ -453,7 +487,7 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
           <button id="sl-pminus">−</button><span id="sl-pcount">4</span><button id="sl-pplus">+</button>
         </div>
         <div id="sl-nameinputs"></div>
-        <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time favours different numbers > learn yours.</small></div></div>
+        <div class="proRow"><label class="switch"><input type="checkbox" class="sl-pro"><span class="slider"></span></label><div><b>Pro dice</b><small>Tap &amp; hold the dice to charge it (up to 3.0s). Each player's hold time favours different numbers — learn yours.</small></div></div>
         <button class="big" id="sl-start">Start game</button>
       </div>
 
@@ -611,12 +645,12 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
         <div class="rr-moon">🌙</div>
         <h2>Let the hunt begin…</h2>
         <p>Let the <b>Thirudan</b> start his looting — smiting the others with his only weapon: his <b>eyes</b>. <span class="rr-wink">😉</span></p>
-        <p><i>Think before you wink!</i> A winked player says “I’ve been winked!” at the end of the game not right away - cos duh ur dead... — everyone except the Police can be winked.</p>
+        <p><i>Think before you wink!</i> A winked player says “I’ve been winked!” — everyone except the Police can be winked.</p>
         <p>👮 <b id="rr-police"></b> is the <b>Police</b> and must find the Thirudan / winker / looter before he winks all <b id="rr-targets"></b> players out.</p>
         <p id="rr-wordnote" style="display:none;"></p>
         <div id="rr-clock" style="position:relative;font-family:'Baloo 2';font-size:3rem;font-weight:800;color:#ffd166;margin:6px 0;">4:00</div>
         <p style="opacity:.6;font-size:.8rem;position:relative;">Put the phone down and play it out. When the clock hits zero the hunt ends. 💤</p>
-        <button class="big ghost" id="rr-over">🔔 The hunt is over </button>
+        <button class="big ghost" id="rr-over">🔔 The hunt is over</button>
       </div>
       <div id="rr-quizov"><div id="rr-quizov-body"></div></div>
     </div>
@@ -678,6 +712,30 @@ footer{text-align:center; font-size:.78rem; opacity:.5; margin-top:30px;}
       <div class="card" id="im-logcard" style="display:none;"><h3>Round log</h3><div id="im-log"></div></div>
       <button id="im-float">😅 Forgot your role?<small>Gee, you had one job… click here</small></button>
       <div id="im-modal"><div id="im-modalbody"></div></div>
+    </div>
+    <div class="bgsub-screen" id="bgsub-ww">
+      <div class="card" id="ww-setup">
+        <h2>Werewolf 🐺</h2>
+        <p class="lead">5–12 players, one shared phone. Day: a short discussion, then everyone takes a private turn to <b>vote to kill</b>; the top-voted player gets a 15-second blinking <b>Kill away / Undo</b> final call. Night: the Evil team kills and the special roles use their powers on private turns. Find and execute every Evil player before they outnumber you.</p>
+        <div class="stepper"><button id="ww-pminus">−</button><span id="ww-pcount">7</span><button id="ww-pplus">+</button></div>
+        <div id="ww-roleset" class="lead" style="text-align:center;font-size:.82rem;margin:0 0 8px;"></div>
+        <div id="ww-nameinputs"></div>
+        <label class="bz-l">Day discussion</label><select id="ww-disc"><option value="15" selected>15 seconds</option><option value="30">30 seconds</option><option value="60">60 seconds</option></select>
+        <label class="bz-l">Final judgement</label><select id="ww-judge"><option value="15" selected>15 seconds</option><option value="30">30 seconds</option></select>
+        <label class="chk" style="margin-top:12px"><input type="checkbox" id="ww-study-on"> 📚 Study mode (answer questions to boost powers)</label>
+        <div id="ww-study-box" class="im-studybox" style="display:none;"><p class="lead" style="font-size:.8rem;margin:0 0 6px">Every night each player answers one private study question. A <b>correct answer makes their power 100%</b> (Hunter 75% → 100%, Shapeshifter’s 50% chance to look Evil → 0%, Seer sees through disguises, and more). A wrong answer leaves the normal odds. Everyone is asked, even roles with no boost, so nobody’s role leaks.</p><div id="ww-study-pick"></div></div>
+        <button class="big" id="ww-start">Start game</button>
+        <details style="margin-top:12px;"><summary><b>Roles, powers &amp; rules</b></summary>
+          <p class="lead"><b>Teams:</b> 😇 Good wins when every Evil player is dead. 😈 Evil wins when Good no longer outnumbers Evil. 🃏 The <b>Jester (Joker)</b> is always in the game (5+ players); if he is killed he wins <i>with whichever team wins</i>, so wasting votes on him is part of the fun.</p>
+          <p class="lead"><b>Evil:</b> 🐺 Werewolf · 👑 Alpha Wolf (looks Good to the Seer) · 🎭 Shapeshifter (the Seer sees them Evil only 50% of the time; the Town Crier shows them as a Good card). Each night the Evil team votes to kill one player; a tie is decided at random.</p>
+          <p class="lead"><b>Good:</b> 🔮 Seer inspects a player (the vision arrives the next morning) · 🩺 Doctor protects a player · 🏹 Hunter, if killed at night, shoots a random Evil player (75%) · 📣 Town Crier marks a player — revealed if he dies that night · 🌿 Druid binds a player — they die together if he is killed that night · 🛡️ Knight survives one night attack · 🎖️ Mayor’s vote counts double · 🧑‍🌾 Villager has no power.</p>
+          <p class="lead"><b>Day:</b> 15-second discussion, then every living player takes a private turn (“tap for your features &amp; vote to kill”). The most-voted player (a tie means nobody) faces the final judgement: everyone else taps ＋ Kill away or − Undo until the clock ends; a majority executes them and their card is revealed. <b>Night:</b> every living player takes a private turn — roles with no power get a decoy screen so nobody can tell who has what.</p>
+          <p class="lead"><b>📚 Study mode:</b> a correct night answer makes that role’s power 100%: Hunter 100% · Shapeshifter 0% chance to look Evil · Seer sees through the Jester and Shapeshifter · Doctor’s protection survives a Savage Bite · Evil’s bite becomes a Savage Bite (breaks protection and shields, unless the Doctor/Knight also answered correctly) · Knight’s shield holds against a Savage Bite · Town Crier reveals the true card. If both a boosted Seer and a boosted Shapeshifter meet, it is back to 50/50. Wrong answer → the normal rules.</p>
+          <p class="lead">Based on the role list of the Plato Werewolf game; only a subset of its roles is included, and the Savage Bite and study boosts are this game’s own rules.</p>
+        </details>
+      </div>
+      <div class="card" id="ww-main" style="display:none;"><div id="ww-body"></div></div>
+      <div class="card" id="ww-logcard" style="display:none;"><h3>Village log</h3><div id="ww-log"></div></div>
     </div>
   </div>
 
@@ -1854,12 +1912,12 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   function tip(role){
     const N=RR.names.length,T=N-2,per=Math.round(RR_ESCAPE/T);
     return{
-      raja:'Sit tight and look royal. If the Thirudan winks at you, announce “I’ve been winked!” at the end of the hunt',
-      rani:'Stay graceful. If the Thirudan winks at you, announce “I’ve been winked!” at the end of the hunt',
-      manthri:'Advise wisely, say nothing. If winked at, announce “I’ve been winked!” at the end of the hunt',
-      milkman:'Deliver the milk, keep a straight face. If winked at, announce “I’ve been winked!” at the end of the hunt',
-      paperman:'Deliver the news, miss nothing. If winked at, announce “I’ve been winked!” at the end of the hunt',
-      joker:'The wildcard of the court. You can still be winked — announce it if you are at the end of the hunt.',
+      raja:'Sit tight and look royal. If the Thirudan winks at you, announce “I’ve been winked!”',
+      rani:'Stay graceful. If the Thirudan winks at you, announce “I’ve been winked!”',
+      manthri:'Advise wisely, say nothing. If winked at, announce “I’ve been winked!”',
+      milkman:'Deliver the milk, keep a straight face. If winked at, announce “I’ve been winked!”',
+      paperman:'Deliver the news, miss nothing. If winked at, announce “I’ve been winked!”',
+      joker:'The wildcard of the court. You can still be winked — announce it if you are.',
       police:'Your identity will be announced when the hunt begins. Find the Thirudan before he winks everyone out: find +1100, miss −200.',
       thirudan:'Secretly wink at the others, one by one (never at the Police). Each wink earns '+per+' of your 1100. Escape: +1100. Caught: −200 plus your wink points. Think before you wink 😉'
     }[role];
@@ -1913,7 +1971,7 @@ function rrLoad(){try{const s=JSON.parse(localStorage.getItem(RR_KEY)||'null');r
   /* ---------- accusation + wink submission ---------- */
   function renderAccuse(){
     const ip=RS.assigned.indexOf('police'),T=RR.names.length-2;
-    let h='<h2>'+(RA.timeUp?'⏰ Time’s up!':'The hunt is over - civilians say if ur dead')+'</h2><p class="lead">'+(RA.timeUp?'Police: make your final accusation — or the Thirudan escapes.':'How did it end?')+'</p>';
+    let h='<h2>'+(RA.timeUp?'⏰ Time’s up!':'The hunt is over')+'</h2><p class="lead">'+(RA.timeUp?'Police: make your final accusation — or the Thirudan escapes.':'How did it end?')+'</p>';
     RR.names.forEach((n,i)=>{if(i!==ip)h+='<button class="rr-sus'+(RA.mode==='accuse'&&RA.accused===i?' on':'')+'" data-act="sus" data-i="'+i+'"><span class="plyr-dot" style="background:'+RR_COL[i]+'"></span>👮 Police accuses '+ldEsc(n)+'</button>';});
     h+='<button class="rr-sus'+(RA.mode==='all'?' on':'')+'" data-act="all">😏 Thirudan winked out everyone</button>';
     h+='<button class="rr-sus'+(RA.mode==='timeout'?' on':'')+'" data-act="timeout">⏰ Time ran out — the Police made no accusation</button>';
@@ -2776,6 +2834,186 @@ function rrwRunTests(){
   return R;
 }
 // ===== RRW-END =====
+// ===== WW-ENGINE-START =====
+/* Werewolf (single device). Rules follow the Plato Werewolf role list for the roles included here.
+   Study mode: a correct answer lifts a role's power to 100% ("boost"); a wrong answer leaves the normal odds. */
+const WW_ROLES={
+  villager:{n:'Villager',e:'🧑‍🌾',team:'good',act:'none'},
+  seer:{n:'Seer',e:'🔮',team:'good',act:'inspect'},
+  doctor:{n:'Doctor',e:'🩺',team:'good',act:'protect'},
+  hunter:{n:'Hunter',e:'🏹',team:'good',act:'none'},
+  towncrier:{n:'Town Crier',e:'📣',team:'good',act:'mark'},
+  druid:{n:'Druid',e:'🌿',team:'good',act:'bind'},
+  knight:{n:'Knight',e:'🛡️',team:'good',act:'none'},
+  mayor:{n:'Mayor',e:'🎖️',team:'good',act:'none'},
+  jester:{n:'Jester (Joker)',e:'🃏',team:'good',act:'none'},
+  werewolf:{n:'Werewolf',e:'🐺',team:'evil',act:'kill'},
+  alpha:{n:'Alpha Wolf',e:'👑',team:'evil',act:'kill'},
+  shapeshifter:{n:'Shapeshifter',e:'🎭',team:'evil',act:'kill'}
+};
+const WW_EXTRAS=['villager','hunter','towncrier','druid','knight','mayor','villager','villager','villager'];
+const WW_HUNTER_ODDS=0.75;
+const wwRnd=()=>rrRand(1000000)/1000000;
+const wwIsEvil=(P,i)=>WW_ROLES[P[i].role].team==='evil';
+const wwAlive=P=>P.map((p,i)=>i).filter(i=>P[i].alive);
+/* 5-12 players: one evil per 3 players (Werewolf, Alpha Wolf, Shapeshifter, Werewolf), always a Seer, a Doctor and the Jester (Joker),
+   the rest filled from the extras list. */
+function wwRoleList(N){
+  const evil=Math.max(1,Math.floor(N/3));
+  return['werewolf','alpha','shapeshifter','werewolf'].slice(0,evil).concat(['seer','doctor','jester'],WW_EXTRAS.slice(0,Math.max(0,N-evil-3)));
+}
+function wwDeal(N){return rrShuffle(wwRoleList(N));}
+/* votes: {voterIndex: targetIndex}. Mayor's vote counts double. A tie executes nobody. */
+function wwTally(P,votes){
+  const c={};
+  Object.keys(votes).forEach(v=>{v=+v;const t=votes[v];if(t===null||t===undefined||!P[v]||!P[t]||!P[v].alive||!P[t].alive||v===t)return;c[t]=(c[t]||0)+(P[v].role==='mayor'?2:1);});
+  const ks=Object.keys(c).map(Number);if(!ks.length)return{counts:c,top:null,tie:false,max:0};
+  const mx=Math.max(...ks.map(k=>c[k])),top=ks.filter(k=>c[k]===mx);
+  return{counts:c,top:top.length===1?top[0]:null,tie:top.length>1,max:mx};
+}
+/* final judgement: a majority of the other living players must press Kill away */
+function wwNeed(P,accused){const e=wwAlive(P).filter(i=>i!==accused).length;return Math.floor(e/2)+1;}
+/* what the Seer sees. Alpha Wolf always looks Good. Jester and Shapeshifter look random (50/50).
+   Study boosts: a boosted Seer sees through Jester/Shapeshifter; a boosted Shapeshifter is 100% hidden (0% to look Evil);
+   both boosted -> back to the normal 50/50. */
+function wwSeer(role,seerBoost,shapeBoost,rnd){
+  if(role==='alpha')return'good';
+  if(role==='shapeshifter'){
+    if(shapeBoost&&!seerBoost)return'good';
+    if(seerBoost&&!shapeBoost)return'evil';
+    return rnd()<0.5?'evil':'good';
+  }
+  if(role==='jester'){if(seerBoost)return'good';return rnd()<0.5?'good':'evil';}
+  return WW_ROLES[role].team;
+}
+/* Night resolution. act = {kills:[{from,target}], protect, doctor, druid, tc, boost:{playerIndex:true}}
+   - the Evil team's kill goes to the most-voted target (tie = random among the tied)
+   - an Evil player who answered correctly makes the bite a "Savage Bite": it breaks the Doctor's protection and the Knight's shield
+     unless that Doctor / Knight also answered correctly
+   - a dead Hunter shoots a random Evil player: 75%, or 100% if boosted; a dead Druid takes the bound player along;
+     a dead Town Crier reveals the marked card (a Shapeshifter shows as a Villager unless the Town Crier was boosted). */
+function wwNight(P,act,rnd){
+  const ev=[],boost=i=>!!(act.boost&&act.boost[i]),alive=i=>P[i]&&P[i].alive;
+  const votes={};
+  (act.kills||[]).forEach(k=>{if(alive(k.from)&&alive(k.target)&&k.from!==k.target)votes[k.target]=(votes[k.target]||0)+1;});
+  const ks=Object.keys(votes).map(Number);let target=null;
+  if(ks.length){const mx=Math.max(...ks.map(k=>votes[k])),top=ks.filter(k=>votes[k]===mx);target=top.length===1?top[0]:top[Math.floor(rnd()*top.length)];}
+  const bite=P.some((p,i)=>p.alive&&WW_ROLES[p.role].team==='evil'&&boost(i));
+  const die=(i,cause)=>{
+    P[i].alive=false;ev.push({t:'death',pl:i,cause,role:P[i].role});
+    if(cause!=='night')return;
+    if(P[i].role==='hunter'){
+      const evils=wwAlive(P).filter(j=>wwIsEvil(P,j));
+      if(evils.length&&rnd()<(boost(i)?1:WW_HUNTER_ODDS)){const v=evils[Math.floor(rnd()*evils.length)];ev.push({t:'hunter-hit',pl:v});die(v,'hunter');}
+      else ev.push({t:'hunter-miss',pl:i});
+    }
+    if(P[i].role==='druid'&&act.druid!==null&&act.druid!==undefined&&alive(act.druid))die(act.druid,'druid');
+    if(P[i].role==='towncrier'&&act.tc!==null&&act.tc!==undefined){
+      const tr=P[act.tc].role,shown=(tr==='shapeshifter'&&!boost(i))?'villager':tr;
+      ev.push({t:'tc',pl:act.tc,role:shown,real:tr});
+    }
+  };
+  let killed=null,saved=null;
+  if(target!==null){
+    const doc=act.doctor;
+    if(act.protect===target){
+      if(bite&&!(doc!==undefined&&doc!==null&&boost(doc)))ev.push({t:'bite-broke',pl:target,what:'protection'});
+      else saved='doctor';
+    }
+    if(!saved&&P[target].role==='knight'&&P[target].shield){
+      P[target].shield=false;
+      if(bite&&!boost(target))ev.push({t:'bite-broke',pl:target,what:'shield'});
+      else saved='knight';
+    }
+    if(saved)ev.push({t:'saved',pl:target,by:saved});else{killed=target;die(target,'night');}
+  }
+  return{ev,target,killed,saved,bite};
+}
+function wwWinner(P){
+  const al=wwAlive(P),evil=al.filter(i=>wwIsEvil(P,i)).length,good=al.length-evil;
+  let team=null;if(evil===0)team='good';else if(good<=evil)team='evil';
+  if(!team)return null;
+  return{team,jester:P.some(p=>p.role==='jester'&&!p.alive)};
+}
+function wwRunTests(){
+  const R=[],T=(n,c)=>R.push({name:n,ok:!!c}),mk=roles=>roles.map(r=>({role:r,alive:true,shield:r==='knight'}));
+  const seq=arr=>{let i=0;return()=>arr[i++%arr.length];},freq=(f,n)=>{let c=0;for(let k=0;k<n;k++)if(f())c++;return c/n;};
+  for(let N=5;N<=12;N++){
+    const L=wwRoleList(N),ev=L.filter(r=>WW_ROLES[r].team==='evil').length;
+    T(N+' players: '+N+' roles, '+Math.max(1,Math.floor(N/3))+' evil, Seer + Doctor + Jester always present',L.length===N&&ev===Math.max(1,Math.floor(N/3))&&L.includes('seer')&&L.includes('doctor')&&L.includes('jester'));
+    T(N+' players: dealing keeps the same roles, only shuffled',wwDeal(N).slice().sort().join()===L.slice().sort().join());
+  }
+  T('the Joker (Jester) is in every game of 5 or more players',[5,6,7,8,9,10,11,12].every(N=>wwRoleList(N).includes('jester')));
+  T('the dealing order is random',(()=>{const s=new Set();for(let k=0;k<40;k++)s.add(wwDeal(8).join());return s.size>10;})());
+  // voting
+  let P=mk(['villager','seer','mayor','werewolf','doctor']);
+  let t=wwTally(P,{0:3,1:3,2:1,4:1});T('Mayor counts double: 1+1 vs 2+1',t.counts[3]===2&&t.counts[1]===3&&t.top===1);
+  t=wwTally(P,{0:3,1:2,4:3});T('plain majority picks the top-voted player',t.top===3&&t.counts[3]===2);
+  t=wwTally(P,{0:1,1:3});T('a tie executes nobody',t.top===null&&t.tie===true);
+  t=wwTally(P,{});T('no votes -> nobody',t.top===null&&!t.tie);
+  P[4].alive=false;t=wwTally(P,{0:4,1:3,4:3});T('votes from or against dead players are ignored',t.counts[4]===undefined&&t.counts[3]===1);
+  P[4].alive=true;T('a self-vote is ignored',wwTally(P,{0:0}).top===null);
+  T('final judgement needs a majority of the other living players',wwNeed(mk(['a','b','c','d','e'].map(()=>'villager')),0)===3&&wwNeed(mk(['a','b','c','d'].map(()=>'villager')),0)===2);
+  // seer
+  const R0=()=>0.1,R1=()=>0.9;
+  T('Seer sees ordinary roles truthfully',wwSeer('villager',false,false,R0)==='good'&&wwSeer('werewolf',false,false,R0)==='evil'&&wwSeer('doctor',false,false,R1)==='good');
+  T('Alpha Wolf always looks Good (even to a boosted Seer)',wwSeer('alpha',false,false,R0)==='good'&&wwSeer('alpha',true,false,R0)==='good');
+  T('Shapeshifter looks Evil about 50% of the time normally',(()=>{const f=freq(()=>wwSeer('shapeshifter',false,false,wwRnd)==='evil',4000);return f>0.45&&f<0.55;})());
+  T('boosted Shapeshifter: 0% chance to look Evil',freq(()=>wwSeer('shapeshifter',false,true,wwRnd)==='evil',2000)===0);
+  T('boosted Seer sees the Shapeshifter as Evil 100% of the time',freq(()=>wwSeer('shapeshifter',true,false,wwRnd)==='evil',2000)===1);
+  T('both boosted -> back to 50/50',(()=>{const f=freq(()=>wwSeer('shapeshifter',true,true,wwRnd)==='evil',4000);return f>0.45&&f<0.55;})());
+  T('Jester looks random to the Seer; a boosted Seer sees Good',(()=>{const f=freq(()=>wwSeer('jester',false,false,wwRnd)==='evil',4000);return f>0.45&&f<0.55&&freq(()=>wwSeer('jester',true,false,wwRnd)==='evil',500)===0;})());
+  // night
+  const base=()=>mk(['werewolf','alpha','seer','doctor','hunter','knight','villager','druid','towncrier','jester']);
+  const idx=(P,r)=>P.findIndex(p=>p.role===r);
+  let Q=base(),wolf=idx(Q,'werewolf'),vil=idx(Q,'villager'),res=wwNight(Q,{kills:[{from:wolf,target:vil}],boost:{}},wwRnd);
+  T('an unprotected target dies',res.killed===vil&&!Q[vil].alive&&res.ev.some(e=>e.t==='death'&&e.pl===vil));
+  Q=base();wolf=idx(Q,'werewolf');vil=idx(Q,'villager');let doc=idx(Q,'doctor');
+  res=wwNight(Q,{kills:[{from:wolf,target:vil}],protect:vil,doctor:doc,boost:{}},wwRnd);T('the Doctor saves the target',res.saved==='doctor'&&Q[vil].alive&&!res.killed);
+  Q=base();wolf=idx(Q,'werewolf');vil=idx(Q,'villager');doc=idx(Q,'doctor');
+  res=wwNight(Q,{kills:[{from:wolf,target:vil}],protect:vil,doctor:doc,boost:{[wolf]:true}},wwRnd);T('a boosted bite (Savage Bite) breaks an ordinary protection',!Q[vil].alive&&res.bite&&res.ev.some(e=>e.t==='bite-broke'));
+  Q=base();wolf=idx(Q,'werewolf');vil=idx(Q,'villager');doc=idx(Q,'doctor');
+  res=wwNight(Q,{kills:[{from:wolf,target:vil}],protect:vil,doctor:doc,boost:{[wolf]:true,[doc]:true}},wwRnd);T('a boosted Doctor holds against a Savage Bite',Q[vil].alive&&res.saved==='doctor');
+  Q=base();let alpha=idx(Q,'alpha');vil=idx(Q,'villager');doc=idx(Q,'doctor');
+  res=wwNight(Q,{kills:[{from:alpha,target:vil}],protect:vil,doctor:doc,boost:{[wolf]:false}},wwRnd);T('an Alpha Wolf can lead the kill too',res.saved==='doctor');
+  const kn=idx(Q=base(),'knight'),w2=idx(Q,'werewolf');
+  res=wwNight(Q,{kills:[{from:w2,target:kn}],boost:{}},wwRnd);T('the Knight survives the first attack with the shield',Q[kn].alive&&res.saved==='knight'&&Q[kn].shield===false);
+  res=wwNight(Q,{kills:[{from:w2,target:kn}],boost:{}},wwRnd);T('the shield is gone for the second attack',!Q[kn].alive);
+  Q=base();const kn2=idx(Q,'knight'),w3=idx(Q,'werewolf');
+  res=wwNight(Q,{kills:[{from:w3,target:kn2}],boost:{[w3]:true}},wwRnd);T('a Savage Bite breaks the Knight shield',!Q[kn2].alive);
+  Q=base();const kn3=idx(Q,'knight'),w4=idx(Q,'werewolf');
+  res=wwNight(Q,{kills:[{from:w4,target:kn3}],boost:{[w4]:true,[kn3]:true}},wwRnd);T('a boosted Knight shield holds against a Savage Bite',Q[kn3].alive);
+  Q=base();const w5=idx(Q,'werewolf'),a5=idx(Q,'alpha'),s5=idx(Q,'seer'),v5=idx(Q,'villager'),d5=idx(Q,'doctor');
+  T('a tied Evil vote kills one of the tied targets at random',(()=>{const hit=new Set();for(let k=0;k<80;k++){const R=base();const r=wwNight(R,{kills:[{from:w5,target:s5},{from:a5,target:v5}],boost:{}},wwRnd);hit.add(r.killed);}return hit.size===2&&hit.has(s5)&&hit.has(v5);})());
+  T('a majority Evil vote beats a lone dissenter',(()=>{const R=mk(['werewolf','werewolf','alpha','seer','villager']);const r=wwNight(R,{kills:[{from:0,target:3},{from:1,target:3},{from:2,target:4}],boost:{}},wwRnd);return r.killed===3;})());
+  T('with no kill votes nobody dies',(()=>{const R=base();const r=wwNight(R,{kills:[],boost:{}},wwRnd);return r.killed===null&&R.every(p=>p.alive);})());
+  // hunter
+  const hunterRun=boost=>{const R=base(),h=idx(R,'hunter'),w=idx(R,'werewolf');wwNight(R,{kills:[{from:w,target:h}],boost:boost?{[h]:true}:{}},wwRnd);return R.some(p=>!p.alive&&WW_ROLES[p.role].team==='evil');};
+  T('Hunter killed at night shoots an Evil player 75% of the time',(()=>{const f=freq(()=>hunterRun(false),4000);return f>0.71&&f<0.79;})());
+  T('boosted Hunter: the shot lands 100% of the time',freq(()=>hunterRun(true),2000)===1);
+  T('the Hunter only shoots Evil players, never Good ones',(()=>{for(let k=0;k<300;k++){const R=base(),h=idx(R,'hunter'),w=idx(R,'werewolf');wwNight(R,{kills:[{from:w,target:h}],boost:{[h]:true}},wwRnd);if(R.some((p,i)=>!p.alive&&i!==h&&WW_ROLES[p.role].team==='good'))return false;}return true;})());
+  T('a Hunter does not shoot if he was saved by the Doctor',(()=>{const R=base(),h=idx(R,'hunter'),w=idx(R,'werewolf'),d=idx(R,'doctor');wwNight(R,{kills:[{from:w,target:h}],protect:h,doctor:d,boost:{}},wwRnd);return R.every(p=>p.alive);})());
+  // druid + town crier
+  Q=base();const dr=idx(Q,'druid'),w6=idx(Q,'werewolf'),vi6=idx(Q,'villager');res=wwNight(Q,{kills:[{from:w6,target:dr}],druid:vi6,boost:{}},wwRnd);
+  T('a killed Druid takes the bound player along',!Q[dr].alive&&!Q[vi6].alive&&res.ev.some(e=>e.t==='death'&&e.cause==='druid'));
+  Q=base();const dr2=idx(Q,'druid'),w7=idx(Q,'werewolf'),vi7=idx(Q,'villager'),ds=idx(Q,'doctor');
+  wwNight(Q,{kills:[{from:w7,target:vi7}],druid:vi7,boost:{}},wwRnd);T('the Druid binding does nothing if the Druid survives',Q[dr2].alive);
+  Q=base();const tc=idx(Q,'towncrier'),w8=idx(Q,'werewolf'),sd=idx(Q,'seer');res=wwNight(Q,{kills:[{from:w8,target:tc}],tc:sd,boost:{}},wwRnd);
+  T('a killed Town Crier reveals the marked card',res.ev.some(e=>e.t==='tc'&&e.pl===sd&&e.role==='seer'));
+  Q=mk(['werewolf','shapeshifter','towncrier','villager','seer','doctor']);res=wwNight(Q,{kills:[{from:0,target:2}],tc:1,boost:{}},wwRnd);
+  T('Town Crier shows a Shapeshifter as a Good card (Villager)',res.ev.some(e=>e.t==='tc'&&e.role==='villager'&&e.real==='shapeshifter'));
+  Q=mk(['werewolf','shapeshifter','towncrier','villager','seer','doctor']);res=wwNight(Q,{kills:[{from:0,target:2}],tc:1,boost:{2:true}},wwRnd);
+  T('boosted Town Crier reveals the true Shapeshifter card',res.ev.some(e=>e.t==='tc'&&e.role==='shapeshifter'));
+  Q=base();res=wwNight(Q,{kills:[{from:idx(Q,'werewolf'),target:idx(Q,'jester')}],boost:{}},wwRnd);T('the Jester can be killed at night',!Q[idx(Q,'jester')].alive);
+  // winner
+  T('Good wins when no Evil is left',wwWinner(mk(['villager','seer'])).team==='good');
+  T('Evil wins when Good no longer outnumbers Evil',wwWinner(mk(['werewolf','villager'])).team==='evil'&&wwWinner(mk(['werewolf','villager','seer'])) ===null);
+  P=mk(['werewolf','villager','villager','jester']);P[3].alive=false;P[2].alive=false;
+  T('the Jester shares the win if he was killed',(()=>{const w=wwWinner(P);return w&&w.team==='evil'&&w.jester===true;})());
+  P=mk(['werewolf','villager','seer','jester','doctor']);T('game continues while Good outnumbers Evil',wwWinner(P)===null);
+  return R;
+}
+// ===== WW-ENGINE-END =====
 // ===== KD-PICKER-START =====
 /* Reusable "pack + subjects" chooser for any game's Study mode. Returns {read(), pool()}. */
 function kdPicker(id,p,onChange){
@@ -3250,6 +3488,308 @@ function impRunTests(){
   });
   render();
 })();
+
+// ===== WW-UI =====
+(function(){
+  const E=id=>document.getElementById(id);
+  const COL=slColors.concat(['#ff8a00','#00bcd4','#ff5ec4','#8bc34a','#795548','#9e9e9e']);
+  const KEY='kondattam_ww_cfg_v1';
+  const esc=ldEsc;
+  let G=null,HIST=[],tmr=0,spick=null;
+  const nm=i=>'<span style="color:'+COL[i]+'">'+esc(G.P[i].name)+'</span>';
+  const dot=i=>'<span class="plyr-dot" style="background:'+COL[i]+'"></span>';
+  const R=i=>WW_ROLES[G.P[i].role];
+  const cnt=()=>parseInt(E('ww-pcount').textContent,10);
+  const studyOn=()=>!!(G&&G.cfg.study&&G.cfg.study.on);
+
+  /* ---------- role texts ---------- */
+  const TIP={
+    villager:'No special power. Use your wits and your vote to find the Evil.',
+    seer:'Each night inspect one player. You learn if they look Good or Evil the next morning. The Jester and the Shapeshifter can look random to you; the Alpha Wolf always looks Good.',
+    doctor:'Each night protect one player (yourself too). If the Evil team attacks them, they survive.',
+    hunter:'If you are killed at night, you shoot a random Evil player — 75% chance.',
+    towncrier:'Each night mark a player. If you are killed that night, their card is revealed to everyone (a Shapeshifter shows up as a Good card).',
+    druid:'Each night bind a player. If you are killed that night, they die with you.',
+    knight:'Your shield saves you from the first night attack — once.',
+    mayor:'Your vote counts double during the day.',
+    jester:'You win — with whichever team wins — if you get killed. The Seer sees you as Good or Evil at random. Gather suspicion on yourself!',
+    werewolf:'Each night the Evil team votes to kill one player (tie = random). Stay hidden during the day.',
+    alpha:'Hunts like a Werewolf, but you always look Good to the Seer.',
+    shapeshifter:'Hunts like a Werewolf. The Seer sees you as Evil only half of the time, and the Town Crier shows you as a Good card.'
+  };
+  const BOOST={
+    seer:'you see through the Jester’s and the Shapeshifter’s disguise',
+    doctor:'your protection cannot be broken by a Savage Bite',
+    hunter:'your dying shot is 100% instead of 75%',
+    towncrier:'your reveal shows the true card, not a disguise',
+    knight:'your shield also holds against a Savage Bite',
+    werewolf:'the pack’s bite becomes a Savage Bite (breaks protection and shields)',
+    alpha:'the pack’s bite becomes a Savage Bite (breaks protection and shields)',
+    shapeshifter:'you can’t look Evil to the Seer tonight (0%), and the bite becomes a Savage Bite'
+  };
+  const DAYNOTE={mayor:'🎖️ Your vote counts double.',jester:'🃏 You want to be killed — build some suspicion on yourself (you can’t vote for yourself).',hunter:'🏹 If you are killed at night you get a shot at the Evil.',knight:'🛡️ Your shield is '+'ready (once).'};
+
+  /* ---------- setup ---------- */
+  function loadCfg(){try{return JSON.parse(localStorage.getItem(KEY)||'null');}catch(_){return null;}}
+  function saveCfg(c){try{localStorage.setItem(KEY,JSON.stringify(c));}catch(_){}}
+  function renderSetup(){
+    const n=cnt(),wrap=E('ww-nameinputs'),old=[...wrap.querySelectorAll('input')].map(i=>i.value);wrap.innerHTML='';
+    for(let i=0;i<n;i++){
+      const row=document.createElement('div');row.className='plyr-row';
+      row.innerHTML='<span class="plyr-dot" style="background:'+COL[i]+'"></span><input id="ww-name'+i+'" placeholder="Player '+(i+1)+'" maxlength="14">';
+      wrap.appendChild(row);if(old[i])E('ww-name'+i).value=old[i];
+    }
+    const L=wwRoleList(n);
+    E('ww-roleset').textContent=n+' players: '+L.filter(r=>WW_ROLES[r].team==='evil').length+' evil · '+L.map(r=>WW_ROLES[r].e).join(' ');
+  }
+  E('ww-pminus').addEventListener('click',()=>{const v=cnt();if(v>5){E('ww-pcount').textContent=v-1;renderSetup();}});
+  E('ww-pplus').addEventListener('click',()=>{const v=cnt();if(v<12){E('ww-pcount').textContent=v+1;renderSetup();}});
+  E('ww-study-on').addEventListener('change',()=>{
+    const on=E('ww-study-on').checked;E('ww-study-box').style.display=on?'block':'none';
+    if(on&&!spick)spick=kdPicker('ww-study-pick','wws',null);
+  });
+  E('ww-start').addEventListener('click',()=>{
+    const n=cnt(),names=[];for(let i=0;i<n;i++)names.push(E('ww-name'+i).value.trim()||('Player '+(i+1)));
+    let study={on:E('ww-study-on').checked,pack:'',subs:[]};
+    if(study.on&&spick){const r=spick.read();study.pack=r.pack;study.subs=r.subs;}
+    if(study.on&&!kdStudyPool(study.pack,study.subs).length)study.on=false;
+    const cfg={names,N:n,study,disc:parseInt(E('ww-disc').value,10),judge:parseInt(E('ww-judge').value,10)};
+    saveCfg({names,disc:cfg.disc,judge:cfg.judge,studyOn:E('ww-study-on').checked});
+    newGame(cfg);
+  });
+  const saved=loadCfg();
+  if(saved){E('ww-pcount').textContent=Math.min(12,Math.max(5,saved.names.length));if(saved.disc)E('ww-disc').value=String(saved.disc);if(saved.judge)E('ww-judge').value=String(saved.judge);}
+  renderSetup();
+  if(saved)saved.names.forEach((n,i)=>{const el=E('ww-name'+i);if(el)el.value=n;});
+
+  /* ---------- game ---------- */
+  function newGame(cfg){
+    clearInterval(tmr);HIST=[];
+    const roles=wwDeal(cfg.N);
+    G={cfg,P:roles.map((r,i)=>({name:cfg.names[i],role:r,alive:true,shield:r==='knight'})),day:0,phase:'deal',pi:0,step:'prompt',inbox:roles.map(()=>[]),news:[],
+       votes:{},order:[],vi:0,sel:null,ans:null,accused:null,kills:0,end:0,acts:null,nq:{},log:[],dayRes:null,dawn:null,winner:null};
+    E('ww-setup').style.display='none';E('ww-main').style.display='block';E('ww-logcard').style.display='block';
+    addLog('🎭 Roles dealt to '+cfg.N+' players'+(cfg.study.on?' · 📚 Study mode':'')+'.');
+    render();
+  }
+  function addLog(t){G.log.push(t);renderLog();}
+  function renderLog(){
+    const box=E('ww-log');box.innerHTML='';
+    for(let k=G.log.length-1;k>=0;k--){const row=document.createElement('div');row.className='log-row';const h=document.createElement('div');h.className='log-head';const n=document.createElement('span');n.className='log-hash';n.textContent='#'+(k+1);h.append(n);const b=document.createElement('div');b.className='log-body';b.textContent=G.log[k];row.append(h,b);box.appendChild(row);}
+  }
+  const snap=kind=>HIST.push({kind,state:JSON.stringify(G)});
+
+  function passHTML(title,i,sub,btn){
+    return'<div class="im-pass">'+title+'</div><div class="im-name" style="color:'+COL[i]+'">'+esc(G.P[i].name)+'</div><p class="lead" style="text-align:center">'+sub+'</p>'+btn;
+  }
+  function roleCard(i,compact){
+    const p=G.P[i],r=WW_ROLES[p.role],mates=r.team==='evil'?G.P.map((q,j)=>j).filter(j=>j!==i&&WW_ROLES[G.P[j].role].team==='evil'):[];
+    return'<div class="ww-role '+r.team+'"><div class="ww-big">'+r.e+'</div><h2>'+r.n+'</h2><div class="ww-team">'+(r.team==='evil'?'😈 Evil team':'😇 Good team')+'</div>'+
+      (compact?'':'<p>'+TIP[p.role]+'</p>')+
+      (studyOn()&&BOOST[p.role]&&!compact?'<div class="ww-boost">📚 <b>Study boost:</b> answer your night question correctly and '+BOOST[p.role]+'. Wrong answer → normal rules.</div>':'')+
+      (mates.length?'<div class="ww-mates">🐺 Your pack: '+mates.map(j=>nm(j)+' ('+WW_ROLES[G.P[j].role].n+')').join(', ')+'</div>':'')+
+      (p.role==='knight'?'<div class="ww-mates">🛡️ Shield: '+(p.shield?'ready':'used')+'</div>':'')+'</div>';
+  }
+
+  /* ---------- rendering by phase ---------- */
+  function render(){
+    const b=E('ww-body');
+    if(G.phase==='deal')return deal(b);
+    if(G.phase==='discuss')return discuss(b);
+    if(G.phase==='vote')return voteScreen(b);
+    if(G.phase==='judge')return judge(b);
+    if(G.phase==='dayres')return dayres(b);
+    if(G.phase==='night')return night(b);
+    if(G.phase==='dawn')return dawn(b);
+    if(G.phase==='over')return over(b);
+  }
+  function deal(b){
+    const i=G.pi,last=G.pi===G.cfg.N-1;
+    b.innerHTML=G.step==='prompt'?passHTML('🎭 Pass the phone to',i,'Role cards — make sure nobody else is looking.','<button class="big" data-wa="show">👀 Tap to see my role</button>')
+      :roleCard(i)+'<button class="big" data-wa="hide">'+(last?'Hide my card &amp; begin Day 1':'Hide my card &amp; pass the phone')+'</button>';
+  }
+  function aliveChips(){return'<div class="ww-alive">'+wwAlive(G.P).map(i=>'<span class="ww-pill">'+dot(i)+esc(G.P[i].name)+'</span>').join('')+'</div>';}
+  function undoBtn(){return HIST.length?'<button class="big ghost" data-wa="undo" style="margin-top:8px">↶ Undo — replay this '+(HIST[HIST.length-1].kind==='day'?'day':'night')+'</button>':'';}
+
+  /* ---------- day ---------- */
+  function beginDay(){
+    snap('day');G.day++;G.phase='discuss';G.votes={};G.end=Date.now()+G.cfg.disc*1000;G.dayRes=null;
+    render();startTimer(()=>startVote());
+  }
+  function startTimer(cb){
+    clearInterval(tmr);
+    tmr=setInterval(()=>{
+      const left=Math.max(0,Math.ceil((G.end-Date.now())/1000)),c=E('ww-clock');
+      if(c){c.textContent=left+'s';c.classList.toggle('low',left<=5);}
+      if(left<=0){clearInterval(tmr);tmr=0;cb();}
+    },250);
+  }
+  function discuss(b){
+    const left=Math.max(0,Math.ceil((G.end-Date.now())/1000));
+    b.innerHTML='<h2 style="margin:0;text-align:center">☀️ Day '+G.day+' — discussion</h2><div id="ww-clock" class="ww-clock">'+left+'s</div>'+
+      (G.news.length?'<div class="ww-news">'+G.news.map(esc).join('<br>')+'</div>':'')+
+      '<p class="lead" style="text-align:center;margin:0 0 6px">Talk it out — who is acting strange? Then the phone goes round for secret votes.</p>'+aliveChips()+
+      '<button class="big" data-wa="skipdisc" style="margin-top:10px">🗳️ Go to voting now</button>';
+  }
+  function startVote(){clearInterval(tmr);G.phase='vote';G.order=wwAlive(G.P);G.vi=0;G.step='prompt';G.sel=null;render();}
+  function voteScreen(b){
+    const i=G.order[G.vi];
+    if(G.step==='prompt'){b.innerHTML=passHTML('🗳️ Day '+G.day+' — pass the phone to',i,'Tap for your features and Vote to kill. Voter '+(G.vi+1)+' of '+G.order.length+'.','<button class="big" data-wa="show">👀 Tap for my features &amp; vote</button>');return;}
+    const inbox=G.inbox[i];
+    let h=roleCard(i,true)+(DAYNOTE[G.P[i].role]?'<p class="lead" style="margin:0 0 6px;text-align:center;font-size:.82rem">'+(G.P[i].role==='knight'?'🛡️ Your shield is '+(G.P[i].shield?'ready':'used')+'.':DAYNOTE[G.P[i].role])+'</p>':'')+
+      (inbox.length?'<div class="ww-news"><b>📨 Your night report</b><br>'+inbox.map(esc).join('<br>')+'</div>':'')+
+      '<h3 style="margin:8px 0 4px;color:var(--marigold)">Vote to kill</h3>';
+    wwAlive(G.P).filter(j=>j!==i).forEach(j=>{h+='<button class="rr-sus'+(G.sel===j?' on':'')+'" data-wa="pick" data-i="'+j+'">'+dot(j)+esc(G.P[j].name)+'</button>';});
+    h+='<button class="big" data-wa="lock"'+(G.sel===null?' disabled':'')+'>🔒 Lock my vote &amp; pass on</button>';
+    b.innerHTML=h;
+  }
+  function tallyDay(){
+    const t=wwTally(G.P,G.votes);G.lastCounts=t.counts;
+    const counts=Object.keys(t.counts).map(Number).sort((a,b)=>t.counts[b]-t.counts[a]).map(k=>G.P[k].name+' '+t.counts[k]).join(' · ');
+    if(t.top===null){G.dayRes={text:t.tie?'🤝 Tie — nobody is put on trial.':'No votes were cast.',counts};addLog('Day '+G.day+' votes: '+(counts||'none')+' → no trial.');G.phase='dayres';render();return;}
+    G.accused=t.top;G.dayCounts=counts;addLog('Day '+G.day+' votes: '+counts+' → '+G.P[t.top].name+' is on trial.');startJudge();
+  }
+  function startJudge(){
+    G.phase='judge';G.kills=0;G.end=Date.now()+G.cfg.judge*1000;render();startTimer(()=>finishJudge());
+  }
+  function judge(b){
+    const a=G.accused,need=wwNeed(G.P,a),max=wwAlive(G.P).length-1,left=Math.max(0,Math.ceil((G.end-Date.now())/1000));
+    b.innerHTML='<div class="im-pass">⚖️ Final judgement</div><h2 style="margin:4px 0;text-align:center">'+nm(a)+' is on trial</h2><p class="lead" style="text-align:center;margin:0">Votes: '+esc(G.dayCounts)+'</p>'+
+      '<div id="ww-clock" class="ww-clock">'+left+'s</div>'+
+      '<div class="ww-kills">Kill votes: <b>'+G.kills+'</b> / need <b>'+need+'</b> <span style="opacity:.7">(of '+max+' others)</span></div>'+
+      '<p class="lead" style="text-align:center;font-size:.8rem;margin:4px 0 8px">Everyone except the accused decides together: each person who wants '+esc(G.P[a].name)+' dead taps <b>＋</b> once. Changed your mind? Tap <b>−</b>.</p>'+
+      '<div class="rowbtns"><button class="big ww-blink ww-kill" data-wa="plus">＋ Kill away</button><button class="big ghost ww-blink" data-wa="minus">− Undo</button></div>'+
+      '<button class="big ghost" data-wa="lockjudge" style="margin-top:8px">Lock the decision now</button>';
+  }
+  function finishJudge(){
+    clearInterval(tmr);tmr=0;
+    const a=G.accused,need=wwNeed(G.P,a),yes=G.kills>=need;
+    if(yes){
+      G.P[a].alive=false;const r=WW_ROLES[G.P[a].role];
+      let text='⚖️ '+G.P[a].name+' is executed ('+G.kills+'/'+need+' kill votes) — they were '+r.e+' <b>'+r.n+'</b> ('+r.team.toUpperCase()+').';
+      if(G.P[a].role==='jester')text+=' 🃏 The Jester got exactly what they wanted!';
+      G.dayRes={text,html:true,counts:G.dayCounts};addLog('Day '+G.day+': '+G.P[a].name+' executed — '+r.n+' ('+r.team+').');
+    }else{
+      G.dayRes={text:'🕊️ The village spares '+G.P[a].name+' ('+G.kills+'/'+need+' kill votes).',counts:G.dayCounts};addLog('Day '+G.day+': '+G.P[a].name+' spared ('+G.kills+'/'+need+').');
+    }
+    checkEnd()||(G.phase='dayres');
+    render();
+  }
+  function dayres(b){
+    b.innerHTML='<h2 style="margin:0;text-align:center">☀️ Day '+G.day+' — verdict</h2><div class="ww-news" style="font-size:1rem">'+(G.dayRes.html?G.dayRes.text:esc(G.dayRes.text))+'</div>'+(G.dayRes.counts?'<p class="lead" style="text-align:center;margin:0 0 8px;font-size:.82rem">Votes: '+esc(G.dayRes.counts)+'</p>':'')+aliveChips()+
+      '<button class="big" data-wa="night" style="margin-top:10px">🌙 Night falls</button>'+undoBtn();
+  }
+  function checkEnd(){
+    const w=wwWinner(G.P);if(!w)return false;
+    G.winner=w;G.phase='over';clearInterval(tmr);
+    addLog('🏁 '+(w.team==='good'?'Good':'Evil')+' wins'+(w.jester?' — the Jester wins too!':'.'));return true;
+  }
+
+  /* ---------- night ---------- */
+  function beginNight(){
+    snap('night');G.phase='night';G.order=wwAlive(G.P);G.vi=0;G.step='prompt';G.sel=null;G.ans=null;
+    G.acts={kills:[],protect:null,doctor:null,druid:null,tc:null,seer:null,boost:{}};G.nq={};
+    if(studyOn()){
+      const pool=kdStudyPool(G.cfg.study.pack,G.cfg.study.subs),full=kdStudyPool('',[]),used=new Set();
+      G.order.forEach(i=>{const rest=pool.filter(x=>!used.has(x.key));const pk=kdPickStudy('ww',rest.length?rest:pool);if(!pk)return;used.add(pk.entry.key);G.nq[i]=rrqBuild(pk.entry.item,full,true);});
+    }
+    render();
+  }
+  const NIGHT_LABEL={kill:'☠ Choose who the Evil team will kill tonight',protect:'🩺 Choose who to protect tonight (yourself is allowed)',inspect:'🔮 Choose who to inspect — the vision reaches you tomorrow',mark:'📣 Mark a player — if you die tonight, their card is revealed',bind:'🌿 Bind a player — if you die tonight, they die with you',none:'💤 Your role has no night action — tap anyone, nothing happens'};
+  function night(b){
+    const i=G.order[G.vi];
+    if(G.step==='prompt'){b.innerHTML=passHTML('🌙 Night '+G.day+' — pass the phone to',i,'Tap for your features. Everyone takes a turn — even roles with no power — so nobody can tell who is who.','<button class="big" data-wa="show">👀 Tap for my features</button>');return;}
+    const role=G.P[i].role,act=WW_ROLES[role].act,q=G.nq[i];
+    let h=roleCard(i,false)+'<h3 style="margin:8px 0 4px;color:var(--marigold)">'+NIGHT_LABEL[act]+'</h3>';
+    const targets=act==='protect'?wwAlive(G.P):wwAlive(G.P).filter(j=>j!==i);
+    targets.forEach(j=>{h+='<button class="rr-sus'+(G.sel===j?' on':'')+'" data-wa="pick" data-i="'+j+'">'+dot(j)+esc(G.P[j].name)+(j===i?' (you)':'')+'</button>';});
+    if(studyOn()){
+      if(q&&q.options){
+        h+='<div class="ww-q"><div class="im-pass" style="text-align:left;margin:0 0 4px">📚 '+esc(q.subject)+' · '+esc(q.topic)+'</div><div class="rr-qtext">'+esc(q.text)+'</div>';
+        q.options.forEach((o,k)=>{const done=G.ans!==null,cls=done?(k===q.correct?' good':(k===G.ans?' bad':'')):'';h+='<button class="rr-sus'+cls+'" data-wa="opt" data-i="'+k+'"'+(done?' disabled':'')+'><b>'+'ABCD'[k]+'.</b> '+esc(o)+'</button>';});
+        if(G.ans!==null){const ok=G.ans===q.correct;h+='<div class="ww-fb '+(ok?'ok':'no')+'">'+(ok?'✔ Correct! '+(BOOST[role]?'Boosted to 100% — '+BOOST[role]+'.':'Well done — your role has no boost, but the answer counts as a decoy.'):'✘ Not quite — the answer was <b>'+esc(q.answer)+'</b>. Normal rules apply tonight.')+'</div>';}
+        h+='</div>';
+      }else h+='<p class="lead" style="font-size:.8rem">No question available for this turn.</p>';
+    }
+    const ready=G.sel!==null&&(!studyOn()||!(G.nq[i]&&G.nq[i].options)||G.ans!==null);
+    h+='<button class="big" data-wa="lock"'+(ready?'':' disabled')+'>🔒 Lock &amp; hide — pass on</button>';
+    b.innerHTML=h;
+  }
+  function lockNight(i){
+    const role=G.P[i].role,act=WW_ROLES[role].act,t=G.sel,a=G.acts;
+    if(act==='kill')a.kills.push({from:i,target:t});
+    else if(act==='protect')a.protect=t;
+    else if(act==='mark')a.tc=t;
+    else if(act==='bind')a.druid=t;
+    else if(act==='inspect')a.seer={from:i,target:t};
+    if(studyOn()&&G.nq[i]&&G.nq[i].options)a.boost[i]=G.ans===G.nq[i].correct;
+  }
+  function resolveNight(){
+    const P=G.P,a=G.acts,doc=P.findIndex(p=>p.role==='doctor'&&p.alive);
+    const res=wwNight(P,{kills:a.kills,protect:a.protect,doctor:doc>=0?doc:null,druid:a.druid,tc:a.tc,boost:a.boost},wwRnd);
+    // private reports
+    if(a.seer&&P[a.seer.from].alive){
+      const tr=P[a.seer.target].role,r=wwSeer(tr,!!a.boost[a.seer.from],tr==='shapeshifter'&&!!a.boost[a.seer.target],wwRnd);
+      G.inbox[a.seer.from].push('🔮 You inspected '+P[a.seer.target].name+': they look '+(r==='evil'?'😈 EVIL':'😇 GOOD')+'.');
+    }
+    res.ev.forEach(e=>{
+      if(e.t==='saved'&&e.by==='doctor'&&doc>=0&&P[doc].alive)G.inbox[doc].push('🩺 '+P[e.pl].name+' was attacked tonight — and your protection held!');
+      if(e.t==='saved'&&e.by==='knight')G.inbox[e.pl].push('🛡️ You were attacked tonight — your shield held (it is gone now).');
+      if(e.t==='bite-broke'&&e.what==='protection'&&doc>=0&&P[doc].alive)G.inbox[doc].push('🩺 '+P[e.pl].name+' was hit by a Savage Bite — your protection could not hold.');
+    });
+    const news=[];
+    res.ev.forEach(e=>{
+      if(e.t==='death'){const r=WW_ROLES[e.role];news.push('💀 '+P[e.pl].name+' '+(e.cause==='night'?'was killed in the night':e.cause==='hunter'?'was shot by the dying Hunter':'was taken by the Druid’s curse')+' — they were '+r.e+' '+r.n+' ('+r.team.toUpperCase()+').');if(e.role==='jester')news.push('🃏 The Jester got exactly what they wanted!');}
+      else if(e.t==='hunter-miss')news.push('🏹 The Hunter’s last shot missed!');
+      else if(e.t==='tc')news.push('📣 The Town Crier’s last message: '+P[e.pl].name+' is a '+WW_ROLES[e.role].e+' '+WW_ROLES[e.role].n+'.');
+    });
+    if(!news.length)news.push('🌅 Nobody died tonight.');
+    G.news=news;G.dawn=news;news.forEach(n=>addLog('Night '+G.day+': '+n));
+    checkEnd()||(G.phase='dawn');
+    render();
+  }
+  function dawn(b){
+    b.innerHTML='<h2 style="margin:0;text-align:center">🌅 Dawn — night '+G.day+' report</h2><div class="ww-news" style="font-size:.98rem">'+G.dawn.map(esc).join('<br>')+'</div>'+aliveChips()+
+      '<p class="lead" style="text-align:center;font-size:.8rem">Private reports (visions, saves) arrive on each player’s own screen when they vote.</p>'+
+      '<button class="big" data-wa="day" style="margin-top:6px">☀️ Start Day '+(G.day+1)+'</button>'+undoBtn();
+  }
+  function over(b){
+    const w=G.winner,good=w.team==='good';
+    b.innerHTML='<h2 style="margin:0;text-align:center">🏁 '+(good?'😇 The village wins!':'😈 The Evil team wins!')+'</h2>'+(w.jester?'<div class="ww-news">🃏 The Jester was killed — the Jester wins too!</div>':'')+
+      '<div class="ww-table">'+G.P.map((p,i)=>{const r=WW_ROLES[p.role],won=r.team===w.team||(p.role==='jester'&&w.jester);return'<div class="ww-trow'+(won?' won':'')+'" style="opacity:'+(p.alive?1:.65)+'">'+dot(i)+'<b>'+esc(p.name)+'</b><span>'+r.e+' '+r.n+'</span><span>'+(p.alive?'alive':'dead')+(won?' · 🏆':'')+'</span></div>';}).join('')+'</div>'+
+      '<button class="big" data-wa="again">🔁 Play again (same players)</button><button class="big ghost" data-wa="setup" style="margin-top:6px">Change players &amp; settings</button>';
+  }
+
+  /* ---------- clicks ---------- */
+  E('ww-body').addEventListener('click',e=>{
+    const b=e.target.closest('[data-wa]');if(!b||!G)return;
+    const a=b.dataset.wa;
+    if(a==='show'){G.step='open';G.sel=null;G.ans=null;render();}
+    else if(a==='hide'&&G.phase==='deal'){G.step='prompt';G.pi++;if(G.pi>=G.cfg.N){beginDay();}else render();}
+    else if(a==='skipdisc'&&G.phase==='discuss'){startVote();}
+    else if(a==='pick'){G.sel=+b.dataset.i;render();}
+    else if(a==='opt'&&G.phase==='night'&&G.ans===null){G.ans=+b.dataset.i;render();}
+    else if(a==='lock'&&G.sel!==null){
+      if(G.phase==='vote'){const i=G.order[G.vi];G.votes[i]=G.sel;G.inbox[i]=[];G.vi++;G.step='prompt';G.sel=null;if(G.vi>=G.order.length)tallyDay();else render();}
+      else if(G.phase==='night'){
+        const i=G.order[G.vi];if(studyOn()&&G.nq[i]&&G.nq[i].options&&G.ans===null)return;
+        lockNight(i);G.vi++;G.step='prompt';G.sel=null;G.ans=null;if(G.vi>=G.order.length)resolveNight();else render();
+      }
+    }
+    else if(a==='plus'&&G.phase==='judge'){G.kills=Math.min(G.kills+1,wwAlive(G.P).length-1);render();}
+    else if(a==='minus'&&G.phase==='judge'){G.kills=Math.max(0,G.kills-1);render();}
+    else if(a==='lockjudge'&&G.phase==='judge'){finishJudge();}
+    else if(a==='night'&&G.phase==='dayres'){beginNight();}
+    else if(a==='day'&&G.phase==='dawn'){beginDay();}
+    else if(a==='undo'&&HIST.length&&(G.phase==='dayres'||G.phase==='dawn')){
+      const h=HIST.pop();G=JSON.parse(h.state);G.log.push('↶ Undo: replaying '+(h.kind==='day'?'the day':'the night')+'.');renderLog();
+      if(h.kind==='day')beginDay();else beginNight();
+    }
+    else if(a==='again'){const c=G.cfg;newGame(Object.assign({},c));}
+    else if(a==='setup'){clearInterval(tmr);G=null;E('ww-main').style.display='none';E('ww-logcard').style.display='none';E('ww-setup').style.display='block';}
+  });
+})();
+
 </script>
 </body>
 </html>
