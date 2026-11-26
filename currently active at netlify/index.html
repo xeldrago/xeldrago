@@ -4,7 +4,8 @@
 <head>
   <!-- ✅ Basic Meta Tags -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
   <title>XELDRAGO - Freelance Technopreneurs Hub | Services and Entertainment</title>
   <meta name="application-name" content="Xeldrago">
   <meta name="description"
@@ -16,9 +17,9 @@
   <link rel="canonical" href="https://xeldrago-service.netlify.app/">
 
   <!-- ✅ Favicon -->
-    <link rel="icon" href="media/images/logo.jpg" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="icon" href="media/images/logo.jpg" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png">
 
   <!-- ✅ Open Graph (Facebook, LinkedIn, etc.) -->
   <meta property="og:title" content="Freelance Technopreneurs Hub - A XELDRAGO CREATION">
@@ -45,49 +46,48 @@
   <!-- ✅ Google Ads -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618809913051129"
     crossorigin="anonymous"></script>
+
+  <!-- ✅ Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Xeldrago",
+    "url": "https://xeldrago-service.netlify.app",
+    "logo": "https://xeldrago-service.netlify.app/media/images/logo.jpg",
+    "sameAs": [
+      "https://linktr.ee/Xeldrago",
+      "https://www.instagram.com/weeknowit/"
+    ],
+    "description": "Xeldrago is a Freelance Technopreneur's creative initiative — offering services, games, blogs, and tools to help freelancers learn, grow, and stay entertained in a collaborative space.",
+    "founder": {
+      "@type": "Person",
+      "name": "Jeffryn Raj T"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Xeldrago",
+    "url": "https://xeldrago-service.netlify.app/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://xeldrago-service.netlify.app/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Xeldrago",
-  "url": "https://xeldrago-service.netlify.app",
-  "logo": "https://xeldrago-service.netlify.app/media/images/logo.jpg",
-  "sameAs": [
-    "https://linktr.ee/Xeldrago",
-    "https://www.instagram.com/weeknowit/"
-  ],
-  "description": "Xeldrago is a Freelance Technopreneur's creative initiative — offering services, games, blogs, and tools to help freelancers learn, grow, and stay entertained in a collaborative space.",
-  "founder": {
-    "@type": "Person",
-    "name": "Jeffryn Raj T"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Xeldrago",
-  "url": "https://xeldrago-service.netlify.app/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://xeldrago-service.netlify.app/?s={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-
-
-
-
-<body>
+<body class="home">
   <div class="site-container">
+
     <!-- WhatsApp Button -->
     <a href="https://api.whatsapp.com/send?phone=+919994198795&text=Hey" class="whatsapp-button" target="_blank"
-      rel="noopener noreferrer">
-      <i class="fas fa-phone"></i>
+      rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+      <i class="fas fa-phone" aria-hidden="true"></i>
     </a>
 
     <!-- Overlay for mobile when menu is open -->
@@ -97,8 +97,8 @@
     <div id="sidebar" class="sidebar">
       <div class="sidebar-header">
         <h2>XELDRAGO</h2>
-        <button id="closeMenu" class="close-btn">
-          <i class="fas fa-times"></i>
+        <button id="closeMenu" class="close-btn" aria-label="Close menu">
+          <i class="fas fa-times" aria-hidden="true"></i>
         </button>
       </div>
       <div class="sidebar-menu">
@@ -108,852 +108,453 @@
         <a href="about us.html">ABOUT US</a>
         <a href="contactus.html">CONTACT US</a>
         <a href="privacy policies.html">PRIVACY POLICIES</a>
-        <a href="Terms & Conditions.Html">TERMS & CONDITIONS</a>
-
+        <a href="Terms & Conditions.Html">TERMS &amp; CONDITIONS</a>
       </div>
     </div>
 
     <div class="main-content">
+
       <!-- Header -->
       <header class="header">
         <div class="container">
           <div class="header-content">
-            <button id="menuBtn" class="menu-btn">
-              <i class="fas fa-bars"></i>
+            <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+              <i class="fas fa-bars" aria-hidden="true"></i>
               <span>MENU</span>
             </button>
             <div class="marquee">
-              <span>WELCOME EVERYONE >>> Scroll on for more Entertainment & Resource >>> Wishing wonders your way!!</span>
+              <span>WELCOME EVERYONE &gt;&gt;&gt; Scroll on for more Entertainment &amp; Resource &gt;&gt;&gt; Wishing
+                wonders your way!!</span>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- Hero Section -->
-     <!-- ✅ HERO + What is Xeldrago Combined Section -->
-<section class="hero-section combined-hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-image">
-        <img src="media/images/logo.jpg" alt="Xeldrago Logo" class="logo-image">
-      </div>
-      <div class="hero-text">
-        <h1>A Freelance technopreneur's Initiative</h1>
-        <p>
-          Creative freelancing hub built to empower fellow technopreneurs with tools, insights,
-          entertainment,
-          and collaborative services.
-        </p>
-        <p style="font-size: 1.05rem; margin-top: 1rem;">
-          <strong>What is Xeldrago?</strong><br>
-          A personal initiative from blog articles, free games, productivity tools, to real-world services; made by and for modern creators.
-        </p>
-        <div class="hero-marquee">
-          <span>A horse is prepared for the day of battle, but victory comes from the LORD. (Proverbs 21:31)</span>
-        </div>
-        <a href="https://linktr.ee/Xeldrago" class="cta-button">
-          <span>XELDRAGO SERVICES</span>
-          <i class="fas fa-chevron-right"></i>
-        </a>
-        <a href="about us.html" class="cta-button secondary-btn" style="margin-top: 1rem;">
-          Learn more about us <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+      <main>
 
+        <!-- ✅ HERO + What is Xeldrago -->
+        <section class="hero-section combined-hero">
+          <div class="container">
+            <div class="hero-content">
+              <div class="hero-image">
+                <img src="media/images/logo.jpg" alt="Xeldrago Logo" class="logo-image" decoding="async">
+              </div>
+              <div class="hero-text">
+                <h1>A Freelance Technopreneur's Initiative</h1>
+                <p>
+                  Creative freelancing hub built to empower fellow technopreneurs with tools, insights,
+                  entertainment, and collaborative services.
+                </p>
 
-      <!-- Navigation Buttons -->
-      <section class="nav-buttons">
-        <div class="container">
-          <button id="scrollToContent" class="nav-btn purple-gradient">
-            <span>Useful-links section</span>
-          </button>
-          <a href="products.html" class="nav-btn indigo-gradient">
-            <span>Ads section</span>
-          </a>
-        </div>
-      </section>
+                <div class="about-snippet">
+                  <h2>What is Xeldrago?</h2>
+                  <p>
+                    A personal initiative from blog articles, free games, productivity tools, to real-world
+                    services; made by and for modern creators.
+                  </p>
+                </div>
 
-      <!-- Blog Section -->
-      <section class="blog-section">
-        <div class="container">
-          <h2>Books, Blogs, and Articles</h2>
-          <div class="blog-card">
-            <h3>
-              LIFE is full of surprises and a whole lot of twists<br />Well for some, sometimes heavily
-              boring.<br />Don'tcha Worry,
-              <span class="multicolortext">XELDRAGO</span> to the rescue
-            </h3>
-            <ul>
-              <li>With tips and tactics</li>
-              <li>Burned with psychological Truth Bombs</li>
-              <li>And some philosophical pills</li>
-              <li>Along with astonishing facts</li>
-              <li>Brings you the fabulous Blogs and Articles</li>
-            </ul>
-            <p>Clicking on the button will take you on a ride over those Blogs & Articles</p>
-            <a href="article.html" class="blog-button">
-              <span>BLOGS & ARTICLES<br />by Xeldrago</span>
+                <div class="hero-marquee">
+                  <span>A horse is prepared for the day of battle, but victory comes from the LORD. (Proverbs
+                    21:31)</span>
+                </div>
+
+                <div class="hero-actions">
+                  <a href="https://linktr.ee/Xeldrago" class="cta-button">
+                    <span>XELDRAGO SERVICES</span>
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="about us.html" class="cta-button secondary-btn">
+                    <span>Learn more about us</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick-jump buttons -->
+        <nav class="nav-buttons" aria-label="Jump to a section">
+          <div class="container">
+            <a href="#blogs" class="nav-btn blue-gradient">
+              <i class="fas fa-book-open" aria-hidden="true"></i>
+              <span>Blogs &amp; Books</span>
             </a>
-            <br></br>
-            <p>Clicking on the button will take you on a ride over some cool Books</p>
-            <a href="Books.html" class="Book-button">
-              <span>Books<br />by cool authors</span>
+            <a href="#games" class="nav-btn green-gradient">
+              <i class="fas fa-gamepad" aria-hidden="true"></i>
+              <span>Games</span>
             </a>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Entertainment Section -->
-      <section class="entertainment-section">
-        <div class="container">
-          <h2>Entertainment</h2>
-          <div class="entertainment-grid">
-            <div class="entertainment-card">
-              <h3>Click the button below and play if you're bored, no download needed all you have to do is click and
-                play!!</h3>
-              <p>(Minecraft+Rpg Shooter+Android games)<br />If you're playing from android<br />please Tilt your phone and switch on
-                rotate screen on your device.</p>
-              <a href="https://venge.io/" target="_blank" rel="noopener noreferrer" class="ent-button green-gradient">
-                <span>Super cool RPG cloud game</span>
-                <i class="fas fa-arrow-right"></i>
-              </a> 
-              <br></br>
-              <a href="https://ev.io/" target="_blank" rel="noopener noreferrer" class="ent-button purple-gradient">
-                <span>super cool RPG cloud game2</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="https://cryzen.io/play" target="_blank" rel="noopener noreferrer" class="ent-button blue-gradient">
-                <span>super cool RPG cloud game3</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="Hangman.html" target="_blank" rel="noopener noreferrer" class="ent-button yellow-gradient">
-                <span>Simple Hangman Guessing game</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-            <div class="entertainment-card">
-              <h3>Random games - again</h3>
-              <p>(Minecraft+ Rpg Shooter +Android games + Nostalgic Windows games)<br />If you're playing from android<br />please Tilt your phone and switch on
-                rotate screen on your device. oh and some really cool mind applicative games</p>
-              <a href="tictactoe.html" class="ent-button yellow-gradient">
-                <span>Play TIC TAC TOE! or X/O ?</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="https://poki.com/" target="_blank" rel="noopener noreferrer" class="ent-button red-gradient">
-                <span>Generic Android games</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="https://emupedia.net/beta/emuos/" target="_blank" rel="noopener noreferrer" class="ent-button blue-gradient">
-                <span>Nostalgic Windows games - pinball ??</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="https://messenger.abeto.co/" target="_blank" rel="noopener noreferrer" class="ent-button green-gradient">
-                <span>Endless world to explore - quest game </span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-            <div class="entertainment-card">
-              <h3>Test your luck with dice/coin or try the 8-Ball for some fortune tellin and a cute kitty to talk to if your alone lol</h3>
-              <a href="dice.html" class="ent-button red-gradient">
-                <span>Roll the Dice or Flip the Coin!</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="8-ball.html" class="ent-button purple-gradient" style="margin-top: 10px;">
-                <span>8-Ball & Fortune Cookie Game</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="Cat.HTML" class="ent-button blue-gradient" style="margin-top: 10px;">
-                <span>A talking apologetic Cat</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="https://buddyboardgames.com/" class="ent-button yellow-gradient" style="margin-top: 10px;">
-                <span>Board Games for Friends- NO SIGN IN</span>
-                <i class="fas fa-arrow-left"></i>
-              </a>
-            </div>
-
-            <div class="entertainment-card">
-              <h3>2 player is less yesss? Dont worry, xeldrago gotcha, here's a game that would make your gang
-                gatherings grandier!!</h3>
-              <a href="chainreaction.html" class="ent-button blue-gradient">
-                <span>Play Chain Reaction!</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="https://parsec.app/" class="ent-button green-gradient">
-                <span>Seamless Remote for co-op</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="Pelmanism.html" class="ent-button yellow-gradient">
-                <span>Pelmanism Memory Game -match em</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <a href="4-in-a-row.html" class="ent-button purple-gradient" style="margin-top: 10px;">
-                <span>4-in-a-row and more -match em</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-            
-
-            <div class="entertainment-card">
-              <h3>Want to play something simple and multiplayer? try this one...hafun!!</h3>
-              <img src="media/images/TiltedDevice.jpeg" alt="Tilt device" class="ent-image">
-              <p>If you're on Android or iOS, Please tilt your device to play</p>
-              <a href="http://uno.robinko.eu/" target="_blank" rel="noopener noreferrer"
-                class="ent-button purple-gradient">
-                <span>Play UNO!</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <h3>Some Math Games for fun?</h3>
-              <a href="MathMaze.html" target="_blank" rel="noopener noreferrer" class="ent-button green-gradient">
-                <span>Play MathMaze</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>
-              <h3>🎵 Musical Chair >> drop your YouTube, Spotify or local song folder and let it randomly freeze the music! </h3>
-              <a href="MusicalChair.html" target="_blank" rel="noopener noreferrer" class="ent-button musical-chair-btn"
-                id="musicalChairBtn">
-                <span class="chair-icon">🪑</span>
-                <span>Play Musical Chair</span>
-                <i class="fas fa-arrow-right"></i>
-                <span class="notes-container"></span>
-              </a>
-            </div>
-            
-
-            <div class="entertainment-card">
-              <h3>If you're bored and wanna go on a superficial adventure?!<br />just click the below button and zoom
-                into your journey</h3>
-              <img src="media/images/rick.jpg" alt="rick and morty meme" class="ent-image">
-              <a href="https://zoomquilt.org/" target="_blank" rel="noopener noreferrer"
-                class="ent-button teal-gradient">
-                <span>Zoom into an adventurous journey!!</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <br></br>  
-              <h3>Christmas Special games by Google for fun</h3>
-              <button id="icy-btn" style="
-                      padding: 25px 60px;
-                      font-size: 1.4em;
-                      font-weight: 600;
-                      font-family: 'Segoe UI', sans-serif;
-                      border: 2px solid rgba(135, 206, 235, 0.3);
-                      border-radius: 50px;
-                      cursor: pointer;
-                      position: relative;
-                      overflow: hidden;
-                      background: linear-gradient(135deg, #4682b4 0%, #1e5a7a 50%, #0d3a52 100%);
-                      color: white;
-                      box-shadow: 0 8px 25px rgba(70, 130, 180, 0.4), inset 0 2px 10px rgba(255, 255, 255, 0.2), inset 0 -2px 10px rgba(0, 0, 0, 0.2);
-                      transition: all 0.4s ease;
-                  ">
-                🎄 Christmas games
-              </button>
-              
-              <style>
-                #icy-btn:hover {
-                  transform: translateY(-3px);
-                  background: linear-gradient(135deg, #5a9fd4 0%, #2e7a9a 50%, #1d5a72 100%);
-                  box-shadow: 0 12px 35px rgba(70, 130, 180, 0.6), inset 0 2px 15px rgba(255, 255, 255, 0.3), inset 0 -2px 15px rgba(0, 0, 0, 0.2), 0 0 30px rgba(135, 206, 235, 0.5);
-                  border-color: rgba(135, 206, 235, 0.6);
-                }
-              
-                #icy-btn:active {
-                  transform: translateY(-1px) scale(0.98);
-                }
-              
-                #icy-btn::before {
-                  content: '';
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  right: 0;
-                  bottom: 0;
-                  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(135, 206, 235, 0.15) 0%, transparent 50%);
-                  border-radius: 50px;
-                  opacity: 0;
-                  transition: opacity 0.4s ease;
-                  pointer-events: none;
-                }
-              
-                #icy-btn:hover::before {
-                  opacity: 1;
-                }
-              
-                #icy-btn::after {
-                  content: '';
-                  position: absolute;
-                  top: -50%;
-                  left: -50%;
-                  width: 200%;
-                  height: 200%;
-                  background: linear-gradient(45deg, transparent 30%, rgba(135, 206, 235, 0.3) 50%, transparent 70%);
-                  transform: translateX(-100%) translateY(-100%) rotate(45deg);
-                  animation: icy-shimmer 3s infinite;
-                  pointer-events: none;
-                }
-              
-                @keyframes icy-shimmer {
-                  0% {
-                    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-                  }
-              
-                  100% {
-                    transform: translateX(100%) translateY(100%) rotate(45deg);
-                  }
-                }
-              
-                .icy-snowflake {
-                  position: absolute;
-                  color: rgba(255, 255, 255, 0.9);
-                  font-size: 12px;
-                  pointer-events: none;
-                  animation: icy-fall linear forwards;
-                  text-shadow: 0 0 5px rgba(135, 206, 235, 0.8);
-                  opacity: 0;
-                  z-index: 10;
-                }
-              
-                @keyframes icy-fall {
-                  0% {
-                    opacity: 0;
-                    transform: translateY(-10px) rotate(0deg);
-                  }
-              
-                  10% {
-                    opacity: 1;
-                  }
-              
-                  90% {
-                    opacity: 1;
-                  }
-              
-                  100% {
-                    opacity: 0;
-                    transform: translateY(100px) rotate(360deg);
-                  }
-                }
-              </style>
-              
-              <script>
-                (function () {
-                  const button = document.getElementById('icy-btn');
-                  let snowInterval;
-
-                  function createSnowflake() {
-                    const snowflake = document.createElement('div');
-                    snowflake.className = 'icy-snowflake';
-                    snowflake.innerHTML = '❄';
-
-                    const buttonRect = button.getBoundingClientRect();
-                    const startX = Math.random() * (buttonRect.width - 20);
-                    snowflake.style.left = startX + 'px';
-                    snowflake.style.top = '0px';
-
-                    const duration = Math.random() * 2 + 2;
-                    snowflake.style.animationDuration = duration + 's';
-
-                    const size = Math.random() * 8 + 8;
-                    snowflake.style.fontSize = size + 'px';
-
-                    button.appendChild(snowflake);
-
-                    setTimeout(() => {
-                      snowflake.remove();
-                    }, duration * 1000);
-                  }
-
-                  button.addEventListener('mouseenter', () => {
-                    snowInterval = setInterval(createSnowflake, 100);
-                  });
-
-                  button.addEventListener('mouseleave', () => {
-                    clearInterval(snowInterval);
-                  });
-
-                  button.addEventListener('click', () => {
-                    window.open('https://santatracker.google.com/', '_blank');
-                  });
-                })();
-              </script>
-              <br></br>
-<h3>Have a lot of friends? Guessing could be a game. 👀</h3>
-
-<button id="friend-games-btn" type="button" aria-label="Open Friend Group Games">
-  <span class="fgb-glow"></span>
-  <span class="fgb-content">
-    <span class="fgb-icon">🎮</span>
-    <span class="fgb-text">
-      <strong>Friend Group Games</strong>
-      <small>Guess • Laugh • Compete</small>
-    </span>
-    <span class="fgb-arrow">→</span>
-  </span>
-</button>
-
-<style>
-  #friend-games-btn {
-    --pink: #ff2da6;
-    --purple: #8b35ff;
-    --blue: #286cff;
-    --cyan: #20d9ff;
-
-    position: relative;
-    width: min(440px, 92vw);
-    min-height: 105px;
-    padding: 3px;
-    border: none;
-    border-radius: 28px;
-    cursor: pointer;
-    overflow: hidden;
-
-    background:
-      linear-gradient(135deg,
-        var(--pink),
-        var(--purple) 45%,
-        var(--blue) 75%,
-        var(--cyan));
-
-    color: white;
-    font-family: "Segoe UI", system-ui, sans-serif;
-
-    box-shadow:
-      0 15px 40px rgba(117, 42, 255, 0.35),
-      0 5px 18px rgba(255, 45, 166, 0.25);
-
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      filter 0.3s ease;
-  }
-
-  /* Animated light running around the button */
-  #friend-games-btn::before {
-    content: "";
-    position: absolute;
-    inset: -150%;
-    background: conic-gradient(transparent 0deg,
-        transparent 285deg,
-        rgba(255, 255, 255, 0.9) 320deg,
-        transparent 350deg);
-    animation: fgb-spin 4s linear infinite;
-  }
-
-  /* Inner glass surface */
-  #friend-games-btn::after {
-    content: "";
-    position: absolute;
-    inset: 3px;
-    border-radius: 25px;
-
-    background:
-      linear-gradient(135deg,
-        rgba(255, 255, 255, 0.16),
-        rgba(255, 255, 255, 0.04) 45%,
-        rgba(0, 0, 0, 0.15));
-
-    backdrop-filter: blur(10px);
-    pointer-events: none;
-  }
-
-  .fgb-content {
-    position: relative;
-    z-index: 3;
-
-    min-height: 99px;
-    padding: 0 22px;
-
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .fgb-icon {
-    width: 58px;
-    height: 58px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 18px;
-
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-
-    font-size: 30px;
-
-    box-shadow:
-      inset 0 2px 8px rgba(255, 255, 255, 0.25),
-      0 5px 15px rgba(0, 0, 0, 0.18);
-
-    transition: transform 0.3s ease;
-  }
-
-  .fgb-text {
-    flex: 1;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .fgb-text strong {
-    font-size: 1.25rem;
-    font-weight: 750;
-    letter-spacing: 0.2px;
-  }
-
-  .fgb-text small {
-    font-size: 0.82rem;
-    opacity: 0.75;
-    letter-spacing: 0.5px;
-  }
-
-  .fgb-arrow {
-    width: 42px;
-    height: 42px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.13);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    font-size: 25px;
-    font-weight: 300;
-
-    transition:
-      transform 0.3s ease,
-      background 0.3s ease;
-  }
-
-  /* Floating game particles */
-  .fgb-particle {
-    position: absolute;
-    z-index: 2;
-
-    pointer-events: none;
-    user-select: none;
-
-    opacity: 0;
-    font-size: 14px;
-
-    animation: fgb-float 1.8s ease-out forwards;
-  }
-
-  #friend-games-btn:hover {
-    transform: translateY(-6px) scale(1.015);
-
-    filter: saturate(1.15);
-
-    box-shadow:
-      0 22px 55px rgba(117, 42, 255, 0.45),
-      0 8px 25px rgba(255, 45, 166, 0.35),
-      0 0 35px rgba(32, 217, 255, 0.18);
-  }
-
-  #friend-games-btn:hover .fgb-icon {
-    transform: rotate(-6deg) scale(1.08);
-  }
-
-  #friend-games-btn:hover .fgb-arrow {
-    transform: translateX(5px);
-    background: rgba(255, 255, 255, 0.22);
-  }
-
-  #friend-games-btn:active {
-    transform: translateY(-1px) scale(0.98);
-  }
-
-  #friend-games-btn:focus-visible {
-    outline: 3px solid rgba(32, 217, 255, 0.8);
-    outline-offset: 5px;
-  }
-
-  @keyframes fgb-spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes fgb-float {
-    0% {
-      transform:
-        translate(0, 15px) scale(0.5) rotate(0deg);
-      opacity: 0;
-    }
-
-    20% {
-      opacity: 0.9;
-    }
-
-    100% {
-      transform:
-        translate(var(--drift), -85px) scale(1.15) rotate(var(--rotation));
-      opacity: 0;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #friend-games-btn::before {
-      animation: none;
-    }
-
-    #friend-games-btn,
-    .fgb-icon,
-    .fgb-arrow {
-      transition: none;
-    }
-  }
-</style>
-
-<script>
-  (function () {
-    const button = document.getElementById("friend-games-btn");
-
-    const particles = [
-      "🎲",
-      "🎯",
-      "🃏",
-      "❓",
-      "😂",
-      "🔥",
-      "⭐",
-      "🎮",
-      "🏆",
-      "👀"
-    ];
-
-    let particleInterval = null;
-
-    function createParticle() {
-      const particle = document.createElement("span");
-
-      particle.className = "fgb-particle";
-      particle.textContent =
-        particles[Math.floor(Math.random() * particles.length)];
-
-      particle.style.left =
-        Math.random() * 85 + 7 + "%";
-
-      particle.style.bottom =
-        Math.random() * 10 + 15 + "px";
-
-      particle.style.setProperty(
-        "--drift",
-        (Math.random() * 100 - 50) + "px"
-      );
-
-      particle.style.setProperty(
-        "--rotation",
-        (Math.random() * 80 - 40) + "deg"
-      );
-
-      particle.style.animationDuration =
-        (Math.random() * 0.8 + 1.4) + "s";
-
-      button.appendChild(particle);
-
-      setTimeout(() => {
-        particle.remove();
-      }, 2200);
-    }
-
-    button.addEventListener("mouseenter", () => {
-      createParticle();
-
-      particleInterval = setInterval(createParticle, 180);
-    });
-
-    button.addEventListener("mouseleave", () => {
-      clearInterval(particleInterval);
-      particleInterval = null;
-    });
-
-    button.addEventListener("click", () => {
-      // Small click burst
-      for (let i = 0; i < 6; i++) {
-        setTimeout(createParticle, i * 45);
-      }
-
-      // Open the friend-group game hub
-      setTimeout(() => {
-        window.open("FriendGroupGames.html", "_blank");
-      }, 120);
-    });
-  })();
-</script>
-
-</script>
-            </div>
-          </div>
-        </div>
-      </section>
-<!-- Useful Links Section 
-      <section id="content-ids" class="useful-links-section">
-        <div class="container">
-          <h2>Did you know?</h2>
-          <h3>Clicking ads in a site actually helps the site owner lol</h3>
-          <div class="ad-placeholder">
-            
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9618809913051129"
-              data-ad-slot="9312271594" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div> -->
-       
-      <section id="content" class="useful-links-section">
-          <h2>Useful Links</h2>
-        <div class="useful-links">
-          <div class="useful-link-card">
-            <p>Study material for various competitive exams!! UPSC, MPSC, IBPS, PS, SSC, NDA, CDS, RBI, GRE etc.</p>
-        
-            <a href="UPSCFEVER/CentralGovtExams.html" target="_blank" rel="noopener noreferrer"
-              class="link-button blue-btn">
-              <span>Competitive exams' study materials -collection</span>
-              <i class="fas fa-arrow-right"></i>
-          </a>
-            <br><br> <!-- ✅ Adds simple vertical space -->
-            <a href="https://tamilnaducareerservices.tn.gov.in/vle/courses" target="_blank" rel="noopener noreferrer"
-              class="link-button blue-btn">
-              <span>Competitive exams' study materials -Tamil Nadu Initiative</span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
-          <br><br> <!-- ✅ Adds simple vertical space -->
-          <a href="https://www.mindluster.com/" target="_blank" rel="noopener noreferrer"
-            class="link-button blue-btn">
-            <span>Certificate courses for free</span>
-            <i class="fas fa-arrow-right"></i>
-          </a>
-          </div>
-        </div>
-
-
-            <div class="useful-link-card">
-              <pre>This link contains a lot of popular series and movies, use VPN for access 
-                /search Myflixer and go for first site if without VPN !! hafun</pre>
-              <a href="https://myflixerz.ist/" target="_blank" rel="noopener noreferrer"
-                class="link-button purple-btn">
-                <span>Click here for Entertainment!!</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-            <div class="useful-link-card">
-              <p>This link is a meme page maintained by xeldrago services, fun is guaranteed!!</p>
-              <a href="https://www.instagram.com/weeknowit/" target="_blank" rel="noopener noreferrer"
-                class="link-button gradient-btn">
-                <span>Meme page by xeldrago</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-            <div class="useful-link-card">
-              <p>Download any Software you want in one click!! from above button</p>
-              <a href="https://filecr.com/" target="_blank" rel="noopener noreferrer"
-                class="link-button green-btn">
-                <span>All PC Software</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-            <div class="useful-link-card">
-              <p>Download any game you want in one click!! from above button</p>
-              <a href="https://freegogpcgames.com/" target="_blank" rel="noopener noreferrer" class="link-button green-btn">
-                <span>All PC Games</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-            <div class="useful-link-card">
-              <p>VPN required</p>
-              <a href="https://vidbox.vc/" target="_blank" rel="noopener noreferrer" class="link-button red-btn"
-                id="alternateNetflix">
-                <span>Alternate for netflix online</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <p id="demo"></p>
-            </div>
-
-            <div class="useful-link-card">
-              <p>Scan any file or link for viruses before opening! Free malware detection by 70+ antivirus engines.</p>
-              <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer"
-                class="link-button blue-btn">
-                <span>Scan on VirusTotal</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-
-
-            <div class="useful-link-card">
-              <p>Alternative photoshop online!! try it out!</p>
-              <a href="https://www.photopea.com/" target="_blank" rel="noopener noreferrer"
-                class="link-button indigo-btn">
-                <span>Alternate photoshop online</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <p class="contact-note">
-            If any queries or difficulties in getting what you wanted from the above buttons. Contact through WhatsApp
-            to clarify.
-          </p>
-        </div>
-      </section>
-
-      <!-- Contact Form -->
-      <section class="contact-section">
-        <div class="container">
-          <h2>Fill the below form to get updates from xeldrago-services!!</h2>
-          <form class="contact-form" name="contact" netlify>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input id="name" type="text" name="name">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input id="email" type="email" name="email">
-            </div>
-            <button type="submit" class="submit-button">
-              <span>Send</span>
-              <i class="fas fa-arrow-right"></i>
+            <button id="scrollToContent" class="nav-btn purple-gradient" type="button">
+              <i class="fas fa-link" aria-hidden="true"></i>
+              <span>Useful-links section</span>
             </button>
-          </form>
-        </div>
-      </section>
+            <a href="products.html" class="nav-btn indigo-gradient">
+              <i class="fas fa-bullhorn" aria-hidden="true"></i>
+              <span>Ads section</span>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Blogs & Books -->
+        <section id="blogs" class="blog-section">
+          <div class="container">
+            <div class="section-head">
+              <h2>Books, Blogs, and Articles</h2>
+            </div>
+            <div class="blog-card">
+              <h3>
+                LIFE is full of surprises and a whole lot of twists<br>Well for some, sometimes heavily
+                boring.<br>Don'tcha Worry,
+                <span class="multicolortext">XELDRAGO</span> to the rescue
+              </h3>
+              <ul>
+                <li>With tips and tactics</li>
+                <li>Burned with psychological Truth Bombs</li>
+                <li>And some philosophical pills</li>
+                <li>Along with astonishing facts</li>
+                <li>Brings you the fabulous Blogs and Articles</li>
+              </ul>
+
+              <div class="read-grid">
+                <div class="read-item">
+                  <p>Clicking on the button will take you on a ride over those Blogs &amp; Articles</p>
+                  <a href="article.html" class="blog-button">
+                    <span>BLOGS &amp; ARTICLES<br>by Xeldrago</span>
+                  </a>
+                </div>
+                <div class="read-item">
+                  <p>Clicking on the button will take you on a ride over some cool Books</p>
+                  <a href="Books.html" class="Book-button">
+                    <span>Books<br>by cool authors</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Entertainment -->
+        <section id="games" class="entertainment-section">
+          <div class="container">
+            <div class="section-head">
+              <h2>Entertainment</h2>
+              <p>Bored? No download needed, just click and play.</p>
+            </div>
+
+            <div class="play-tip">
+              <span aria-hidden="true">📱</span>
+              <span>Playing from Android? Tilt your phone and switch on rotate screen for the best experience.</span>
+            </div>
+
+            <div class="entertainment-grid">
+
+              <!-- Shooters & RPG -->
+              <div class="entertainment-card">
+                <h3>Shooters &amp; RPG</h3>
+                <p>Minecraft-style, RPG shooter and Android-type games that run right in your browser.</p>
+                <div class="btn-stack">
+                  <a href="https://venge.io/" target="_blank" rel="noopener noreferrer"
+                    class="ent-button green-gradient">
+                    <span>Super cool RPG cloud game</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://ev.io/" target="_blank" rel="noopener noreferrer" class="ent-button purple-gradient">
+                    <span>Super cool RPG cloud game 2</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://cryzen.io/play" target="_blank" rel="noopener noreferrer"
+                    class="ent-button blue-gradient">
+                    <span>Super cool RPG cloud game 3</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Brain & puzzle -->
+              <div class="entertainment-card">
+                <h3>Brain &amp; puzzle games</h3>
+                <p>Some really cool mind-applicative games, plus math games for fun.</p>
+                <div class="btn-stack">
+                  <a href="Hangman.html" target="_blank" rel="noopener noreferrer" class="ent-button yellow-gradient">
+                    <span>Simple Hangman Guessing game</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="4-in-a-row.html" class="ent-button purple-gradient">
+                    <span>4-in-a-row and more: match 'em</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="tictactoe.html" class="ent-button yellow-gradient">
+                    <span>Play TIC TAC TOE! or X/O ?</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="MathMaze.html" target="_blank" rel="noopener noreferrer" class="ent-button green-gradient">
+                    <span>Play MathMaze</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="Pelmanism.html" class="ent-button yellow-gradient">
+                    <span>Pelmanism Memory Game: match 'em</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Luck & fun -->
+              <div class="entertainment-card">
+                <h3>Luck &amp; fun</h3>
+                <p>Test your luck with dice or a coin, try the 8-Ball for some fortune telling, or talk to a cute kitty
+                  if you're alone lol</p>
+                <div class="btn-stack">
+                  <a href="dice.html" class="ent-button red-gradient">
+                    <span>Roll the Dice or Flip the Coin!</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="8-ball.html" class="ent-button purple-gradient">
+                    <span>8-Ball &amp; Fortune Cookie Game</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="Cat.HTML" class="ent-button blue-gradient">
+                    <span>A talking apologetic Cat</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Explore, relax & retro -->
+              <div class="entertainment-card">
+                <h3>Explore, relax &amp; retro</h3>
+                <p>Want a superficial adventure? Zoom into a journey, wander a quest world, or go nostalgic.</p>
+                <img src="media/images/rick.jpg" alt="rick and morty meme" class="ent-image" loading="lazy">
+                <div class="btn-stack">
+                  <a href="https://zoomquilt.org/" target="_blank" rel="noopener noreferrer"
+                    class="ent-button teal-gradient">
+                    <span>Zoom into an adventurous journey!!</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://messenger.abeto.co/" target="_blank" rel="noopener noreferrer"
+                    class="ent-button green-gradient">
+                    <span>Endless world to explore - quest game</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://emupedia.net/beta/emuos/" target="_blank" rel="noopener noreferrer"
+                    class="ent-button blue-gradient">
+                    <span>Nostalgic Windows games - pinball ??</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://poki.com/" target="_blank" rel="noopener noreferrer" class="ent-button red-gradient">
+                    <span>Generic Android games</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <p>Christmas Special games by Google for fun</p>
+                  <button id="icy-btn" type="button">🎄 Christmas games</button>
+                </div>
+              </div>
+
+              <!-- Play with friends -->
+              <div class="entertainment-card game-card-wide">
+                <h3>Play with friends</h3>
+                <p>Only 2 players is less, yesss? Don't worry, Xeldrago gotcha. Here are games to make your gang
+                  gatherings grander!!</p>
+
+                <div class="card-split">
+                  <div class="split-col">
+                    <p>Quick multiplayer picks. On Android or iOS, please tilt your device to play UNO.</p>
+                    <img src="media/images/TiltedDevice.jpeg" alt="Tilt device" class="ent-image" loading="lazy">
+                    <div class="btn-stack">
+                      <a href="http://uno.robinko.eu/" target="_blank" rel="noopener noreferrer"
+                        class="ent-button purple-gradient">
+                        <span>Play UNO!</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                      </a>
+                      <a href="chainreaction.html" class="ent-button blue-gradient">
+                        <span>Play Chain Reaction!</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                      </a>
+                      <a href="https://parsec.app/" class="ent-button green-gradient">
+                        <span>Seamless Remote for co-op</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                      </a>
+                      <a href="https://buddyboardgames.com/" class="ent-button yellow-gradient">
+                        <span>Board Games for Friends - NO SIGN IN</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="split-col">
+                    <p>Have a lot of friends? Guessing could be a game. 👀</p>
+                    <div class="btn-stack">
+                      <button id="friend-games-btn" type="button" aria-label="Open Friend Group Games">
+                        <span class="fgb-glow"></span>
+                        <span class="fgb-content">
+                          <span class="fgb-icon">🎮</span>
+                          <span class="fgb-text">
+                            <strong>Friend Group Games</strong>
+                            <small>Guess • Laugh • Compete</small>
+                          </span>
+                          <span class="fgb-arrow">→</span>
+                        </span>
+                      </button>
+                    </div>
+
+                    <p style="margin-top: 24px;">🎵 Musical Chair: drop your YouTube, Spotify or local song folder and
+                      let it randomly freeze the music!</p>
+                    <div class="btn-stack">
+                      <a href="MusicalChair.html" target="_blank" rel="noopener noreferrer"
+                        class="ent-button musical-chair-btn" id="musicalChairBtn">
+                        <span class="chair-icon">🪑</span>
+                        <span>Play Musical Chair</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        <span class="notes-container"></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Useful Links -->
+        <!-- (Ad block kept for later: add an <ins class="adsbygoogle"> unit here when you want ads back)
+             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9618809913051129"
+               data-ad-slot="9312271594" data-ad-format="auto" data-full-width-responsive="true"></ins>
+             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
+        <section id="content" class="useful-links-section">
+          <div class="container">
+            <div class="section-head">
+              <h2>Useful Links</h2>
+              <p>Handpicked shortcuts for study, entertainment, software and everyday tools.</p>
+            </div>
+
+            <div class="useful-links">
+
+              <div class="useful-link-card">
+                <h3>Learn &amp; upskill</h3>
+                <p>Study material for various competitive exams!! UPSC, MPSC, IBPS, PS, SSC, NDA, CDS, RBI, GRE etc.</p>
+                <div class="btn-stack">
+                  <a href="UPSCFEVER/CentralGovtExams.html" target="_blank" rel="noopener noreferrer"
+                    class="link-button blue-btn">
+                    <span>Competitive exams' study materials - collection</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://tamilnaducareerservices.tn.gov.in/vle/courses" target="_blank"
+                    rel="noopener noreferrer" class="link-button blue-btn">
+                    <span>Competitive exams' study materials - Tamil Nadu Initiative</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.mindluster.com/" target="_blank" rel="noopener noreferrer"
+                    class="link-button blue-btn">
+                    <span>Certificate courses for free</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="useful-link-card">
+                <h3>Watch &amp; laugh</h3>
+                <p>Popular series and movies. VPN required; without one, search "Myflixer" and go for the first site.
+                  hafun!!</p>
+                <div class="btn-stack">
+                  <a href="https://myflixerz.ist/" target="_blank" rel="noopener noreferrer"
+                    class="link-button purple-btn">
+                    <span>Click here for Entertainment!!</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://vidbox.vc/" target="_blank" rel="noopener noreferrer" class="link-button red-btn"
+                    id="alternateNetflix">
+                    <span>Alternate for netflix online</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.instagram.com/weeknowit/" target="_blank" rel="noopener noreferrer"
+                    class="link-button gradient-btn">
+                    <span>Meme page by xeldrago</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+                <p id="demo" class="btn-note"></p>
+              </div>
+
+              <div class="useful-link-card">
+                <h3>Software &amp; games</h3>
+                <p>Download any software or game you want in one click from the buttons below.</p>
+                <div class="btn-stack">
+                  <a href="https://filecr.com/" target="_blank" rel="noopener noreferrer" class="link-button green-btn">
+                    <span>All PC Software</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://freegogpcgames.com/" target="_blank" rel="noopener noreferrer"
+                    class="link-button green-btn">
+                    <span>All PC Games</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="useful-link-card">
+                <h3>Safety &amp; creative tools</h3>
+                <p>Scan any file or link for viruses before opening (free detection by 70+ antivirus engines), or edit
+                  images with an online Photoshop alternative.</p>
+                <div class="btn-stack">
+                  <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer"
+                    class="link-button blue-btn">
+                    <span>Scan on VirusTotal</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.photopea.com/" target="_blank" rel="noopener noreferrer"
+                    class="link-button indigo-btn">
+                    <span>Alternate photoshop online</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="contact-note">
+              If any queries or difficulties in getting what you wanted from the above buttons. Contact through WhatsApp
+              to clarify.
+            </p>
+          </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="updates" class="contact-section">
+          <div class="container">
+            <h2>Fill the below form to get updates from xeldrago-services!!</h2>
+            <form class="contact-form" name="contact" method="POST" netlify>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" type="text" name="name" autocomplete="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" autocomplete="email" inputmode="email" required>
+              </div>
+              <button type="submit" class="submit-button">
+                <span>Send</span>
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </section>
+
+      </main>
 
       <!-- Footer -->
       <footer class="footer">
         <div class="container">
           <div class="footer-content">
             <p>
-              Author: Xeldrago<br />
+              Author: Xeldrago<br>
               <a href="mailto:jeffrynspr@gmail.com">jeffrynspr@gmail.com</a>
             </p>
             <p class="copyright">© <span id="currentYear"></span> Xeldrago Services. All rights reserved.</p>
-            <a href="old website/index.html" class="active">legacy website</a>
+            <div class="legacy-links">
+              <a href="old website/index.html" class="active">legacy website</a>
+              <a href="legacy2.html">legacy website 2</a>
+            </div>
           </div>
         </div>
       </footer>
